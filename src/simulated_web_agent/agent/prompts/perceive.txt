@@ -6,6 +6,7 @@ You will be provided with an environment that includes:
 - A list of all buttons on the page
 
 Your task is to simulate human perception of the page accurately. Read the page from top to bottom and list all observations, capturing all the information that a human user would notice. 
+You should think in the first person.
 
 Examples of observations include:
 1. A search box with the input name "search" and placeholder "Search".

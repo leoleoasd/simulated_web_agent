@@ -1,5 +1,5 @@
 You are tasked with determining the next action based on the current HTML and a provided plan. The action should be selected according to the current step in the plan.
-
+You should think in the first person.
 You need to translate steps to actionable actions, for example, "Search for xxx" have to be translated firstly to "type xxx in input with name yyy" if the "value" of the input is empty.
 
 ## Action Space Description
@@ -7,8 +7,8 @@ An action is represented by a JSON, following this format:
 
 ```json
 {
-    "type": "ACTION_TYPE",
-    "ACTION_ARGS": "ACTION_ARGS"
+    "type": "<add action type here>",
+    "<add other action args here>": "<add other action arg values here>"
 }
 ```
 

@@ -2,13 +2,15 @@ import json
 import logging
 
 from .gpt import chat, chat_bulk, load_prompt
-from .memory import Action, Memory, MemoryPiece, Observation, Plan, Reflection
+from .memory import Action, Memory, MemoryPiece, Observation, Plan, Reflection, Thought
 
 PERCEIVE_PROMPT = load_prompt("perceive")
 REFLECT_QUESTION_PROMPT = load_prompt("reflect_question")
 REFLECT_ANSWER_PROMPT = load_prompt("reflect_answer")
 REFLECT_IMPORTANCE_PROMPT = load_prompt("reflect_importance")
+WONDER_PROMPT = load_prompt("wonder")
 PLANNING_PROMPT = load_prompt("planning")
+EVALUATE_PLAN_PROMPT = load_prompt("evaluate_plan")
 ACTION_PROMPT = load_prompt("action")
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -98,14 +100,18 @@ class Agent:
             if answer["answer"] == "N/A":
                 continue
             answers.append(answer)
-        for answer in answers:
-            reflections.append(
-                Reflection(
-                    answer["answer"],
-                    self.memory,
-                    [memories[i] for i in answer["target"]],
+        try:
+            for answer in answers:
+                reflections.append(
+                    Reflection(
+                        answer["answer"],
+                        self.memory,
+                        [memories[i] for i in answer["target"]],
+                    )
                 )
-            )
+        except IndexError as e:
+            logger.error("Reflection failed: %s", e)
+            Thought("Reflection failed", self.memory)
         # now get importance
         requests = [
             [
@@ -137,8 +143,32 @@ class Agent:
         for r, i in zip(reflections, importance):
             r.importance = i / 10
 
+    def wonder(self):
+        logger.info("wondering ...")
+        memories = self.memory.memories[-50:]  # get the last 50 memories
+        memories = self.format_memories(memories)
+        resp = chat(
+            [
+                {"role": "system", "content": WONDER_PROMPT},
+                {
+                    "role": "user",
+                    "content": json.dumps(
+                        {"persona": self.persona, "memories": memories}
+                    ),
+                },
+            ],
+            response_format={"type": "json_object"},
+        )
+        resp = json.loads(resp.choices[0].message.content)
+        logger.info("wondering: %s", resp)
+        for thought in resp["thoughts"]:
+            Thought(thought, self.memory)
+
     def plan(self):
-        memories = self.memory.retrieve(self.intent, include_recent_observation=True)
+        logger.info("planning ...")
+        memories = self.memory.retrieve(
+            self.intent, include_recent_observation=True, include_recent_action=True
+        )
         memories = self.format_memories(memories)
         resp = chat(
             [
@@ -163,12 +193,47 @@ class Agent:
             ],
             response_format={"type": "json_object"},
             model="gpt-4o",
+            n=3,
         )
-        new_plan = json.loads(resp.choices[0].message.content)["plan"]
-        logger.info("planning: %s", new_plan)
+        # print(resp.choices[0].message.content)
+        # new_plan = json.loads(resp.choices[0].message.content)["plan"]
+        # rationale = json.loads(resp.choices[0].message.content)["rationale"]
+        choices = [json.loads(c.message.content) for c in resp.choices]
+        logger.info("plans: %s", choices)
+        # now pick the best plan
+        best_plan = chat(
+            [
+                {"role": "system", "content": EVALUATE_PLAN_PROMPT},
+                {
+                    "role": "user",
+                    "content": json.dumps(
+                        {
+                            "persona": self.persona,
+                            "intent": self.intent,
+                            "memories": memories,
+                            "current_timestamp": self.memory.timestamp,
+                            "plans": [c["plan"] for c in choices],
+                            "rationales": [c["rationale"] for c in choices],
+                        }
+                    ),
+                },
+            ],
+            response_format={"type": "json_object"},
+        )
+        best_plan = json.loads(best_plan.choices[0].message.content)
+        new_plan = best_plan["plan"]
+        rationale = best_plan["rationale"]
+
+        logger.info("plan: %s", new_plan)
+        logger.info("rationale: %s", rationale)
         self.current_plan = Plan(new_plan, self.memory)
+        Thought(rationale, self.memory)
 
     def act(self, env):
+        memories = self.memory.retrieve(
+            self.intent, include_recent_observation=True, include_recent_action=True
+        )
+        memories = self.format_memories(memories)
         action = chat(
             [
                 {"role": "system", "content": ACTION_PROMPT},
@@ -180,12 +245,17 @@ class Agent:
                             "intent": self.intent,
                             "plan": self.current_plan.content,
                             "environment": env,
+                            "recent_memories": memories,
                         }
                     ),
                 },
             ],
             response_format={"type": "json_object"},
+            model="gpt-4o",
         )
         action = json.loads(action.choices[0].message.content)
         Action(action["description"], self.memory, json.dumps(action))
         return action
+
+    def add_thought(self, thought):
+        Thought(thought, self.memory)

@@ -1,10 +1,17 @@
+import datetime
 import json
+import logging
 import pathlib
+import pickle
+import time
+import uuid
 from abc import ABC, abstractmethod
 
 import openai
 
 from ..agent import Agent
+
+logger = logging.getLogger(__name__)
 
 
 class BasePolicy(ABC):
@@ -103,10 +110,27 @@ class HumanPolicy(BasePolicy):
 
 class AgentPolicy(BasePolicy):
     def __init__(self, persona, intent):
+        logger.info(f"Creating AgentPolicy with persona: {persona}, intent: {intent}")
         self.agent = Agent(persona, intent)
+        self.agent.add_thought(f"I want to {intent}")
+        # lets' have a run name with current time and random string to save agent checkpoints
+        # 2024-02-02_05:05:05
+        self.run_name = f"{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{uuid.uuid4().hex[:4]}"
+        self.run_path = pathlib.Path() / "runs" / self.run_name
+        self.run_path.mkdir(parents=True)
 
     def forward(self, observation, available_actions):
         self.agent.perceive(observation)
         self.agent.reflect()
+        self.agent.wonder()
         self.agent.plan()
-        return json.dumps(self.agent.act(observation))
+        action = self.agent.act(observation)
+        pickle.dump(
+            self.agent,
+            open(self.run_path / f"agent_{self.agent.memory.timestamp}.pkl", "wb"),
+        )
+        (self.run_path / f"memory_trace_{self.agent.memory.timestamp}.txt").write_text(
+            "\n".join(self.agent.format_memories(self.agent.memory.memories))
+        )
+        self.agent.memory.timestamp += 1
+        return json.dumps(action)

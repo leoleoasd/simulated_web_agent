@@ -39,7 +39,9 @@ class Memory:
         else:
             self.embeddings = np.concatenate([self.embeddings, embeds])
 
-    def retrieve(self, query, n=20, include_recent_observation=False):
+    def retrieve(
+        self, query, n=20, include_recent_observation=False, include_recent_action=False
+    ):
         self.update()
         results = []
         if include_recent_observation:
@@ -48,6 +50,13 @@ class Memory:
                 m
                 for m in self.memories
                 if m.kind == "observation" and m.timestamp == self.timestamp
+            ]
+        if include_recent_action:
+            # must include the most recent action
+            results += [
+                m
+                for m in self.memories
+                if m.kind == "action" and m.timestamp >= self.timestamp - 5
             ]
         query_embedding = gpt.embed_text(query).data[0].embedding
         similarities = np.dot(self.embeddings, query_embedding)
@@ -99,6 +108,7 @@ class Reflection(MemoryPiece):
     def __init__(self, content, memory, target=None):
         super().__init__(content, memory)
         self.target = target
+        self._importance = 0
 
     @property
     def importance(self):
@@ -124,6 +134,15 @@ class Action(MemoryPiece):
     def __init__(self, content, memory, raw_action):
         super().__init__(content, memory)
         self.raw_action = raw_action
+
+    @property
+    def importance(self):
+        return exp(self.timestamp - self.memory.timestamp)
+
+
+class Thought(MemoryPiece):
+    def __init__(self, content, memory):
+        super().__init__(content, memory)
 
     @property
     def importance(self):

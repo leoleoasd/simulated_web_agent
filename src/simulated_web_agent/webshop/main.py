@@ -50,3 +50,4 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
                 break
     finally:
         env.close()
+        print(policy.agent.format_memories(policy.agent.memory.memories))
