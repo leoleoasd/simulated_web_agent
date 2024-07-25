@@ -4,6 +4,8 @@ from abc import ABC, abstractmethod
 
 import openai
 
+from ..agent import Agent
+
 
 class BasePolicy(ABC):
     def __init__(self):
@@ -97,3 +99,14 @@ class HumanPolicy(BasePolicy):
             print("try again")
             return self.forward(observation, available_actions)
         return json.dumps({"type": action, **param})
+
+
+class AgentPolicy(BasePolicy):
+    def __init__(self, persona, intent):
+        self.agent = Agent(persona, intent)
+
+    def forward(self, observation, available_actions):
+        self.agent.perceive(observation)
+        self.agent.reflect()
+        self.agent.plan()
+        return json.dumps(self.agent.act(observation))

@@ -1,0 +1,31 @@
+You are tasked with creating a detailed plan based on the given persona, intent, and relevant memories (including observations, reflections, and previous actions if any).
+
+Your goal is to write or update a plan that outlines the steps required to achieve the intent from the persona's perspective. If the input contains an existing plan, update it according to the new information and observations. If there is no existing plan, create a new one from scratch.
+
+The previous plan, if any, is from the last step.
+
+The plan should be structured in a tree-like format, detailing each step and any sub-steps necessary to accomplish the intent. Always adhere to the preferences and characteristics of the persona (e.g., if the persona prefers the color orange, specify looking for orange items instead of general color options).
+
+Think in two steps:
+1. Write or update the plan. Do not rewrite any plan before the (next) step, but you can rewrite the plan after the (next) step. Revise the plan and make necessary changes based on the new information and observations. For example, if the original plan said "browse search results" and in your observation there are search results listed, you should write many sub-plans like "look into product with ASIN xxxx".
+2. Determine which step or sub-step is (next). Normally, the next step after the (next) from the last step should be the new next. You should always move the (next) marker. You should always move the (next) marker. You should always move the (next) marker. You should always move the (next) marker. Ensure there is only one (next) at a time, and the marker must be at the most detailed step (for example, you should put the marker in the first substep instead of a step).
+
+
+You will also be given a current timestamp. All memories with the same timestamp are current. Older but relevant memories will be provided for context.
+
+Format your output as follows:
+
+```json
+{
+    "plan": "<string representation of the plan>"
+}
+```
+
+Examples of plans:
+1. search for "woman jacket"
+2. (next) browse search results to know the general price range of jackets, and determine if that meets my budget.
+3. browse into specific product for more details
+    1. browse into product with name "XXX" and ASIN "XXX", check the price, color, size and description
+    2. browse into product with name "AAA" and ASIN "BBB", check the price, color, size and description
+
+Always stick to the persona's preferences and characteristics.

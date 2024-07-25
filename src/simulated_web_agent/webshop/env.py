@@ -451,7 +451,7 @@ viewing page {self.page_params['page']+1} of {n_pages}
                     "search",
                     {"search_term": self.page_params["search_term"], "page": i - 1},
                 )
-                for i in range(n_pages)
+                for i in range(1, n_pages + 1)
             },
         }
 
@@ -578,5 +578,5 @@ class WebshopEnv(gym.Env):
 
 gym.register(
     id="Webshop-v0",
-    entry_point="src.webshop.env:WebshopEnv",
+    entry_point="simulated_web_agent.webshop.env:WebshopEnv",
 )

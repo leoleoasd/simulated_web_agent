@@ -1,9 +1,13 @@
+import logging
+
 import gymnasium as gym
 
+from ..agent.gpt import chat_bulk
 from .env import WebshopEnv  # noqa
-from .model import HumanPolicy, OpenAIPolicy  # noqa
+from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
 
 if __name__ == "__main__":
+    logging.basicConfig()
     env = gym.make("Webshop-v0")
     observation, info = env.reset()
     persona = """
@@ -22,6 +26,7 @@ Clara spends most of her time in academia, attending conferences, working in the
 Financial Situation:
 Clara have a rich family, so she cares quality of the goods more than the price.
 
+
 Shopping Habits:
 Clara dislikes shopping and avoids spending much time browsing through products. She prefers straightforward, efficient shopping experiences and often shops online for convenience. When she does shop, she looks for practicality and affordability over style or trendiness.
 
@@ -30,21 +35,18 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
 """
 
     try:
-        policy = OpenAIPolicy(persona, "buy a faux jacket")
+        policy = AgentPolicy(persona, "buy a faux jacket")
 
         while True:
             print(observation["url"])
+            print(observation["page"])
             clickables = observation["clickables"]
             print("clickables:", clickables)
             action = policy.forward(observation, clickables)
+            print(f"Taking action {action}")
             observation, reward, terminated, truncated, info = env.step(action)
-            print(f'Taking action "{action}" -> Reward = {reward}')
             print("-" * 50)
             if terminated:
                 break
     finally:
         env.close()
-        import json
-
-        print(json.dumps(policy.short_term_memory, indent=2))
-        print(json.dumps(policy.previous_actions, indent=2))
