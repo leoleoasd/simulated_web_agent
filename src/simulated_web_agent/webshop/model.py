@@ -118,6 +118,8 @@ class AgentPolicy(BasePolicy):
         self.run_name = f"{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{uuid.uuid4().hex[:4]}"
         self.run_path = pathlib.Path() / "runs" / self.run_name
         self.run_path.mkdir(parents=True)
+        (self.run_path / "persona.txt").write_text(persona)
+        (self.run_path / "intent.txt").write_text(intent)
 
     def forward(self, observation, available_actions):
         self.agent.perceive(observation)

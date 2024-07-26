@@ -153,7 +153,11 @@ class Agent:
                 {
                     "role": "user",
                     "content": json.dumps(
-                        {"persona": self.persona, "memories": memories}
+                        {
+                            "persona": self.persona,
+                            "memories": memories,
+                            "intent": self.intent,
+                        }
                     ),
                 },
             ],
@@ -230,9 +234,7 @@ class Agent:
         Thought(rationale, self.memory)
 
     def act(self, env):
-        memories = self.memory.retrieve(
-            self.intent, include_recent_observation=True, include_recent_action=True
-        )
+        memories = self.memory.retrieve(self.intent, include_recent_action=True)
         memories = self.format_memories(memories)
         action = chat(
             [

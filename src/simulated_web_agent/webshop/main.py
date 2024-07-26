@@ -24,14 +24,14 @@ Professional Life:
 Clara spends most of her time in academia, attending conferences, working in the lab, and writing papers. Her commitment to her research is her main priority, and she manages her time around her academic responsibilities.
 
 Financial Situation:
-Clara have a rich family, so she cares quality of the goods more than the price.
+Clara lives on her stipend as a PhD student and is careful with her spending. She prefers to save money for research-related expenses and invest in her academic pursuits.
 
 
 Shopping Habits:
 Clara dislikes shopping and avoids spending much time browsing through products. She prefers straightforward, efficient shopping experiences and often shops online for convenience. When she does shop, she looks for practicality and affordability over style or trendiness.
 
 Personal Style:
-Clara prefers comfortable, functional clothing, often choosing items that are easy to wear for long hours spent at her desk or in the lab. She wears XXL-sized clothing and likes colors that reflect her personality—mostly grey, which she finds uplifting and energizing.
+Clara prefers comfortable, functional clothing, often choosing items that are easy to wear for long hours spent at her desk or in the lab. She wears small-sized clothing and likes colors that reflect her personality—mostly red, which she finds uplifting and energizing.
 """
 
     try:
