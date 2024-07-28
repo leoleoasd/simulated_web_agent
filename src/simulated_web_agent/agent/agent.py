@@ -217,7 +217,10 @@ class Agent:
                             "memories": memories,
                             "current_timestamp": self.memory.timestamp,
                             "plans": [c["plan"] for c in choices],
-                            "rationales": [c["rationale"] for c in choices],
+                            "rationales": [
+                                c["rationale"] if "rationale" in c else "N/A"
+                                for c in choices
+                            ],
                         }
                     ),
                 },

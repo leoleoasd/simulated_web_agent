@@ -120,8 +120,11 @@ class AgentPolicy(BasePolicy):
         self.run_path.mkdir(parents=True)
         (self.run_path / "persona.txt").write_text(persona)
         (self.run_path / "intent.txt").write_text(intent)
+        self.action_trace_file = (self.run_path / "action_trace.txt").open("w")
+        self.env_trace_file = (self.run_path / "env_trace.txt").open("w")
 
     def forward(self, observation, available_actions):
+        self.env_trace_file.write(json.dumps(observation) + "\n")
         self.agent.perceive(observation)
         self.agent.reflect()
         self.agent.wonder()
@@ -135,4 +138,7 @@ class AgentPolicy(BasePolicy):
             "\n".join(self.agent.format_memories(self.agent.memory.memories))
         )
         self.agent.memory.timestamp += 1
+        self.action_trace_file.write(json.dumps(action) + "\n")
+        self.action_trace_file.flush()
+        self.env_trace_file.flush()
         return json.dumps(action)

@@ -7,11 +7,12 @@ The previous plan, if any, is from the last step.
 The plan should be structured in a tree-like format, detailing each step and any sub-steps necessary to accomplish the intent. Always adhere to the preferences and characteristics of the persona (e.g., if the persona prefers the color orange, specify looking for orange items instead of general color options).
 You should think in the first person.
 
-Think in two steps:
+Think in three steps:
 1. Write or update the plan. Do not rewrite any plan before the (next) step, but you can rewrite the plan after the (next) step. Revise the plan and make necessary changes based on the new information and observations. For example, if the original plan said "browse search results" and in your observation there are search results listed, you should write many sub-plans like "look into product with ASIN xxxx".
 2. Explain the rationale behind your current next step. Think why do you make the current movement.
 3. Determine which step or sub-step is (next). Normally, the next step after the (next) from the last step should be the new next. You should always move the (next) marker. You should always move the (next) marker. You should always move the (next) marker. You should always move the (next) marker. Ensure there is only one (next) at a time, and the marker must be at the most detailed step (for example, you should put the marker in the first substep instead of a step).
 
+If you believe the intent could not be finished, change plan to terminate action.
 
 You will also be given a current timestamp. All memories with the same timestamp are current. Older but relevant memories will be provided for context.
 
@@ -35,4 +36,7 @@ Examples of plans:
 Examples of rationales:
 I need to see what are the general price range of jackets. Do they worth it? If not, I'm not buying anything.
 
+TIPS:
 Always stick to the persona's preferences and characteristics.
+Use shorter search terms instead of longer one. Use `men's raincoat` instead of `eco-friendly men's raincoat grey olive recycled materials`.
+If there isn't desired search result, You should try different search terms.
