@@ -134,7 +134,7 @@ recipes = [
                                                 "selector": ".actions-primary",
                                                 "add_text": True,
                                                 "clickable": True,
-                                                "name": "add_to_card",
+                                                "name": "add_to_cart",
                                                 "tag_name": "button",
                                                 "click_selector": "button",
                                             },
@@ -260,7 +260,6 @@ recipes = [
                                         "children": [
                                             {
                                                 "selector": "ol",
-                                                "direct_child": True,
                                                 "children": [
                                                     {
                                                         "selector": "li",
@@ -331,7 +330,7 @@ recipes = [
                                                         "selector": ".actions-primary form",
                                                         "add_text": True,
                                                         "clickable": True,
-                                                        "name": "add_to_card",
+                                                        "name": "add_to_cart",
                                                         "tag_name": "button",
                                                         "click_selector": "button",
                                                     },
