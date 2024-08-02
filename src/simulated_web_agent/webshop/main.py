@@ -3,6 +3,7 @@ import logging
 import gymnasium as gym
 
 from ..agent.gpt import chat_bulk
+from ..executor.env import SeleniumEnv  # noqa
 from .env import WebshopEnv  # noqa
 from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
 
