@@ -1,6 +1,7 @@
 recipes = [
     {
-        "match": "^/?$",
+        "match": "#maincontent > div.columns > div > div:nth-child(3) > div > div.block-title > strong",
+        "match_text": "Product Showcases",
         "selector": "html",
         "children": [
             {
@@ -149,7 +150,8 @@ recipes = [
         ],
     },
     {
-        "match": "^/catalogsearch/result/.*$",
+        "match": "#maincontent > div.page-title-wrapper > h1 > span",
+        "match_text": "Search results",
         "selector": "html",
         "children": [
             {

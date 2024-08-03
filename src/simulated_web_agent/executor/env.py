@@ -3,18 +3,18 @@ import logging
 import os
 import random
 import re
+import time
 import urllib
-from collections import defaultdict
-from decimal import Decimal
-from os.path import join
 
 import dominate
 import dominate.tags
 import gymnasium as gym
+import numpy
 from bs4 import BeautifulSoup
 from gymnasium import spaces
-from pyserini.search.lucene import LuceneSearcher
 from selenium import webdriver
+from selenium.common.exceptions import (NoSuchElementException,
+                                        StaleElementReferenceException)
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement as Element
@@ -29,14 +29,38 @@ class InvalidAction(Exception):
     pass
 
 
+class ElementHighlight:
+    def __init__(self, element, driver, headless, sleep=0.5):
+        self.element = element
+        self.driver = driver
+        self.headless = headless
+        
+    def __enter__(self):
+        if self.headless:
+            return
+        self.driver.execute_script("arguments[0].scrollIntoView();", self.element)
+        self.driver.execute_script("arguments[0].style.outline='3px solid #79ccd7'", self.element)
+        self.driver.execute_script("arguments[0].style.outline_offset='3px'", self.element)
+        time.sleep(0.5)
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.headless:
+            return
+        try:
+            self.driver.execute_script("arguments[0].style.outline=''", self.element)
+            self.driver.execute_script("arguments[0].style.outline_offset=''", self.element)
+        except StaleElementReferenceException:
+            pass
+
 class Browser:
     clickables = {}
     inputs = {}
 
-    def __init__(self, url):
+    def __init__(self, url, headless=True):
         options = Options()
         options.add_argument("start-maximized")
-        options.add_argument("--headless")
+        if headless:
+            options.add_argument("--headless")
         options.add_argument("--remote-debugging-port=9222")
         driver = webdriver.Chrome(options=options)
         self.driver = driver
@@ -44,6 +68,7 @@ class Browser:
         self.clickables = {}
         self.inputs = {}
         self.last_url = url
+        self.headless = headless
 
     def set_attribute(self, element: Element, attribute, value):
         self.driver.execute_script(
@@ -52,6 +77,15 @@ class Browser:
             attribute,
             value,
         )
+        
+    def slow_type(self, element: Element, text: str, delay: float=0.1):
+        if self.headless:
+            element.send_keys(text)
+        else:
+            """Send a text to an element one character at a time with a delay."""
+            for character in text:
+                element.send_keys(character)
+                time.sleep(max(delay + numpy.random.normal(0, 0.05), 0))
 
     def register_clickable(self, element: Element, name: str):
         self.clickables[name] = element
@@ -70,6 +104,9 @@ class Browser:
         return element.get_attribute("innerText")
 
     def process(self, element: Element, recipe, parent_name=""):
+        if random.random() < 0.01:
+            # element.scrollIntoView()
+            self.driver.execute_script('arguments[0].scrollIntoView({ behavior: "smooth" });', element)
         elementText = ""
         if "text_selector" in recipe:
             text_element = element.find_element(
@@ -150,13 +187,15 @@ class Browser:
         if name not in self.inputs:
             logger.error(f"INVALID ACTION: {name}")
             raise InvalidAction(f"INVALID ACTION: input {name} not found")
-        self.inputs[name].send_keys(text)
+        with ElementHighlight(self.inputs[name], self.driver, self.headless):
+            self.slow_type(self.inputs[name], text)
 
     def click(self, name):
         if name not in self.clickables:
             logger.error(f"INVALID ACTION: {name}")
             raise InvalidAction(f"INVALID ACTION: clickable {name} not found")
-        self.clickables[name].click()
+        with ElementHighlight(self.clickables[name], self.driver, self.headless):
+            self.clickables[name].click()
 
     def back(self):
         self.driver.back()
@@ -171,9 +210,13 @@ class Browser:
         print(path)
         recipe = None
         for r in recipes:
-            if re.match(r["match"], path):
-                recipe = r
-                break
+            try:
+                element = self.driver.find_element(By.CSS_SELECTOR, r["match"])
+                if element and r['match_text'] in self.get_text(element):
+                    recipe = r
+                    break
+            except NoSuchElementException:
+                pass
         else:
             logging.error(f"NO RECIPE FOUND FOR {path}")
             raise Exception(f"NO RECIPE FOUND FOR {path}")
@@ -192,7 +235,7 @@ class Browser:
 class SeleniumEnv(gym.Env):
     browser: Browser = None
 
-    def __init__(self, start_url, pretty=False):
+    def __init__(self, start_url, pretty=False, headless=True):
         self.observation_space = spaces.Dict(
             {
                 "url": spaces.Text(10000),
@@ -205,10 +248,11 @@ class SeleniumEnv(gym.Env):
         self.start_url = start_url
         self.pretty = pretty
         self.ended = False
+        self.headless = headless
 
     def reset(self, seed=None):
         super().reset(seed=seed)
-        self.browser = Browser(self.start_url)
+        self.browser = Browser(self.start_url, self.headless)
         self.ended = False
         obs = self.browser.observe()
         return (
