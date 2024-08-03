@@ -13,8 +13,10 @@ import numpy
 from bs4 import BeautifulSoup
 from gymnasium import spaces
 from selenium import webdriver
-from selenium.common.exceptions import (NoSuchElementException,
-                                        StaleElementReferenceException)
+from selenium.common.exceptions import (
+    NoSuchElementException,
+    StaleElementReferenceException,
+)
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement as Element
@@ -34,13 +36,17 @@ class ElementHighlight:
         self.element = element
         self.driver = driver
         self.headless = headless
-        
+
     def __enter__(self):
         if self.headless:
             return
         self.driver.execute_script("arguments[0].scrollIntoView();", self.element)
-        self.driver.execute_script("arguments[0].style.outline='3px solid #79ccd7'", self.element)
-        self.driver.execute_script("arguments[0].style.outline_offset='3px'", self.element)
+        self.driver.execute_script(
+            "arguments[0].style.outline='3px solid #79ccd7'", self.element
+        )
+        self.driver.execute_script(
+            "arguments[0].style.outline_offset='3px'", self.element
+        )
         time.sleep(0.5)
 
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -48,9 +54,12 @@ class ElementHighlight:
             return
         try:
             self.driver.execute_script("arguments[0].style.outline=''", self.element)
-            self.driver.execute_script("arguments[0].style.outline_offset=''", self.element)
+            self.driver.execute_script(
+                "arguments[0].style.outline_offset=''", self.element
+            )
         except StaleElementReferenceException:
             pass
+
 
 class Browser:
     clickables = {}
@@ -77,8 +86,8 @@ class Browser:
             attribute,
             value,
         )
-        
-    def slow_type(self, element: Element, text: str, delay: float=0.1):
+
+    def slow_type(self, element: Element, text: str, delay: float = 0.1):
         if self.headless:
             element.send_keys(text)
         else:
@@ -106,13 +115,17 @@ class Browser:
     def process(self, element: Element, recipe, parent_name=""):
         if random.random() < 0.01:
             # element.scrollIntoView()
-            self.driver.execute_script('arguments[0].scrollIntoView({ behavior: "smooth" });', element)
+            self.driver.execute_script(
+                'arguments[0].scrollIntoView({ behavior: "smooth" });', element
+            )
         elementText = ""
         if "text_selector" in recipe:
             text_element = element.find_element(
                 By.CSS_SELECTOR, recipe["text_selector"]
             )
             elementText = self.get_text(text_element)
+        elif "text_js" in recipe:
+            elementText = self.driver.execute_script(recipe["text_js"], element)
         else:
             elementText = self.get_text(element)
         if "text_format" in recipe and recipe["text_format"]:
@@ -159,18 +172,28 @@ class Browser:
         for key in ["class", "id"]:
             if key in recipe and recipe[key]:
                 node[key] = recipe[key]
-        # if 'radio' in recipe and recipe['radio']:
-        #     if element.get_attribute('checked'):
-        #         node.text += ' (selected)'
+        if "override_attr" in recipe:
+            for key in recipe["override_attr"]:
+                node[key] = self.driver.execute_script(
+                    recipe["override_attr"][key], element
+                )
         if tag_name == "input":
             input_type = element.get_attribute("type")
             if input_type == "radio":
                 if element.get_attribute("checked"):
-                    node.text += " (selected)"
+                    if "class" not in node:
+                        node["class"] = "selected"
+                    else:
+                        node["class"] += " selected"
                 assert "clickable" in recipe and recipe["clickable"]
             elif input_type == "text":
                 node["value"] = element.get_attribute("value")
                 self.register_input(element, node["name"])
+        if "keep_attr" in recipe:
+            for key in recipe["keep_attr"]:
+                value = element.get_attribute(key)
+                if value:
+                    node[key] = value
         if "children" in recipe and recipe["children"]:
             with node:
                 for child in recipe["children"]:
@@ -209,13 +232,18 @@ class Browser:
         path = url.path
         print(path)
         recipe = None
-        for r in recipes:
+        for i, r in enumerate(recipes):
             try:
                 element = self.driver.find_element(By.CSS_SELECTOR, r["match"])
-                if element and r['match_text'] in self.get_text(element):
+                if element and r["match_text"] in self.get_text(element):
                     recipe = r
                     break
+                else:
+                    logger.info(
+                        f"NO MATCH FOR recipe i, {r['match']}, got {self.get_text(element)}"
+                    )
             except NoSuchElementException:
+                logger.info(f"NO SUCH ELEMENT FOR recipe i, {r['match']}")
                 pass
         else:
             logging.error(f"NO RECIPE FOUND FOR {path}")

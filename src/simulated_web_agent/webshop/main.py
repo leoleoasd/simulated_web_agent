@@ -8,7 +8,7 @@ from .env import WebshopEnv  # noqa
 from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
 
 if __name__ == "__main__":
-    logging.basicConfig()
+    logging.basicConfig(level=logging.INFO)
     personas = {
         "persona": [
             "Background: I am Amir, a 35-year-old urban planner working for a city government, focusing on sustainable development projects to enhance urban living. Demographics: Age: 35, Gender: Male, Education: Master’s degree in Urban Planning. Professional Life: My career is dedicated to revitalizing urban areas with environmental sustainability, collaborating with architects, engineers, and community leaders. Financial Situation: I earn a monthly income of approximately $5,000, prioritizing investments in green technologies and saving for future projects and personal milestones like home ownership. Shopping Habits: I shop infrequently, preferring eco-friendly and ethically produced goods, and support local businesses. Personal Style: My style is minimalist and eco-conscious, consisting of organic fabrics and neutral colors, practical yet polished for office settings and community site visits.",

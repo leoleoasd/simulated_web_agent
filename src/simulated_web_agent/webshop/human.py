@@ -13,7 +13,7 @@ if __name__ == "__main__":
         "SeleniumEnv-v0",
         start_url="http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/",
         pretty=True,
-        headless=False,
+        headless=True,
     )
     observation, info = env.reset()
 
@@ -26,6 +26,10 @@ if __name__ == "__main__":
                 "text": "woman jacket",
             },
             {"type": "click", "name": "header.search_box.search_button"},
+            {
+                "type": "click",
+                "name": "search_results.woman_within_womens_plus_size_zipfront_microfleece_jacket_fleece.view_product",
+            },
         ]:
             print(observation["url"])
             print(observation["page"])
