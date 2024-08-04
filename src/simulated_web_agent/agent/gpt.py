@@ -15,7 +15,11 @@ def embed_text(texts, model=embedding_model, **kwargs):
 
 
 def chat(messages, model=chat_model, **kwargs):
-    return client.chat.completions.create(model=model, messages=messages, **kwargs)
+    try:
+        return client.chat.completions.create(model=model, messages=messages, **kwargs)
+    except Exception as e:
+        print(messages)
+        print(e)
 
 
 def chat_bulk(messages, model=chat_model, **kwargs):

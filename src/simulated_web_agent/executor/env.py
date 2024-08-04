@@ -265,7 +265,7 @@ class Browser:
             select = self.selects[name]
             select = Select(select)
             option = self.clickables[name]
-            with ElementHighlight(select, self.driver, self.headless):
+            with ElementHighlight(self.selects[name], self.driver, self.headless):
                 select.select_by_value(option.get_attribute("value"))
         else:
             with ElementHighlight(self.clickables[name], self.driver, self.headless):
