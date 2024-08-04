@@ -4,7 +4,6 @@ import gymnasium as gym
 
 from ..agent.gpt import chat_bulk
 from ..executor.env import SeleniumEnv  # noqa
-from .env import WebshopEnv  # noqa
 from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
 
 if __name__ == "__main__":
@@ -35,7 +34,10 @@ if __name__ == "__main__":
             ],
         ]
     }
-    env = gym.make("Webshop-v0")
+    env = gym.make(
+        "SeleniumEnv-v0",
+        start_url="http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/",
+    )
     for index, persona in enumerate(personas["persona"]):
         print(f"Persona {index}: {persona}")
         for intent in intents["intent"][index]:

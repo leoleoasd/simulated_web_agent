@@ -4,6 +4,7 @@ You will be provided with an environment that includes:
 - A URL
 - Simplified HTML content of the page
 - A list of all buttons on the page
+- A list of all inputs on the page
 
 Your task is to simulate human perception of the page accurately. Read the page from top to bottom and list all observations, capturing all the information that a human user would notice. 
 You should think in the first person.

@@ -137,6 +137,9 @@ class AgentPolicy(BasePolicy):
         (self.run_path / f"memory_trace_{self.agent.memory.timestamp}.txt").write_text(
             "\n".join(self.agent.format_memories(self.agent.memory.memories))
         )
+        (self.run_path / "page_{self.agent.memory.timestamp}.html").write_text(
+            observation["page"]
+        )
         self.agent.memory.timestamp += 1
         self.action_trace_file.write(json.dumps(action) + "\n")
         self.action_trace_file.flush()
