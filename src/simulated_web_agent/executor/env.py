@@ -13,10 +13,8 @@ import numpy
 from bs4 import BeautifulSoup
 from gymnasium import spaces
 from selenium import webdriver
-from selenium.common.exceptions import (
-    NoSuchElementException,
-    StaleElementReferenceException,
-)
+from selenium.common.exceptions import (NoSuchElementException,
+                                        StaleElementReferenceException)
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement as Element
@@ -40,14 +38,14 @@ class ElementHighlight:
     def __enter__(self):
         if self.headless:
             return
-        self.driver.execute_script("arguments[0].scrollIntoView();", self.element)
+        self.driver.execute_script('arguments[0].scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });', self.element)
         self.driver.execute_script(
             "arguments[0].style.outline='3px solid #79ccd7'", self.element
         )
         self.driver.execute_script(
             "arguments[0].style.outline_offset='3px'", self.element
         )
-        time.sleep(0.5)
+        time.sleep(2)
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if self.headless:
@@ -113,7 +111,7 @@ class Browser:
         return element.get_attribute("innerText")
 
     def process(self, element: Element, recipe, parent_name=""):
-        if random.random() < 0.01:
+        if random.random() < 0.04:
             # element.scrollIntoView()
             self.driver.execute_script(
                 'arguments[0].scrollIntoView({ behavior: "smooth" });', element
@@ -186,7 +184,7 @@ class Browser:
                     else:
                         node["class"] += " selected"
                 assert "clickable" in recipe and recipe["clickable"]
-            elif input_type == "text":
+            elif input_type == "text": # TODO: handle number
                 node["value"] = element.get_attribute("value")
                 self.register_input(element, node["name"])
         if "keep_attr" in recipe:

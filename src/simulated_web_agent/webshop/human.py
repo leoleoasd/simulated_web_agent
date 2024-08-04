@@ -1,5 +1,6 @@
 import json
 import logging
+import time
 
 import gymnasium as gym
 
@@ -13,7 +14,7 @@ if __name__ == "__main__":
         "SeleniumEnv-v0",
         start_url="http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/",
         pretty=True,
-        headless=True,
+        headless=False,
     )
     observation, info = env.reset()
 
@@ -30,12 +31,28 @@ if __name__ == "__main__":
                 "type": "click",
                 "name": "search_results.woman_within_womens_plus_size_zipfront_microfleece_jacket_fleece.view_product",
             },
+            {
+                "type": "back",
+            },
+            {"type": "click", "name": "search_results.women_outwear_jacket_autumn_and_winter_longsleeved_lapel_buttoned_solid_color_plush_warm_jacket_gifts_for_ladies.view_product"},
+            
+            {
+                "type": "back",
+            },
+            {
+                "type": "click",
+                "name": "search_results.woman_within_womens_plus_size_packable_puffer_jacket.view_product"
+            },
+            {"type": "click", "name": "options.black"},
+            {"type": "click", "name": "options.medium_plus"},
+            {"type": "click", "name": "add_to_cart"},
         ]:
             print(observation["url"])
             print(observation["page"])
             print("clickables:", observation["clickables"])
             print("inputs:", observation["inputs"])
             observation, reward, terminated, truncated, info = env.step(json.dumps(ac))
+            time.sleep(1)
 
         while True:
             print(observation["url"])

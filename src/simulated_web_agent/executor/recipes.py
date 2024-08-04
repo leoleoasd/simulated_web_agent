@@ -428,7 +428,7 @@ recipes = [
                                                 ],
                                             },
                                             {
-                                                "selector": "div.actions > submit",
+                                                "selector": "div.actions > button[type='submit']",
                                                 "add_text": True,
                                                 "clickable": True,
                                                 "name": "add_to_cart",
