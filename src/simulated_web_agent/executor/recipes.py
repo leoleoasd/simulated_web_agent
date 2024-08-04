@@ -52,6 +52,48 @@ nav = {
     ],
 }
 
+search_bar = {
+    "selector": ".header.content",
+    "name": "header",
+    "children": [
+        {
+            "selector": "#search_mini_form",
+            "name": "search_box",
+            "children": [
+                {
+                    "selector": "input#search",
+                    "name": "search_input",
+                },
+                {
+                    "selector": "button.action.search",
+                    "name": "search_button",
+                    "add_text": True,
+                    "clickable": True,
+                },
+            ],
+        },
+        {
+            "selector": "div.minicart-wrapper",
+            "name": "minicart",
+            "children": [
+                {
+                    "selector": "a.action.showcart",
+                    "add_text": True,
+                    "text_js": "return 'Go to cart'",
+                    "name": "view_cart",
+                    "clickable": True,
+                    "children": [
+                        {
+                            "selector": "span.counter-label",
+                            "add_text": True,
+                        }
+                    ],
+                }
+            ],
+        },
+    ],
+}
+
 recipes = [
     {
         "match": "#maincontent > div.columns > div > div:nth-child(3) > div > div.block-title > strong",
@@ -72,32 +114,12 @@ recipes = [
                 "selector": "body",
                 "children": [
                     # nav,
-                    {
-                        "selector": ".header.content",
-                        "name": "header",
-                        "children": [
-                            {
-                                "selector": "#search_mini_form",
-                                "name": "search_box",
-                                "children": [
-                                    {
-                                        "selector": "input#search",
-                                        "name": "search_input",
-                                    },
-                                    {
-                                        "selector": "button.action.search",
-                                        "name": "search_button",
-                                        "add_text": True,
-                                        "clickable": True,
-                                    },
-                                ],
-                            }
-                        ],
-                    },
+                    search_bar,
                     {
                         "selector": "#maincontent > div.columns > div > div:nth-child(3)",
                         "add_text": True,
                         "text_selector": "div > div.block-title > strong",
+                        "name": "product_showcases",
                         "children": [
                             {
                                 "selector": "div.product-item-info",
@@ -120,8 +142,8 @@ recipes = [
                                                 "selector": "div.reviews-actions a",
                                                 "add_text": True,
                                                 "name": "rating",
-                                                "clickable": True,
-                                                "name": "view_reviews",
+                                                # "clickable": True,
+                                                # "name": "view_reviews",
                                             },
                                             {
                                                 "selector": ".product-item-name a",
@@ -170,28 +192,7 @@ recipes = [
                 "selector": "body",
                 "children": [
                     # nav,
-                    {
-                        "selector": ".header.content",
-                        "name": "header",
-                        "children": [
-                            {
-                                "selector": "#search_mini_form",
-                                "name": "search_box",
-                                "children": [
-                                    {
-                                        "selector": "input#search",
-                                        "name": "search_input",
-                                    },
-                                    {
-                                        "selector": "button.action.search",
-                                        "name": "search_button",
-                                        "add_text": True,
-                                        "clickable": True,
-                                    },
-                                ],
-                            }
-                        ],
-                    },
+                    search_bar,
                     {
                         "selector": "#maincontent",
                         "add_text": True,
@@ -227,6 +228,23 @@ recipes = [
                                                 ],
                                             }
                                         ],
+                                    },
+                                ],
+                            },
+                            {
+                                "selector": "div.search.results div.toolbar",
+                                "name": "sorter",
+                                "children": [
+                                    {"selector": "#toolbar-amount", "add_text": True},
+                                    {
+                                        "selector": "select#sorter",
+                                        "name": "sorter.select",
+                                    },
+                                    {
+                                        "selector": "a.action.sorter-action",
+                                        "add_text": True,
+                                        "clickable": True,
+                                        "name": "from_text",
                                     },
                                 ],
                             },
@@ -269,8 +287,8 @@ recipes = [
                                                         "selector": "div.product-reviews-summary > div.review-actions > a",
                                                         "add_text": True,
                                                         "name": "reviews",
-                                                        "clickable": True,
-                                                        "name": "view_reviews",
+                                                        # "clickable": True,
+                                                        # "name": "view_reviews",
                                                     },
                                                     {
                                                         "selector": ".product-item-name a",
@@ -321,28 +339,7 @@ recipes = [
                 "selector": "body",
                 "children": [
                     # nav,
-                    {
-                        "selector": ".header.content",
-                        "name": "header",
-                        "children": [
-                            {
-                                "selector": "#search_mini_form",
-                                "name": "search_box",
-                                "children": [
-                                    {
-                                        "selector": "input#search",
-                                        "name": "search_input",
-                                    },
-                                    {
-                                        "selector": "button.action.search",
-                                        "name": "search_button",
-                                        "add_text": True,
-                                        "clickable": True,
-                                    },
-                                ],
-                            }
-                        ],
-                    },
+                    search_bar,
                     {
                         "selector": "#maincontent",
                         "children": [
@@ -385,6 +382,7 @@ recipes = [
                             {
                                 "selector": "div.product-add-form > form",
                                 "class": "product-add-form",
+                                "name": "product_form",
                                 "children": [
                                     {
                                         "selector": "div.field.required",
@@ -413,13 +411,17 @@ recipes = [
                                         ],
                                     },
                                     {
-                                        "selector": "div.product-options-bottom",
+                                        "selector": "div.box-tocart",
                                         "children": [
                                             {
                                                 "selector": "div.field",
                                                 "children": [
                                                     {
                                                         "selector": "label",
+                                                        "add_text": True,
+                                                        "keep_attr": [
+                                                            "for",
+                                                        ],
                                                     },
                                                     {
                                                         "selector": "div.control > input",
@@ -445,16 +447,16 @@ recipes = [
                                     {
                                         "selector": "div.data.item.title",
                                         "add_text": True,
-                                        "keep_attr": ["class"],
+                                        "class": "data item title tab-title",
                                         "name": "from_text",
                                         "clickable": True,
                                     },
                                     {
-                                        "selector": "div.data.item.content[aria-hidden='false']",
+                                        "selector": "#description[aria-hidden='false']",
                                         "keep_attr": ["class", "aria-hidden"],
                                         "children": [
                                             {
-                                                "selector": "div.celwidget:nth-child(3)",
+                                                "selector": "div.celwidget",
                                                 "add_text": True,
                                             },
                                             {
@@ -494,6 +496,84 @@ recipes = [
                                                     },
                                                 ],
                                             },
+                                        ],
+                                    },
+                                    {
+                                        "selector": "#reviews[aria-hidden='false']",
+                                        "keep_attr": ["class", "aria-hidden"],
+                                        "name": "reviews",
+                                        "children": [
+                                            {
+                                                "selector": "#product-review-container",
+                                                "children": [
+                                                    {
+                                                        "selector": "div.block-title",
+                                                        "add_text": True,
+                                                    },
+                                                    {
+                                                        "selector": "div.block-content > ol",
+                                                        "children": [
+                                                            {
+                                                                "selector": "li",
+                                                                "children": [
+                                                                    {
+                                                                        "selector": "div.review-title",
+                                                                        "keep_attr": [
+                                                                            "class",
+                                                                        ],
+                                                                        "add_text": True,
+                                                                    },
+                                                                    {
+                                                                        "selector": "div.review-ratings div.rating-result > span > span",
+                                                                        "add_text": True,
+                                                                        "text_format": "Rating: {}",
+                                                                    },
+                                                                    {
+                                                                        "selector": "div.review-content-container",
+                                                                        "add_text": True,
+                                                                    },
+                                                                    {
+                                                                        "selector": "review-details > p",
+                                                                        "add_text": True,
+                                                                    },
+                                                                ],
+                                                            }
+                                                        ],
+                                                    },
+                                                    {
+                                                        "selector": "div.review-toolbar:last-child div.pager div.pages",
+                                                        "add_text": True,
+                                                        "text_selector": "strong.label",
+                                                        "name": "pager",
+                                                        "children": [
+                                                            {
+                                                                "selector": "ul",
+                                                                "children": [
+                                                                    {
+                                                                        "selector": "li",
+                                                                        "keep_attr": [
+                                                                            "class"
+                                                                        ],
+                                                                        "add_text": True,
+                                                                        "children": [
+                                                                            {
+                                                                                "selector": "strong.page",
+                                                                                "add_text": True,
+                                                                            },
+                                                                            {
+                                                                                "selector": "a",
+                                                                                "add_text": True,
+                                                                                "clickable": True,
+                                                                                "name": "from_text",
+                                                                            },
+                                                                        ],
+                                                                    }
+                                                                ],
+                                                            }
+                                                        ],
+                                                    },
+                                                ],
+                                            }
                                         ],
                                     },
                                 ],

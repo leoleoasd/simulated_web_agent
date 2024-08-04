@@ -13,11 +13,15 @@ import numpy
 from bs4 import BeautifulSoup
 from gymnasium import spaces
 from selenium import webdriver
-from selenium.common.exceptions import (NoSuchElementException,
-                                        StaleElementReferenceException)
+from selenium.common.exceptions import (
+    NoSuchElementException,
+    StaleElementReferenceException,
+)
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement as Element
+from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.ui import WebDriverWait
 from tqdm.auto import tqdm
 
 from .recipes import recipes
@@ -37,8 +41,11 @@ class ElementHighlight:
 
     def __enter__(self):
         if self.headless:
-            return
-        self.driver.execute_script('arguments[0].scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });', self.element)
+            return self
+        self.driver.execute_script(
+            'arguments[0].scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });',
+            self.element,
+        )
         self.driver.execute_script(
             "arguments[0].style.outline='3px solid #79ccd7'", self.element
         )
@@ -46,6 +53,7 @@ class ElementHighlight:
             "arguments[0].style.outline_offset='3px'", self.element
         )
         time.sleep(2)
+        return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if self.headless:
@@ -58,10 +66,16 @@ class ElementHighlight:
         except StaleElementReferenceException:
             pass
 
+    def sleep(self):
+        if self.headless:
+            return
+        time.sleep(max(0.1 + numpy.random.normal(0, 0.05), 0))
+
 
 class Browser:
     clickables = {}
     inputs = {}
+    selects = {}
 
     def __init__(self, url, headless=True):
         options = Options()
@@ -84,15 +98,6 @@ class Browser:
             attribute,
             value,
         )
-
-    def slow_type(self, element: Element, text: str, delay: float = 0.1):
-        if self.headless:
-            element.send_keys(text)
-        else:
-            """Send a text to an element one character at a time with a delay."""
-            for character in text:
-                element.send_keys(character)
-                time.sleep(max(delay + numpy.random.normal(0, 0.05), 0))
 
     def register_clickable(self, element: Element, name: str):
         self.clickables[name] = element
@@ -167,14 +172,6 @@ class Browser:
             value = element.get_dom_attribute(key)
             if value:
                 node[key] = value
-        for key in ["class", "id"]:
-            if key in recipe and recipe[key]:
-                node[key] = recipe[key]
-        if "override_attr" in recipe:
-            for key in recipe["override_attr"]:
-                node[key] = self.driver.execute_script(
-                    recipe["override_attr"][key], element
-                )
         if tag_name == "input":
             input_type = element.get_attribute("type")
             if input_type == "radio":
@@ -184,14 +181,48 @@ class Browser:
                     else:
                         node["class"] += " selected"
                 assert "clickable" in recipe and recipe["clickable"]
-            elif input_type == "text": # TODO: handle number
+            elif input_type == "text":
                 node["value"] = element.get_attribute("value")
                 self.register_input(element, node["name"])
+            elif input_type == "number":
+                node["value"] = element.get_attribute("value")
+                self.register_input(element, node["name"])
+        if tag_name == "select":
+            select = Select(element)
+            for option in select.options:
+                option_name = node["name"] + "." + option.get_attribute("value")
+                if option.is_selected():
+                    node.add(
+                        dominate.tags.option(
+                            option.text,
+                            value=option.get_attribute("value"),
+                            selected="selected",
+                            name=option_name,
+                        )
+                    )
+                else:
+                    node.add(
+                        dominate.tags.option(
+                            option.text,
+                            value=option.get_attribute("value"),
+                            name=option_name,
+                        )
+                    )
+                self.selects[option_name] = element
+                self.clickables[option_name] = option
         if "keep_attr" in recipe:
             for key in recipe["keep_attr"]:
                 value = element.get_attribute(key)
                 if value:
                     node[key] = value
+        for key in ["class", "id"]:
+            if key in recipe and recipe[key]:
+                node[key] = recipe[key]
+        if "override_attr" in recipe:
+            for key in recipe["override_attr"]:
+                node[key] = self.driver.execute_script(
+                    recipe["override_attr"][key], element
+                )
         if "children" in recipe and recipe["children"]:
             with node:
                 for child in recipe["children"]:
@@ -208,15 +239,38 @@ class Browser:
         if name not in self.inputs:
             logger.error(f"INVALID ACTION: {name}")
             raise InvalidAction(f"INVALID ACTION: input {name} not found")
-        with ElementHighlight(self.inputs[name], self.driver, self.headless):
-            self.slow_type(self.inputs[name], text)
+        with ElementHighlight(self.inputs[name], self.driver, self.headless) as h:
+            for character in text:
+                self.inputs[name].send_keys(character)
+                h.sleep()
+
+    def clear(self, name):
+        if name not in self.inputs:
+            logger.error(f"INVALID ACTION: {name}")
+            raise InvalidAction(f"INVALID ACTION: input {name} not found")
+        with ElementHighlight(self.inputs[name], self.driver, self.headless) as h:
+            # self.inputs[name].clear()
+            # send end key
+            self.inputs[name].send_keys("\ue010")
+            # send backspace key
+            while self.inputs[name].get_attribute("value"):
+                self.inputs[name].send_keys("\ue003")
+                h.sleep()
 
     def click(self, name):
         if name not in self.clickables:
             logger.error(f"INVALID ACTION: {name}")
             raise InvalidAction(f"INVALID ACTION: clickable {name} not found")
-        with ElementHighlight(self.clickables[name], self.driver, self.headless):
-            self.clickables[name].click()
+        if name in self.selects:
+            select = self.selects[name]
+            select = Select(select)
+            option = self.clickables[name]
+            with ElementHighlight(select, self.driver, self.headless):
+                select.select_by_value(option.get_attribute("value"))
+        else:
+            with ElementHighlight(self.clickables[name], self.driver, self.headless):
+                self.clickables[name].click()
+        time.sleep(1)
 
     def back(self):
         self.driver.back()
@@ -295,6 +349,8 @@ class SeleniumEnv(gym.Env):
         action = json.loads(action)
         if action["type"] == "type":
             self.browser.type(action["name"], action["text"])
+        elif action["type"] == "clear":
+            self.browser.clear(action["name"])
         elif action["type"] == "click":
             self.browser.click(action["name"])
         elif action["type"] == "back":
@@ -303,17 +359,6 @@ class SeleniumEnv(gym.Env):
             self.ended = True
         else:
             logger.error(f"INVALID ACTION: {action}")
-            return (
-                {
-                    "url": self.webshop.url,
-                    "page": self.webshop.page,
-                    "clickables": list(self.webshop.clickables.keys()),
-                },
-                0,
-                True,
-                True,
-                {},
-            )
         obs = self.browser.observe()
         if obs["ended"]:
             self.ended = True
