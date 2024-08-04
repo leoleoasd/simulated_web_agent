@@ -314,6 +314,36 @@ recipes = [
                                     },
                                 ],
                             },
+                            {
+                                "selector": "div.toolbar-products div.pages",
+                                "add_text": True,
+                                "text_selector": "strong",
+                                "name": "pager",
+                                "children": [
+                                    {
+                                        "selector": "ul",
+                                        "children": [
+                                            {
+                                                "selector": "li",
+                                                "keep_attr": ["class"],
+                                                "add_text": True,
+                                                "children": [
+                                                    {
+                                                        "selector": "strong.page",
+                                                        "add_text": True,
+                                                    },
+                                                    {
+                                                        "selector": "a",
+                                                        "add_text": True,
+                                                        "clickable": True,
+                                                        "name": "from_text",
+                                                    },
+                                                ],
+                                            }
+                                        ],
+                                    }
+                                ],
+                            },
                         ],
                     },
                 ],
