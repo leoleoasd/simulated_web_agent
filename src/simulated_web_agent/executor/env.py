@@ -123,10 +123,13 @@ class Browser:
             )
         elementText = ""
         if "text_selector" in recipe:
-            text_element = element.find_element(
-                By.CSS_SELECTOR, recipe["text_selector"]
-            )
-            elementText = self.get_text(text_element)
+            try:
+                text_element = element.find_element(
+                    By.CSS_SELECTOR, recipe["text_selector"]
+                )
+                elementText = self.get_text(text_element)
+            except NoSuchElementException:
+                elementText = ""
         elif "text_js" in recipe:
             elementText = self.driver.execute_script(recipe["text_js"], element)
         else:
@@ -300,6 +303,14 @@ class Browser:
         else:
             logging.error(f"NO RECIPE FOUND FOR {path}")
             raise Exception(f"NO RECIPE FOUND FOR {path}")
+        if "terminate" in recipe and recipe["terminate"]:
+            return {
+                "page": "TERMINATE",
+                "url": self.driver.current_url,
+                "clickables": [],
+                "inputs": [],
+                "ended": True,
+            }
         root = self.process(
             self.driver.find_element(By.CSS_SELECTOR, recipe["selector"]), recipe
         )
@@ -322,6 +333,7 @@ class SeleniumEnv(gym.Env):
                 "page": spaces.Text(10000),
                 "clickables": spaces.Sequence(spaces.Text(10000)),
                 "inputs": spaces.Sequence(spaces.Text(10000)),
+                "error_message": spaces.Text(10000),
             }
         )
         self.action_space = spaces.Text(10000)
@@ -341,24 +353,33 @@ class SeleniumEnv(gym.Env):
                 "page": obs["page"].render(pretty=self.pretty),
                 "clickables": obs["clickables"],
                 "inputs": obs["inputs"],
+                "error_message": "",
             },
             {},
         )
 
     def step(self, action):
-        action = json.loads(action)
-        if action["type"] == "type":
-            self.browser.type(action["name"], action["text"])
-        elif action["type"] == "clear":
-            self.browser.clear(action["name"])
-        elif action["type"] == "click":
-            self.browser.click(action["name"])
-        elif action["type"] == "back":
-            self.browser.back()
-        elif action["type"] == "terminate":
-            self.ended = True
-        else:
-            logger.error(f"INVALID ACTION: {action}")
+        error_message = ""
+        try:
+            action = json.loads(action)
+            if action["type"] == "type":
+                self.browser.type(action["name"], action["text"])
+            elif action["type"] == "clear":
+                self.browser.clear(action["name"])
+            elif action["type"] == "click":
+                self.browser.click(action["name"])
+            elif action["type"] == "back":
+                self.browser.back()
+            elif action["type"] == "terminate":
+                self.ended = True
+            else:
+                logger.error(f"INVALID ACTION: {action}")
+                error_message = f"INVALID ACTION: {action} is not in the action space"
+        except InvalidAction as e:
+            error_message = str(e)
+        except Exception as e:
+            logger.error(f"ERROR: {e}")
+            error_message = str(e)
         obs = self.browser.observe()
         if obs["ended"]:
             self.ended = True
@@ -368,12 +389,17 @@ class SeleniumEnv(gym.Env):
                 "page": obs["page"].render(pretty=self.pretty),
                 "clickables": obs["clickables"],
                 "inputs": obs["inputs"],
+                "error_message": error_message,
             },
             0,
             self.ended,
             self.ended,
             {},
         )
+
+    def close(self):
+        self.browser.driver.quit()
+        return super().close()
 
 
 gym.register(

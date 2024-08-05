@@ -11,7 +11,11 @@ prompt_dir = Path(__file__).parent.absolute() / "prompts"
 
 
 def embed_text(texts, model=embedding_model, **kwargs):
-    return client.embeddings.create(input=texts, model=model, **kwargs)
+    try:
+        return client.embeddings.create(input=texts, model=model, **kwargs)
+    except Exception as e:
+        print(texts)
+        print(e)
 
 
 def chat(messages, model=chat_model, **kwargs):

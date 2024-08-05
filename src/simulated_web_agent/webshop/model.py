@@ -125,8 +125,10 @@ class AgentPolicy(BasePolicy):
 
     def forward(self, observation, available_actions):
         self.env_trace_file.write(json.dumps(observation) + "\n")
+        if self.agent.memory.timestamp != 0:  # make parallel
+            self.agent.feedback(observation)
         self.agent.perceive(observation)
-        self.agent.reflect()
+        self.agent.reflect()  # parallel with wonder
         self.agent.wonder()
         self.agent.plan()
         action = self.agent.act(observation)

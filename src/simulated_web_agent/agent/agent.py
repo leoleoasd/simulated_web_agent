@@ -12,8 +12,8 @@ WONDER_PROMPT = load_prompt("wonder")
 PLANNING_PROMPT = load_prompt("planning")
 EVALUATE_PLAN_PROMPT = load_prompt("evaluate_plan")
 ACTION_PROMPT = load_prompt("action")
+FEEDBACK_PROMPT = load_prompt("feedback")
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
 
 
 class Agent:
@@ -50,6 +50,35 @@ class Agent:
             for m in memories
         ]
         return memories
+
+    def feedback(self, obs):
+        last_action = None
+        last_plan = self.current_plan
+        for m in self.memory.memories[::-1]:
+            if isinstance(m, Action):
+                last_action = m
+                break
+        resp = chat(
+            [
+                {"role": "system", "content": FEEDBACK_PROMPT},
+                {
+                    "role": "user",
+                    "content": json.dumps(
+                        {
+                            "persona": self.persona,
+                            "last_action": last_action.raw_action,
+                            "last_plan": last_plan.content,
+                            "observation": obs,
+                        }
+                    ),
+                },
+            ],
+            response_format={"type": "json_object"},
+        )
+        resp = json.loads(resp.choices[0].message.content)
+        logger.info("feedback: %s", resp)
+        for thought in resp["thoughts"]:
+            Thought(thought, self.memory)
 
     def reflect(self):
         # we reflect on the most recent memories
@@ -170,6 +199,7 @@ class Agent:
 
     def plan(self):
         logger.info("planning ...")
+        # TODO: change to only one plan
         memories = self.memory.retrieve(
             self.intent, include_recent_observation=True, include_recent_action=True
         )

@@ -245,6 +245,7 @@ recipes = [
                                         "add_text": True,
                                         "clickable": True,
                                         "name": "from_text",
+                                        "keep_attr": ["class", "data-role"],
                                     },
                                 ],
                             },
@@ -608,6 +609,85 @@ recipes = [
                                     },
                                 ],
                             },
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        "match": "#maincontent > div.page-title-wrapper > h1 > span",
+        "match_text": "Shopping Cart",
+        "terminate": True,
+        "selector": "html",
+        "children": [
+            {
+                "selector": "head",
+                "name": "",
+                "children": [
+                    {
+                        "selector": "title",
+                        "add_text": True,
+                    }
+                ],
+            },
+            {
+                "selector": "body",
+                "children": [
+                    # nav,
+                    search_bar,
+                    {
+                        "selector": "#maincontent > div.columns > div > div:nth-child(3)",
+                        "add_text": True,
+                        "text_selector": "div > div.block-title > strong",
+                        "name": "product_showcases",
+                        "children": [
+                            {
+                                "selector": "div.product-item-info",
+                                "class": "product-item-info",
+                                "name": "from_text",
+                                "text_selector": "div.product-item-details strong.product-item-name",
+                                "children": [
+                                    {
+                                        "selector": "img",
+                                    },
+                                    {
+                                        "selector": "div.product-item-details",
+                                        "children": [
+                                            {
+                                                "selector": "div.rating-summary > div > span > span",
+                                                "add_text": True,
+                                                "text_format": "Rating: {}",
+                                            },
+                                            {
+                                                "selector": "div.reviews-actions a",
+                                                "add_text": True,
+                                                "name": "rating",
+                                                # "clickable": True,
+                                                # "name": "view_reviews",
+                                            },
+                                            {
+                                                "selector": ".product-item-name a",
+                                                "add_text": True,
+                                                "clickable": True,
+                                                "name": "view_product",
+                                            },
+                                            {
+                                                "selector": ".price-box",
+                                                "add_text": True,
+                                            },
+                                            {
+                                                "selector": ".actions-primary",
+                                                "add_text": True,
+                                                "clickable": True,
+                                                "name": "add_to_cart",
+                                                "tag_name": "button",
+                                                "click_selector": "button",
+                                            },
+                                        ],
+                                    },
+                                ],
+                            }
                         ],
                     },
                 ],
