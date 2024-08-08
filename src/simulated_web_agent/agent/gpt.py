@@ -25,6 +25,12 @@ def chat(messages, model=chat_model, **kwargs):
         print(messages)
         print(e)
 
+async def async_chat(messages, model=chat_model, **kwargs):
+    try:
+        return await async_client.chat.completions.create(model=model, messages=messages, **kwargs)
+    except Exception as e:
+        print(messages)
+        print(e)
 
 def chat_bulk(messages, model=chat_model, **kwargs):
     if len(messages) == 1:

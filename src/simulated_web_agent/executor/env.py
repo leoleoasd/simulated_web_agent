@@ -13,10 +13,8 @@ import numpy
 from bs4 import BeautifulSoup
 from gymnasium import spaces
 from selenium import webdriver
-from selenium.common.exceptions import (
-    NoSuchElementException,
-    StaleElementReferenceException,
-)
+from selenium.common.exceptions import (NoSuchElementException,
+                                        StaleElementReferenceException)
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement as Element
@@ -90,6 +88,7 @@ class Browser:
         self.inputs = {}
         self.last_url = url
         self.headless = headless
+        self.window_height = self.driver.execute_script('return window.innerHeight')
 
     def set_attribute(self, element: Element, attribute, value):
         self.driver.execute_script(
@@ -116,11 +115,15 @@ class Browser:
         return element.get_attribute("innerText")
 
     def process(self, element: Element, recipe, parent_name=""):
-        if random.random() < 0.04:
-            # element.scrollIntoView()
-            self.driver.execute_script(
-                'arguments[0].scrollIntoView({ behavior: "smooth" });', element
-            )
+        # if random.random() < 0.04:
+        #     # element.scrollIntoView()
+        #     self.driver.execute_script(
+        #         'arguments[0].scrollIntoView({ behavior: "smooth" });', element
+        #     )
+        boundingRect = self.driver.execute_script("return arguments[0].getBoundingClientRect()", element)
+        if boundingRect["top"] - self.window_height // 2 > 400:
+            self.driver.execute_script("window.scrollBy({top: 400, behavior: 'smooth'});")
+            time.sleep(0.5)
         elementText = ""
         if "text_selector" in recipe:
             try:
@@ -247,6 +250,16 @@ class Browser:
                 self.inputs[name].send_keys(character)
                 h.sleep()
 
+    def type_and_submit(self, name, text):
+        if name not in self.inputs:
+            logger.error(f"INVALID ACTION: {name}")
+            raise InvalidAction(f"INVALID ACTION: input {name} not found")
+        with ElementHighlight(self.inputs[name], self.driver, self.headless) as h:
+            for character in text:
+                self.inputs[name].send_keys(character)
+                h.sleep()
+            self.inputs[name].submit()
+
     def clear(self, name):
         if name not in self.inputs:
             logger.error(f"INVALID ACTION: {name}")
@@ -314,6 +327,7 @@ class Browser:
         root = self.process(
             self.driver.find_element(By.CSS_SELECTOR, recipe["selector"]), recipe
         )
+        self.driver.execute_script("window.scrollBy({top: -800, behavior: 'smooth'});")
         return {
             "page": root,
             "url": self.driver.current_url,
@@ -346,6 +360,8 @@ class SeleniumEnv(gym.Env):
         super().reset(seed=seed)
         self.browser = Browser(self.start_url, self.headless)
         self.ended = False
+        if not self.headless:
+            input("Press Enter to continue...")
         obs = self.browser.observe()
         return (
             {
@@ -364,6 +380,8 @@ class SeleniumEnv(gym.Env):
             action = json.loads(action)
             if action["type"] == "type":
                 self.browser.type(action["name"], action["text"])
+            elif action["type"] == "type_and_submit":
+                self.browser.type_and_submit(action["name"], action["text"])
             elif action["type"] == "clear":
                 self.browser.clear(action["name"])
             elif action["type"] == "click":

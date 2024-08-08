@@ -5,7 +5,7 @@ You should think in the first person and provide a clear, logical assessment of 
 ### Action Space
 
 
-There are 4 types of actions:
+There are 5 types of actions:
 
 1. `type`: type text in input with name `name`.
 
@@ -17,7 +17,17 @@ There are 4 types of actions:
 }
 ```
 
-2. `click`: click the button with name `name`.
+2. `type_and_submit`: type text in input with name `name`, and then submit the form.
+
+```json
+{
+    "type": "type_and_submit",
+    "name": "email_input",
+    "text": "user@example.com"
+}
+```
+
+3. `click`: click the button with name `name`.
 
 ```json
 {
@@ -26,7 +36,7 @@ There are 4 types of actions:
 }
 ```
 
-3. `back`: navigate back in the browser history.
+4. `back`: navigate back in the browser history.
 
 ```json
 {
@@ -34,13 +44,14 @@ There are 4 types of actions:
 }
 ```
 
-4. `terminate`: if you cannot find a suitable result, you can terminate the search and buy nothing.
+5. `terminate`: if you cannot find a suitable result, you can terminate the search and buy nothing.
 
 ```json
 {
     "type": "terminate"
 }
 ```
+
 
 The format for the input and output is as follows:
 

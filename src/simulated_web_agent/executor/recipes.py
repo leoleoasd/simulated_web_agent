@@ -439,6 +439,10 @@ recipes = [
                                                     },
                                                 ],
                                             },
+                                            {
+                                                "selector": "div.control > div.mage-error",
+                                                "add_text": True,
+                                            }
                                         ],
                                     },
                                     {

@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 import json
 import logging
@@ -123,15 +124,17 @@ class AgentPolicy(BasePolicy):
         self.action_trace_file = (self.run_path / "action_trace.txt").open("w")
         self.env_trace_file = (self.run_path / "env_trace.txt").open("w")
 
-    def forward(self, observation, available_actions):
+    async def _forward(self, observation, available_actions):
         self.env_trace_file.write(json.dumps(observation) + "\n")
         if self.agent.memory.timestamp != 0:  # make parallel
-            self.agent.feedback(observation)
-        self.agent.perceive(observation)
-        self.agent.reflect()  # parallel with wonder
-        self.agent.wonder()
-        self.agent.plan()
-        action = self.agent.act(observation)
+            await asyncio.gather(self.agent.feedback(observation), self.agent.perceive(observation))
+        else:
+            await self.agent.perceive(observation)
+        # self.agent.reflect()  # parallel with wonder
+        # self.agent.wonder()
+        await asyncio.gather(self.agent.reflect(), self.agent.wonder())
+        await self.agent.plan()
+        action = await self.agent.act(observation)
         pickle.dump(
             self.agent,
             open(self.run_path / f"agent_{self.agent.memory.timestamp}.pkl", "wb"),
@@ -147,3 +150,6 @@ class AgentPolicy(BasePolicy):
         self.action_trace_file.flush()
         self.env_trace_file.flush()
         return json.dumps(action)
+
+    def forward(self, observation, available_actions):
+        return asyncio.run(self._forward(observation, available_actions))

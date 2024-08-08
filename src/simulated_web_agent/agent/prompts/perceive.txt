@@ -9,6 +9,10 @@ You will be provided with an environment that includes:
 Your task is to simulate human perception of the page accurately. Read the page from top to bottom and list all observations, capturing all the information that a human user would notice. 
 You should think in the first person.
 
+## Principles
+* **EACH OBSERVATION SHOULD BE INDEPENDENT**. For every thing (not necessarily a single HTML element. A form, a product card, ...) should be described in ONE paragraph of observation.
+* **WRITE EVERY DETAIL**. A blind person should able to understand every detail of the web page with your support. This including listing ALL OPTIONS of radio buttons, no matter how long are they.
+
 Examples of observations include:
 1. A search box with the input name "search" and placeholder "Search".
 2. A button with the name "search" and the text "Search".
