@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import os
 import traceback
@@ -9,7 +10,8 @@ from ..agent.gpt import chat_bulk
 from ..executor.env import SeleniumEnv  # noqa
 from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
 
-if __name__ == "__main__":
+
+async def main():
     load_dotenv()
     logging.basicConfig()
     loggers = [
@@ -83,22 +85,27 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
 
             try:
                 policy = AgentPolicy(persona, intent)
-                policy.agent.add_thought("I should shorter search terms.")
 
                 while True:
                     print(observation["url"])
                     # print(observation["page"])
                     clickables = observation["clickables"]
                     # print("clickables:", clickables)
-                    action = policy.forward(observation, clickables)
+                    action = await policy.forward(observation, clickables)
                     print(f"Taking action {action}")
                     observation, reward, terminated, truncated, info = env.step(action)
                     print("-" * 50)
                     if terminated:
                         break
-            except Exception as e:
+            except Exception:
                 print(traceback.format_exc())
 
                 (policy.run_path / "error.txt").write_text(traceback.format_exc())
             finally:
                 env.close()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())

@@ -5,9 +5,13 @@ You will be provided with an environment that includes:
 - Simplified HTML content of the page
 - A list of all buttons on the page
 - A list of all inputs on the page
+- Optionally, a CSS selector called diff_selector of the element changed in the last step
 
 Your task is to simulate human perception of the page accurately. Read the page from top to bottom and list all observations, capturing all the information that a human user would notice. 
 You should think in the first person.
+
+If a diff_selector is provided, it means that the page only changed in the area of the element with the given selector.
+In this case, the HTML shown to you is the changed part of the page.
 
 ## Principles
 * **EACH OBSERVATION SHOULD BE INDEPENDENT**. For every thing (not necessarily a single HTML element. A form, a product card, ...) should be described in ONE paragraph of observation.

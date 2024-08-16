@@ -20,7 +20,7 @@ class BasePolicy(ABC):
         pass
 
     @abstractmethod
-    def forward(observation, available_actions):
+    async def forward(observation, available_actions):
         """
         Args:
             observation (`str`):
@@ -93,7 +93,7 @@ class HumanPolicy(BasePolicy):
     def __init__(self):
         super().__init__()
 
-    def forward(self, observation, available_actions):
+    async def forward(self, observation, available_actions):
         action = input("> ")
         try:
             action, param = action.split(" ", 1)
@@ -113,7 +113,7 @@ class AgentPolicy(BasePolicy):
     def __init__(self, persona, intent):
         logger.info(f"Creating AgentPolicy with persona: {persona}, intent: {intent}")
         self.agent = Agent(persona, intent)
-        self.agent.add_thought(f"I want to {intent}")
+        # self.agent.add_thought(f"I want to {intent}")
         # lets' have a run name with current time and random string to save agent checkpoints
         # 2024-02-02_05:05:05
         self.run_name = f"{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{uuid.uuid4().hex[:4]}"
@@ -124,14 +124,19 @@ class AgentPolicy(BasePolicy):
         self.action_trace_file = (self.run_path / "action_trace.txt").open("w")
         self.env_trace_file = (self.run_path / "env_trace.txt").open("w")
 
-    async def _forward(self, observation, available_actions):
+    async def forward(self, observation, available_actions):
         self.env_trace_file.write(json.dumps(observation) + "\n")
         if self.agent.memory.timestamp != 0:  # make parallel
-            await asyncio.gather(self.agent.feedback(observation), self.agent.perceive(observation))
+            await asyncio.gather(
+                self.agent.feedback(observation), self.agent.perceive(observation)
+            )
         else:
             await self.agent.perceive(observation)
-        # self.agent.reflect()  # parallel with wonder
-        # self.agent.wonder()
+        # if self.agent.memory.timestamp != 0:
+        #     await self.agent.feedback(observation)
+        # await self.agent.perceive(observation)
+        # await self.agent.reflect()  # parallel with wonder
+        # await self.agent.wonder()
         await asyncio.gather(self.agent.reflect(), self.agent.wonder())
         await self.agent.plan()
         action = await self.agent.act(observation)
@@ -151,5 +156,5 @@ class AgentPolicy(BasePolicy):
         self.env_trace_file.flush()
         return json.dumps(action)
 
-    def forward(self, observation, available_actions):
-        return asyncio.run(self._forward(observation, available_actions))
+    # def forward(self, observation, available_actions):
+    #     return asyncio.run(self._forward(observation, available_actions))

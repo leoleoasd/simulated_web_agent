@@ -1,7 +1,10 @@
 import asyncio
 from pathlib import Path
+from typing import Any
 
 import openai
+from openai.types import CreateEmbeddingResponse
+from openai.types.chat import ChatCompletion
 
 client = openai.Client()
 async_client = openai.AsyncClient()
@@ -10,39 +13,43 @@ chat_model = "gpt-4o-mini"
 prompt_dir = Path(__file__).parent.absolute() / "prompts"
 
 
-def embed_text(texts, model=embedding_model, **kwargs):
+async def embed_text(texts, model=embedding_model, **kwargs) -> CreateEmbeddingResponse:
     try:
-        return client.embeddings.create(input=texts, model=model, **kwargs)
+        return await async_client.embeddings.create(input=texts, model=model, **kwargs)
     except Exception as e:
         print(texts)
         print(e)
+        raise e
 
 
-def chat(messages, model=chat_model, **kwargs):
+def chat(messages, model=chat_model, **kwargs) -> ChatCompletion:
     try:
         return client.chat.completions.create(model=model, messages=messages, **kwargs)
     except Exception as e:
         print(messages)
         print(e)
+        raise e
 
-async def async_chat(messages, model=chat_model, **kwargs):
+
+async def async_chat(messages, model=chat_model, **kwargs) -> ChatCompletion:
     try:
-        return await async_client.chat.completions.create(model=model, messages=messages, **kwargs)
+        return await async_client.chat.completions.create(
+            model=model, messages=messages, **kwargs
+        )
     except Exception as e:
         print(messages)
         print(e)
+        raise e
+
 
 def chat_bulk(messages, model=chat_model, **kwargs):
     if len(messages) == 1:
         return [chat(messages[0], model=model, **kwargs)]
 
-    async def chat_one(message):
-        return await async_client.chat.completions.create(
-            model=model, messages=message, **kwargs
-        )
-
     async def run_all():
-        return await asyncio.gather(*[chat_one(m) for m in messages])
+        return await asyncio.gather(
+            *[async_chat(m, model=model, **kwargs) for m in messages]
+        )
 
     results = asyncio.run(run_all())
     return results

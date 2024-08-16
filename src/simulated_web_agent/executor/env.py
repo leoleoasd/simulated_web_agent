@@ -4,7 +4,8 @@ import os
 import random
 import re
 import time
-import urllib
+import urllib.parse
+from typing import Any, Union
 
 import dominate
 import dominate.tags
@@ -13,8 +14,10 @@ import numpy
 from bs4 import BeautifulSoup
 from gymnasium import spaces
 from selenium import webdriver
-from selenium.common.exceptions import (NoSuchElementException,
-                                        StaleElementReferenceException)
+from selenium.common.exceptions import (
+    NoSuchElementException,
+    StaleElementReferenceException,
+)
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement as Element
@@ -32,7 +35,13 @@ class InvalidAction(Exception):
 
 
 class ElementHighlight:
-    def __init__(self, element, driver, headless, sleep=0.5):
+    def __init__(
+        self,
+        element: Element,
+        driver: webdriver.Chrome,
+        headless: bool,
+        sleep: float = 0.5,
+    ):
         self.element = element
         self.driver = driver
         self.headless = headless
@@ -53,7 +62,7 @@ class ElementHighlight:
         time.sleep(2)
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any):
         if self.headless:
             return
         try:
@@ -70,12 +79,62 @@ class ElementHighlight:
         time.sleep(max(0.1 + numpy.random.normal(0, 0.05), 0))
 
 
+# we assume there are only 'root' node for the diff
+# so for any node from root to diff root, there should only be one different child
+def tree_diff(tree1: dominate.tags.html_tag, tree2: dominate.tags.html_tag):
+    diffs: list[
+        tuple[Union[dominate.tags.html_tag, str], Union[dominate.tags.html_tag, str]]
+    ] = []
+    if len(tree1.children) != len(tree2.children):
+        return tree1, tree2
+    if len(tree1.children) == 0:
+        return tree1, tree2
+    child_count = 0
+    for child1, child2 in zip(tree1.children, tree2.children):
+        if child1 == "" and child2 == "":
+            continue
+        child_count += 1
+        if type(child1) != type(child2):
+            diffs.append((child1, child2))
+        if type(child1) == str:
+            if child1 != child2:
+                diffs.append((child1, child2))
+        else:
+            if child1.render(pretty=False) != child2.render(pretty=False):
+                diffs.append((child1, child2))
+    if child_count == 0:
+        return tree1, tree2
+
+    if len(diffs) == 0:
+        return None
+    if len(diffs) > 1:
+        return tree1, tree2
+    else:
+        return tree_diff(*diffs[0])  # type: ignore
+
+
+def node_to_selector(node: dominate.tags.html_tag):
+    selector = getattr(node, "tag_name", type(node).__name__)
+    if selector[-1] == "_":
+        selector = selector[:-1]
+    if "id" in node.attributes:
+        selector += f"#{node['id']}"
+    if "class" in node.attributes:
+        for _cls in node["class"].split(" "):
+            selector += f".{_cls}"
+    if "name" in node.attributes:
+        selector += f"[name='{node['name']}']"
+    if node.parent is None:
+        return selector
+    return node_to_selector(node.parent) + " > " + selector
+
+
 class Browser:
     clickables = {}
     inputs = {}
     selects = {}
 
-    def __init__(self, url, headless=True):
+    def __init__(self, url: str, headless: bool):
         options = Options()
         options.add_argument("start-maximized")
         if headless:
@@ -88,9 +147,11 @@ class Browser:
         self.inputs = {}
         self.last_url = url
         self.headless = headless
-        self.window_height = self.driver.execute_script('return window.innerHeight')
+        self.window_height = self.driver.execute_script("return window.innerHeight")
+        self.last_recipe_index = -1
+        self.last_page = dominate.tags.html()
 
-    def set_attribute(self, element: Element, attribute, value):
+    def set_attribute(self, element: Element, attribute: str, value: str):
         self.driver.execute_script(
             "arguments[0].setAttribute(arguments[1], arguments[2]);",
             element,
@@ -106,23 +167,26 @@ class Browser:
         self.inputs[name] = element
         self.set_attribute(element, "data-input-id", name)
 
-    def get_text(self, element):
-        elementText = element.text  # sometime NOT work
+    def get_text(self, element: Element) -> str:
+        elementText = element.get_attribute("textContent")
         if not elementText:
             elementText = element.get_attribute("innerText")
-        if not elementText:
-            elementText = element.get_attribute("textContent")
-        return element.get_attribute("innerText")
+        elementText = re.sub(r"\s+", " ", elementText)  # type: ignore
+        return elementText or ""
 
-    def process(self, element: Element, recipe, parent_name=""):
+    def process(self, element: Element, recipe: dict, parent_name: str = ""):
         # if random.random() < 0.04:
         #     # element.scrollIntoView()
         #     self.driver.execute_script(
         #         'arguments[0].scrollIntoView({ behavior: "smooth" });', element
         #     )
-        boundingRect = self.driver.execute_script("return arguments[0].getBoundingClientRect()", element)
+        boundingRect = self.driver.execute_script(
+            "return arguments[0].getBoundingClientRect()", element
+        )
         if boundingRect["top"] - self.window_height // 2 > 400:
-            self.driver.execute_script("window.scrollBy({top: 400, behavior: 'smooth'});")
+            self.driver.execute_script(
+                "window.scrollBy({top: 400, behavior: 'smooth'});"
+            )
             time.sleep(0.5)
         elementText = ""
         if "text_selector" in recipe:
@@ -298,13 +362,14 @@ class Browser:
             self.inputs = {}
         url = urllib.parse.urlparse(self.driver.current_url)
         path = url.path
-        print(path)
         recipe = None
+        recipe_index = -1
         for i, r in enumerate(recipes):
             try:
                 element = self.driver.find_element(By.CSS_SELECTOR, r["match"])
                 if element and r["match_text"] in self.get_text(element):
                     recipe = r
+                    recipe_index = i
                     break
                 else:
                     logger.info(
@@ -319,17 +384,38 @@ class Browser:
         if "terminate" in recipe and recipe["terminate"]:
             return {
                 "page": "TERMINATE",
+                "diff_selector": "",
                 "url": self.driver.current_url,
                 "clickables": [],
                 "inputs": [],
                 "ended": True,
             }
-        root = self.process(
+        new_root = self.process(
             self.driver.find_element(By.CSS_SELECTOR, recipe["selector"]), recipe
         )
         self.driver.execute_script("window.scrollBy({top: -800, behavior: 'smooth'});")
+        if recipe_index == self.last_recipe_index:
+            # get diff
+            diff = tree_diff(self.last_root, new_root)
+            self.last_root = new_root
+            self.last_recipe_index = recipe_index
+            if diff is not None:
+                selector_1 = node_to_selector(diff[0])
+                selector_2 = node_to_selector(diff[1])
+                assert selector_1 == selector_2
+                return {
+                    "page": diff[1],
+                    "diff_selector": selector_1,
+                    "url": self.driver.current_url,
+                    "clickables": list(self.clickables.keys()),
+                    "inputs": list(self.inputs.keys()),
+                    "ended": False,
+                }
+        self.last_root = new_root
+        self.last_recipe_index = recipe_index
         return {
-            "page": root,
+            "page": new_root,
+            "diff_selector": "",
             "url": self.driver.current_url,
             "clickables": list(self.clickables.keys()),
             "inputs": list(self.inputs.keys()),
@@ -338,7 +424,7 @@ class Browser:
 
 
 class SeleniumEnv(gym.Env):
-    browser: Browser = None
+    browser: Browser
 
     def __init__(self, start_url, pretty=False, headless=True):
         self.observation_space = spaces.Dict(
@@ -348,6 +434,7 @@ class SeleniumEnv(gym.Env):
                 "clickables": spaces.Sequence(spaces.Text(10000)),
                 "inputs": spaces.Sequence(spaces.Text(10000)),
                 "error_message": spaces.Text(10000),
+                "diff_selector": spaces.Text(10000),
             }
         )
         self.action_space = spaces.Text(10000)
@@ -370,6 +457,7 @@ class SeleniumEnv(gym.Env):
                 "clickables": obs["clickables"],
                 "inputs": obs["inputs"],
                 "error_message": "",
+                "diff_selector": obs["diff_selector"],
             },
             {},
         )
@@ -408,6 +496,7 @@ class SeleniumEnv(gym.Env):
                 "clickables": obs["clickables"],
                 "inputs": obs["inputs"],
                 "error_message": error_message,
+                "diff_selector": obs["diff_selector"],
             },
             0,
             self.ended,
