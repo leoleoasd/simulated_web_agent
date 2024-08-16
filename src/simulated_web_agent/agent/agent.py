@@ -7,7 +7,7 @@ from .gpt import async_chat, load_prompt
 from .memory import Action, Memory, MemoryPiece, Observation, Plan, Reflection, Thought
 
 PERCEIVE_PROMPT = load_prompt("perceive")
-REFLECT_QUESTION_PROMPT = load_prompt("reflect_question")
+REFLECT_PROMPT = load_prompt("reflect")
 REFLECT_ANSWER_PROMPT = load_prompt("reflect_answer")
 REFLECT_IMPORTANCE_PROMPT = load_prompt("reflect_importance")
 WONDER_PROMPT = load_prompt("wonder")
@@ -22,6 +22,7 @@ class Agent:
     memory: Memory
     persona: str
     current_plan: Optional[MemoryPiece]
+    last_reflect_index = 0
 
     def __init__(self, persona, intent):
         self.memory = Memory(self)
@@ -88,9 +89,11 @@ class Agent:
         # we reflect on the most recent memories
         # two most recent memories (last observasion, reflect, plan, action)
         logger.info("reflecting on memories ...")
-        memories = [
-            i for i in self.memory.memories if i.timestamp >= self.memory.timestamp - 1
-        ]
+        # memories = [
+        #     i for i in self.memory.memories if i.timestamp >= self.memory.timestamp - 1
+        # ]
+        memories = self.memory.memories[self.last_reflect_index :]
+        self.last_reflect_index = len(self.memory.memories)
         memories = self.format_memories(memories)
         model_input = {
             "current_timestamp": self.memory.timestamp,
@@ -99,64 +102,69 @@ class Agent:
         }
         questions = await async_chat(
             [
-                {"role": "system", "content": REFLECT_QUESTION_PROMPT},
+                {"role": "system", "content": REFLECT_PROMPT},
                 {"role": "user", "content": json.dumps(model_input)},
             ],
             response_format={"type": "json_object"},
         )
-        questions = json.loads(questions.choices[0].message.content)["questions"]
-        logger.info(
-            f"reflecting on {questions}",
-        )
-        reflections = []
-        answers = []
-        requests = [
-            [
-                {
-                    "role": "system",
-                    "content": REFLECT_ANSWER_PROMPT,
-                },
-                {
-                    "role": "user",
-                    "content": json.dumps(
-                        {
-                            "question": q,
-                            "memories": self.format_memories(
-                                await self.memory.retrieve(q)
-                            ),
-                        }
-                    ),
-                },
-            ]
-            for q in questions
-        ]
-        results = await asyncio.gather(
-            *[
-                async_chat(
-                    r,
-                    response_format={"type": "json_object"},
-                )
-                for r in requests
-            ]
-        )
-        for answer in results:
-            answer = json.loads(answer.choices[0].message.content)
-            if answer["answer"] != "N/A":
-                answers.append(answer)
-        try:
-            for answer in answers:
-                reflections.append(
-                    Reflection(
-                        answer["answer"],
-                        self.memory,
-                        [memories[i] for i in answer["target"]],
-                    )
-                )
-        except IndexError as e:
-            logger.error("Reflection failed: %s", e)
-            await self.memory.add_memory_piece(
-                Thought("Reflection failed", self.memory)
-            )
+        reflections = json.loads(questions.choices[0].message.content)["insights"]
+        logger.info("reflections: %s", reflections)
+        for r in reflections:
+            await self.memory.add_memory_piece(Reflection(r, self.memory))
+        # todo
+
+        # logger.info(
+        #     f"reflecting on {questions}",
+        # )
+        # reflections = []
+        # answers = []
+        # requests = [
+        #     [
+        #         {
+        #             "role": "system",
+        #             "content": REFLECT_ANSWER_PROMPT,
+        #         },
+        #         {
+        #             "role": "user",
+        #             "content": json.dumps(
+        #                 {
+        #                     "question": q,
+        #                     "memories": self.format_memories(
+        #                         await self.memory.retrieve(q)
+        #                     ),
+        #                 }
+        #             ),
+        #         },
+        #     ]
+        #     for q in questions
+        # ]
+        # results = await asyncio.gather(
+        #     *[
+        #         async_chat(
+        #             r,
+        #             response_format={"type": "json_object"},
+        #         )
+        #         for r in requests
+        #     ]
+        # )
+        # for answer in results:
+        #     answer = json.loads(answer.choices[0].message.content)
+        #     if answer["answer"] != "N/A":
+        #         answers.append(answer)
+        # try:
+        #     for answer in answers:
+        #         reflections.append(
+        #             Reflection(
+        #                 answer["answer"],
+        #                 self.memory,
+        #                 [memories[i] for i in answer["target"]],
+        #             )
+        #         )
+        # except IndexError as e:
+        #     logger.error("Reflection failed: %s", e)
+        #     await self.memory.add_memory_piece(
+        #         Thought("Reflection failed", self.memory)
+        #     )
 
     async def wonder(self):
         logger.info("wondering ...")
@@ -189,7 +197,7 @@ class Agent:
             self.intent,
             include_recent_observation=True,
             include_recent_action=True,
-            kind_weight={"action": 2.0},
+            trigger_update=False,
         )
         memories = self.format_memories(memories)
         new_plan = ""
@@ -217,7 +225,6 @@ class Agent:
                     },
                 ],
                 response_format={"type": "json_object"},
-                model="gpt-4-turbo",
             )
             # # print(resp.choices[0].message.content)
             resp = resp.choices[0].message.content
@@ -238,7 +245,9 @@ class Agent:
         await self.memory.add_memory_piece(Thought(rationale, self.memory))
 
     async def act(self, env):
-        memories = await self.memory.retrieve(self.intent, include_recent_action=True)
+        memories = await self.memory.retrieve(
+            self.intent, include_recent_action=True, trigger_update=False
+        )
         memories = self.format_memories(memories)
         assert self.current_plan is not None
         action = await async_chat(
@@ -258,7 +267,6 @@ class Agent:
                 },
             ],
             response_format={"type": "json_object"},
-            model="gpt-4o",
         )
         action = json.loads(action.choices[0].message.content)
         await self.memory.add_memory_piece(
@@ -267,4 +275,13 @@ class Agent:
         return action
 
     async def add_thought(self, thought):
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
         await self.memory.add_memory_piece(Thought(thought, self.memory))

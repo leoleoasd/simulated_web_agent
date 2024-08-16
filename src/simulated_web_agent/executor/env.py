@@ -360,6 +360,14 @@ class Browser:
             self.last_url = self.driver.current_url
             self.clickables = {}
             self.inputs = {}
+        # wait for the page to load
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(
+            lambda driver: driver.execute_script("return document.readyState")
+            == "complete"
+        )
+        time.sleep(1)
+
         url = urllib.parse.urlparse(self.driver.current_url)
         path = url.path
         recipe = None
@@ -367,7 +375,10 @@ class Browser:
         for i, r in enumerate(recipes):
             try:
                 element = self.driver.find_element(By.CSS_SELECTOR, r["match"])
-                if element and r["match_text"] in self.get_text(element):
+                if (
+                    element
+                    and r["match_text"].lower() in self.get_text(element).lower()
+                ):
                     recipe = r
                     recipe_index = i
                     break

@@ -102,6 +102,7 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
 
                 (policy.run_path / "error.txt").write_text(traceback.format_exc())
             finally:
+                await policy.close()
                 env.close()
 
 

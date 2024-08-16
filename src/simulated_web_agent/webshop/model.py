@@ -123,6 +123,13 @@ class AgentPolicy(BasePolicy):
         (self.run_path / "intent.txt").write_text(intent)
         self.action_trace_file = (self.run_path / "action_trace.txt").open("w")
         self.env_trace_file = (self.run_path / "env_trace.txt").open("w")
+        self.slow_loop_task = None
+
+    async def slow_loop(self):
+        while True:
+            await self.agent.reflect()
+            await self.agent.wonder()
+            await self.agent.memory.update()
 
     async def forward(self, observation, available_actions):
         self.env_trace_file.write(json.dumps(observation) + "\n")
@@ -132,12 +139,14 @@ class AgentPolicy(BasePolicy):
             )
         else:
             await self.agent.perceive(observation)
+        if self.slow_loop_task is None:
+            self.slow_loop_task = asyncio.create_task(self.slow_loop())
         # if self.agent.memory.timestamp != 0:
         #     await self.agent.feedback(observation)
         # await self.agent.perceive(observation)
         # await self.agent.reflect()  # parallel with wonder
         # await self.agent.wonder()
-        await asyncio.gather(self.agent.reflect(), self.agent.wonder())
+        # await asyncio.gather(self.agent.reflect(), self.agent.wonder())
         await self.agent.plan()
         action = await self.agent.act(observation)
         pickle.dump(
@@ -155,6 +164,11 @@ class AgentPolicy(BasePolicy):
         self.action_trace_file.flush()
         self.env_trace_file.flush()
         return json.dumps(action)
+
+    async def close(self):
+        if self.slow_loop_task is not None:
+            self.slow_loop_task.cancel()
+            self.slow_loop_task = None
 
     # def forward(self, observation, available_actions):
     #     return asyncio.run(self._forward(observation, available_actions))

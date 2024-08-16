@@ -26,80 +26,97 @@ class Memory:
         self.importance = np.array([])
         self.timestamp = 0
         self.agent = agent
-        self.update_lock = asyncio.Lock()
+        self.read_lock = asyncio.Lock()
+        self.write_lock = asyncio.Lock()
 
     async def add_memory_piece(self, memory_piece):
-        async with self.update_lock:
-            memory_piece.timestamp = self.timestamp
-            self.memories.append(memory_piece)
+        # async with self.update_lock:
+        memory_piece.timestamp = self.timestamp
+        self.memories.append(memory_piece)
 
     def __getstate__(self):
         state = self.__dict__.copy()
-        del state["update_lock"]
+        del state["read_lock"]
+        del state["write_lock"]
         return state
 
     def __setstate__(self, state):
         self.__dict__ = state
-        self.update_lock = asyncio.Lock()
+        self.read_lock = asyncio.Lock()
+        self.write_lock = asyncio.Lock()
 
     async def update(self):
-        if self.embeddings is not None and len(self.memories) == len(self.embeddings):
-            return
-        logger.info("updating memory embeds and importance")
-        # first get memories with no embeddings
-        memory_to_embed = self.memories[
-            len(self.embeddings) if self.embeddings is not None else 0 :
-        ]
-        inputs = [m.content for m in memory_to_embed]
-        embeds = await gpt.embed_text(inputs)
-        embeds = [e.embedding for e in embeds.data]
-        embeds = np.array(embeds)
-        for i, m in enumerate(memory_to_embed):
-            m.embedding = embeds[i]
-        if self.embeddings.size == 0:
-            self.embeddings = embeds
-        else:
-            self.embeddings = np.concatenate([self.embeddings, embeds])
-        # update importance
-        memory_to_update = self.memories[len(self.importance) :]
-        requests = [
-            [
-                {
-                    "role": "system",
-                    "content": MEMORY_IMPORTANCE_PROMPT,
-                },
-                {
-                    "role": "user",
-                    "content": json.dumps(
+        async with self.write_lock:
+            if self.embeddings is not None and len(self.memories) == len(
+                self.embeddings
+            ):
+                return
+            logger.info("updating memory embeds and importance")
+
+            async def get_embeddings():
+                # first get memories with no embeddings
+                memory_to_embed = self.memories[
+                    len(self.embeddings) if self.embeddings is not None else 0 :
+                ]
+                inputs = [m.content for m in memory_to_embed]
+                embeds = await gpt.embed_text(inputs)
+                embeds = [e.embedding for e in embeds.data]
+                embeds = np.array(embeds)
+                for i, m in enumerate(memory_to_embed):
+                    m.embedding = embeds[i]
+                return embeds
+
+            async def update_importance():
+                # update importance
+                memory_to_update = self.memories[len(self.importance) :]
+                requests = [
+                    [
                         {
-                            "persona": self.agent.persona,
-                            "intent": self.agent.intent,
-                            "memory": m.content,
-                            "plan": self.agent.current_plan.content
-                            if self.agent.current_plan
-                            else None,
-                        }
-                    ),
-                },
-            ]
-            for m in memory_to_update
-        ]
-        responses = await asyncio.gather(
-            *[
-                gpt.async_chat(r, response_format={"type": "json_object"})
-                for r in requests
-            ]
-        )
-        new_importance = [
-            json.loads(r.choices[0].message.content)["score"] for r in responses
-        ]
-        new_importance = np.array(new_importance) / 10
-        if self.importance is None:
-            self.importance = new_importance
-        else:
-            self.importance = np.concatenate([self.importance, new_importance])
-        for i, m in enumerate(memory_to_update):
-            m.importance = new_importance[i]
+                            "role": "system",
+                            "content": MEMORY_IMPORTANCE_PROMPT,
+                        },
+                        {
+                            "role": "user",
+                            "content": json.dumps(
+                                {
+                                    "persona": self.agent.persona,
+                                    "intent": self.agent.intent,
+                                    "memory": m.content,
+                                    "plan": self.agent.current_plan.content
+                                    if self.agent.current_plan
+                                    else None,
+                                }
+                            ),
+                        },
+                    ]
+                    for m in memory_to_update
+                ]
+                responses = await asyncio.gather(
+                    *[
+                        gpt.async_chat(r, response_format={"type": "json_object"})
+                        for r in requests
+                    ]
+                )
+                new_importance = [
+                    json.loads(r.choices[0].message.content)["score"] for r in responses
+                ]
+                new_importance = np.array(new_importance) / 10
+                for i, m in enumerate(memory_to_update):
+                    m.importance = new_importance[i]
+                return new_importance
+
+            embeds, new_importance = await asyncio.gather(
+                get_embeddings(), update_importance()
+            )
+            async with self.read_lock:
+                if self.embeddings.size == 0:
+                    self.embeddings = embeds
+                else:
+                    self.embeddings = np.concatenate([self.embeddings, embeds])
+                if self.importance is None:
+                    self.importance = new_importance
+                else:
+                    self.importance = np.concatenate([self.importance, new_importance])
 
     async def retrieve(
         self,
@@ -107,10 +124,12 @@ class Memory:
         n=20,
         include_recent_observation=False,
         include_recent_action=False,
+        trigger_update=True,
         kind_weight={},
     ):
-        async with self.update_lock:
+        if trigger_update:
             await self.update()
+        async with self.read_lock:
             results = []
             if include_recent_observation:
                 # must include the most recent observation
@@ -126,12 +145,26 @@ class Memory:
                     for m in self.memories
                     if m.kind == "action" and m.timestamp >= self.timestamp - 5
                 ]
+            # make a copy for read
+            # embedding = self.embeddings.copy()
+            # importance = self.importance.copy()
+            # memories = [m for m in self.memories]
+            if self.embeddings.size == 0:
+                return results
+
             query_embedding = (await gpt.embed_text(query)).data[0].embedding
             similarities = np.dot(self.embeddings, query_embedding)
             recencies = np.array([m.timestamp - self.timestamp for m in self.memories])
             recencies = np.exp(recencies)
             kind_weights = np.array([kind_weight.get(m.kind, 1) for m in self.memories])
-            scores = (similarities + recencies + self.importance) * kind_weights
+            # print(similarities.size, recencies.size, self.importance.size)
+            smallest_size = min(similarities.size, recencies.size, self.importance.size)
+            scores = (
+                similarities[:smallest_size]
+                + recencies[:smallest_size]
+                + self.importance[:smallest_size]
+            ) * kind_weights[:smallest_size]
+            # scores = (similarities + recencies + self.importance) * kind_weights
             top_indices = np.argsort(-scores)[:n]
             return results + [self.memories[i] for i in top_indices]
 
@@ -162,11 +195,8 @@ class Observation(MemoryPiece):
 
 
 class Reflection(MemoryPiece):
-    target: list[MemoryPiece]
-
-    def __init__(self, content, memory, target: list[MemoryPiece]):
+    def __init__(self, content, memory):
         super().__init__(content, memory)
-        self.target = target
 
 
 class Plan(MemoryPiece):
