@@ -1,105 +1,95 @@
 name: simulated_web_agent
 channels:
   - conda-forge
-  - nodefaults
 dependencies:
-  - python=3.9
-  - ipykernel
-  - openjdk=11
-  - ca-certificates
-  - openssl
+  - appnope=0.1.4=pyhd8ed1ab_0
+  - asttokens=2.4.1=pyhd8ed1ab_0
+  - bzip2=1.0.8=h99b78c6_7
+  - ca-certificates=2024.7.4=hf0a4a13_0
+  - comm=0.2.2=pyhd8ed1ab_0
+  - debugpy=1.8.2=py39hbf7db11_0
+  - decorator=5.1.1=pyhd8ed1ab_0
+  - exceptiongroup=1.2.2=pyhd8ed1ab_0
+  - executing=2.0.1=pyhd8ed1ab_0
+  - importlib-metadata=8.2.0=pyha770c72_0
+  - importlib_metadata=8.2.0=hd8ed1ab_0
+  - ipykernel=6.29.5=pyh57ce528_0
+  - ipython=8.18.1=pyh707e725_3
+  - jedi=0.19.1=pyhd8ed1ab_0
+  - jupyter_client=8.6.2=pyhd8ed1ab_0
+  - jupyter_core=5.7.2=py39h2804cbe_0
+  - krb5=1.21.3=h237132a_0
+  - libcxx=18.1.8=h167917d_2
+  - libedit=3.1.20191231=hc8eb9b7_2
+  - libffi=3.4.2=h3422bc3_5
+  - libsodium=1.0.18=h27ca646_1
+  - libsqlite=3.46.0=hfb93653_0
+  - libzlib=1.3.1=hfb2fe0b_1
+  - matplotlib-inline=0.1.7=pyhd8ed1ab_0
+  - ncurses=6.5=hb89a1cb_0
+  - nest-asyncio=1.6.0=pyhd8ed1ab_0
+  - openjdk=11.0.23=h8f67a1f_1
+  - openssl=3.3.1=hfb2fe0b_2
+  - packaging=24.1=pyhd8ed1ab_0
+  - parso=0.8.4=pyhd8ed1ab_0
+  - pexpect=4.9.0=pyhd8ed1ab_0
+  - pickleshare=0.7.5=py_1003
+  - pip=24.2=pyhd8ed1ab_0
+  - platformdirs=4.2.2=pyhd8ed1ab_0
+  - prompt-toolkit=3.0.47=pyha770c72_0
+  - psutil=6.0.0=py39hfea33bf_0
+  - ptyprocess=0.7.0=pyhd3deb0d_0
+  - pure_eval=0.2.3=pyhd8ed1ab_0
+  - pygments=2.18.0=pyhd8ed1ab_0
+  - python=3.9.19=hd7ebdb9_0_cpython
+  - python-dateutil=2.9.0=pyhd8ed1ab_0
+  - python_abi=3.9=4_cp39
+  - pyzmq=26.0.3=py39he7f0319_0
+  - readline=8.2=h92ec313_1
+  - setuptools=72.1.0=pyhd8ed1ab_0
+  - six=1.16.0=pyh6c4a22f_0
+  - stack_data=0.6.2=pyhd8ed1ab_0
+  - tk=8.6.13=h5083fa2_1
+  - tornado=6.4.1=py39hfea33bf_0
+  - traitlets=5.14.3=pyhd8ed1ab_0
+  - typing_extensions=4.12.2=pyha770c72_0
+  - tzdata=2024a=h0c530f3_0
+  - wcwidth=0.2.13=pyhd8ed1ab_0
+  - wheel=0.43.0=pyhd8ed1ab_1
+  - xz=5.2.6=h57fd34a_0
+  - zeromq=4.3.5=hcc0f68c_4
+  - zipp=3.19.2=pyhd8ed1ab_0
   - pip:
       - annotated-types==0.7.0
       - anyio==4.4.0
       - attrs==23.2.0
       - beautifulsoup4==4.12.3
-      - blis==0.7.11
-      - catalogue==2.0.10
       - certifi==2024.7.4
-      - charset-normalizer==3.3.2
-      - click==8.1.7
-      - cloudpathlib==0.18.1
       - cloudpickle==3.0.0
-      - coloredlogs==15.0.1
-      - confection==0.1.5
-      - cymem==2.0.8
-      - cython==3.0.10
       - distro==1.9.0
       - dominate==2.9.1
-      - exceptiongroup==1.2.2
-      - faiss-cpu==1.8.0.post1
       - farama-notifications==0.0.4
-      - filelock==3.15.4
-      - flatbuffers==24.3.25
-      - fsspec==2024.6.1
       - gymnasium==0.29.1
       - h11==0.14.0
       - httpcore==1.0.5
       - httpx==0.27.0
-      - huggingface-hub==0.24.0
-      - humanfriendly==10.0
       - idna==3.7
-      - ipywidgets==8.1.3
-      - jinja2==3.1.4
-      - joblib==1.4.2
-      - jupyterlab-widgets==3.0.11
-      - langcodes==3.4.0
-      - language-data==1.2.0
-      - lightgbm==4.4.0
-      - marisa-trie==1.2.0
-      - markdown-it-py==3.0.0
-      - markupsafe==2.1.5
-      - mdurl==0.1.2
-      - mpmath==1.3.0
-      - murmurhash==1.0.10
-      - networkx==3.2.1
-      - nmslib==2.1.1
-      - numpy==1.26.4
-      - onnxruntime==1.18.1
-      - openai==1.35.15
+      - numpy==2.0.1
+      - openai==1.38.0
       - outcome==1.3.0.post0
-      - pandas==2.2.2
-      - preshed==3.0.9
-      - protobuf==5.27.2
-      - pybind11==2.6.1
       - pydantic==2.8.2
       - pydantic-core==2.20.1
-      - pyjnius==1.6.1
-      - pyserini==0.17.0
       - pysocks==1.7.1
-      - pytz==2024.1
-      - pyyaml==6.0.1
-      - regex==2024.5.15
-      - requests==2.32.3
-      - rich==13.7.1
-      - safetensors==0.4.3
-      - scikit-learn==1.5.1
-      - scipy==1.13.1
+      - python-dotenv==1.0.1
       - selenium==4.23.1
-      - sentencepiece==0.2.0
-      - shellingham==1.5.4
-      - smart-open==7.0.4
+      - simulated-web-agent==0.1.0
       - sniffio==1.3.1
       - sortedcontainers==2.4.0
       - soupsieve==2.5
-      - spacy==3.7.5
-      - spacy-legacy==3.0.12
-      - spacy-loggers==1.0.5
-      - srsly==2.4.8
-      - sympy==1.13.0
-      - thinc==8.2.5
-      - threadpoolctl==3.5.0
-      - tokenizers==0.19.1
       - tqdm==4.66.4
-      - transformers==4.42.4
       - trio==0.26.0
       - trio-websocket==0.11.1
-      - typer==0.12.3
-      - tzdata==2024.1
       - urllib3==2.2.2
-      - wasabi==1.1.3
-      - weasel==0.4.1
       - websocket-client==1.8.0
-      - widgetsnbextension==4.0.11
-      - wrapt==1.16.0
       - wsproto==1.2.0
+prefix: /Users/leo/micromamba/envs/simulated_web_agent
