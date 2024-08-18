@@ -124,6 +124,8 @@ class Memory:
         n=20,
         include_recent_observation=False,
         include_recent_action=False,
+        include_recent_plan=False,
+        include_recent_thought=False,
         trigger_update=True,
         kind_weight={},
     ):
@@ -136,7 +138,7 @@ class Memory:
                 results += [
                     m
                     for m in self.memories
-                    if m.kind == "observation" and m.timestamp == self.timestamp
+                    if m.kind == "observation" and m.timestamp == self.timestamp - 3
                 ]
             if include_recent_action:
                 # must include the most recent action
@@ -144,6 +146,18 @@ class Memory:
                     m
                     for m in self.memories
                     if m.kind == "action" and m.timestamp >= self.timestamp - 5
+                ]
+            if include_recent_plan:
+                results += [
+                    m
+                    for m in self.memories
+                    if m.kind == "plan" and m.timestamp >= self.timestamp - 5
+                ]
+            if include_recent_thought:
+                results += [
+                    m
+                    for m in self.memories
+                    if m.kind == "thought" and m.timestamp >= self.timestamp - 5
                 ]
             # make a copy for read
             # embedding = self.embeddings.copy()
@@ -200,8 +214,11 @@ class Reflection(MemoryPiece):
 
 
 class Plan(MemoryPiece):
-    def __init__(self, content, memory):
+    next_step: str
+
+    def __init__(self, content, memory, next_step):
         super().__init__(content, memory)
+        self.next_step = next_step
 
 
 class Action(MemoryPiece):

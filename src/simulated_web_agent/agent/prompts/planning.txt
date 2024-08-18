@@ -21,6 +21,7 @@ Format your output as follows:
 ```json
 {
     "plan": "<string representation of the plan>",
+    "next_step": "<string representation of the next step>",
     "rationale": "<string representation of the plan>"
 }
 ```
@@ -32,6 +33,9 @@ Examples of plans:
     1. browse into product with name "XXX" and ASIN "XXX", check the price, color, size and description
         1. if don't have my preferred color, go back to search results
     2. browse into product with name "AAA" and ASIN "BBB", check the price, color, size and description
+
+Example of next step:
+browse into product with name "XXX" and ASIN "XXX", check the price, color, size and description
 
 Examples of rationales:
 I need to see what are the general price range of jackets. Do they worth it? If not, I'm not buying anything.

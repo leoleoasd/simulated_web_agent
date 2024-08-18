@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 class Agent:
     memory: Memory
     persona: str
-    current_plan: Optional[MemoryPiece]
+    current_plan: Optional[Plan]
     last_reflect_index = 0
 
     def __init__(self, persona, intent):
@@ -100,14 +100,15 @@ class Agent:
             "memories": memories,
             "persona": self.persona,
         }
-        questions = await async_chat(
+        reflections = await async_chat(
             [
                 {"role": "system", "content": REFLECT_PROMPT},
                 {"role": "user", "content": json.dumps(model_input)},
             ],
             response_format={"type": "json_object"},
+            model="gpt-4-turbo",
         )
-        reflections = json.loads(questions.choices[0].message.content)["insights"]
+        reflections = json.loads(reflections.choices[0].message.content)["insights"]
         logger.info("reflections: %s", reflections)
         for r in reflections:
             await self.memory.add_memory_piece(Reflection(r, self.memory))
@@ -197,6 +198,8 @@ class Agent:
             self.intent,
             include_recent_observation=True,
             include_recent_action=True,
+            include_recent_plan=True,
+            include_recent_thought=True,
             trigger_update=False,
         )
         memories = self.format_memories(memories)
@@ -228,25 +231,27 @@ class Agent:
             )
             # # print(resp.choices[0].message.content)
             resp = resp.choices[0].message.content
-            if "plan" in json.loads(resp) and "rationale" in json.loads(resp):
-                new_plan = json.loads(resp)["plan"]
-                rationale = (
-                    json.loads(resp)["rationale"]
-                    if "rationale" in json.loads(resp)
-                    else "N/A"
-                )
+            resp = json.loads(resp)
+            if "plan" in resp and "rationale" in resp and "next_step" in resp:
+                new_plan = resp["plan"]
+                rationale = resp["rationale"] if "rationale" in resp else "N/A"
+                next_step = resp["next_step"]
                 # make sure they are str
                 if type(new_plan) == str and type(rationale) == str:
                     break
             logger.info("invalid response, rethinking... ")
         logger.info("plan: %s", new_plan)
         logger.info("rationale: %s", rationale)
-        self.current_plan = Plan(new_plan, self.memory)
+        logger.info("next_step: %s", next_step)
+        self.current_plan = Plan(new_plan, self.memory, next_step)
         await self.memory.add_memory_piece(Thought(rationale, self.memory))
 
     async def act(self, env):
         memories = await self.memory.retrieve(
-            self.intent, include_recent_action=True, trigger_update=False
+            self.current_plan.next_step,
+            include_recent_action=True,
+            include_recent_thought=True,
+            trigger_update=False,
         )
         memories = self.format_memories(memories)
         assert self.current_plan is not None
@@ -260,6 +265,7 @@ class Agent:
                             "persona": self.persona,
                             "intent": self.intent,
                             "plan": self.current_plan.content,
+                            "next_step": self.current_plan.next_step,
                             "environment": env,
                             "recent_memories": memories,
                         }
@@ -267,6 +273,7 @@ class Agent:
                 },
             ],
             response_format={"type": "json_object"},
+            model="gpt-4o",
         )
         action = json.loads(action.choices[0].message.content)
         await self.memory.add_memory_piece(
@@ -275,6 +282,16 @@ class Agent:
         return action
 
     async def add_thought(self, thought):
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
+        await self.memory.add_memory_piece(Thought(thought, self.memory))
         await self.memory.add_memory_piece(Thought(thought, self.memory))
         await self.memory.add_memory_piece(Thought(thought, self.memory))
         await self.memory.add_memory_piece(Thought(thought, self.memory))

@@ -51,7 +51,7 @@ There are 5 types of actions:
 }
 ```
 
-5. `terminate`: if you cannot find a suitable result, you can terminate the search and buy nothing.
+5. `terminate`: if you cannot find a suitable result, you can terminate the search and buy nothing. Only use this action if you can not find a suitable result.
 
 ```json
 {
