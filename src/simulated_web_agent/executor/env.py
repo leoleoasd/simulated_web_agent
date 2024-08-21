@@ -1,3 +1,4 @@
+import asyncio
 import json
 import logging
 import os
@@ -5,10 +6,12 @@ import random
 import re
 import time
 import urllib.parse
+from threading import Thread
 from typing import Any, Union
 
 import dominate
 import dominate.tags
+import dominate.util
 import gymnasium as gym
 import numpy
 from bs4 import BeautifulSoup
@@ -96,6 +99,7 @@ def tree_diff(tree1: dominate.tags.html_tag, tree2: dominate.tags.html_tag):
         child_count += 1
         if type(child1) != type(child2):
             diffs.append((child1, child2))
+            continue
         if type(child1) == str:
             if child1 != child2:
                 diffs.append((child1, child2))
@@ -180,14 +184,15 @@ class Browser:
         #     self.driver.execute_script(
         #         'arguments[0].scrollIntoView({ behavior: "smooth" });', element
         #     )
-        boundingRect = self.driver.execute_script(
-            "return arguments[0].getBoundingClientRect()", element
-        )
-        if boundingRect["top"] - self.window_height // 2 > 400:
-            self.driver.execute_script(
-                "window.scrollBy({top: 400, behavior: 'smooth'});"
+        if not self.headless:
+            boundingRect = self.driver.execute_script(
+                "return arguments[0].getBoundingClientRect()", element
             )
-            time.sleep(0.5)
+            if boundingRect["top"] - self.window_height // 2 > 400:
+                self.driver.execute_script(
+                    "window.scrollBy({top: 400, behavior: 'smooth'});"
+                )
+                time.sleep(0.5)
         elementText = ""
         if "text_selector" in recipe:
             try:
@@ -294,15 +299,27 @@ class Browser:
                     recipe["override_attr"][key], element
                 )
         if "children" in recipe and recipe["children"]:
-            with node:
-                for child in recipe["children"]:
-                    if "direct_child" in child and child["direct_child"]:
-                        selector = ":scope > " + child["selector"]
-                    else:
-                        selector = child["selector"]
-                    elements = element.find_elements(By.CSS_SELECTOR, selector)
+            for child in recipe["children"]:
+                if "direct_child" in child and child["direct_child"]:
+                    selector = ":scope > " + child["selector"]
+                else:
+                    selector = child["selector"]
+                elements = element.find_elements(By.CSS_SELECTOR, selector)
+                if child.get("insert_split_marker", False):
+                    logger.info("INSERTING SPLIT MARKER")
+                    last_split_marker_index = 0
+                    split_marker_every = child.get("insert_split_marker_every", 1)
+                    node.add(dominate.util.raw("<split-marker/>"))
+                    for i, child_element in enumerate(elements):
+                        if i - last_split_marker_index >= split_marker_every:
+                            node.add(dominate.util.raw("<split-marker/>"))
+                            last_split_marker_index = i
+                            logger.info(f"INSERTING SPLIT MARKER AT {i}")
+                        node.add(self.process(child_element, child, parent_name))
+                    node.add(dominate.util.raw("<split-marker/>"))
+                else:
                     for child_element in elements:
-                        self.process(child_element, child, parent_name)
+                        node.add(self.process(child_element, child, parent_name))
         return node
 
     def type(self, name, text):
@@ -355,18 +372,21 @@ class Browser:
     def back(self):
         self.driver.back()
 
-    def observe(self):
+    def observe(self, skip_wait: bool = False):
         if self.driver.current_url != self.last_url:
             self.last_url = self.driver.current_url
             self.clickables = {}
             self.inputs = {}
         # wait for the page to load
-        wait = WebDriverWait(self.driver, 10)
-        wait.until(
-            lambda driver: driver.execute_script("return document.readyState")
-            == "complete"
-        )
-        time.sleep(1)
+        if not skip_wait:
+            wait = WebDriverWait(self.driver, 10)
+            wait.until(
+                lambda driver: driver.execute_script("return document.readyState")
+                == "complete"
+            )
+            # await asyncio.sleep(1)
+            logger.info("OBSERVING")
+            time.sleep(1)
 
         url = urllib.parse.urlparse(self.driver.current_url)
         path = url.path
@@ -413,10 +433,10 @@ class Browser:
             if diff is not None:
                 selector_1 = node_to_selector(diff[0])
                 selector_2 = node_to_selector(diff[1])
-                assert selector_1 == selector_2
+                # assert selector_1 == selector_2
                 return {
                     "page": diff[1],
-                    "diff_selector": selector_1,
+                    "diff_selector": selector_2,
                     "url": self.driver.current_url,
                     "clickables": list(self.clickables.keys()),
                     "inputs": list(self.inputs.keys()),
@@ -460,7 +480,17 @@ class SeleniumEnv(gym.Env):
         self.ended = False
         if not self.headless:
             input("Press Enter to continue...")
+        self.browser.headless = True
         obs = self.browser.observe()
+        if obs["ended"]:
+            self.ended = True
+        if not self.headless:
+            self.browser.headless = False
+            # self.browser.observe()  # re-run to make
+            # re-run in new thread
+            # asyncio.create_task(self.browser.observe())
+            thread = Thread(target=self.browser.observe, args=(False,))
+            thread.start()
         return (
             {
                 "url": obs["url"],
@@ -497,9 +527,18 @@ class SeleniumEnv(gym.Env):
         except Exception as e:
             logger.error(f"ERROR: {e}")
             error_message = str(e)
+        self.browser.headless = True
+        # obs = self.browser.observe()
         obs = self.browser.observe()
         if obs["ended"]:
             self.ended = True
+        if not self.headless:
+            self.browser.headless = False
+            # self.browser.observe()  # re-run to make
+            # re-run in new thread
+            # asyncio.create_task(self.browser.observe())
+            thread = Thread(target=self.browser.observe, args=(False,))
+            thread.start()
         return (
             {
                 "url": obs["url"],

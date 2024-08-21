@@ -4,10 +4,11 @@ import logging
 from abc import ABC, abstractmethod
 from math import exp
 
+import json_fix
 import numpy as np
 import openai
 
-from . import gpt
+from . import context, gpt
 from .gpt import load_prompt
 
 MEMORY_IMPORTANCE_PROMPT = load_prompt("memory_importance")
@@ -164,6 +165,8 @@ class Memory:
             # importance = self.importance.copy()
             # memories = [m for m in self.memories]
             if self.embeddings.size == 0:
+                if context.api_call_manager:
+                    context.api_call_manager.retrieve_result.append(results)
                 return results
 
             query_embedding = (await gpt.embed_text(query)).data[0].embedding
@@ -180,7 +183,10 @@ class Memory:
             ) * kind_weights[:smallest_size]
             # scores = (similarities + recencies + self.importance) * kind_weights
             top_indices = np.argsort(-scores)[:n]
-            return results + [self.memories[i] for i in top_indices]
+            results += [self.memories[i] for i in top_indices]
+            if context.api_call_manager:
+                context.api_call_manager.retrieve_result.append(results)
+            return results
 
 
 class MemoryPiece(ABC):
@@ -198,6 +204,15 @@ class MemoryPiece(ABC):
         self.memory = memory
         self.content = content
         # self.memory.add_memory_piece(self)
+
+    def __json__(self):
+        return json.dumps(
+            {
+                "kind": self.kind,
+                "content": self.content,
+                "timestamp": self.timestamp,
+            }
+        )
 
 
 class Observation(MemoryPiece):
@@ -231,4 +246,6 @@ class Action(MemoryPiece):
 
 class Thought(MemoryPiece):
     def __init__(self, content, memory):
+        super().__init__(content, memory)
+        super().__init__(content, memory)
         super().__init__(content, memory)

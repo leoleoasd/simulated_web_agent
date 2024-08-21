@@ -126,6 +126,8 @@ recipes = [
                                 "class": "product-item-info",
                                 "name": "from_text",
                                 "text_selector": "div.product-item-details strong.product-item-name",
+                                "insert_split_marker": True,
+                                "insert_split_marker_every": 4,
                                 "children": [
                                     {
                                         "selector": "img",
@@ -441,8 +443,9 @@ recipes = [
                                             },
                                             {
                                                 "selector": "div.control > div.mage-error",
+                                                "keep_attr": ["class"],
                                                 "add_text": True,
-                                            }
+                                            },
                                         ],
                                     },
                                     {

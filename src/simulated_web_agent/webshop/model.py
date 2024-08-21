@@ -10,7 +10,7 @@ from abc import ABC, abstractmethod
 
 import openai
 
-from ..agent import Agent
+from ..agent import Agent, context
 
 logger = logging.getLogger(__name__)
 
@@ -119,6 +119,7 @@ class AgentPolicy(BasePolicy):
         self.run_name = f"{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{uuid.uuid4().hex[:4]}"
         self.run_path = pathlib.Path() / "runs" / self.run_name
         self.run_path.mkdir(parents=True)
+        context.run_path = self.run_path
         (self.run_path / "persona.txt").write_text(persona)
         (self.run_path / "intent.txt").write_text(intent)
         self.action_trace_file = (self.run_path / "action_trace.txt").open("w")

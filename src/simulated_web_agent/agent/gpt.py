@@ -6,6 +6,8 @@ import openai
 from openai.types import CreateEmbeddingResponse
 from openai.types.chat import ChatCompletion
 
+from . import context
+
 client = openai.Client()
 async_client = openai.AsyncClient()
 embedding_model = "text-embedding-3-small"
@@ -33,9 +35,16 @@ def chat(messages, model=chat_model, **kwargs) -> ChatCompletion:
 
 async def async_chat(messages, model=chat_model, **kwargs) -> ChatCompletion:
     try:
-        return await async_client.chat.completions.create(
+        if context.api_call_manager:
+            context.api_call_manager.request.append(messages)
+        response = await async_client.chat.completions.create(
             model=model, messages=messages, **kwargs
         )
+        if context.api_call_manager:
+            context.api_call_manager.response.append(
+                response.choices[0].message.content
+            )
+        return response
     except Exception as e:
         print(messages)
         print(e)
@@ -56,4 +65,6 @@ def chat_bulk(messages, model=chat_model, **kwargs):
 
 
 def load_prompt(prompt_name):
+    return (prompt_dir / f"{prompt_name}.txt").read_text()
+    return (prompt_dir / f"{prompt_name}.txt").read_text()
     return (prompt_dir / f"{prompt_name}.txt").read_text()
