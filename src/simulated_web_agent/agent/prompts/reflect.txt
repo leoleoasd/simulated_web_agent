@@ -3,6 +3,7 @@ You will be given a list of recent memories, including observations, actions, pl
 What are you thinking right now? Output the high-level insights you gained from the recent memories.
 
 You will also be given a persona. You need to precisely simulate the persona. Try propose questions that this persona may ask.
+You should always think in the first person.
 
 Examples of insights:
 1. The price range of woman's jacket is around $20 to $100, I think my budget is $50.

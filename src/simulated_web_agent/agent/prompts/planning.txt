@@ -6,15 +6,19 @@ Your goal is to write or update a plan that outlines the steps required to achie
 The previous plan, if any, is from the last step.
 
 The plan should be structured in a list-like format, detailing each step needed for completing the intent. Always adhere to the preferences and characteristics of the persona (e.g., if the persona prefers the color orange, specify looking for orange items instead of general color options).
+Each step will be translated to a series of browser actions. For example, "look into product 'Woman Within Women's Plus Size Packable Puffer Jacket' in serach result" will be translated to a series of browser actions like "click search result with 'Woman Within Women's Plus Size Packable Puffer Jacket'". "search for 'woman jacket' in search result" will be translated to a series of browser actions like "type 'woman jacket' into the search bar, click search button".
+So, you need to write steps that are "logical" atomic but not "atomic" in terms of browser actions. For example, you should write "Search for 'woman jacket' in search result" instead of "type 'woman jacket' into the search bar, click search button".
+For **FUTURE STEPS**, you can write if statements like "If the product matches my preference, select my desired color $color and size $size for product $product_name, else go back to search results and look into the next product $product_name.".
+For **CURRENT STEPS**, you should have all information you needed (for example, whether the product matches your preference), so you should not write if statements. You should write concrete, actionable steps.
 The plan should be concrete. For example, use "look into product 'Woman Within Women's Plus Size Packable Puffer Jacket' in serach result" instead of "browse search results". If any required information is missing, add a placeholder like "look into product with $product_name in search results".
 You should think in the first person.
 
 # Detailed Guidelines
-Think in three steps:
+Think in four steps:
 1. Write or update the plan. Do not rewrite any plan before the (next) step, but you can rewrite the plan after the (next) step. Revise the plan and make necessary changes based on the new information and observations. Use placeholders like $product_name for the product name. For example, if the original plan said "look into product with $product_name in search results" and in your observation there are search results listed, you should re-write many new steps like "look into product with 'Woman Within Women's Plus Size Packable Puffer Jacket' in search results".
 2. Expand plan from "repeat the above steps until i find the product i want." to many steps repeating the above steps with different product name filled in the placeholder.
-2. Explain the rationale behind your current next step. Think why do you make the current movement.
-3. Determine which step or sub-step is (next). Normally, the next step after the (next) from the last step should be the new next. You should always move the (next) marker. You should always move the (next) marker. You should always move the (next) marker. You should always move the (next) marker. Ensure there is only one (next) at a time, and the marker must be at the most detailed step (for example, you should put the marker in the first substep instead of a step).
+3. Explain the rationale behind your current next step. Think why do you make the current movement.
+4. Determine which step or sub-step is (next). Normally, the next step after the (next) from the last step should be the new next. You should always move the (next) marker. You should always move the (next) marker. You should always move the (next) marker. You should always move the (next) marker. Ensure there is only one (next) at a time, and the marker must be at the most detailed step (for example, you should put the marker in the first substep instead of a step).
 
 If you believe the intent could not be finished, change plan to terminate action.
 Each step should be able to execute in a series of browser actions, such type and click. **observation is not an action**.
@@ -25,9 +29,9 @@ Format your output as follows:
 
 ```json
 {
+    "rationale": "<string representation of the plan>",
     "plan": "<string representation of the plan>",
-    "next_step": "<string representation of the next step>",
-    "rationale": "<string representation of the plan>"
+    "next_step": "<string representation of the next step>"
 }
 ```
 
@@ -49,7 +53,7 @@ Rationale:
 I need to find a jacket that is both in my budget and has my preferred color and size.
 
 Next step:
-search for "woman jacket"
+search for "woman jacket" browse search results to know the general price range of jackets, and determine if that meets my budget.
 
 ## Example 2
 After obtain the search result for "woman jacket", the plan is:
@@ -89,5 +93,5 @@ select my desired color $color and size $size for product "Woman Within Women's 
 
 # TIPS:
 Always stick to the persona's preferences and characteristics.
-Use shorter search terms instead of longer one. Use `men's raincoat` instead of `eco-friendly men's raincoat grey olive recycled materials`.
+Use shorter search terms instead of longer one. Use `men's raincoat` instead of `eco-friendly men's raincoat grey olive recycled materials`. Use "women's jacket" instead of "women's jacket with hood red small".
 If there isn't desired search result, You should try different search terms.

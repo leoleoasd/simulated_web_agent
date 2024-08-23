@@ -6,6 +6,7 @@ import random
 import re
 import time
 import urllib.parse
+import traceback
 from threading import Thread
 from typing import Any, Union
 
@@ -99,8 +100,7 @@ def tree_diff(tree1: dominate.tags.html_tag, tree2: dominate.tags.html_tag):
         child_count += 1
         if type(child1) != type(child2):
             diffs.append((child1, child2))
-            continue
-        if type(child1) == str:
+        elif type(child1) == str:
             if child1 != child2:
                 diffs.append((child1, child2))
         else:
@@ -114,6 +114,8 @@ def tree_diff(tree1: dominate.tags.html_tag, tree2: dominate.tags.html_tag):
     if len(diffs) > 1:
         return tree1, tree2
     else:
+        if type(diffs[0][0]) == str:
+            return tree1, tree2
         return tree_diff(*diffs[0])  # type: ignore
 
 
@@ -306,7 +308,6 @@ class Browser:
                     selector = child["selector"]
                 elements = element.find_elements(By.CSS_SELECTOR, selector)
                 if child.get("insert_split_marker", False):
-                    logger.info("INSERTING SPLIT MARKER")
                     last_split_marker_index = 0
                     split_marker_every = child.get("insert_split_marker_every", 1)
                     node.add(dominate.util.raw("<split-marker/>"))
@@ -314,7 +315,6 @@ class Browser:
                         if i - last_split_marker_index >= split_marker_every:
                             node.add(dominate.util.raw("<split-marker/>"))
                             last_split_marker_index = i
-                            logger.info(f"INSERTING SPLIT MARKER AT {i}")
                         node.add(self.process(child_element, child, parent_name))
                     node.add(dominate.util.raw("<split-marker/>"))
                 else:
@@ -356,8 +356,8 @@ class Browser:
 
     def click(self, name):
         if name not in self.clickables:
-            logger.error(f"INVALID ACTION: {name}")
-            raise InvalidAction(f"INVALID ACTION: clickable {name} not found")
+            logger.error(f"INVALID ACTION: {name} is not clickable")
+            raise InvalidAction(f"INVALID ACTION: {name} is not clickable")
         if name in self.selects:
             select = self.selects[name]
             select = Select(select)
@@ -503,30 +503,37 @@ class SeleniumEnv(gym.Env):
             {},
         )
 
-    def step(self, action):
-        error_message = ""
-        try:
-            action = json.loads(action)
-            if action["type"] == "type":
-                self.browser.type(action["name"], action["text"])
-            elif action["type"] == "type_and_submit":
-                self.browser.type_and_submit(action["name"], action["text"])
-            elif action["type"] == "clear":
-                self.browser.clear(action["name"])
-            elif action["type"] == "click":
-                self.browser.click(action["name"])
-            elif action["type"] == "back":
-                self.browser.back()
-            elif action["type"] == "terminate":
-                self.ended = True
-            else:
-                logger.error(f"INVALID ACTION: {action}")
-                error_message = f"INVALID ACTION: {action} is not in the action space"
-        except InvalidAction as e:
-            error_message = str(e)
-        except Exception as e:
-            logger.error(f"ERROR: {e}")
-            error_message = str(e)
+    def step(self, actions):
+        for action in json.loads(actions):
+            print(action)
+            error_message = ""
+            try:
+                if action["type"] == "type":
+                    self.browser.type(action["name"], action["text"])
+                elif action["type"] == "type_and_submit":
+                    self.browser.type_and_submit(action["name"], action["text"])
+                elif action["type"] == "clear":
+                    self.browser.clear(action["name"])
+                elif action["type"] == "click":
+                    self.browser.click(action["name"])
+                elif action["type"] == "back":
+                    self.browser.back()
+                elif action["type"] == "terminate":
+                    self.ended = True
+                else:
+                    logger.error(f"INVALID ACTION: {action}")
+                    error_message = (
+                        f"INVALID ACTION: {action} is not in the action space"
+                    )
+            except InvalidAction as e:
+                error_message = str(e)
+                break
+            except Exception as e:
+                logger.error(f"ERROR: {e}")
+                print(traceback.format_exc())
+                error_message = str(e)
+                break
+
         self.browser.headless = True
         # obs = self.browser.observe()
         obs = self.browser.observe()

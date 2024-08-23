@@ -139,7 +139,7 @@ class Memory:
                 results += [
                     m
                     for m in self.memories
-                    if m.kind == "observation" and m.timestamp == self.timestamp - 3
+                    if m.kind == "observation" and m.timestamp >= self.timestamp - 3
                 ]
             if include_recent_action:
                 # must include the most recent action

@@ -203,6 +203,8 @@ recipes = [
                             {
                                 "selector": "div.filter",
                                 "name": "filter",
+                                "insert_split_marker": True,
+                                "insert_split_marker_every": 1,
                                 "children": [
                                     {
                                         "selector": ".filter-title",
@@ -274,6 +276,8 @@ recipes = [
                                         "class": "product-item-info",
                                         "name": "from_text",
                                         "text_selector": "div.product-item-details strong.product-item-name a",
+                                        "insert_split_marker": True,
+                                        "insert_split_marker_every": 4,
                                         "children": [
                                             {
                                                 "selector": "img",
@@ -416,6 +420,8 @@ recipes = [
                                 "selector": "div.product-add-form > form",
                                 "class": "product-add-form",
                                 "name": "product_form",
+                                "insert_split_marker": True,
+                                "insert_split_marker_every": 1000,
                                 "children": [
                                     {
                                         "selector": "div.field.required",
@@ -481,6 +487,8 @@ recipes = [
                                 "selector": "div.product.info.detailed",
                                 "class": "product info detailed",
                                 "name": "product_info",
+                                "insert_split_marker": True,
+                                "insert_split_marker_every": 1000,
                                 "children": [
                                     {
                                         "selector": "div.data.item.title",

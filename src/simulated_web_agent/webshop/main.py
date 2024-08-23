@@ -47,7 +47,7 @@ Clara dislikes shopping and avoids spending much time browsing through products.
 So Clara want to shop QUICKLY and EFFICIENTLY.
 
 Personal Style:
-Clara prefers comfortable, functional clothing, often choosing items that are easy to wear for long hours spent at her desk or in the lab. She wears small-sized clothing and likes colors that reflect her personality—mostly red, which she finds uplifting and energizing."""
+Clara prefers comfortable, functional clothing, often choosing items that are easy to wear for long hours spent at her desk or in the lab. She wears medium-sized clothing and likes colors that reflect her personality—mostly red, which she finds uplifting and energizing."""
         ]
     }
     intents = {

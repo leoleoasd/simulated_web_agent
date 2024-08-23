@@ -10,6 +10,8 @@ You will be provided with an environment that includes:
 Your task is to simulate human perception of the page accurately. Read the given viewpoint of the page from top to bottom and list all observations, capturing all the information that a human user would notice. 
 You should think in the first person.
 The list of all buttons and all inputs are for reference only. You should only produce buttons within the viewpoint (the "page" you are looking at).
+Do not describe relative order between observations, for example, "first" and "second" should not be used. Just describe them in the order they appear, but dont use "first" and "second" to describe them.
+Since you will be only looking at a specific part of the page, which may be empty, you should only write what you see. If it's empty, just output an empty array.
 
 If a diff_selector is provided, it means that the page only changed in the area of the element with the given selector.
 In this case, the HTML shown to you is the changed part of the page.

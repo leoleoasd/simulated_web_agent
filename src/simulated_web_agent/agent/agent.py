@@ -109,6 +109,8 @@ class Agent:
 
     @staticmethod
     def format_memories(memories: list[MemoryPiece]) -> list[str]:
+        # sort by kind and timestamp
+        memories = sorted(memories, key=lambda x: (x.kind, x.timestamp))
         memories_str = [
             f"""timestamp: {m.timestamp}; kind: {m.kind}; importance: {m.importance:.2f}, content: {m.content}"""
             for m in memories
@@ -262,10 +264,11 @@ class Agent:
             memories = await self.memory.retrieve(
                 self.intent,
                 include_recent_observation=True,
-                include_recent_action=True,
-                include_recent_plan=True,
-                include_recent_thought=True,
+                include_recent_action=False,
+                include_recent_plan=False,
+                include_recent_thought=False,
                 trigger_update=False,
+                kind_weight={"action": 10, "plan": 10, "thought": 10, "reflection": 10},
             )
             memories = self.format_memories(memories)
             new_plan = ""
@@ -299,6 +302,9 @@ class Agent:
                 resp = resp.choices[0].message.content
                 resp = json.loads(resp)
                 if "plan" in resp and "rationale" in resp and "next_step" in resp:
+                    logger.info(
+                        "retrieved memory for planning: %s", "\n".join(memories)
+                    )
                     new_plan = resp["plan"]
                     rationale = resp["rationale"] if "rationale" in resp else "N/A"
                     next_step = resp["next_step"]
@@ -316,9 +322,8 @@ class Agent:
         with LogApiCall():
             memories = await self.memory.retrieve(
                 self.current_plan.next_step,
-                include_recent_action=True,
-                include_recent_thought=True,
                 trigger_update=False,
+                kind_weight={"observation": 0, "action": 10, "thought": 10},
             )
             memories = self.format_memories(memories)
             assert self.current_plan is not None
@@ -342,21 +347,14 @@ class Agent:
                 response_format={"type": "json_object"},
                 model="gpt-4o",
             )
-        action = json.loads(action.choices[0].message.content)
-        await self.memory.add_memory_piece(
-            Action(action["description"], self.memory, json.dumps(action))
-        )
-        return action
+        actions = json.loads(action.choices[0].message.content)
+        logger.info("actions: %s", actions)
+        for action in actions["actions"]:
+            await self.memory.add_memory_piece(
+                Action(action["description"], self.memory, json.dumps(action))
+            )
+
+        return actions["actions"]
 
     async def add_thought(self, thought):
-        await self.memory.add_memory_piece(Thought(thought, self.memory))
-        await self.memory.add_memory_piece(Thought(thought, self.memory))
-        await self.memory.add_memory_piece(Thought(thought, self.memory))
-        await self.memory.add_memory_piece(Thought(thought, self.memory))
-        await self.memory.add_memory_piece(Thought(thought, self.memory))
-        await self.memory.add_memory_piece(Thought(thought, self.memory))
-        await self.memory.add_memory_piece(Thought(thought, self.memory))
-        await self.memory.add_memory_piece(Thought(thought, self.memory))
-        await self.memory.add_memory_piece(Thought(thought, self.memory))
-        await self.memory.add_memory_piece(Thought(thought, self.memory))
         await self.memory.add_memory_piece(Thought(thought, self.memory))
