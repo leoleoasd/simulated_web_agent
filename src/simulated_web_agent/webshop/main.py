@@ -53,7 +53,7 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
     intents = {
         "intent": [
             [
-                "buy a jacket",
+                "see if there is any jacket i wanted. if i found a good deal buy it, otherwise just terminate.",
             ]
             # [
             #     "I am looking for a men's raincoat. It should be durable and in a neutral color, preferably grey or olive. It should be practical for both commuting and fieldwork, with a budget of up to $150.",
@@ -88,6 +88,8 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
 
                 while True:
                     print(observation["url"])
+                    if not observation["error_message"]:
+                        del observation["error_message"]
                     # print(observation["page"])
                     clickables = observation["clickables"]
                     # print("clickables:", clickables)

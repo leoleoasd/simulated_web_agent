@@ -9,6 +9,7 @@ import urllib.parse
 import traceback
 from threading import Thread
 from typing import Any, Union
+from IPython import embed
 
 import dominate
 import dominate.tags
@@ -323,7 +324,9 @@ class Browser:
                         node.add(self.process(child_element, child, parent_name))
         # if is empty, add empty message
         if "empty_message" in recipe and recipe["empty_message"]:
-            if len(node.children) == 0:
+            if len(node.children) == 0 or (
+                len(node.children[0]) == 1 and node.children[0] == ""
+            ):
                 node.add(recipe["empty_message"])
         return node
 
@@ -522,6 +525,7 @@ class SeleniumEnv(gym.Env):
         )
 
     def step(self, actions):
+        obs = None
         for action in json.loads(actions):
             print(action)
             error_message = ""
@@ -572,6 +576,8 @@ class SeleniumEnv(gym.Env):
                     self.ended,
                     {},
                 )
+        if obs is None:
+            obs = self.browser.observe()
         if not self.headless and not self.no_animate:
             self.browser.headless = False
             # self.browser.observe()  # re-run to make
