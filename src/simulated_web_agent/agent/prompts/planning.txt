@@ -20,6 +20,15 @@ For **CURRENT STEPS**, you should have all information you needed (for example, 
 The plan should be concrete. For example, use "look into product 'Woman Within Women's Plus Size Packable Puffer Jacket' in serach result" instead of "browse search results". If any required information is missing, add a placeholder like "look into product with $product_name in search results".
 You should think in the first person.
 
+**Clarification on Steps**  
+Avoid breaking down steps into individual browser actions (e.g., typing in the search bar, clicking buttons). Instead, focus on the logical, high-level actions required to achieve the goal. For example:
+- Write "Search for 'women's jacket'" instead of "type 'women's jacket' into the search bar and click the search button."
+- Write "Select red and large for product 'xxx'" instead of "Click the 'Red' radio button and the 'Large' option in the size dropdown for the product 'xxx'."
+- Write "Select red and large for product 'xxx'" instead of "Select the 'Red' color for the product 'xxx'" and "Select the 'Large' size for the product 'xxx'". COMBINE THEM INTO ONE STEP.
+- Write "Add the product to the cart" instead of specifying the process of clicking the add-to-cart button.
+
+Your goal is to describe logical tasks, not the low-level mechanics of how they are performed on the website.
+
 # Detailed Guidelines
 Think in four steps:
 1. Write or update the plan. Do not rewrite any plan before the (next) step, but you can rewrite the plan after the (next) step. Revise the plan and make necessary changes based on the new information and observations. Use placeholders like $product_name for the product name. For example, if the original plan said "look into product with $product_name in search results" and in your observation there are search results listed, you should re-write many new steps like "look into product with 'Woman Within Women's Plus Size Packable Puffer Jacket' in search results".
@@ -104,8 +113,15 @@ You should always follow these tips to write the plan.
 You should always follow these tips to write the plan.
 You should always follow these tips to write the plan.
 
-Always stick to the persona's preferences and characteristics.
-Use shorter search terms instead of longer one. Use `men's raincoat` instead of `eco-friendly men's raincoat grey olive recycled materials`. Use "women's jacket" instead of "women's jacket with hood red small".
-Don't include size and color in the search term.
-If there isn't desired search result, You should try different search terms.
-Select color and size in the same step.
+## Always stick to the persona's preferences and characteristics.
+## Use shorter search terms instead of longer one. Use `men's raincoat` instead of `eco-friendly men's raincoat grey olive recycled materials`. Use "women's jacket" instead of "women's jacket with hood red small".
+* Correct: search for "woman's jacket"
+* Wrong: search for "woman's jacket eco-friendly"
+## Don't include size and color in the search term.
+* Correct: search for "woman's jacket"
+* Wrong: Search for "woman's jacket red medium"
+## If there isn't desired search result, You should try different search terms.
+## Select color and size in the same step.
+* Correct: Select color red and size medium
+* Wrong: Select color red
+## select options before 

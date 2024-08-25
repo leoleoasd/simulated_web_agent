@@ -254,9 +254,9 @@ class Browser:
             if input_type == "radio":
                 if element.get_attribute("checked"):
                     if "class" not in node:
-                        node["class"] = "selected"
+                        node["selected"] = "true"
                     else:
-                        node["class"] += " selected"
+                        node["selected"] = "false"
                 assert "clickable" in recipe and recipe["clickable"]
             elif input_type == "text":
                 node["value"] = element.get_attribute("value")
@@ -273,7 +273,7 @@ class Browser:
                         dominate.tags.option(
                             option.text,
                             value=option.get_attribute("value"),
-                            selected="selected",
+                            selected="true",
                             name=option_name,
                         )
                     )
@@ -283,6 +283,7 @@ class Browser:
                             option.text,
                             value=option.get_attribute("value"),
                             name=option_name,
+                            selected="false",
                         )
                     )
                 self.selects[option_name] = element
