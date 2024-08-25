@@ -72,25 +72,25 @@ search_bar = {
                 },
             ],
         },
-        {
-            "selector": "div.minicart-wrapper",
-            "name": "minicart",
-            "children": [
-                {
-                    "selector": "a.action.showcart",
-                    "add_text": True,
-                    "text_js": "return 'Go to cart'",
-                    "name": "view_cart",
-                    "clickable": True,
-                    "children": [
-                        {
-                            "selector": "span.counter-label",
-                            "add_text": True,
-                        }
-                    ],
-                }
-            ],
-        },
+        # {
+        #     "selector": "div.minicart-wrapper",
+        #     "name": "minicart",
+        #     "children": [
+        #         {
+        #             "selector": "a.action.showcart",
+        #             "add_text": True,
+        #             "text_js": "return 'Go to cart'",
+        #             "name": "view_cart",
+        #             "clickable": True,
+        #             "children": [
+        #                 {
+        #                     "selector": "span.counter-label",
+        #                     "add_text": True,
+        #                 }
+        #             ],
+        #         }
+        #     ],
+        # },
     ],
 }
 
@@ -157,14 +157,14 @@ recipes = [
                                                 "selector": ".price-box",
                                                 "add_text": True,
                                             },
-                                            {
-                                                "selector": ".actions-primary",
-                                                "add_text": True,
-                                                "clickable": True,
-                                                "name": "add_to_cart",
-                                                "tag_name": "button",
-                                                "click_selector": "button",
-                                            },
+                                            # {
+                                            #     "selector": ".actions-primary",
+                                            #     "add_text": True,
+                                            #     "clickable": True,
+                                            #     "name": "add_to_cart",
+                                            #     "tag_name": "button",
+                                            #     "click_selector": "button",
+                                            # },
                                         ],
                                     },
                                 ],
@@ -307,14 +307,14 @@ recipes = [
                                                         "selector": ".price-box",
                                                         "add_text": True,
                                                     },
-                                                    {
-                                                        "selector": ".actions-primary form",
-                                                        "add_text": True,
-                                                        "clickable": True,
-                                                        "name": "add_to_cart",
-                                                        "tag_name": "button",
-                                                        "click_selector": "button",
-                                                    },
+                                                    # {
+                                                    #     "selector": ".actions-primary form",
+                                                    #     "add_text": True,
+                                                    #     "clickable": True,
+                                                    #     "name": "add_to_cart",
+                                                    #     "tag_name": "button",
+                                                    #     "click_selector": "button",
+                                                    # },
                                                 ],
                                             },
                                         ],
@@ -361,6 +361,32 @@ recipes = [
         "match": "#maincontent > div.columns > div > div.product-info-main > div.product-info-price > div.product-info-stock-sku > div.stock.available > span",
         "match_text": "IN STOCK",
         "selector": "html",
+        "terminate": """
+return document.querySelector("span.counter-label").textContent.trim() != ""
+""",
+        "terminate_callback": """
+cart = document.querySelector("#minicart-content-wrapper")
+product = cart.querySelector("div.product-item-details")
+
+option_list = product.querySelector("dl.product.options.list")
+values = [...option_list.querySelectorAll("dd.values")].map(a => a.textContent.trim())
+labels = [...option_list.querySelectorAll("dt.label")].map(a => a.textContent.trim())
+options = labels.map((l, i) => [l, values[i]])
+options_str = ""
+for (i of options) {options_str += `${i[0]}: ${i[1]}; `}
+
+h1 = document.createElement("h1");
+document.documentElement.remove();
+div = document.createElement("div");
+div.style.display="flex";
+div.style.justifyContent="center";
+div.style.alignItems="center";
+div.style.width="100%"; div.style.height="100%";
+document.appendChild(div);
+div.style.alignContent="center";
+h1.textContent=`You purchased ${product.querySelector(".product-item-name").textContent.trim()}, with options ${options_str}`
+div.appendChild(h1)
+""",
         "children": [
             {
                 "selector": "head",
@@ -450,6 +476,10 @@ recipes = [
                                             {
                                                 "selector": "div.control > div.mage-error",
                                                 "keep_attr": ["class"],
+                                                "override_attr": {
+                                                    "class": "return 'error'",
+                                                    "style": "return 'color: red'",
+                                                },
                                                 "add_text": True,
                                             },
                                         ],
@@ -551,6 +581,8 @@ recipes = [
                                         "children": [
                                             {
                                                 "selector": "#product-review-container",
+                                                "keep_attr": ["class", "id"],
+                                                "empty_message": "No reviews",
                                                 "children": [
                                                     {
                                                         "selector": "div.block-title",
@@ -630,83 +662,83 @@ recipes = [
             },
         ],
     },
-    {
-        "match": "#maincontent > div.page-title-wrapper > h1 > span",
-        "match_text": "Shopping Cart",
-        "terminate": True,
-        "selector": "html",
-        "children": [
-            {
-                "selector": "head",
-                "name": "",
-                "children": [
-                    {
-                        "selector": "title",
-                        "add_text": True,
-                    }
-                ],
-            },
-            {
-                "selector": "body",
-                "children": [
-                    # nav,
-                    search_bar,
-                    {
-                        "selector": "#maincontent > div.columns > div > div:nth-child(3)",
-                        "add_text": True,
-                        "text_selector": "div > div.block-title > strong",
-                        "name": "product_showcases",
-                        "children": [
-                            {
-                                "selector": "div.product-item-info",
-                                "class": "product-item-info",
-                                "name": "from_text",
-                                "text_selector": "div.product-item-details strong.product-item-name",
-                                "children": [
-                                    {
-                                        "selector": "img",
-                                    },
-                                    {
-                                        "selector": "div.product-item-details",
-                                        "children": [
-                                            {
-                                                "selector": "div.rating-summary > div > span > span",
-                                                "add_text": True,
-                                                "text_format": "Rating: {}",
-                                            },
-                                            {
-                                                "selector": "div.reviews-actions a",
-                                                "add_text": True,
-                                                "name": "rating",
-                                                # "clickable": True,
-                                                # "name": "view_reviews",
-                                            },
-                                            {
-                                                "selector": ".product-item-name a",
-                                                "add_text": True,
-                                                "clickable": True,
-                                                "name": "view_product",
-                                            },
-                                            {
-                                                "selector": ".price-box",
-                                                "add_text": True,
-                                            },
-                                            {
-                                                "selector": ".actions-primary",
-                                                "add_text": True,
-                                                "clickable": True,
-                                                "name": "add_to_cart",
-                                                "tag_name": "button",
-                                                "click_selector": "button",
-                                            },
-                                        ],
-                                    },
-                                ],
-                            }
-                        ],
-                    },
-                ],
-            },
-        ],
-    },
+    # {
+    #     "match": "#maincontent > div.page-title-wrapper > h1 > span",
+    #     "match_text": "Shopping Cart",
+    #     "terminate": "return true",
+    #     "selector": "html",
+    #     "children": [
+    #         {
+    #             "selector": "head",
+    #             "name": "",
+    #             "children": [
+    #                 {
+    #                     "selector": "title",
+    #                     "add_text": True,
+    #                 }
+    #             ],
+    #         },
+    #         {
+    #             "selector": "body",
+    #             "children": [
+    #                 # nav,
+    #                 search_bar,
+    #                 {
+    #                     "selector": "#maincontent > div.columns > div > div:nth-child(3)",
+    #                     "add_text": True,
+    #                     "text_selector": "div > div.block-title > strong",
+    #                     "name": "product_showcases",
+    #                     "children": [
+    #                         {
+    #                             "selector": "div.product-item-info",
+    #                             "class": "product-item-info",
+    #                             "name": "from_text",
+    #                             "text_selector": "div.product-item-details strong.product-item-name",
+    #                             "children": [
+    #                                 {
+    #                                     "selector": "img",
+    #                                 },
+    #                                 {
+    #                                     "selector": "div.product-item-details",
+    #                                     "children": [
+    #                                         {
+    #                                             "selector": "div.rating-summary > div > span > span",
+    #                                             "add_text": True,
+    #                                             "text_format": "Rating: {}",
+    #                                         },
+    #                                         {
+    #                                             "selector": "div.reviews-actions a",
+    #                                             "add_text": True,
+    #                                             "name": "rating",
+    #                                             # "clickable": True,
+    #                                             # "name": "view_reviews",
+    #                                         },
+    #                                         {
+    #                                             "selector": ".product-item-name a",
+    #                                             "add_text": True,
+    #                                             "clickable": True,
+    #                                             "name": "view_product",
+    #                                         },
+    #                                         {
+    #                                             "selector": ".price-box",
+    #                                             "add_text": True,
+    #                                         },
+    #                                         {
+    #                                             "selector": ".actions-primary",
+    #                                             "add_text": True,
+    #                                             "clickable": True,
+    #                                             "name": "add_to_cart",
+    #                                             "tag_name": "button",
+    #                                             "click_selector": "button",
+    #                                         },
+    #                                     ],
+    #                                 },
+    #                             ],
+    #                         }
+    #                     ],
+    #                 },
+    #             ],
+    #         },
+    #     ],
+    # },
 ]

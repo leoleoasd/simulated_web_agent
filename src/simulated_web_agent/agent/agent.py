@@ -108,12 +108,16 @@ class Agent:
             await self.memory.add_memory_piece(Observation(o, self.memory, environment))
 
     @staticmethod
-    def format_memories(memories: list[MemoryPiece]) -> list[str]:
+    def format_memories(memories: list[MemoryPiece], sort_by_kind=True) -> list[str]:
         # sort by kind and timestamp
-        memories = sorted(memories, key=lambda x: (x.kind, x.timestamp))
+        if sort_by_kind:
+            memories = sorted(memories, key=lambda x: (x.kind, x.timestamp))
+        importances_str = [
+            f"{m.importance:.2f}" if m.importance != -1 else "N/A" for m in memories
+        ]
         memories_str = [
-            f"""timestamp: {m.timestamp}; kind: {m.kind}; importance: {m.importance:.2f}, content: {m.content}"""
-            for m in memories
+            f"""timestamp: {m.timestamp}; kind: {m.kind}; importance: {i}, content: {m.content}"""
+            for m, i in zip(memories, importances_str)
         ]
         return memories_str
 
@@ -171,6 +175,7 @@ class Agent:
                 {"role": "user", "content": json.dumps(model_input)},
             ],
             response_format={"type": "json_object"},
+            log=False,
             model="gpt-4-turbo",
         )
         reflections = json.loads(reflections.choices[0].message.content)["insights"]
@@ -251,6 +256,7 @@ class Agent:
                     ),
                 },
             ],
+            log=False,
             response_format={"type": "json_object"},
         )
         resp = json.loads(resp.choices[0].message.content)

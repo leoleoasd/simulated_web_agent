@@ -106,7 +106,7 @@ class HumanPolicy(BasePolicy):
             print(e)
             print("try again")
             return self.forward(observation, available_actions)
-        return json.dumps({"type": action, **param})
+        return json.dumps([{"type": action, **param}])
 
 
 class AgentPolicy(BasePolicy):
@@ -155,7 +155,7 @@ class AgentPolicy(BasePolicy):
             open(self.run_path / f"agent_{self.agent.memory.timestamp}.pkl", "wb"),
         )
         (self.run_path / f"memory_trace_{self.agent.memory.timestamp}.txt").write_text(
-            "\n".join(self.agent.format_memories(self.agent.memory.memories))
+            "\n".join(self.agent.format_memories(self.agent.memory.memories, False))
         )
         (self.run_path / f"page_{self.agent.memory.timestamp}.html").write_text(
             observation["page"]

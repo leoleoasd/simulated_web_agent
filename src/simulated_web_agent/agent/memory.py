@@ -94,7 +94,9 @@ class Memory:
                 ]
                 responses = await asyncio.gather(
                     *[
-                        gpt.async_chat(r, response_format={"type": "json_object"})
+                        gpt.async_chat(
+                            r, response_format={"type": "json_object"}, log=False
+                        )
                         for r in requests
                     ]
                 )

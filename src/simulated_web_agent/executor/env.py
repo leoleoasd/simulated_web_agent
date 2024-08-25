@@ -320,6 +320,10 @@ class Browser:
                 else:
                     for child_element in elements:
                         node.add(self.process(child_element, child, parent_name))
+        # if is empty, add empty message
+        if "empty_message" in recipe and recipe["empty_message"]:
+            if len(node.children) == 0:
+                node.add(recipe["empty_message"])
         return node
 
     def type(self, name, text):
@@ -373,10 +377,8 @@ class Browser:
         self.driver.back()
 
     def observe(self, skip_wait: bool = False):
-        if self.driver.current_url != self.last_url:
-            self.last_url = self.driver.current_url
-            self.clickables = {}
-            self.inputs = {}
+        self.clickables = {}
+        self.inputs = {}
         # wait for the page to load
         if not skip_wait:
             wait = WebDriverWait(self.driver, 10)
@@ -412,7 +414,10 @@ class Browser:
         else:
             logging.error(f"NO RECIPE FOUND FOR {path}")
             raise Exception(f"NO RECIPE FOUND FOR {path}")
-        if "terminate" in recipe and recipe["terminate"]:
+        if "terminate" in recipe and self.driver.execute_script(recipe["terminate"]):
+            if "terminate_callback" in recipe:
+                self.driver.execute_script(recipe["terminate_callback"])
+                input("Press Enter to continue...")
             return {
                 "page": "TERMINATE",
                 "diff_selector": "",
@@ -457,7 +462,7 @@ class Browser:
 class SeleniumEnv(gym.Env):
     browser: Browser
 
-    def __init__(self, start_url, pretty=False, headless=True):
+    def __init__(self, start_url, pretty=False, headless=True, no_animate=None):
         self.observation_space = spaces.Dict(
             {
                 "url": spaces.Text(10000),
@@ -473,6 +478,7 @@ class SeleniumEnv(gym.Env):
         self.pretty = pretty
         self.ended = False
         self.headless = headless
+        self.no_animate = self.headless if no_animate is None else no_animate
 
     def reset(self, seed=None):
         super().reset(seed=seed)
@@ -484,6 +490,17 @@ class SeleniumEnv(gym.Env):
         obs = self.browser.observe()
         if obs["ended"]:
             self.ended = True
+            return (
+                {
+                    "url": obs["url"],
+                    "page": obs["page"],
+                    "clickables": obs["clickables"],
+                    "inputs": obs["inputs"],
+                    "error_message": "",
+                    "diff_selector": obs["diff_selector"],
+                },
+                {},
+            )
         if not self.headless:
             self.browser.headless = False
             # self.browser.observe()  # re-run to make
@@ -534,18 +551,35 @@ class SeleniumEnv(gym.Env):
                 error_message = str(e)
                 break
 
-        self.browser.headless = True
-        # obs = self.browser.observe()
-        obs = self.browser.observe()
-        if obs["ended"]:
-            self.ended = True
-        if not self.headless:
+            self.browser.headless = True
+            # obs = self.browser.observe()
+            obs = self.browser.observe()
+            logger.info(f"get obs")
+            if obs["ended"]:
+                self.ended = True
+                return (
+                    {
+                        "url": obs["url"],
+                        "page": obs["page"],
+                        "clickables": obs["clickables"],
+                        "inputs": obs["inputs"],
+                        "error_message": "",
+                        "diff_selector": obs["diff_selector"],
+                    },
+                    0,
+                    self.ended,
+                    self.ended,
+                    {},
+                )
+        if not self.headless and not self.no_animate:
             self.browser.headless = False
             # self.browser.observe()  # re-run to make
             # re-run in new thread
             # asyncio.create_task(self.browser.observe())
             thread = Thread(target=self.browser.observe, args=(False,))
             thread.start()
+        if type(obs["page"]) == str:
+            print(obs["page"])
         return (
             {
                 "url": obs["url"],

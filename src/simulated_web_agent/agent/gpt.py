@@ -33,14 +33,14 @@ def chat(messages, model=chat_model, **kwargs) -> ChatCompletion:
         raise e
 
 
-async def async_chat(messages, model=chat_model, **kwargs) -> ChatCompletion:
+async def async_chat(messages, model=chat_model, log=True, **kwargs) -> ChatCompletion:
     try:
-        if context.api_call_manager:
+        if context.api_call_manager and log:
             context.api_call_manager.request.append(messages)
         response = await async_client.chat.completions.create(
             model=model, messages=messages, **kwargs
         )
-        if context.api_call_manager:
+        if context.api_call_manager and log:
             context.api_call_manager.response.append(
                 response.choices[0].message.content
             )
