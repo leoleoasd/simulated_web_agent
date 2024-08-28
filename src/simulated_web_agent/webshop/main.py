@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from ..agent.gpt import chat_bulk
 from ..executor.env import SeleniumEnv  # noqa
 from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
+from ..executor import onestopshop_recipes, google_flights_recipes
 
 
 async def main():
@@ -40,7 +41,8 @@ Clara spends most of her time in academia, attending conferences, working in the
 
 Financial Situation:
 Clara lives on her stipend as a PhD student and is careful with her spending. She prefers to save money for research-related expenses and invest in her academic pursuits.
-
+Clara loves United Airlines, and usually wake up at 9am everyday.
+Clara lives in Boston.
 
 Shopping Habits:
 Clara dislikes shopping and avoids spending much time browsing through products. She prefers straightforward, efficient shopping experiences and often shops online for convenience. When she does shop, she looks for practicality and affordability over style or trendiness.
@@ -53,7 +55,7 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
     intents = {
         "intent": [
             [
-                "see if there is any jacket i wanted. if i found a good deal buy it, otherwise just terminate.",
+                "book a flight to new york on 10/10/2024, and return on 10/15/2024",
             ]
             # [
             #     "I am looking for a men's raincoat. It should be durable and in a neutral color, preferably grey or olive. It should be practical for both commuting and fieldwork, with a budget of up to $150.",
@@ -74,8 +76,10 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
     }
     env = gym.make(
         "SeleniumEnv-v0",
-        start_url="http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/",
+        # start_url="http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/",
+        start_url="https://www.google.com/flights",
         headless=os.environ.get("HEADLESS", "true").lower() == "true",
+        recipes=google_flights_recipes.recipes,
     )
     for index, persona in enumerate(personas["persona"]):
         print(f"Persona {index}: {persona}")

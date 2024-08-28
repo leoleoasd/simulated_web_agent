@@ -270,9 +270,6 @@ class Agent:
             memories = await self.memory.retrieve(
                 self.intent,
                 include_recent_observation=True,
-                include_recent_action=False,
-                include_recent_plan=False,
-                include_recent_thought=False,
                 trigger_update=False,
                 kind_weight={"action": 10, "plan": 10, "thought": 10, "reflection": 10},
             )
@@ -302,7 +299,7 @@ class Agent:
                         },
                     ],
                     response_format={"type": "json_object"},
-                    model="gpt-4-turbo",
+                    model="gpt-4o",
                 )
                 # # print(resp.choices[0].message.content)
                 resp = resp.choices[0].message.content
@@ -318,6 +315,7 @@ class Agent:
                     if type(new_plan) == str and type(rationale) == str:
                         break
                 logger.info("invalid response, rethinking... ")
+                logger.info("response: %s", resp)
         logger.info("plan: %s", new_plan)
         logger.info("rationale: %s", rationale)
         logger.info("next_step: %s", next_step)

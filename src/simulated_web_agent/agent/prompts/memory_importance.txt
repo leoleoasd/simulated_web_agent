@@ -28,23 +28,15 @@ Format your output as a JSON:
        "score": 9
    }
    ```
-2. Memory: "I need to find a jacket that’s comfortable but also looks professional for conferences. Maybe something in red to keep that energy up?"
+2. Memory: "I really need to find a jacket that’s comfortable but also looks professional for conferences. Maybe something in red to keep that energy up?"
    Output:
    ```json
    {
-       "rationale": "This memory is highly important as it directly relates to the persona's intent of finding a specific type of jacket, influencing the search criteria and decision-making process.",
-       "score": 9
+       "rationale": "This memory is not important, as it only repeats information that I already know, for example, my preferences.",
+       "score": 3
    }
    ```
-3. Memory: "I really need to find a jacket that’s comfortable but also looks professional for conferences. Maybe something in red to keep that energy up?"
-   Output:
-   ```json
-   {
-       "rationale": "This memory is extremely important because it clearly defines the persona's needs and preferences, which are crucial for guiding the search and selection process for a jacket.",
-       "score": 10
-   }
-   ```
-4. Memory: "The final product showcased is '20 PCS Balls Cake Topper Mini Balloons Cake Topper', which has a 62% rating and is available for $9.49 with an 'Add to Cart' button."
+3. Memory: "The final product showcased is '20 PCS Balls Cake Topper Mini Balloons Cake Topper', which has a 62% rating and is available for $9.49 with an 'Add to Cart' button."
    Output:
    ```json
    {

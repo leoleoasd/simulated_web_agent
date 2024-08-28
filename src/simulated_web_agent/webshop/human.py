@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from ..agent.gpt import chat_bulk
 from ..executor.env import SeleniumEnv  # noqa
 from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
+from ..executor import google_flights_recipes
 
 
 async def main():
@@ -16,10 +17,11 @@ async def main():
     logging.basicConfig()
     env = gym.make(
         "SeleniumEnv-v0",
-        start_url="http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/",
+        start_url="https://www.google.com/flights",
         pretty=True,
         headless=os.environ.get("HEADLESS", "true").lower() == "true",
         no_animate=True,
+        recipes=google_flights_recipes.recipes,
     )
     observation, info = env.reset()
 
@@ -28,11 +30,47 @@ async def main():
         for ac in [
             [
                 {
-                    "type": "type_and_submit",
-                    "name": "header.search_box.search_input",
-                    "text": "waterproof coat",
-                    "description": "Type 'waterproof coat' in the search input box and submit the query.",
-                }
+                    "type": "type",
+                    "name": "city_picker.to_city",
+                    "text": "New York",
+                    "description": "Typing 'New York' as the arrival city in the destination input field.",
+                },
+                {
+                    "type": "type",
+                    "name": "date_picker.departure_date",
+                    "text": "10/10/2024",
+                    "description": "Typing '10/10/2024' as the departure date in the departure date input field.",
+                },
+                {
+                    "type": "type",
+                    "name": "date_picker.return_date",
+                    "text": "10/15/2024",
+                    "description": "Typing '10/15/2024' as the return date in the return date input field.",
+                },
+                {
+                    "type": "type",
+                    "name": "date_picker.departure_date",
+                    "text": "10/10/2024",
+                    "description": "Typing '10/10/2024' as the departure date in the departure date input field.",
+                },
+                {
+                    "type": "type",
+                    "name": "date_picker.return_date",
+                    "text": "10/15/2024",
+                    "description": "Typing '10/15/2024' as the return date in the return date input field.",
+                },
+                {
+                    "type": "type",
+                    "name": "date_picker.departure_date",
+                    "text": "10/10/2024",
+                    "description": "Typing '10/10/2024' as the departure date in the departure date input field.",
+                },
+                {
+                    "type": "type",
+                    "name": "date_picker.return_date",
+                    "text": "10/15/2024",
+                    "description": "Typing '10/15/2024' as the return date in the return date input field.",
+                },
             ]
             # {
             #     "type": "click",

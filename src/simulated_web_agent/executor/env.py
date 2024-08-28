@@ -5,6 +5,7 @@ import os
 import random
 import re
 import time
+from typing import Optional
 import urllib.parse
 import traceback
 from threading import Thread
@@ -30,7 +31,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from tqdm.auto import tqdm
 
-from .recipes import recipes
+# from .recipes import recipes
 
 logger = logging.getLogger(__name__)
 
@@ -46,10 +47,15 @@ class ElementHighlight:
         driver: webdriver.Chrome,
         headless: bool,
         sleep: float = 0.5,
+        before_hook: Optional[str] = None,
+        after_hook: Optional[str] = None,
     ):
+        print("init")
         self.element = element
         self.driver = driver
         self.headless = headless
+        self.before_hook = before_hook
+        self.after_hook = after_hook
 
     def __enter__(self):
         if self.headless:
@@ -58,30 +64,61 @@ class ElementHighlight:
             'arguments[0].scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });',
             self.element,
         )
+        time.sleep(0.3)
         self.driver.execute_script(
-            "arguments[0].style.outline='3px solid #79ccd7'", self.element
+            """
+console.log(arguments[0].getBoundingClientRect());
+rect = arguments[0].getBoundingClientRect();
+div = document.createElement('div');
+div.style.position = 'fixed';
+div.style.top = rect.top + 'px';
+div.style.left = rect.left + 'px';
+div.style.width = rect.width + 'px';
+div.style.height = rect.height + 'px';
+div.style.border = '3px solid #79ccd7';
+div.style.outline_offset = '3px';
+div.style.zIndex = '10000';
+div.style.pointerEvents = 'none';
+document.body.appendChild(div);
+document.highlightedElement = div;
+
+""",
+            self.element,
         )
-        self.driver.execute_script(
-            "arguments[0].style.outline_offset='3px'", self.element
-        )
-        time.sleep(2)
+        time.sleep(1)
+        if self.before_hook:
+            self.driver.execute_script(self.before_hook, self.element)
+        # self.driver.execute_script(
+        #     "arguments[0].style.outline='3px solid #79ccd7'", self.element
+        # )
+        # self.driver.execute_script(
+        #     "arguments[0].style.outline_offset='3px'", self.element
+        # )
+        # get bounding rect
+        # draw a rectangle
         return self
 
     def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any):
         if self.headless:
             return
         try:
-            self.driver.execute_script("arguments[0].style.outline=''", self.element)
-            self.driver.execute_script(
-                "arguments[0].style.outline_offset=''", self.element
-            )
+            # self.driver.execute_script("arguments[0].style.outline=''", self.element)
+            # self.driver.execute_script(
+            #     "arguments[0].style.outline_offset=''", self.element
+            # )
+            self.driver.execute_script("document.highlightedElement.remove()")
+            if self.after_hook:
+                self.driver.execute_script(self.after_hook, self.element)
         except StaleElementReferenceException:
             pass
+
+    def pause(self, a: webdriver.ActionChains) -> webdriver.ActionChains:
+        return a.pause(max(0.2 + numpy.random.normal(0, 0.05), 0))
 
     def sleep(self):
         if self.headless:
             return
-        time.sleep(max(0.1 + numpy.random.normal(0, 0.05), 0))
+        time.sleep(max(0.2 + numpy.random.normal(0, 0.05), 0))
 
 
 # we assume there are only 'root' node for the diff
@@ -141,22 +178,26 @@ class Browser:
     inputs = {}
     selects = {}
 
-    def __init__(self, url: str, headless: bool):
+    def __init__(self, url: str, headless: bool, recipes: list[dict]):
         options = Options()
         options.add_argument("start-maximized")
         if headless:
             options.add_argument("--headless")
         options.add_argument("--remote-debugging-port=9222")
+        options.add_argument("--unsafely-disable-devtools-self-xss-warnings")
         driver = webdriver.Chrome(options=options)
         self.driver = driver
         self.driver.get(url)
         self.clickables = {}
+        self.clickable_recipes = {}
         self.inputs = {}
+        self.inputs_recipes = {}
         self.last_url = url
         self.headless = headless
         self.window_height = self.driver.execute_script("return window.innerHeight")
         self.last_recipe_index = -1
         self.last_page = dominate.tags.html()
+        self.recipes = recipes
 
     def set_attribute(self, element: Element, attribute: str, value: str):
         self.driver.execute_script(
@@ -166,12 +207,14 @@ class Browser:
             value,
         )
 
-    def register_clickable(self, element: Element, name: str):
+    def register_clickable(self, element: Element, name: str, recipe: dict):
         self.clickables[name] = element
+        self.clickable_recipes[name] = recipe
         self.set_attribute(element, "data-clickable-id", name)
 
-    def register_input(self, element: Element, name: str):
+    def register_input(self, element: Element, name: str, recipe: dict):
         self.inputs[name] = element
+        self.inputs_recipes[name] = recipe
         self.set_attribute(element, "data-input-id", name)
 
     def get_text(self, element: Element) -> str:
@@ -181,7 +224,9 @@ class Browser:
         elementText = re.sub(r"\s+", " ", elementText)  # type: ignore
         return elementText or ""
 
-    def process(self, element: Element, recipe: dict, parent_name: str = ""):
+    def process(
+        self, element: Element, recipe: dict, parent_name: str = "", nth_child: int = 0
+    ):
         # if random.random() < 0.04:
         #     # element.scrollIntoView()
         #     self.driver.execute_script(
@@ -232,6 +277,10 @@ class Browser:
                 for special_char in "[]{}()<>.:;|!@#$%^&*+-=,?/\\\"'":
                     element_name = element_name.replace(special_char, "")
                 node["name"] = (parent_name + "." if parent_name else "") + element_name
+            elif recipe["name"] == "from_nth_child":
+                node["name"] = (parent_name + "." if parent_name else "") + str(
+                    nth_child
+                )
             else:
                 node["name"] = (parent_name + "." if parent_name else "") + recipe[
                     "name"
@@ -245,8 +294,19 @@ class Browser:
                 click_element = element.find_element(
                     By.CSS_SELECTOR, recipe["click_selector"]
                 )
-            self.register_clickable(click_element, node["name"])
-        for key in ["alt", "src", "href", "title", "type", "value"]:
+            self.register_clickable(click_element, node["name"], recipe)
+        for key in [
+            "alt",
+            "src",
+            "href",
+            "title",
+            "type",
+            "value",
+            "role",
+            "aria-label",
+            "aria-hidden",
+            "aria-selected",
+        ]:
             value = element.get_dom_attribute(key)
             if value:
                 node[key] = value
@@ -255,16 +315,16 @@ class Browser:
             if input_type == "radio":
                 if element.get_attribute("checked"):
                     if "class" not in node:
-                        node["selected"] = "true"
+                        node["aria-selected"] = "true"
                     else:
-                        node["selected"] = "false"
+                        node["aria-selected"] = "false"
                 assert "clickable" in recipe and recipe["clickable"]
             elif input_type == "text":
                 node["value"] = element.get_attribute("value")
-                self.register_input(element, node["name"])
+                self.register_input(element, node["name"], recipe)
             elif input_type == "number":
                 node["value"] = element.get_attribute("value")
-                self.register_input(element, node["name"])
+                self.register_input(element, node["name"], recipe)
         if tag_name == "select":
             select = Select(element)
             for option in select.options:
@@ -320,8 +380,8 @@ class Browser:
                         node.add(self.process(child_element, child, parent_name))
                     node.add(dominate.util.raw("<split-marker/>"))
                 else:
-                    for child_element in elements:
-                        node.add(self.process(child_element, child, parent_name))
+                    for i, child_element in enumerate(elements):
+                        node.add(self.process(child_element, child, parent_name, i))
         # if is empty, add empty message
         if "empty_message" in recipe and recipe["empty_message"]:
             if len(node.children) == 0 or (
@@ -331,29 +391,59 @@ class Browser:
         return node
 
     def type(self, name, text):
+        print("typing", name, text)
         if name not in self.inputs:
             logger.error(f"INVALID ACTION: {name}")
             raise InvalidAction(f"INVALID ACTION: input {name} not found")
-        with ElementHighlight(self.inputs[name], self.driver, self.headless) as h:
+        with ElementHighlight(
+            self.inputs[name],
+            self.driver,
+            self.headless,
+            before_hook=self.inputs_recipes[name].get("before_hook", None),
+            after_hook=self.inputs_recipes[name].get("after_hook", None),
+        ) as h:
+            action = webdriver.ActionChains(self.driver)
+            action = action.click(self.inputs[name]).pause(0.5)
             for character in text:
-                self.inputs[name].send_keys(character)
-                h.sleep()
+                action = action.send_keys(character)
+                action = h.pause(action)
+            action = action.pause(0.5)
+            action = action.send_keys(webdriver.Keys.ENTER)  # TODO
+            action.perform()
+        time.sleep(1)
 
     def type_and_submit(self, name, text):
         if name not in self.inputs:
             logger.error(f"INVALID ACTION: {name}")
             raise InvalidAction(f"INVALID ACTION: input {name} not found")
-        with ElementHighlight(self.inputs[name], self.driver, self.headless) as h:
+        with ElementHighlight(
+            self.inputs[name],
+            self.driver,
+            self.headless,
+            before_hook=self.inputs_recipes[name].get("before_hook", None),
+            after_hook=self.inputs_recipes[name].get("after_hook", None),
+        ) as h:
+            action = webdriver.ActionChains(self.driver)
+            action = action.click(self.inputs[name]).pause(0.5)
             for character in text:
-                self.inputs[name].send_keys(character)
-                h.sleep()
-            self.inputs[name].submit()
+                action = action.send_keys(character)
+                action = h.pause(action)
+            action = action.pause(0.5)
+            action = action.send_keys(webdriver.Keys.ENTER)
+            action.perform()
+        time.sleep(1)
 
     def clear(self, name):
         if name not in self.inputs:
             logger.error(f"INVALID ACTION: {name}")
             raise InvalidAction(f"INVALID ACTION: input {name} not found")
-        with ElementHighlight(self.inputs[name], self.driver, self.headless) as h:
+        with ElementHighlight(
+            self.inputs[name],
+            self.driver,
+            self.headless,
+            before_hook=self.inputs_recipes[name].get("before_hook", None),
+            after_hook=self.inputs_recipes[name].get("after_hook", None),
+        ) as h:
             # self.inputs[name].clear()
             # send end key
             self.inputs[name].send_keys("\ue010")
@@ -361,6 +451,7 @@ class Browser:
             while self.inputs[name].get_attribute("value"):
                 self.inputs[name].send_keys("\ue003")
                 h.sleep()
+            time.sleep(1)
 
     def click(self, name):
         if name not in self.clickables:
@@ -370,12 +461,24 @@ class Browser:
             select = self.selects[name]
             select = Select(select)
             option = self.clickables[name]
-            with ElementHighlight(self.selects[name], self.driver, self.headless):
+            with ElementHighlight(
+                self.selects[name],
+                self.driver,
+                self.headless,
+                before_hook=self.clickable_recipes[name].get("before_hook", None),
+                after_hook=self.clickable_recipes[name].get("after_hook", None),
+            ):
                 select.select_by_value(option.get_attribute("value"))
         else:
-            with ElementHighlight(self.clickables[name], self.driver, self.headless):
+            with ElementHighlight(
+                self.clickables[name],
+                self.driver,
+                self.headless,
+                before_hook=self.clickable_recipes[name].get("before_hook", None),
+                after_hook=self.clickable_recipes[name].get("after_hook", None),
+            ):
                 self.clickables[name].click()
-        time.sleep(1)
+            time.sleep(1)
 
     def back(self):
         self.driver.back()
@@ -398,7 +501,7 @@ class Browser:
         path = url.path
         recipe = None
         recipe_index = -1
-        for i, r in enumerate(recipes):
+        for i, r in enumerate(self.recipes):
             try:
                 element = self.driver.find_element(By.CSS_SELECTOR, r["match"])
                 if (
@@ -434,7 +537,7 @@ class Browser:
             self.driver.find_element(By.CSS_SELECTOR, recipe["selector"]), recipe
         )
         self.driver.execute_script("window.scrollBy({top: -800, behavior: 'smooth'});")
-        if recipe_index == self.last_recipe_index:
+        if recipe_index == self.last_recipe_index and False:  # TODO
             # get diff
             diff = tree_diff(self.last_root, new_root)
             self.last_root = new_root
@@ -466,7 +569,14 @@ class Browser:
 class SeleniumEnv(gym.Env):
     browser: Browser
 
-    def __init__(self, start_url, pretty=False, headless=True, no_animate=None):
+    def __init__(
+        self,
+        start_url,
+        recipes,
+        pretty=False,
+        headless=True,
+        no_animate=None,
+    ):
         self.observation_space = spaces.Dict(
             {
                 "url": spaces.Text(10000),
@@ -479,6 +589,7 @@ class SeleniumEnv(gym.Env):
         )
         self.action_space = spaces.Text(10000)
         self.start_url = start_url
+        self.recipes = recipes
         self.pretty = pretty
         self.ended = False
         self.headless = headless
@@ -486,7 +597,7 @@ class SeleniumEnv(gym.Env):
 
     def reset(self, seed=None):
         super().reset(seed=seed)
-        self.browser = Browser(self.start_url, self.headless)
+        self.browser = Browser(self.start_url, self.headless, self.recipes)
         self.ended = False
         if not self.headless:
             input("Press Enter to continue...")
@@ -557,6 +668,7 @@ class SeleniumEnv(gym.Env):
                 break
 
             self.browser.headless = True
+            time.sleep(1)
             # obs = self.browser.observe()
             obs = self.browser.observe()
             logger.info(f"get obs")
@@ -576,10 +688,11 @@ class SeleniumEnv(gym.Env):
                     self.ended,
                     {},
                 )
+            self.browser.headless = self.headless
         if obs is None:
             obs = self.browser.observe()
+        self.browser.headless = self.headless
         if not self.headless and not self.no_animate:
-            self.browser.headless = False
             # self.browser.observe()  # re-run to make
             # re-run in new thread
             # asyncio.create_task(self.browser.observe())

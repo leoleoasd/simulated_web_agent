@@ -1,1 +1,1 @@
-from . import env, recipes
+from . import env, onestopshop_recipes
