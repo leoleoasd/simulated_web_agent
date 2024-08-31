@@ -5,12 +5,10 @@ import os
 import random
 import re
 import time
-from typing import Optional
-import urllib.parse
 import traceback
+import urllib.parse
 from threading import Thread
-from typing import Any, Union
-from IPython import embed
+from typing import Any, Optional, Union
 
 import dominate
 import dominate.tags
@@ -19,6 +17,7 @@ import gymnasium as gym
 import numpy
 from bs4 import BeautifulSoup
 from gymnasium import spaces
+from IPython import embed
 from selenium import webdriver
 from selenium.common.exceptions import (
     NoSuchElementException,
@@ -158,7 +157,7 @@ def tree_diff(tree1: dominate.tags.html_tag, tree2: dominate.tags.html_tag):
         child_count += 1
         if type(child1) != type(child2):
             diffs.append((child1, child2))
-        elif type(child1) == str:
+        if isinstance(child1, str) and isinstance(child2, str):
             if child1 != child2:
                 diffs.append((child1, child2))
         else:
@@ -172,7 +171,8 @@ def tree_diff(tree1: dominate.tags.html_tag, tree2: dominate.tags.html_tag):
     if len(diffs) > 1:
         return tree1, tree2
     else:
-        if type(diffs[0][0]) == str:
+        # if type(diffs[0][0]) == str:
+        if isinstance(diffs[0][0], str) and isinstance(diffs[0][1], str):
             return tree1, tree2
         return tree_diff(*diffs[0])  # type: ignore
 
@@ -565,7 +565,7 @@ class Browser:
             self.last_root = new_root
             self.last_recipe_index = recipe_index
             if diff is not None:
-                selector_1 = node_to_selector(diff[0])
+                # selector_1 = node_to_selector(diff[0])
                 selector_2 = node_to_selector(diff[1])
                 # assert selector_1 == selector_2
                 return {
@@ -695,7 +695,7 @@ class SeleniumEnv(gym.Env):
             time.sleep(1)
             # obs = self.browser.observe()
             obs = self.browser.observe()
-            logger.info(f"get obs")
+            logger.info("get obs")
             if obs["ended"]:
                 self.ended = True
                 return (
@@ -724,7 +724,7 @@ class SeleniumEnv(gym.Env):
                 target=self.browser.driver.execute_script, args=(run_animate,)
             )
             thread.start()
-        if type(obs["page"]) == str:
+        if isinstance(obs["page"], str):
             print(obs["page"])
         return (
             {

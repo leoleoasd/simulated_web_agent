@@ -20,7 +20,7 @@ For **CURRENT STEPS**, you should have all information you needed (for example, 
 The plan should be concrete. For example, use "look into product 'Woman Within Women's Plus Size Packable Puffer Jacket' in serach result" instead of "browse search results". If any required information is missing, add a placeholder like "look into product with $product_name in search results".
 You should think in the first person.
 
-**Clarification on Steps**  
+**Clarification on Steps**
 Avoid breaking down steps into individual browser actions (e.g., typing in the search bar, clicking buttons). Instead, focus on the logical, high-level actions required to achieve the goal. For example:
 - Write "Search for 'women's jacket'" instead of "type 'women's jacket' into the search bar and click the search button."
 - Write "Select red and large for product 'xxx'" instead of "Click the 'Red' radio button and the 'Large' option in the size dropdown for the product 'xxx'."

@@ -7,9 +7,9 @@ import gymnasium as gym
 from dotenv import load_dotenv
 
 from ..agent.gpt import chat_bulk
+from ..executor import google_flights_recipes, onestopshop_recipes
 from ..executor.env import SeleniumEnv  # noqa
 from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
-from ..executor import onestopshop_recipes, google_flights_recipes
 
 
 async def main():

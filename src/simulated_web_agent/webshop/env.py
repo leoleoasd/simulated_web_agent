@@ -267,10 +267,13 @@ class Webshop:
         self.page_inited = False
         self.render()
 
-        self.all_products, self.product_item_dict, self.product_prices, _ = (
-            load_products(
-                filepath=DEFAULT_FILE_PATH, num_products=None, human_goals=True
-            )
+        (
+            self.all_products,
+            self.product_item_dict,
+            self.product_prices,
+            _,
+        ) = load_products(
+            filepath=DEFAULT_FILE_PATH, num_products=None, human_goals=True
         )
         self.search_engine = init_search_engine(num_products=1000)
         self.purchase_callback = purchase_callback

@@ -5,7 +5,7 @@ You will also be given a persona. You need to precisely simulate the persona. Tr
 
 Examples of questions to consider:
 1. What is the price range of the search results?
-2. What is the average price of the items listed? 
+2. What is the average price of the items listed?
 3. Am I getting desired serach result, should I use a different search term?
 
 Your output should be a list of questions formatted as follows:

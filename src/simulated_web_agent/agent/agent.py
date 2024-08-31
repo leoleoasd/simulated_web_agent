@@ -312,7 +312,7 @@ class Agent:
                     rationale = resp["rationale"] if "rationale" in resp else "N/A"
                     next_step = resp["next_step"]
                     # make sure they are str
-                    if type(new_plan) == str and type(rationale) == str:
+                    if isinstance(new_plan, str) and isinstance(rationale, str):
                         break
                 logger.info("invalid response, rethinking... ")
                 logger.info("response: %s", resp)

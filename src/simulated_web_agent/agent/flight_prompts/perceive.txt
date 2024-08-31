@@ -7,7 +7,7 @@ You will be provided with an environment that includes:
 - A list of all inputs on the page
 - Optionally, a CSS selector called diff_selector of the element changed in the last step
 
-Your task is to simulate human perception of the page accurately. Read the given viewpoint of the page from top to bottom and list all observations, capturing all the information that a human user would notice. 
+Your task is to simulate human perception of the page accurately. Read the given viewpoint of the page from top to bottom and list all observations, capturing all the information that a human user would notice.
 You should think in the first person.
 The list of all buttons and all inputs are for reference only. You should only produce buttons within the viewpoint (the "page" you are looking at).
 Do not describe relative order between observations, for example, "first" and "second" should not be used. Just describe them in the order they appear, but dont use "first" and "second" to describe them.

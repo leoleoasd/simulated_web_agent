@@ -110,14 +110,18 @@ class HumanPolicy(BasePolicy):
 
 
 class AgentPolicy(BasePolicy):
-    def __init__(self, persona, intent):
+    def __init__(self, persona, intent, output=None):
         logger.info(f"Creating AgentPolicy with persona: {persona}, intent: {intent}")
         self.agent = Agent(persona, intent)
         # self.agent.add_thought(f"I want to {intent}")
         # lets' have a run name with current time and random string to save agent checkpoints
         # 2024-02-02_05:05:05
-        self.run_name = f"{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{uuid.uuid4().hex[:4]}"
-        self.run_path = pathlib.Path() / "runs" / self.run_name
+        if output is None:
+            self.run_name = f"{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}_{uuid.uuid4().hex[:4]}"
+            self.run_path = pathlib.Path() / "runs" / self.run_name
+        else:
+            self.run_name = output
+            self.run_path = pathlib.Path(output)
         self.run_path.mkdir(parents=True)
         context.run_path = self.run_path
         (self.run_path / "persona.txt").write_text(persona)

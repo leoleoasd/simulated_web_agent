@@ -1,15 +1,16 @@
+import asyncio
 import json
 import logging
 import os
-import time, asyncio
+import time
 
 import gymnasium as gym
 from dotenv import load_dotenv
 
 from ..agent.gpt import chat_bulk
+from ..executor import google_flights_recipes
 from ..executor.env import SeleniumEnv  # noqa
 from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
-from ..executor import google_flights_recipes
 
 
 async def main():

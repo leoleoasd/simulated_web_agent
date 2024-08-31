@@ -1,7 +1,10 @@
-from ..agent.gpt import chat
-import asyncio, json
+import asyncio
+import json
 from pathlib import Path
+
 from tqdm.asyncio import tqdm
+
+from ..agent.gpt import chat
 
 
 async def main():
@@ -24,7 +27,7 @@ async def main():
                     messages=[
                         {
                             "role": "system",
-                            "content": """You are a helpful assistant that generates persona. 
+                            "content": """You are a helpful assistant that generates persona.
     Example:
     Persona: Clara
     Background:

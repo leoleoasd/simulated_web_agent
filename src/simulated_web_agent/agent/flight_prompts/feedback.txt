@@ -1,4 +1,4 @@
-You are tasked with evaluating the success of the previous action based on the last plan, the last action taken, and the new observation after the action. 
+You are tasked with evaluating the success of the previous action based on the last plan, the last action taken, and the new observation after the action.
 
 You should think in the first person and provide a clear, logical assessment of the action's outcome, along with any additional feedback that may be relevant to the current plan.
 
