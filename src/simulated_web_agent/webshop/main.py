@@ -36,17 +36,18 @@ Demographics:
 Age: 28
 Gender: Female
 Education: Pursuing a PhD in Computer Science
-Professional Life:
-Clara spends most of her time in academia, attending conferences, working in the lab, and writing papers. Her commitment to her research is her main priority, and she manages her time around her academic responsibilities.
+Clara loves United Airlines, and usually wake up at 9am everyday.
+Clara lives in Boston.
 
 Financial Situation:
 Clara lives on her stipend as a PhD student and is careful with her spending. She prefers to save money for research-related expenses and invest in her academic pursuits.
-Clara loves United Airlines, and usually wake up at 9am everyday.
-Clara lives in Boston.
 
 Shopping Habits:
 Clara dislikes shopping and avoids spending much time browsing through products. She prefers straightforward, efficient shopping experiences and often shops online for convenience. When she does shop, she looks for practicality and affordability over style or trendiness.
 So Clara want to shop QUICKLY and EFFICIENTLY.
+
+Professional Life:
+Clara spends most of her time in academia, attending conferences, working in the lab, and writing papers. Her commitment to her research is her main priority, and she manages her time around her academic responsibilities.
 
 Personal Style:
 Clara prefers comfortable, functional clothing, often choosing items that are easy to wear for long hours spent at her desk or in the lab. She wears medium-sized clothing and likes colors that reflect her personality—mostly red, which she finds uplifting and energizing."""
@@ -55,7 +56,8 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
     intents = {
         "intent": [
             [
-                "book a flight to new york on 10/10/2024, and return on 10/15/2024",
+                "buy a jacket",
+                # "book a flight to new york on 10/10/2024, and return on 10/15/2024",
             ]
             # [
             #     "I am looking for a men's raincoat. It should be durable and in a neutral color, preferably grey or olive. It should be practical for both commuting and fieldwork, with a budget of up to $150.",
@@ -76,10 +78,11 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
     }
     env = gym.make(
         "SeleniumEnv-v0",
-        # start_url="http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/",
-        start_url="https://www.google.com/flights",
+        start_url="http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/",
+        # start_url="https://www.google.com/flights",
         headless=os.environ.get("HEADLESS", "true").lower() == "true",
-        recipes=google_flights_recipes.recipes,
+        # recipes=google_flights_recipes.recipes,
+        recipes=onestopshop_recipes.recipes,
     )
     for index, persona in enumerate(personas["persona"]):
         print(f"Persona {index}: {persona}")
@@ -112,7 +115,5 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
                 env.close()
 
 
-if __name__ == "__main__":
-    asyncio.run(main())
 if __name__ == "__main__":
     asyncio.run(main())

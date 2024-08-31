@@ -31,7 +31,25 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from tqdm.auto import tqdm
 
+# run_path
+from ..agent import context
+
 # from .recipes import recipes
+
+run_animate = """
+// js
+// while not to end, scroll down
+scrollDown = () => {
+    window.scrollBy({top: 400, behavior: 'smooth'});
+    if ((window.innerHeight + Math.round(window.scrollY)) < document.body.offsetHeight) {
+        setTimeout(scrollDown, 1000);
+    } else {
+        // scroll back
+        window.scrollBy({top: -800, behavior: 'smooth'});
+    }
+}
+scrollDown();
+"""
 
 logger = logging.getLogger(__name__)
 
@@ -64,7 +82,7 @@ class ElementHighlight:
             'arguments[0].scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });',
             self.element,
         )
-        time.sleep(0.3)
+        time.sleep(0.5)
         self.driver.execute_script(
             """
 console.log(arguments[0].getBoundingClientRect());
@@ -106,7 +124,9 @@ document.highlightedElement = div;
             # self.driver.execute_script(
             #     "arguments[0].style.outline_offset=''", self.element
             # )
-            self.driver.execute_script("document.highlightedElement.remove()")
+            self.driver.execute_script(
+                "document.highlightedElement && document.highlightedElement.remove()"
+            )
             if self.after_hook:
                 self.driver.execute_script(self.after_hook, self.element)
         except StaleElementReferenceException:
@@ -232,15 +252,15 @@ class Browser:
         #     self.driver.execute_script(
         #         'arguments[0].scrollIntoView({ behavior: "smooth" });', element
         #     )
-        if not self.headless:
-            boundingRect = self.driver.execute_script(
-                "return arguments[0].getBoundingClientRect()", element
-            )
-            if boundingRect["top"] - self.window_height // 2 > 400:
-                self.driver.execute_script(
-                    "window.scrollBy({top: 400, behavior: 'smooth'});"
-                )
-                time.sleep(0.5)
+        # if not self.headless:
+        #     boundingRect = self.driver.execute_script(
+        #         "return arguments[0].getBoundingClientRect()", element
+        #     )
+        #     if boundingRect["top"] - self.window_height // 2 > 400:
+        #         self.driver.execute_script(
+        #             "window.scrollBy({top: 400, behavior: 'smooth'});"
+        #         )
+        #         time.sleep(0.5)
         elementText = ""
         if "text_selector" in recipe:
             try:
@@ -523,8 +543,10 @@ class Browser:
             raise Exception(f"NO RECIPE FOUND FOR {path}")
         if "terminate" in recipe and self.driver.execute_script(recipe["terminate"]):
             if "terminate_callback" in recipe:
-                self.driver.execute_script(recipe["terminate_callback"])
-                input("Press Enter to continue...")
+                result = self.driver.execute_script(recipe["terminate_callback"])
+                if self.headless:
+                    input("Press Enter to continue...")
+                (context.run_path / "result.json").write_text(json.dumps(result))
             return {
                 "page": "TERMINATE",
                 "diff_selector": "",
@@ -601,7 +623,6 @@ class SeleniumEnv(gym.Env):
         self.ended = False
         if not self.headless:
             input("Press Enter to continue...")
-        self.browser.headless = True
         obs = self.browser.observe()
         if obs["ended"]:
             self.ended = True
@@ -617,11 +638,15 @@ class SeleniumEnv(gym.Env):
                 {},
             )
         if not self.headless:
-            self.browser.headless = False
             # self.browser.observe()  # re-run to make
             # re-run in new thread
             # asyncio.create_task(self.browser.observe())
-            thread = Thread(target=self.browser.observe, args=(False,))
+            # thread = Thread(target=self.browser.observe, args=(False,))
+            # thread.start()
+
+            thread = Thread(
+                target=self.browser.driver.execute_script, args=(run_animate,)
+            )
             thread.start()
         return (
             {
@@ -667,7 +692,6 @@ class SeleniumEnv(gym.Env):
                 error_message = str(e)
                 break
 
-            self.browser.headless = True
             time.sleep(1)
             # obs = self.browser.observe()
             obs = self.browser.observe()
@@ -688,15 +712,17 @@ class SeleniumEnv(gym.Env):
                     self.ended,
                     {},
                 )
-            self.browser.headless = self.headless
+            # self.browser.headless = self.headless
         if obs is None:
             obs = self.browser.observe()
-        self.browser.headless = self.headless
+        # self.browser.headless = self.headless
         if not self.headless and not self.no_animate:
             # self.browser.observe()  # re-run to make
             # re-run in new thread
             # asyncio.create_task(self.browser.observe())
-            thread = Thread(target=self.browser.observe, args=(False,))
+            thread = Thread(
+                target=self.browser.driver.execute_script, args=(run_animate,)
+            )
             thread.start()
         if type(obs["page"]) == str:
             print(obs["page"])

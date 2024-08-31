@@ -299,7 +299,7 @@ class Agent:
                         },
                     ],
                     response_format={"type": "json_object"},
-                    model="gpt-4o",
+                    model="gpt-4-turbo",
                 )
                 # # print(resp.choices[0].message.content)
                 resp = resp.choices[0].message.content

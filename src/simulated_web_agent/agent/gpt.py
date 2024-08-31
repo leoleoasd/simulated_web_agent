@@ -12,7 +12,7 @@ client = openai.Client()
 async_client = openai.AsyncClient()
 embedding_model = "text-embedding-3-small"
 chat_model = "gpt-4o-mini"
-prompt_dir = Path(__file__).parent.absolute() / "prompts"
+prompt_dir = Path(__file__).parent.absolute() / "shop_prompts"
 
 
 async def embed_text(texts, model=embedding_model, **kwargs) -> CreateEmbeddingResponse:
@@ -65,6 +65,4 @@ def chat_bulk(messages, model=chat_model, **kwargs):
 
 
 def load_prompt(prompt_name):
-    return (prompt_dir / f"{prompt_name}.txt").read_text()
-    return (prompt_dir / f"{prompt_name}.txt").read_text()
     return (prompt_dir / f"{prompt_name}.txt").read_text()

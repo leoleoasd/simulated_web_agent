@@ -386,6 +386,10 @@ document.appendChild(div);
 div.style.alignContent="center";
 h1.textContent=`You purchased ${product.querySelector(".product-item-name").textContent.trim()}, with options ${options_str}`
 div.appendChild(h1)
+return {
+    "product_name": product.querySelector(".product-item-name").textContent.trim(),
+    "options": options,
+}
 """,
         "children": [
             {
