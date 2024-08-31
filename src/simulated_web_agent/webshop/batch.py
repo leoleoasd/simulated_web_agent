@@ -56,7 +56,7 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
     intents = {
         "intent": [
             [
-                "buy a jacket, select red and medium size",
+                "buy a jacket",
                 # "book a flight to new york on 10/10/2024, and return on 10/15/2024",
             ]
             # [
