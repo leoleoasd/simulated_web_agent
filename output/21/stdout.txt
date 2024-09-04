@@ -1,0 +1,28 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "unisex oversized denim jacket", "description": "Typing 'unisex oversized denim jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'unisex oversized denim jacket', 'description': "Typing 'unisex oversized denim jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=unisex+oversized+denim+jacket
+Taking action [{"type": "click", "name": "search_results._womens_oversize_jean_jacket_vintage_washed_boyfriend_denim_jacket_long_sleeve_classic_loose_button_down_jean_coats_.view_product", "description": "Clicking on the product 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats' to view the details for quality assurance."}]
+{'type': 'click', 'name': 'search_results._womens_oversize_jean_jacket_vintage_washed_boyfriend_denim_jacket_long_sleeve_classic_loose_button_down_jean_coats_.view_product', 'description': "Clicking on the product 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats' to view the details for quality assurance."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "BAGELISE Winter Coats for Women Fashion, Womens Denim Faux Fur Long Sleeve Coat Sherpa Collar Casual Oversized Jacket Outwear", "description": "Typing the product name 'BAGELISE Winter Coats for Women Fashion, Womens Denim Faux Fur Long Sleeve Coat Sherpa Collar Casual Oversized Jacket Outwear' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'BAGELISE Winter Coats for Women Fashion, Womens Denim Faux Fur Long Sleeve Coat Sherpa Collar Casual Oversized Jacket Outwear', 'description': "Typing the product name 'BAGELISE Winter Coats for Women Fashion, Womens Denim Faux Fur Long Sleeve Coat Sherpa Collar Casual Oversized Jacket Outwear' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=BAGELISE+Winter+Coats+for+Women+Fashion%2C+Womens+Denim+Faux+Fur+Long+Sleeve+Coat+Sherpa+Collar+Casual+Oversized+Jacket+Outwear
+Taking action [{"type": "click", "name": "search_results._bagelise_winter_coats_for_women_fashion_womens_denim_faux_fur_long_sleeve_coat_sherpa_collar_casual_oversized_jacket_outwear_.view_product", "description": "Clicking on the 'BAGELISE Winter Coats for Women Fashion, Womens Denim Faux Fur Long Sleeve Coat Sherpa Collar Casual Oversized Jacket Outwear' to check product details concerning color, size, sustainability features, and uniqueness in design."}]
+{'type': 'click', 'name': 'search_results._bagelise_winter_coats_for_women_fashion_womens_denim_faux_fur_long_sleeve_coat_sherpa_collar_casual_oversized_jacket_outwear_.view_product', 'description': "Clicking on the 'BAGELISE Winter Coats for Women Fashion, Womens Denim Faux Fur Long Sleeve Coat Sherpa Collar Casual Oversized Jacket Outwear' to check product details concerning color, size, sustainability features, and uniqueness in design."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/bagelise-winter-coats-for-women-fashion-womens-denim-faux-fur-long-sleeve-coat-sherpa-collar-casual-oversized-jacket-outwear.html
+Taking action [{"type": "back", "description": "Navigating back in the browser history to refine search criteria or check the next page of search results."}]
+{'type': 'back', 'description': 'Navigating back in the browser history to refine search criteria or check the next page of search results.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=BAGELISE+Winter+Coats+for+Women+Fashion%2C+Womens+Denim+Faux+Fur+Long+Sleeve+Coat+Sherpa+Collar+Casual+Oversized+Jacket+Outwear
+Taking action [{"type": "terminate", "description": "The next step indicates to consider looking into local thrift stores or artisan markets next weekend, which is an offline activity and concludes the current online process."}]
+{'type': 'terminate', 'description': 'The next step indicates to consider looking into local thrift stores or artisan markets next weekend, which is an offline activity and concludes the current online process.'}
+--------------------------------------------------

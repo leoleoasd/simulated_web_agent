@@ -1,0 +1,22 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "men's navy jacket", "description": "Typing 'men's navy jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "men's navy jacket", 'description': "Typing 'men's navy jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+navy+jacket
+Taking action [{"type": "click", "name": "search_results._adidas_x_united_arrows__sons_mens_track_jacket_navy_cd7723_.view_product", "description": "Clicking on the product link for 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723' to view detailed product specifications, customer reviews, and check tailoring compatibility for size 40 and style preferences."}]
+{'type': 'click', 'name': 'search_results._adidas_x_united_arrows__sons_mens_track_jacket_navy_cd7723_.view_product', 'description': "Clicking on the product link for 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723' to view detailed product specifications, customer reviews, and check tailoring compatibility for size 40 and style preferences."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/adidas-x-united-arrows-sons-men-s-track-jacket-navy-cd7723.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab for the 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723' to gather product specifications and fabric properties."}, {"type": "click", "name": "product_info._reviews_", "description": "Clicking on the 'Reviews' tab for the 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723' to gather customer reviews and ensure product quality."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab for the 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723' to gather product specifications and fabric properties."}
+init
+{'type': 'click', 'name': 'product_info._reviews_', 'description': "Clicking on the 'Reviews' tab for the 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723' to gather customer reviews and ensure product quality."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/adidas-x-united-arrows-sons-men-s-track-jacket-navy-cd7723.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking 'Add to Cart' to add the adidas x United Arrows & Sons Men's Track Jacket Navy CD7723 in size 40 to the cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking 'Add to Cart' to add the adidas x United Arrows & Sons Men's Track Jacket Navy CD7723 in size 40 to the cart."}
+init
+--------------------------------------------------

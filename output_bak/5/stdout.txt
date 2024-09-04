@@ -1,0 +1,48 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "second-hand eco-friendly denim jacket small", "description": "Typing 'second-hand eco-friendly denim jacket small' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'second-hand eco-friendly denim jacket small', 'description': "Typing 'second-hand eco-friendly denim jacket small' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=second-hand+eco-friendly+denim+jacket+small
+Taking action [{"type": "click", "name": "search_results._winter_warm_denim_jacket_faux_collar_thick_trucker_jeans_coat_women_women_silk_camisole_tanks_.view_product", "description": "Clicking on the product 'Winter Warm Denim Jacket Faux Collar Thick Trucker Jeans Coat Women women silk camisole tanks' to check detailed information and confirm it meets the specified criteria."}, {"type": "click", "name": "search_results._womens_oversize_jean_jacket_vintage_washed_boyfriend_denim_jacket_long_sleeve_classic_loose_button_down_jean_coats_.view_product", "description": "Clicking on the product 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats' to check detailed information and confirm it meets the specified criteria."}]
+{'type': 'click', 'name': 'search_results._winter_warm_denim_jacket_faux_collar_thick_trucker_jeans_coat_women_women_silk_camisole_tanks_.view_product', 'description': "Clicking on the product 'Winter Warm Denim Jacket Faux Collar Thick Trucker Jeans Coat Women women silk camisole tanks' to check detailed information and confirm it meets the specified criteria."}
+init
+{'type': 'click', 'name': 'search_results._womens_oversize_jean_jacket_vintage_washed_boyfriend_denim_jacket_long_sleeve_classic_loose_button_down_jean_coats_.view_product', 'description': "Clicking on the product 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats' to check detailed information and confirm it meets the specified criteria."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/winter-warm-denim-jacket-faux-collar-thick-trucker-jeans-coat-women-women-silk-camisole-tanks.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to check detailed information for the product 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats' to confirm it is second-hand, eco-friendly, available in size small, and affordable within my budget constraints."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to check detailed information for the product 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats' to confirm it is second-hand, eco-friendly, available in size small, and affordable within my budget constraints."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/winter-warm-denim-jacket-faux-collar-thick-trucker-jeans-coat-women-women-silk-camisole-tanks.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to check detailed information for the product 'Winter Warm Denim Jacket Faux Collar Thick Trucker Jeans Coat Women women silk camisole tanks' to confirm it is second-hand, eco-friendly, available in size small, and affordable within my budget constraints."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to check detailed information for the product 'Winter Warm Denim Jacket Faux Collar Thick Trucker Jeans Coat Women women silk camisole tanks' to confirm it is second-hand, eco-friendly, available in size small, and affordable within my budget constraints."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/winter-warm-denim-jacket-faux-collar-thick-trucker-jeans-coat-women-women-silk-camisole-tanks.html
+Taking action [{"type": "click", "name": "product_form.options.small", "description": "Clicking on the size 'Small' option for the 'Winter Warm Denim Jacket Faux Collar Thick Trucker Jeans Coat Women women silk camisole tanks' product."}]
+{'type': 'click', 'name': 'product_form.options.small', 'description': "Clicking on the size 'Small' option for the 'Winter Warm Denim Jacket Faux Collar Thick Trucker Jeans Coat Women women silk camisole tanks' product."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/winter-warm-denim-jacket-faux-collar-thick-trucker-jeans-coat-women-women-silk-camisole-tanks.html
+Taking action [{"type": "click", "name": "product_form.options.small", "description": "Clicking on the size 'Small' button for the 'Winter Warm Denim Jacket Faux Collar Thick Trucker Jeans Coat Women women silk camisole tanks' product."}]
+{'type': 'click', 'name': 'product_form.options.small', 'description': "Clicking on the size 'Small' button for the 'Winter Warm Denim Jacket Faux Collar Thick Trucker Jeans Coat Women women silk camisole tanks' product."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/winter-warm-denim-jacket-faux-collar-thick-trucker-jeans-coat-women-women-silk-camisole-tanks.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the 'Winter Warm Denim Jacket Faux Collar Thick Trucker Jeans Coat Women women silk camisole tanks' to the cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the 'Winter Warm Denim Jacket Faux Collar Thick Trucker Jeans Coat Women women silk camisole tanks' to the cart."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/winter-warm-denim-jacket-faux-collar-thick-trucker-jeans-coat-women-women-silk-camisole-tanks.html
+Taking action []
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/webshop/batch.py", line 68, in main
+    observation, reward, terminated, truncated, info = env.step(action)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/gymnasium/wrappers/order_enforcing.py", line 56, in step
+    return self.env.step(action)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/gymnasium/wrappers/env_checker.py", line 51, in step
+    return self.env.step(action)
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 735, in step
+    "error_message": error_message,
+UnboundLocalError: local variable 'error_message' referenced before assignment

@@ -1,0 +1,151 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "unisex teal oversized jacket", "description": "Typing 'unisex teal oversized jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'unisex teal oversized jacket', 'description': "Typing 'unisex teal oversized jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=unisex+teal+oversized+jacket
+Taking action [{"type": "click", "name": "search_results._womens_solid_oversized_jacket_coat_winter_zip_down_fluffy_hooded_trench_thicken_fleece_outwear_overcoat_with_pockets_.view_product", "description": "Clicking on the product 'Womens Solid Oversized Jacket Coat Winter Zip Down Fluffy Hooded Trench Thicken Fleece Outwear Overcoat With Pockets' to check its details and verify if it is made from sustainable materials and matches the teal color and desired style."}]
+{'type': 'click', 'name': 'search_results._womens_solid_oversized_jacket_coat_winter_zip_down_fluffy_hooded_trench_thicken_fleece_outwear_overcoat_with_pockets_.view_product', 'description': "Clicking on the product 'Womens Solid Oversized Jacket Coat Winter Zip Down Fluffy Hooded Trench Thicken Fleece Outwear Overcoat With Pockets' to check its details and verify if it is made from sustainable materials and matches the teal color and desired style."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/womens-solid-oversized-jacket-coat-winter-zip-down-fluffy-hooded-trench-thicken-fleece-outwear-overcoat-with-pockets.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to examine the materials and verify sustainability features of the 'Womens Solid Oversized Jacket Coat Winter Zip Down Fluffy Hooded Trench Thicken Fleece Outwear Overcoat With Pockets'."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to examine the materials and verify sustainability features of the 'Womens Solid Oversized Jacket Coat Winter Zip Down Fluffy Hooded Trench Thicken Fleece Outwear Overcoat With Pockets'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/womens-solid-oversized-jacket-coat-winter-zip-down-fluffy-hooded-trench-thicken-fleece-outwear-overcoat-with-pockets.html
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "GUROA Women 90s Hip Hop Baseball Jacket Oversized Letter Icon Print Long Sleeve Outerwear Stand Collar Patchwork Cute Coat", "description": "Typing 'GUROA Women 90s Hip Hop Baseball Jacket Oversized Letter Icon Print Long Sleeve Outerwear Stand Collar Patchwork Cute Coat' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'GUROA Women 90s Hip Hop Baseball Jacket Oversized Letter Icon Print Long Sleeve Outerwear Stand Collar Patchwork Cute Coat', 'description': "Typing 'GUROA Women 90s Hip Hop Baseball Jacket Oversized Letter Icon Print Long Sleeve Outerwear Stand Collar Patchwork Cute Coat' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=GUROA+Women+90s+Hip+Hop+Baseball+Jacket+Oversized+Letter+Icon+Print+Long+Sleeve+Outerwear+Stand+Collar+Patchwork+Cute+Coat
+Taking action [{"type": "click", "name": "search_results._vintage_jackets_for_women_long_sleeve_medievals_coats_triplebreasted_lapel_outerwear_solid_color_trench_coats_.view_product", "description": "Clicking on the product 'Women's Hooded Fleece Jacket Winter Vintage Print Parka Coat Oversize Fuzzy Lined Outwear Long Sleeve Overcoat Cardigan' to check its details and verify if it is made from sustainable materials and matches the teal color and desired style."}]
+{'type': 'click', 'name': 'search_results._vintage_jackets_for_women_long_sleeve_medievals_coats_triplebreasted_lapel_outerwear_solid_color_trench_coats_.view_product', 'description': "Clicking on the product 'Women's Hooded Fleece Jacket Winter Vintage Print Parka Coat Oversize Fuzzy Lined Outwear Long Sleeve Overcoat Cardigan' to check its details and verify if it is made from sustainable materials and matches the teal color and desired style."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/vintage-jackets-for-women-long-sleeve-medievals-coats-triple-breasted-lapel-outerwear-solid-color-trench-coats.html
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "unisex teal oversized sustainable jacket", "description": "Typing 'unisex teal oversized sustainable jacket' into the search input field and submitting the form."}, {"type": "click", "name": "header.search_box.search_button", "description": "Clicking the 'Search' button to submit the query."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'unisex teal oversized sustainable jacket', 'description': "Typing 'unisex teal oversized sustainable jacket' into the search input field and submitting the form."}
+init
+{'type': 'click', 'name': 'header.search_box.search_button', 'description': "Clicking the 'Search' button to submit the query."}
+init
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 676, in step
+    self.browser.click(action["name"])
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 500, in click
+    self.clickables[name].click()
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <button type="submit" title="Search" class="action search" aria-label="Search" disabled="" data-clickable-id="header.search_box.search_button">...</button> is not clickable at point (1299, 87). Other element would receive the click: <input id="search" type="text" name="q" value="unisex teal oversized sustainable jacket" placeholder="Search entire store here..." class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" autocomplete="off" aria-expanded="false" data-input-id="header.search_box.search_input">
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x0000000102fd39a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x0000000102fcbe10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x0000000102bd0be0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x0000000102c1a6fc cxxbridge1$string$len + 391360
+4   chromedriver                        0x0000000102c18d28 cxxbridge1$string$len + 384748
+5   chromedriver                        0x0000000102c16f54 cxxbridge1$string$len + 377112
+6   chromedriver                        0x0000000102c164a0 cxxbridge1$string$len + 374372
+7   chromedriver                        0x0000000102c0b930 cxxbridge1$string$len + 330484
+8   chromedriver                        0x0000000102c0b3c0 cxxbridge1$string$len + 329092
+9   chromedriver                        0x0000000102c4e4a4 cxxbridge1$string$len + 603752
+10  chromedriver                        0x0000000102c09a08 cxxbridge1$string$len + 322508
+11  chromedriver                        0x0000000102c0a66c cxxbridge1$string$len + 325680
+12  chromedriver                        0x0000000102f9a068 cxxbridge1$str$ptr + 1651256
+13  chromedriver                        0x0000000102f9e99c cxxbridge1$str$ptr + 1669996
+14  chromedriver                        0x0000000102f7f1fc cxxbridge1$str$ptr + 1541068
+15  chromedriver                        0x0000000102f9f26c cxxbridge1$str$ptr + 1672252
+16  chromedriver                        0x0000000102f70810 cxxbridge1$str$ptr + 1481184
+17  chromedriver                        0x0000000102fbd108 cxxbridge1$str$ptr + 1794776
+18  chromedriver                        0x0000000102fbd284 cxxbridge1$str$ptr + 1795156
+19  chromedriver                        0x0000000102fcbaac cxxbridge1$str$ptr + 1854588
+20  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+21  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8
+
+
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=unisex+teal+oversized+sustainable+jacket
+Taking action [{"type": "click", "name": "search_results._guroa_women_90s_hip_hop_baseball_jacket_oversized_letter_icon_print_long_sleeve_outerwear_stand_collar_patchwork_cute_coat_.view_product", "description": "Clicking on the product 'GUROA Women 90s Hip Hop Baseball Jacket Oversized Letter Icon Print Long Sleeve Outerwear Stand Collar Patchwork Cute Coat' to check its details and verify if it is made from sustainable materials and matches the teal color and desired style."}]
+{'type': 'click', 'name': 'search_results._guroa_women_90s_hip_hop_baseball_jacket_oversized_letter_icon_print_long_sleeve_outerwear_stand_collar_patchwork_cute_coat_.view_product', 'description': "Clicking on the product 'GUROA Women 90s Hip Hop Baseball Jacket Oversized Letter Icon Print Long Sleeve Outerwear Stand Collar Patchwork Cute Coat' to check its details and verify if it is made from sustainable materials and matches the teal color and desired style."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/guroa-women-90s-hip-hop-baseball-jacket-oversized-letter-icon-print-long-sleeve-outerwear-stand-collar-patchwork-cute-coat.html
+Taking action [{"type": "click", "name": "header.search_box.search_button", "description": "Clicking the 'Search' button to proceed to the next set of search results."}]
+{'type': 'click', 'name': 'header.search_box.search_button', 'description': "Clicking the 'Search' button to proceed to the next set of search results."}
+init
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 676, in step
+    self.browser.click(action["name"])
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 500, in click
+    self.clickables[name].click()
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <button type="submit" title="Search" class="action search" aria-label="Search" disabled="" data-clickable-id="header.search_box.search_button">...</button> is not clickable at point (1299, 87). Other element would receive the click: <input id="search" type="text" name="q" value="" placeholder="Search entire store here..." class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" autocomplete="off" aria-expanded="false" data-input-id="header.search_box.search_input">
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x0000000102fd39a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x0000000102fcbe10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x0000000102bd0be0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x0000000102c1a6fc cxxbridge1$string$len + 391360
+4   chromedriver                        0x0000000102c18d28 cxxbridge1$string$len + 384748
+5   chromedriver                        0x0000000102c16f54 cxxbridge1$string$len + 377112
+6   chromedriver                        0x0000000102c164a0 cxxbridge1$string$len + 374372
+7   chromedriver                        0x0000000102c0b930 cxxbridge1$string$len + 330484
+8   chromedriver                        0x0000000102c0b3c0 cxxbridge1$string$len + 329092
+9   chromedriver                        0x0000000102c4e4a4 cxxbridge1$string$len + 603752
+10  chromedriver                        0x0000000102c09a08 cxxbridge1$string$len + 322508
+11  chromedriver                        0x0000000102c0a66c cxxbridge1$string$len + 325680
+12  chromedriver                        0x0000000102f9a068 cxxbridge1$str$ptr + 1651256
+13  chromedriver                        0x0000000102f9e99c cxxbridge1$str$ptr + 1669996
+14  chromedriver                        0x0000000102f7f1fc cxxbridge1$str$ptr + 1541068
+15  chromedriver                        0x0000000102f9f26c cxxbridge1$str$ptr + 1672252
+16  chromedriver                        0x0000000102f70810 cxxbridge1$str$ptr + 1481184
+17  chromedriver                        0x0000000102fbd108 cxxbridge1$str$ptr + 1794776
+18  chromedriver                        0x0000000102fbd284 cxxbridge1$str$ptr + 1795156
+19  chromedriver                        0x0000000102fcbaac cxxbridge1$str$ptr + 1854588
+20  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+21  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8
+
+
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/guroa-women-90s-hip-hop-baseball-jacket-oversized-letter-icon-print-long-sleeve-outerwear-stand-collar-patchwork-cute-coat.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to review the details of the 'GUROA Women 90s Hip Hop Baseball Jacket Oversized Letter Icon Print Long Sleeve Outerwear Stand Collar Patchwork Cute Coat' in detail."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to review the details of the 'GUROA Women 90s Hip Hop Baseball Jacket Oversized Letter Icon Print Long Sleeve Outerwear Stand Collar Patchwork Cute Coat' in detail."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/guroa-women-90s-hip-hop-baseball-jacket-oversized-letter-icon-print-long-sleeve-outerwear-stand-collar-patchwork-cute-coat.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to review the relevant product details for color, sustainability, and size information."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to review the relevant product details for color, sustainability, and size information."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/guroa-women-90s-hip-hop-baseball-jacket-oversized-letter-icon-print-long-sleeve-outerwear-stand-collar-patchwork-cute-coat.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to review the detailed product information for the 'GUROA Women 90s Hip Hop Baseball Jacket'."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to review the detailed product information for the 'GUROA Women 90s Hip Hop Baseball Jacket'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/guroa-women-90s-hip-hop-baseball-jacket-oversized-letter-icon-print-long-sleeve-outerwear-stand-collar-patchwork-cute-coat.html
+Taking action [{"type": "back", "description": "Navigating back to the previous page in the browser history to return to the search results."}]
+{'type': 'back', 'description': 'Navigating back to the previous page in the browser history to return to the search results.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=unisex+teal+oversized+sustainable+jacket
+Taking action [{"type": "click", "name": "search_results._fenxixi_oversized_mens_leather_suit_jacket_autumn_business_casual_loose_loose_jacket_men_color__black_size__xxxxxl_code_.view_product", "description": "Clicking on the 'FENXIXI Oversized Men's Leather Suit Jacket Autumn Business Casual Loose Loose Jacket Men (Color : Black, Size : XXXXXL Code)' to check its details and verify if it meets the teal color, oversized unisex design, and sustainability criteria."}, {"type": "click", "name": "search_results._womens_sherpa_jacket_casual_lapel_fleece_fuzzy_faux_shearling_button_down_teddy_coat_oversized_outwear_.view_product", "description": "Clicking on the 'Women's Sherpa Jacket Casual Lapel Fleece Fuzzy Faux Shearling Button Down Teddy Coat Oversized Outwear' to check its details and verify if it is made from sustainable materials and matches the teal color and desired style."}, {"type": "click", "name": "pager._page_next_", "description": "Clicking on the 'Page Next' link to view more search results and continue the review process if none of the current results meet the criteria."}]
+{'type': 'click', 'name': 'search_results._fenxixi_oversized_mens_leather_suit_jacket_autumn_business_casual_loose_loose_jacket_men_color__black_size__xxxxxl_code_.view_product', 'description': "Clicking on the 'FENXIXI Oversized Men's Leather Suit Jacket Autumn Business Casual Loose Loose Jacket Men (Color : Black, Size : XXXXXL Code)' to check its details and verify if it meets the teal color, oversized unisex design, and sustainability criteria."}
+init
+{'type': 'click', 'name': 'search_results._womens_sherpa_jacket_casual_lapel_fleece_fuzzy_faux_shearling_button_down_teddy_coat_oversized_outwear_.view_product', 'description': "Clicking on the 'Women's Sherpa Jacket Casual Lapel Fleece Fuzzy Faux Shearling Button Down Teddy Coat Oversized Outwear' to check its details and verify if it is made from sustainable materials and matches the teal color and desired style."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/fenxixi-oversized-men-s-leather-suit-jacket-autumn-business-casual-loose-loose-jacket-men-color-black-size-xxxxxl-code.html
+Taking action [{"type": "terminate", "description": "Considering reaching out to local artisans or designers to custom-make a jacket with the desired specifications."}]
+{'type': 'terminate', 'description': 'Considering reaching out to local artisans or designers to custom-make a jacket with the desired specifications.'}
+--------------------------------------------------

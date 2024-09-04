@@ -1,0 +1,78 @@
+/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/gymnasium/utils/passive_env_checker.py:181: DeprecationWarning: [33mWARN: Current gymnasium version requires that `Env.reset` can be passed `options` to allow the environment initialisation to be passed additional information.[0m
+  logger.deprecation(
+INFO:simulated_web_agent.executor.env:OBSERVING
+Traceback (most recent call last):
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/webshop/batch.py", line 87, in <module>
+    main()
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/click/core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/webshop/batch.py", line 21, in wrapper
+    return asyncio.run(func(*args, **kwargs))
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/webshop/batch.py", line 54, in main
+    observation, info = env.reset()
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/gymnasium/wrappers/order_enforcing.py", line 61, in reset
+    return self.env.reset(**kwargs)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/gymnasium/wrappers/env_checker.py", line 57, in reset
+    return env_reset_passive_checker(self.env, **kwargs)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/gymnasium/utils/passive_env_checker.py", line 186, in env_reset_passive_checker
+    result = env.reset(**kwargs)
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 626, in reset
+    obs = self.browser.observe()
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 558, in observe
+    new_root = self.process(
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 404, in process
+    node.add(self.process(child_element, child, parent_name, i))
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 404, in process
+    node.add(self.process(child_element, child, parent_name, i))
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 400, in process
+    node.add(self.process(child_element, child, parent_name))
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 404, in process
+    node.add(self.process(child_element, child, parent_name, i))
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 404, in process
+    node.add(self.process(child_element, child, parent_name, i))
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 330, in process
+    value = element.get_dom_attribute(key)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 149, in get_dom_attribute
+    return self._execute(Command.GET_ELEMENT_ATTRIBUTE, {"name": name})["value"]
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: disconnected: not connected to DevTools
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x00000001050eb9a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x00000001050e3e10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x0000000104ce8be0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x0000000104cd2a68 core::str::slice_error_fail::h6c488016ada29016 + 64036
+4   chromedriver                        0x0000000104cd29a8 core::str::slice_error_fail::h6c488016ada29016 + 63844
+5   chromedriver                        0x0000000104d65f08 cxxbridge1$string$len + 602316
+6   chromedriver                        0x0000000104d21a08 cxxbridge1$string$len + 322508
+7   chromedriver                        0x0000000104d2266c cxxbridge1$string$len + 325680
+8   chromedriver                        0x00000001050b2068 cxxbridge1$str$ptr + 1651256
+9   chromedriver                        0x00000001050b699c cxxbridge1$str$ptr + 1669996
+10  chromedriver                        0x00000001050971fc cxxbridge1$str$ptr + 1541068
+11  chromedriver                        0x00000001050b726c cxxbridge1$str$ptr + 1672252
+12  chromedriver                        0x0000000105088810 cxxbridge1$str$ptr + 1481184
+13  chromedriver                        0x00000001050d5108 cxxbridge1$str$ptr + 1794776
+14  chromedriver                        0x00000001050d5284 cxxbridge1$str$ptr + 1795156
+15  chromedriver                        0x00000001050e3aac cxxbridge1$str$ptr + 1854588
+16  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+17  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8

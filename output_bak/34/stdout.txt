@@ -1,0 +1,34 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "unisex oversized denim jacket", "description": "Typing 'unisex oversized denim jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'unisex oversized denim jacket', 'description': "Typing 'unisex oversized denim jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=unisex+oversized+denim+jacket
+Taking action [{"type": "click", "name": "search_results._womens_denim_jackets_ripped_distressed_casual_long_sleeve_button_down_stretch_cropped_jean_trucker_jacket_with_pockets_.view_product", "description": "Clicking on the product 'Womens Denim Jackets Ripped Distressed Casual Long Sleeve Button Down Stretch Cropped Jean Trucker Jacket with Pockets' to verify the size and product details."}]
+{'type': 'click', 'name': 'search_results._womens_denim_jackets_ripped_distressed_casual_long_sleeve_button_down_stretch_cropped_jean_trucker_jacket_with_pockets_.view_product', 'description': "Clicking on the product 'Womens Denim Jackets Ripped Distressed Casual Long Sleeve Button Down Stretch Cropped Jean Trucker Jacket with Pockets' to verify the size and product details."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/womens-denim-jackets-ripped-distressed-casual-long-sleeve-button-down-stretch-cropped-jean-trucker-jacket-with-pockets.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to verify product details including size and distress finish."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to verify product details including size and distress finish."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/womens-denim-jackets-ripped-distressed-casual-long-sleeve-button-down-stretch-cropped-jean-trucker-jacket-with-pockets.html
+Taking action [{"type": "click", "name": "product_form.options.medium", "description": "Clicking on the size 'Medium' option to select the correct size."}, {"type": "click", "name": "product_form.add_to_cart", "description": "Clicking the 'Add to Cart' button to add the jacket to the shopping cart."}]
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Clicking on the size 'Medium' option to select the correct size."}
+init
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking the 'Add to Cart' button to add the jacket to the shopping cart."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/womens-denim-jackets-ripped-distressed-casual-long-sleeve-button-down-stretch-cropped-jean-trucker-jacket-with-pockets.html
+Taking action [{"type": "click", "name": "product_form.options.blue", "description": "Selecting the color 'Blue' for the jacket."}, {"type": "click", "name": "product_form.options.medium", "description": "Selecting the size 'Medium' for the jacket."}]
+{'type': 'click', 'name': 'product_form.options.blue', 'description': "Selecting the color 'Blue' for the jacket."}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Selecting the size 'Medium' for the jacket."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/womens-denim-jackets-ripped-distressed-casual-long-sleeve-button-down-stretch-cropped-jean-trucker-jacket-with-pockets.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the jacket to the shopping cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the jacket to the shopping cart."}
+init
+--------------------------------------------------

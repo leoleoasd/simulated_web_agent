@@ -1,0 +1,30 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "unisex oversized denim jacket", "description": "Typing 'unisex oversized denim jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'unisex oversized denim jacket', 'description': "Typing 'unisex oversized denim jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=unisex+oversized+denim+jacket
+Taking action [{"type": "click", "name": "search_results._womens_oversize_jean_jacket_vintage_washed_boyfriend_denim_jacket_long_sleeve_classic_loose_button_down_jean_coats_.view_product", "description": "Clicking on the product link to view more details about the 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats'."}]
+{'type': 'click', 'name': 'search_results._womens_oversize_jean_jacket_vintage_washed_boyfriend_denim_jacket_long_sleeve_classic_loose_button_down_jean_coats_.view_product', 'description': "Clicking on the product link to view more details about the 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to view more information about the 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats'."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to view more information about the 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_form.options.5xlarge", "description": "Clicking on the size '5X-Large' option to choose the desired size for a relaxed fit."}]
+{'type': 'click', 'name': 'product_form.options.5xlarge', 'description': "Clicking on the size '5X-Large' option to choose the desired size for a relaxed fit."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_form.options.5xlarge", "description": "Selecting the size '5X-Large' for the denim jacket to ensure a relaxed fit."}]
+{'type': 'click', 'name': 'product_form.options.5xlarge', 'description': "Selecting the size '5X-Large' for the denim jacket to ensure a relaxed fit."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the selected size '5X-Large' Women's Oversize Jean Jacket to the cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the selected size '5X-Large' Women's Oversize Jean Jacket to the cart."}
+init
+--------------------------------------------------

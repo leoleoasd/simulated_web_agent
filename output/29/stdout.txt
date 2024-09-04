@@ -1,0 +1,40 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "woman navy tailored jacket", "description": "Typing 'woman navy tailored jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'woman navy tailored jacket', 'description': "Typing 'woman navy tailored jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=woman+navy+tailored+jacket
+Taking action [{"type": "click", "name": "search_results._woman_within_womens_plus_size_packable_puffer_jacket_.view_product", "description": "Clicking on the 'Woman Within Women's Plus Size Packable Puffer Jacket' to check its material descriptions and customer reviews."}]
+{'type': 'click', 'name': 'search_results._woman_within_womens_plus_size_packable_puffer_jacket_.view_product', 'description': "Clicking on the 'Woman Within Women's Plus Size Packable Puffer Jacket' to check its material descriptions and customer reviews."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/woman-within-women-s-plus-size-packable-puffer-jacket.html
+Taking action [{"type": "click", "name": "product_form.options.navy", "description": "Clicking on the color option 'Navy' to check if the jacket is available in navy blue."}, {"type": "click", "name": "product_form.options.medium_plus", "description": "Clicking on the size option 'Medium Plus' to check if the jacket is available in medium size."}]
+{'type': 'click', 'name': 'product_form.options.navy', 'description': "Clicking on the color option 'Navy' to check if the jacket is available in navy blue."}
+init
+{'type': 'click', 'name': 'product_form.options.medium_plus', 'description': "Clicking on the size option 'Medium Plus' to check if the jacket is available in medium size."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/woman-within-women-s-plus-size-packable-puffer-jacket.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to check the material types of the 'Woman Within Women's Plus Size Packable Puffer Jacket' to verify if it is made from sustainable materials."}, {"type": "click", "name": "product_info._reviews_", "description": "Clicking on the 'Reviews' tab to check the customer reviews for additional context on the quality and sustainability of the 'Woman Within Women's Plus Size Packable Puffer Jacket'."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to check the material types of the 'Woman Within Women's Plus Size Packable Puffer Jacket' to verify if it is made from sustainable materials."}
+init
+{'type': 'click', 'name': 'product_info._reviews_', 'description': "Clicking on the 'Reviews' tab to check the customer reviews for additional context on the quality and sustainability of the 'Woman Within Women's Plus Size Packable Puffer Jacket'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/woman-within-women-s-plus-size-packable-puffer-jacket.html
+Taking action [{"type": "click", "name": "product_form.options.medium_plus", "description": "Clicking on the size option 'Medium Plus' to select Medium Plus size."}, {"type": "click", "name": "product_form.options.navy", "description": "Clicking on the color option 'Navy' to select the Navy color."}]
+{'type': 'click', 'name': 'product_form.options.medium_plus', 'description': "Clicking on the size option 'Medium Plus' to select Medium Plus size."}
+init
+{'type': 'click', 'name': 'product_form.options.navy', 'description': "Clicking on the color option 'Navy' to select the Navy color."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/woman-within-women-s-plus-size-packable-puffer-jacket.html
+Taking action [{"type": "click", "name": "header", "description": "Clicking on the header link to simulate going to the cart page."}]
+{'type': 'click', 'name': 'header', 'description': 'Clicking on the header link to simulate going to the cart page.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/woman-within-women-s-plus-size-packable-puffer-jacket.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking the 'Add to Cart' button to add the 'Woman Within Women's Plus Size Packable Puffer Jacket' to the shopping cart."}, {"type": "click", "name": "header.search_box.search_button", "description": "Clicking the 'Cart' button to proceed to the checkout page."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking the 'Add to Cart' button to add the 'Woman Within Women's Plus Size Packable Puffer Jacket' to the shopping cart."}
+init
+--------------------------------------------------

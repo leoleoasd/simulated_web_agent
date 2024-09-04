@@ -1,0 +1,69 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "women's recycled material jacket", "description": "Typing 'women's recycled material jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "women's recycled material jacket", 'description': "Typing 'women's recycled material jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=women%27s+recycled+material+jacket
+Taking action [{"type": "click", "name": "search_results._little_donkey_andy_womens_packable_lightweight_puffer_jacket_hooded_windproof_winter_coat_with_recycled_insulation_.view_product", "description": "Clicking on the product 'Little Donkey Andy Women's Packable Lightweight Puffer Jacket Hooded Windproof Winter Coat with Recycled Insulation' to view details."}]
+{'type': 'click', 'name': 'search_results._little_donkey_andy_womens_packable_lightweight_puffer_jacket_hooded_windproof_winter_coat_with_recycled_insulation_.view_product', 'description': "Clicking on the product 'Little Donkey Andy Women's Packable Lightweight Puffer Jacket Hooded Windproof Winter Coat with Recycled Insulation' to view details."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/little-donkey-andy-women-s-packable-lightweight-puffer-jacket-hooded-windproof-winter-coat-with-recycled-insulation.html
+Taking action [{"type": "click", "name": "product_form.options.packable_aqua", "description": "Clicking on the color option 'Packable Aqua' to verify if it matches the earth-toned preference."}]
+{'type': 'click', 'name': 'product_form.options.packable_aqua', 'description': "Clicking on the color option 'Packable Aqua' to verify if it matches the earth-toned preference."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/little-donkey-andy-women-s-packable-lightweight-puffer-jacket-hooded-windproof-winter-coat-with-recycled-insulation.html
+Taking action [{"type": "click", "name": "product_form.options.medium", "description": "Clicking on the size 'Medium' option to check for availability."}]
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Clicking on the size 'Medium' option to check for availability."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/little-donkey-andy-women-s-packable-lightweight-puffer-jacket-hooded-windproof-winter-coat-with-recycled-insulation.html
+Taking action [{"type": "click", "name": "product_form.options.packable_black", "description": "Clicking on the color 'Packable Black' option to explore other color choices."}, {"type": "click", "name": "product_form.options.packable_dark_red", "description": "Clicking on the color 'Packable Dark Red' option to explore other color choices."}, {"type": "click", "name": "product_form.options.packable_grey", "description": "Clicking on the color 'Packable Grey' option to explore other color choices."}, {"type": "click", "name": "product_form.options.packable_light_grey", "description": "Clicking on the color 'Packable Light Grey' option to explore other color choices."}, {"type": "click", "name": "product_form.options.packable_rose", "description": "Clicking on the color 'Packable Rose' option to explore other color choices."}]
+{'type': 'click', 'name': 'product_form.options.packable_black', 'description': "Clicking on the color 'Packable Black' option to explore other color choices."}
+init
+{'type': 'click', 'name': 'product_form.options.packable_dark_red', 'description': "Clicking on the color 'Packable Dark Red' option to explore other color choices."}
+init
+{'type': 'click', 'name': 'product_form.options.packable_grey', 'description': "Clicking on the color 'Packable Grey' option to explore other color choices."}
+init
+{'type': 'click', 'name': 'product_form.options.packable_light_grey', 'description': "Clicking on the color 'Packable Light Grey' option to explore other color choices."}
+init
+{'type': 'click', 'name': 'product_form.options.packable_rose', 'description': "Clicking on the color 'Packable Rose' option to explore other color choices."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/little-donkey-andy-women-s-packable-lightweight-puffer-jacket-hooded-windproof-winter-coat-with-recycled-insulation.html
+Taking action [{"type": "click", "name": "product_form.options.medium", "description": "Clicking on the size 'Medium' option to ensure it fits Mia's requirements."}, {"type": "click", "name": "product_form.options.packable_aqua", "description": "Clicking on the 'Packable Aqua' color option to check if it matches Mia's preference."}]
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Clicking on the size 'Medium' option to ensure it fits Mia's requirements."}
+init
+{'type': 'click', 'name': 'product_form.options.packable_aqua', 'description': "Clicking on the 'Packable Aqua' color option to check if it matches Mia's preference."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/little-donkey-andy-women-s-packable-lightweight-puffer-jacket-hooded-windproof-winter-coat-with-recycled-insulation.html
+Taking action [{"type": "click", "name": "product_form.options.packable_black", "description": "Clicking on the 'Packable Black' color option to see if it meets Mia's preference for earth-toned colors."}, {"type": "click", "name": "product_form.options.packable_dark_red", "description": "Clicking on the 'Packable Dark Red' color option to see if it meets Mia's preference for earth-toned colors."}, {"type": "click", "name": "product_form.options.packable_grey", "description": "Clicking on the 'Packable Grey' color option to see if it meets Mia's preference for earth-toned colors."}, {"type": "click", "name": "product_form.options.packable_light_grey", "description": "Clicking on the 'Packable Light Grey' color option to see if it meets Mia's preference for earth-toned colors."}, {"type": "click", "name": "product_form.options.packable_rose", "description": "Clicking on the 'Packable Rose' color option to see if it meets Mia's preference for earth-toned colors."}]
+{'type': 'click', 'name': 'product_form.options.packable_black', 'description': "Clicking on the 'Packable Black' color option to see if it meets Mia's preference for earth-toned colors."}
+init
+{'type': 'click', 'name': 'product_form.options.packable_dark_red', 'description': "Clicking on the 'Packable Dark Red' color option to see if it meets Mia's preference for earth-toned colors."}
+init
+{'type': 'click', 'name': 'product_form.options.packable_grey', 'description': "Clicking on the 'Packable Grey' color option to see if it meets Mia's preference for earth-toned colors."}
+init
+{'type': 'click', 'name': 'product_form.options.packable_light_grey', 'description': "Clicking on the 'Packable Light Grey' color option to see if it meets Mia's preference for earth-toned colors."}
+init
+{'type': 'click', 'name': 'product_form.options.packable_rose', 'description': "Clicking on the 'Packable Rose' color option to see if it meets Mia's preference for earth-toned colors."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/little-donkey-andy-women-s-packable-lightweight-puffer-jacket-hooded-windproof-winter-coat-with-recycled-insulation.html
+Taking action [{"type": "click", "name": "product_form.options.packable_dark_red", "description": "Clicking on the 'Packable Dark Red' color option to see if it meets Mia's preference for earth-toned colors."}, {"type": "click", "name": "product_form.options.packable_grey", "description": "Clicking on the 'Packable Grey' color option to see if it meets Mia's preference for earth-toned colors."}, {"type": "click", "name": "product_form.options.packable_light_grey", "description": "Clicking on the 'Packable Light Grey' color option to see if it meets Mia's preference for earth-toned colors."}, {"type": "click", "name": "product_form.options.packable_rose", "description": "Clicking on the 'Packable Rose' color option to see if it meets Mia's preference for earth-toned colors."}]
+{'type': 'click', 'name': 'product_form.options.packable_dark_red', 'description': "Clicking on the 'Packable Dark Red' color option to see if it meets Mia's preference for earth-toned colors."}
+init
+{'type': 'click', 'name': 'product_form.options.packable_grey', 'description': "Clicking on the 'Packable Grey' color option to see if it meets Mia's preference for earth-toned colors."}
+init
+{'type': 'click', 'name': 'product_form.options.packable_light_grey', 'description': "Clicking on the 'Packable Light Grey' color option to see if it meets Mia's preference for earth-toned colors."}
+init
+{'type': 'click', 'name': 'product_form.options.packable_rose', 'description': "Clicking on the 'Packable Rose' color option to see if it meets Mia's preference for earth-toned colors."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/little-donkey-andy-women-s-packable-lightweight-puffer-jacket-hooded-windproof-winter-coat-with-recycled-insulation.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the selected jacket to the shopping cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the selected jacket to the shopping cart."}
+init
+--------------------------------------------------

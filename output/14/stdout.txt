@@ -1,0 +1,19 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "men's jacket", "description": "Typing 'men's jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "men's jacket", 'description': "Typing 'men's jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+jacket
+Taking action [{"type": "click", "name": "search_results._crysully_mens_jacketfall_winter_thicken_windbreakers_bomber_jackets_padded_coats_.view_product", "description": "Clicking to view the product 'CRYSULLY Men's Jacket-Fall Winter Thicken Windbreakers Bomber Jackets Padded Coats' because it looks like it may match the desired specifications."}]
+{'type': 'click', 'name': 'search_results._crysully_mens_jacketfall_winter_thicken_windbreakers_bomber_jackets_padded_coats_.view_product', 'description': "Clicking to view the product 'CRYSULLY Men's Jacket-Fall Winter Thicken Windbreakers Bomber Jackets Padded Coats' because it looks like it may match the desired specifications."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/crysully-men-s-jacket-fall-winter-thicken-windbreakers-bomber-jackets-padded-coats.html
+Taking action [{"type": "click", "name": "product_form.options.navy_blue", "description": "Selecting the color navy for the jacket."}, {"type": "click", "name": "product_form.options.medium", "description": "Selecting the size medium for the jacket."}, {"type": "click", "name": "product_form.add_to_cart", "description": "Adding the jacket to the cart."}]
+{'type': 'click', 'name': 'product_form.options.navy_blue', 'description': 'Selecting the color navy for the jacket.'}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': 'Selecting the size medium for the jacket.'}
+init
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': 'Adding the jacket to the cart.'}
+init
+--------------------------------------------------

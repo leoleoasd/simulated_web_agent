@@ -1,0 +1,52 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "unisex oversized light wash denim jacket", "description": "Typing 'unisex oversized light wash denim jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'unisex oversized light wash denim jacket', 'description': "Typing 'unisex oversized light wash denim jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=unisex+oversized+light+wash+denim+jacket
+Taking action [{"type": "click", "name": "search_results._womens_oversize_jean_jacket_vintage_washed_boyfriend_denim_jacket_long_sleeve_classic_loose_button_down_jean_coats_.view_product", "description": "Clicking on the product name 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats' to view more details about the jacket."}]
+{'type': 'click', 'name': 'search_results._womens_oversize_jean_jacket_vintage_washed_boyfriend_denim_jacket_long_sleeve_classic_loose_button_down_jean_coats_.view_product', 'description': "Clicking on the product name 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats' to view more details about the jacket."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_info._reviews_", "description": "Clicking on the 'Reviews' tab to check for customer reviews and ratings for the jacket."}]
+{'type': 'click', 'name': 'product_info._reviews_', 'description': "Clicking on the 'Reviews' tab to check for customer reviews and ratings for the jacket."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_info._reviews_", "description": "Clicking on the 'Reviews' tab to check for customer reviews and ratings for the jacket."}]
+{'type': 'click', 'name': 'product_info._reviews_', 'description': "Clicking on the 'Reviews' tab to check for customer reviews and ratings for the jacket."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to verify information about the ethical production and sustainability of the denim jacket."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to verify information about the ethical production and sustainability of the denim jacket."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to verify information about the ethical production and sustainability of the denim jacket."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to verify information about the ethical production and sustainability of the denim jacket."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to check for information on ethical production and sustainability."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to check for information on ethical production and sustainability."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_form.options.3xlarge", "description": "Clicking on the size '3X-Large' option to compare size options considering the size discrepancies for Asian figures."}, {"type": "click", "name": "product_form.options.4xlarge", "description": "Clicking on the size '4X-Large' option to compare size options considering the size discrepancies for Asian figures."}, {"type": "click", "name": "product_form.options.5xlarge", "description": "Clicking on the size '5X-Large' option to compare size options considering the size discrepancies for Asian figures."}, {"type": "click", "name": "product_form.options.xlarge", "description": "Clicking on the size 'X-Large' option to compare size options considering the size discrepancies for Asian figures."}, {"type": "click", "name": "product_form.options.xxlarge", "description": "Clicking on the size 'XX-Large' option to compare size options considering the size discrepancies for Asian figures."}]
+{'type': 'click', 'name': 'product_form.options.3xlarge', 'description': "Clicking on the size '3X-Large' option to compare size options considering the size discrepancies for Asian figures."}
+init
+{'type': 'click', 'name': 'product_form.options.4xlarge', 'description': "Clicking on the size '4X-Large' option to compare size options considering the size discrepancies for Asian figures."}
+init
+{'type': 'click', 'name': 'product_form.options.5xlarge', 'description': "Clicking on the size '5X-Large' option to compare size options considering the size discrepancies for Asian figures."}
+init
+{'type': 'click', 'name': 'product_form.options.xlarge', 'description': "Clicking on the size 'X-Large' option to compare size options considering the size discrepancies for Asian figures."}
+init
+{'type': 'click', 'name': 'product_form.options.xxlarge', 'description': "Clicking on the size 'XX-Large' option to compare size options considering the size discrepancies for Asian figures."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "terminate", "description": "Ending the exploration of this product page to consider alternative options such as thrift stores or community clothing swaps that may offer more sustainable shopping solutions."}]
+{'type': 'terminate', 'description': 'Ending the exploration of this product page to consider alternative options such as thrift stores or community clothing swaps that may offer more sustainable shopping solutions.'}
+--------------------------------------------------

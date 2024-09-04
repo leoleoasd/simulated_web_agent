@@ -1,0 +1,140 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "unisex oversized denim jacket", "description": "Typing 'unisex oversized denim jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'unisex oversized denim jacket', 'description': "Typing 'unisex oversized denim jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=unisex+oversized+denim+jacket
+Taking action [{"type": "click", "name": "search_results._womens_oversize_jean_jacket_vintage_washed_boyfriend_denim_jacket_long_sleeve_classic_loose_button_down_jean_coats_.view_product", "description": "Clicking on the product card for 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats' to review details and determine if it matches the desired teal color and oversized design."}]
+{'type': 'click', 'name': 'search_results._womens_oversize_jean_jacket_vintage_washed_boyfriend_denim_jacket_long_sleeve_classic_loose_button_down_jean_coats_.view_product', 'description': "Clicking on the product card for 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats' to review details and determine if it matches the desired teal color and oversized design."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_form.options.xxlarge", "description": "Clicking on the XX-Large size option to select an appropriately oversized fit."}]
+{'type': 'click', 'name': 'product_form.options.xxlarge', 'description': 'Clicking on the XX-Large size option to select an appropriately oversized fit.'}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to see if there is any mention of the color options."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to see if there is any mention of the color options."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "back", "description": "Navigating back in the browser history to return to the search results page."}]
+{'type': 'back', 'description': 'Navigating back in the browser history to return to the search results page.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=unisex+oversized+denim+jacket
+Taking action [{"type": "click", "name": "search_results._guroa_women_90s_hip_hop_baseball_jacket_oversized_letter_icon_print_long_sleeve_outerwear_stand_collar_patchwork_cute_coat_.view_product", "description": "Clicking on the product link to view details for 'GUROA Women 90s Hip Hop Baseball Jacket Oversized Letter Icon Print Long Sleeve Outerwear Stand Collar Patchwork Cute Coat'."}]
+{'type': 'click', 'name': 'search_results._guroa_women_90s_hip_hop_baseball_jacket_oversized_letter_icon_print_long_sleeve_outerwear_stand_collar_patchwork_cute_coat_.view_product', 'description': "Clicking on the product link to view details for 'GUROA Women 90s Hip Hop Baseball Jacket Oversized Letter Icon Print Long Sleeve Outerwear Stand Collar Patchwork Cute Coat'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/guroa-women-90s-hip-hop-baseball-jacket-oversized-letter-icon-print-long-sleeve-outerwear-stand-collar-patchwork-cute-coat.html
+Taking action [{"type": "back", "description": "Navigating back to the search results to assess the next product option since this current jacket does not meet the desired teal color requirement."}]
+{'type': 'back', 'description': 'Navigating back to the search results to assess the next product option since this current jacket does not meet the desired teal color requirement.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=unisex+oversized+denim+jacket
+Taking action [{"type": "click", "name": "search_results._guroa_women_90s_hip_hop_baseball_jacket_oversized_letter_icon_print_long_sleeve_outerwear_stand_collar_patchwork_cute_coat_.view_product", "description": "Clicking on the product card for 'GUROA Women 90s Hip Hop Baseball Jacket Oversized Letter Icon Print Long Sleeve Outerwear Stand Collar Patchwork Cute Coat' to review the details and determine if it matches the desired teal color and size."}]
+{'type': 'click', 'name': 'search_results._guroa_women_90s_hip_hop_baseball_jacket_oversized_letter_icon_print_long_sleeve_outerwear_stand_collar_patchwork_cute_coat_.view_product', 'description': "Clicking on the product card for 'GUROA Women 90s Hip Hop Baseball Jacket Oversized Letter Icon Print Long Sleeve Outerwear Stand Collar Patchwork Cute Coat' to review the details and determine if it matches the desired teal color and size."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/guroa-women-90s-hip-hop-baseball-jacket-oversized-letter-icon-print-long-sleeve-outerwear-stand-collar-patchwork-cute-coat.html
+Taking action [{"type": "back", "description": "Navigating back to the search results page to assess the next product option, 'Womens Solid Oversized Jacket Coat Winter Zip Down Fluffy Hooded Trench Thicken Fleece Outwear With Pockets'."}]
+{'type': 'back', 'description': "Navigating back to the search results page to assess the next product option, 'Womens Solid Oversized Jacket Coat Winter Zip Down Fluffy Hooded Trench Thicken Fleece Outwear With Pockets'."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=unisex+oversized+denim+jacket
+Taking action [{"type": "click", "name": "search_results._womens_denim_jackets_ripped_distressed_casual_long_sleeve_button_down_stretch_cropped_jean_trucker_jacket_with_pockets_.view_product", "description": "Clicking on the product 'Womens Denim Jackets Ripped Distressed Casual Long Sleeve Button Down Stretch Cropped Jean Trucker Jacket with Pockets' to review its details."}]
+{'type': 'click', 'name': 'search_results._womens_denim_jackets_ripped_distressed_casual_long_sleeve_button_down_stretch_cropped_jean_trucker_jacket_with_pockets_.view_product', 'description': "Clicking on the product 'Womens Denim Jackets Ripped Distressed Casual Long Sleeve Button Down Stretch Cropped Jean Trucker Jacket with Pockets' to review its details."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/womens-denim-jackets-ripped-distressed-casual-long-sleeve-button-down-stretch-cropped-jean-trucker-jacket-with-pockets.html
+Taking action [{"type": "back", "description": "Navigating back to the search results, since the current product does not have the desired teal color option."}]
+{'type': 'back', 'description': 'Navigating back to the search results, since the current product does not have the desired teal color option.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=unisex+oversized+denim+jacket
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "unisex oversized teal denim jacket", "description": "Typing 'unisex oversized teal denim jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'unisex oversized teal denim jacket', 'description': "Typing 'unisex oversized teal denim jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=unisex+oversizeunisex+oversized+teal+denim+jacketd+denim+jacket
+Taking action [{"type": "click", "name": "search_results._bagelise_winter_coats_for_women_fashion_womens_denim_faux_fur_long_sleeve_coat_sherpa_collar_casual_oversized_jacket_outwear_.view_product", "description": "Clicking on the 'BAGELISE Winter Coats for Women Fashion, Womens Denim Faux Fur Long Sleeve Coat Sherpa Collar Casual Oversized Jacket Outwear' to check if it matches the desired color teal and size."}]
+{'type': 'click', 'name': 'search_results._bagelise_winter_coats_for_women_fashion_womens_denim_faux_fur_long_sleeve_coat_sherpa_collar_casual_oversized_jacket_outwear_.view_product', 'description': "Clicking on the 'BAGELISE Winter Coats for Women Fashion, Womens Denim Faux Fur Long Sleeve Coat Sherpa Collar Casual Oversized Jacket Outwear' to check if it matches the desired color teal and size."}
+init
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 676, in step
+    self.browser.click(action["name"])
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 500, in click
+    self.clickables[name].click()
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: disconnected: not connected to DevTools
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x00000001031e79a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x00000001031dfe10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x0000000102de4be0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x0000000102dcea68 core::str::slice_error_fail::h6c488016ada29016 + 64036
+4   chromedriver                        0x0000000102dce9a8 core::str::slice_error_fail::h6c488016ada29016 + 63844
+5   chromedriver                        0x0000000102e61f08 cxxbridge1$string$len + 602316
+6   chromedriver                        0x0000000102e1da08 cxxbridge1$string$len + 322508
+7   chromedriver                        0x0000000102e1e66c cxxbridge1$string$len + 325680
+8   chromedriver                        0x00000001031ae068 cxxbridge1$str$ptr + 1651256
+9   chromedriver                        0x00000001031b299c cxxbridge1$str$ptr + 1669996
+10  chromedriver                        0x00000001031931fc cxxbridge1$str$ptr + 1541068
+11  chromedriver                        0x00000001031b326c cxxbridge1$str$ptr + 1672252
+12  chromedriver                        0x0000000103184810 cxxbridge1$str$ptr + 1481184
+13  chromedriver                        0x00000001031d1108 cxxbridge1$str$ptr + 1794776
+14  chromedriver                        0x00000001031d1284 cxxbridge1$str$ptr + 1795156
+15  chromedriver                        0x00000001031dfaac cxxbridge1$str$ptr + 1854588
+16  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+17  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8
+
+
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/webshop/batch.py", line 68, in main
+    observation, reward, terminated, truncated, info = env.step(action)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/gymnasium/wrappers/order_enforcing.py", line 56, in step
+    return self.env.step(action)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/gymnasium/wrappers/env_checker.py", line 51, in step
+    return self.env.step(action)
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 717, in step
+    obs = self.browser.observe()
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 512, in observe
+    wait.until(
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/support/wait.py", line 96, in until
+    value = method(self._driver)
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 513, in <lambda>
+    lambda driver: driver.execute_script("return document.readyState")
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 414, in execute_script
+    return self.execute(command, {"script": script, "args": converted_args})["value"]
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: disconnected: not connected to DevTools
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x00000001031e79a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x00000001031dfe10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x0000000102de4be0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x0000000102dcea68 core::str::slice_error_fail::h6c488016ada29016 + 64036
+4   chromedriver                        0x0000000102dce9a8 core::str::slice_error_fail::h6c488016ada29016 + 63844
+5   chromedriver                        0x0000000102e61f08 cxxbridge1$string$len + 602316
+6   chromedriver                        0x0000000102e1da08 cxxbridge1$string$len + 322508
+7   chromedriver                        0x0000000102e1e66c cxxbridge1$string$len + 325680
+8   chromedriver                        0x00000001031ae068 cxxbridge1$str$ptr + 1651256
+9   chromedriver                        0x00000001031b299c cxxbridge1$str$ptr + 1669996
+10  chromedriver                        0x00000001031931fc cxxbridge1$str$ptr + 1541068
+11  chromedriver                        0x00000001031b326c cxxbridge1$str$ptr + 1672252
+12  chromedriver                        0x0000000103184810 cxxbridge1$str$ptr + 1481184
+13  chromedriver                        0x00000001031d1108 cxxbridge1$str$ptr + 1794776
+14  chromedriver                        0x00000001031d1284 cxxbridge1$str$ptr + 1795156
+15  chromedriver                        0x00000001031dfaac cxxbridge1$str$ptr + 1854588
+16  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+17  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8

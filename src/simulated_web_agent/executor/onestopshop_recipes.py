@@ -369,11 +369,16 @@ cart = document.querySelector("#minicart-content-wrapper")
 product = cart.querySelector("div.product-item-details")
 
 option_list = product.querySelector("dl.product.options.list")
-values = [...option_list.querySelectorAll("dd.values")].map(a => a.textContent.trim())
-labels = [...option_list.querySelectorAll("dt.label")].map(a => a.textContent.trim())
-options = labels.map((l, i) => [l, values[i]])
-options_str = ""
-for (i of options) {options_str += `${i[0]}: ${i[1]}; `}
+if (!option_list) {
+    options = []
+    options_str = ""
+} else {
+    values = [...option_list.querySelectorAll("dd.values")].map(a => a.textContent.trim())
+    labels = [...option_list.querySelectorAll("dt.label")].map(a => a.textContent.trim())
+    options = labels.map((l, i) => [l, values[i]])
+    options_str = ""
+    for (i of options) {options_str += `${i[0]}: ${i[1]}; `}
+}
 
 h1 = document.createElement("h1");
 document.documentElement.remove();
@@ -436,7 +441,6 @@ return {
                                     {
                                         "selector": "div.reviews-actions > a.view",
                                         "add_text": True,
-                                        "name": "reviews",
                                         "clickable": True,
                                         "name": "view_reviews",
                                     },

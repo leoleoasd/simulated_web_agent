@@ -61,7 +61,15 @@ exclude_lines = [
 ]
 
 [tool.ruff.lint]
-ignore = ['F401']
+ignore = ["F401"]
+select = ["E4", "E7", "E9", "F", "I"]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [tool.basedpyright]
 typeCheckingMode = "basic"

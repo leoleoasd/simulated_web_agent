@@ -1,0 +1,121 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "men's navy blue water-resistant jacket", "description": "Typing 'men's navy blue water-resistant jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "men's navy blue water-resistant jacket", 'description': "Typing 'men's navy blue water-resistant jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+navy+blue+water-resistant+jacket
+Taking action [{"type": "click", "name": "search_results._mens_young_boys_padded_down_vest_winter_outdoor_packable_waterresistant_sleeveless_puffy_puffer_coats_jackets_.view_product", "description": "Clicking on the product 'Men's Young Boys Padded Down Vest Winter Outdoor Packable Water-Resistant Sleeveless Puffy Puffer Coats Jackets'."}]
+{'type': 'click', 'name': 'search_results._mens_young_boys_padded_down_vest_winter_outdoor_packable_waterresistant_sleeveless_puffy_puffer_coats_jackets_.view_product', 'description': "Clicking on the product 'Men's Young Boys Padded Down Vest Winter Outdoor Packable Water-Resistant Sleeveless Puffy Puffer Coats Jackets'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-young-boys-padded-down-vest-winter-outdoor-packable-water-resistant-sleeveless-puffy-puffer-coats-jackets.html
+Taking action [{"type": "back", "description": "Navigating back to the search results to continue looking for a jacket that meets the criteria."}]
+{'type': 'back', 'description': 'Navigating back to the search results to continue looking for a jacket that meets the criteria.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+navy+blue+water-resistant+jacket
+Taking action [{"type": "click", "name": "search_results._mens_young_boys_padded_down_vest_winter_outdoor_packable_waterresistant_sleeveless_puffy_puffer_coats_jackets_.view_product", "description": "Clicking on the product 'Men's Young Boys Padded Down Vest Winter Outdoor Packable Water-Resistant Sleeveless Puffy Puffer Coats Jackets' to check its details."}]
+{'type': 'click', 'name': 'search_results._mens_young_boys_padded_down_vest_winter_outdoor_packable_waterresistant_sleeveless_puffy_puffer_coats_jackets_.view_product', 'description': "Clicking on the product 'Men's Young Boys Padded Down Vest Winter Outdoor Packable Water-Resistant Sleeveless Puffy Puffer Coats Jackets' to check its details."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-young-boys-padded-down-vest-winter-outdoor-packable-water-resistant-sleeveless-puffy-puffer-coats-jackets.html
+Taking action [{"type": "click", "name": "product_form.options.dark_blue", "description": "Clicking on the 'Dark Blue' color option to see if it closely matches the navy blue requirement."}, {"type": "click", "name": "product_form.options.medium", "description": "Clicking on the 'Medium' size option to ensure the jacket is available in the desired size."}]
+{'type': 'click', 'name': 'product_form.options.dark_blue', 'description': "Clicking on the 'Dark Blue' color option to see if it closely matches the navy blue requirement."}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Clicking on the 'Medium' size option to ensure the jacket is available in the desired size."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-young-boys-padded-down-vest-winter-outdoor-packable-water-resistant-sleeveless-puffy-puffer-coats-jackets.html
+Taking action [{"type": "click", "name": "product_form.options.dark_blue", "description": "Selecting the color 'Dark Blue' to check if it aligns with the navy blue requirement."}, {"type": "click", "name": "product_form.options.medium", "description": "Selecting the size 'Medium' to confirm its availability in the desired size."}, {"type": "verify", "name": "product details", "description": "Checking the product details to verify if it is water-resistant and matches other requirements such as color and size."}]
+{'type': 'click', 'name': 'product_form.options.dark_blue', 'description': "Selecting the color 'Dark Blue' to check if it aligns with the navy blue requirement."}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Selecting the size 'Medium' to confirm its availability in the desired size."}
+init
+{'type': 'verify', 'name': 'product details', 'description': 'Checking the product details to verify if it is water-resistant and matches other requirements such as color and size.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-young-boys-padded-down-vest-winter-outdoor-packable-water-resistant-sleeveless-puffy-puffer-coats-jackets.html
+Taking action [{"type": "click", "name": "product_form.options.dark_blue", "description": "Clicking the option 'Dark Blue' to check the color alignment with navy blue."}, {"type": "click", "name": "product_form.options.medium", "description": "Clicking the option 'Medium' to check the size availability in medium."}]
+{'type': 'click', 'name': 'product_form.options.dark_blue', 'description': "Clicking the option 'Dark Blue' to check the color alignment with navy blue."}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Clicking the option 'Medium' to check the size availability in medium."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-young-boys-padded-down-vest-winter-outdoor-packable-water-resistant-sleeveless-puffy-puffer-coats-jackets.html
+Taking action [{"type": "click", "name": "product_form.options.dark_blue", "description": "Selecting the 'Dark Blue' color option as it closely matches 'Navy Blue'."}, {"type": "click", "name": "product_form.options.medium", "description": "Ensuring the 'Medium' size option is selected."}, {"type": "click", "name": "product_info._details_", "description": "Checking detailed product information to verify it's water-resistant and satisfies all criteria."}]
+{'type': 'click', 'name': 'product_form.options.dark_blue', 'description': "Selecting the 'Dark Blue' color option as it closely matches 'Navy Blue'."}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Ensuring the 'Medium' size option is selected."}
+init
+{'type': 'click', 'name': 'product_info._details_', 'description': "Checking detailed product information to verify it's water-resistant and satisfies all criteria."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-young-boys-padded-down-vest-winter-outdoor-packable-water-resistant-sleeveless-puffy-puffer-coats-jackets.html
+Taking action [{"type": "click", "name": "header.search_box.search_button", "description": "Clicking on the search button to look for 'PUREMSX Insulated Expedition Parka Coat, Hooded Warm Heavy Weight Water Resistant Jacket, Mountain Thicken Lined Fur Hooded Long Anorak Parka Padded Coat, Navy, Large'."}, {"type": "type_and_submit", "name": "header.search_box.search_input", "text": "PUREMSX Insulated Expedition Parka Coat, Hooded Warm Heavy Weight Water Resistant Jacket, Mountain Thicken Lined Fur Hooded Long Anorak Parka Padded Coat, Navy, Large", "description": "Typing 'PUREMSX Insulated Expedition Parka Coat, Hooded Warm Heavy Weight Water Resistant Jacket, Mountain Thicken Lined Fur Hooded Long Anorak Parka Padded Coat, Navy, Large' into the search input field and submitting the form."}]
+{'type': 'click', 'name': 'header.search_box.search_button', 'description': "Clicking on the search button to look for 'PUREMSX Insulated Expedition Parka Coat, Hooded Warm Heavy Weight Water Resistant Jacket, Mountain Thicken Lined Fur Hooded Long Anorak Parka Padded Coat, Navy, Large'."}
+init
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 676, in step
+    self.browser.click(action["name"])
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 500, in click
+    self.clickables[name].click()
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <button type="submit" title="Search" class="action search" aria-label="Search" disabled="" data-clickable-id="header.search_box.search_button">...</button> is not clickable at point (1299, 16). Other element would receive the click: <input id="search" type="text" name="q" value="" placeholder="Search entire store here..." class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" autocomplete="off" aria-expanded="false" data-input-id="header.search_box.search_input">
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x00000001006779a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x000000010066fe10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x0000000100274be0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x00000001002be6fc cxxbridge1$string$len + 391360
+4   chromedriver                        0x00000001002bcd28 cxxbridge1$string$len + 384748
+5   chromedriver                        0x00000001002baf54 cxxbridge1$string$len + 377112
+6   chromedriver                        0x00000001002ba4a0 cxxbridge1$string$len + 374372
+7   chromedriver                        0x00000001002af930 cxxbridge1$string$len + 330484
+8   chromedriver                        0x00000001002af3c0 cxxbridge1$string$len + 329092
+9   chromedriver                        0x00000001002f24a4 cxxbridge1$string$len + 603752
+10  chromedriver                        0x00000001002ada08 cxxbridge1$string$len + 322508
+11  chromedriver                        0x00000001002ae66c cxxbridge1$string$len + 325680
+12  chromedriver                        0x000000010063e068 cxxbridge1$str$ptr + 1651256
+13  chromedriver                        0x000000010064299c cxxbridge1$str$ptr + 1669996
+14  chromedriver                        0x00000001006231fc cxxbridge1$str$ptr + 1541068
+15  chromedriver                        0x000000010064326c cxxbridge1$str$ptr + 1672252
+16  chromedriver                        0x0000000100614810 cxxbridge1$str$ptr + 1481184
+17  chromedriver                        0x0000000100661108 cxxbridge1$str$ptr + 1794776
+18  chromedriver                        0x0000000100661284 cxxbridge1$str$ptr + 1795156
+19  chromedriver                        0x000000010066faac cxxbridge1$str$ptr + 1854588
+20  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+21  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8
+
+
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-young-boys-padded-down-vest-winter-outdoor-packable-water-resistant-sleeveless-puffy-puffer-coats-jackets.html
+Taking action [{"type": "click", "name": "product_form.options.large", "description": "Clicking on the 'Large' size option for the product 'PUREMSX Insulated Expedition Parka Coat, Hooded Warm Heavy Weight Water Resistant Jacket, Mountain Thicken Lined Fur Hooded Long Anorak Parka Padded Coat, Navy, Large'."}, {"type": "click", "name": "product_form.options.dark_blue", "description": "Clicking on the 'Dark Blue' color option for the product 'PUREMSX Insulated Expedition Parka Coat, Hooded Warm Heavy Weight Water Resistant Jacket, Mountain Thicken Lined Fur Hooded Long Anorak Parka Padded Coat, Navy, Large'."}]
+{'type': 'click', 'name': 'product_form.options.large', 'description': "Clicking on the 'Large' size option for the product 'PUREMSX Insulated Expedition Parka Coat, Hooded Warm Heavy Weight Water Resistant Jacket, Mountain Thicken Lined Fur Hooded Long Anorak Parka Padded Coat, Navy, Large'."}
+init
+{'type': 'click', 'name': 'product_form.options.dark_blue', 'description': "Clicking on the 'Dark Blue' color option for the product 'PUREMSX Insulated Expedition Parka Coat, Hooded Warm Heavy Weight Water Resistant Jacket, Mountain Thicken Lined Fur Hooded Long Anorak Parka Padded Coat, Navy, Large'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-young-boys-padded-down-vest-winter-outdoor-packable-water-resistant-sleeveless-puffy-puffer-coats-jackets.html
+Taking action [{"type": "click", "name": "product_form.options.large", "description": "Clicking on the 'Large' size option to verify the product size."}, {"type": "click", "name": "product_form.options.dark_blue", "description": "Clicking on the 'Dark Blue' color option to verify the product color."}]
+{'type': 'click', 'name': 'product_form.options.large', 'description': "Clicking on the 'Large' size option to verify the product size."}
+init
+{'type': 'click', 'name': 'product_form.options.dark_blue', 'description': "Clicking on the 'Dark Blue' color option to verify the product color."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-young-boys-padded-down-vest-winter-outdoor-packable-water-resistant-sleeveless-puffy-puffer-coats-jackets.html
+Taking action [{"type": "click", "name": "product_form.options.large", "description": "Clicking on the option for size 'Large' to verify it."}, {"type": "click", "name": "product_form.options.dark_blue", "description": "Clicking on the option for color 'Navy Blue' to verify it."}]
+{'type': 'click', 'name': 'product_form.options.large', 'description': "Clicking on the option for size 'Large' to verify it."}
+init
+{'type': 'click', 'name': 'product_form.options.dark_blue', 'description': "Clicking on the option for color 'Navy Blue' to verify it."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-young-boys-padded-down-vest-winter-outdoor-packable-water-resistant-sleeveless-puffy-puffer-coats-jackets.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking the 'Add to Cart' button to add the product that matches the preferences to the cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking the 'Add to Cart' button to add the product that matches the preferences to the cart."}
+init
+--------------------------------------------------

@@ -1,0 +1,43 @@
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/webshop/batch.py", line 68, in main
+    observation, reward, terminated, truncated, info = env.step(action)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/gymnasium/wrappers/order_enforcing.py", line 56, in step
+    return self.env.step(action)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/gymnasium/wrappers/env_checker.py", line 51, in step
+    return self.env.step(action)
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 717, in step
+    obs = self.browser.observe()
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 512, in observe
+    wait.until(
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/support/wait.py", line 96, in until
+    value = method(self._driver)
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 513, in <lambda>
+    lambda driver: driver.execute_script("return document.readyState")
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 414, in execute_script
+    return self.execute(command, {"script": script, "args": converted_args})["value"]
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: disconnected: not connected to DevTools
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x0000000102ab79a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x0000000102aafe10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x00000001026b4be0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x000000010269ea68 core::str::slice_error_fail::h6c488016ada29016 + 64036
+4   chromedriver                        0x000000010269e9a8 core::str::slice_error_fail::h6c488016ada29016 + 63844
+5   chromedriver                        0x0000000102731f08 cxxbridge1$string$len + 602316
+6   chromedriver                        0x00000001026eda08 cxxbridge1$string$len + 322508
+7   chromedriver                        0x00000001026ee66c cxxbridge1$string$len + 325680
+8   chromedriver                        0x0000000102a7e068 cxxbridge1$str$ptr + 1651256
+9   chromedriver                        0x0000000102a8299c cxxbridge1$str$ptr + 1669996
+10  chromedriver                        0x0000000102a631fc cxxbridge1$str$ptr + 1541068
+11  chromedriver                        0x0000000102a8326c cxxbridge1$str$ptr + 1672252
+12  chromedriver                        0x0000000102a54810 cxxbridge1$str$ptr + 1481184
+13  chromedriver                        0x0000000102aa1108 cxxbridge1$str$ptr + 1794776
+14  chromedriver                        0x0000000102aa1284 cxxbridge1$str$ptr + 1795156
+15  chromedriver                        0x0000000102aafaac cxxbridge1$str$ptr + 1854588
+16  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+17  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8

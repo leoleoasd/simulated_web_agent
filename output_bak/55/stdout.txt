@@ -1,0 +1,28 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "women's jacket", "description": "Typing 'women's jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "women's jacket", 'description': "Typing 'women's jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=women%27s+jacket
+Taking action [{"type": "click", "name": "search_results._unipin_women\u2019s_solid_rain_jacket_outdoor_jackets_hooded_raincoat_windproof_.view_product", "description": "Clicking the product link for 'UNIPIN Women's Solid Rain Jacket Outdoor Jackets Hooded Raincoat Windproof' to view its details."}]
+{'type': 'click', 'name': 'search_results._unipin_women’s_solid_rain_jacket_outdoor_jackets_hooded_raincoat_windproof_.view_product', 'description': "Clicking the product link for 'UNIPIN Women's Solid Rain Jacket Outdoor Jackets Hooded Raincoat Windproof' to view its details."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/unipin-women-s-solid-rain-jacket-outdoor-jackets-hooded-raincoat-windproof.html
+Taking action [{"type": "back", "description": "Navigating back in the browser history to return to the search results page and look into the next product 'Women's Fleece Coats & Jackets Fleece Tops for Women Sweatshirt Womens Jacket With Hood Winter Plush Jacket Coat'."}]
+{'type': 'back', 'description': "Navigating back in the browser history to return to the search results page and look into the next product 'Women's Fleece Coats & Jackets Fleece Tops for Women Sweatshirt Womens Jacket With Hood Winter Plush Jacket Coat'."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=women%27s+jacket
+Taking action [{"type": "click", "name": "search_results._womens_fleece_coats__jackets_fleece_tops_for_women_sweatshirt_womens_jacket_with_hood_winter_plush_jacket_coat_.view_product", "description": "Clicking on the 'Women's Fleece Coats & Jackets Fleece Tops for Women Sweatshirt Womens Jacket With Hood Winter Plush Jacket Coat' product to view its details."}]
+{'type': 'click', 'name': 'search_results._womens_fleece_coats__jackets_fleece_tops_for_women_sweatshirt_womens_jacket_with_hood_winter_plush_jacket_coat_.view_product', 'description': "Clicking on the 'Women's Fleece Coats & Jackets Fleece Tops for Women Sweatshirt Womens Jacket With Hood Winter Plush Jacket Coat' product to view its details."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-fleece-coats-jackets-fleece-tops-for-women-sweatshirt-womens-jacket-with-hood-winter-plush-jacket-coat.html
+Taking action [{"type": "click", "name": "product_form.options.003blue", "description": "Select the navy color option (if blue represents navy)."}, {"type": "click", "name": "product_form.options.medium", "description": "Select the medium size option."}, {"type": "click", "name": "product_form.add_to_cart", "description": "Add the product to the cart."}]
+{'type': 'click', 'name': 'product_form.options.003blue', 'description': 'Select the navy color option (if blue represents navy).'}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': 'Select the medium size option.'}
+init
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': 'Add the product to the cart.'}
+init
+--------------------------------------------------

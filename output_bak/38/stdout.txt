@@ -1,0 +1,22 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "men's blazer", "description": "Typing 'men's blazer' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "men's blazer", 'description': "Typing 'men's blazer' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+blazer
+Taking action [{"type": "click", "name": "search_results._mens_blazer_lightweight_casual_solid_one_button_slim_fit_sport_coat_.view_product", "description": "Clicking on 'Men's Blazer Lightweight Casual Solid One Button Slim Fit Sport Coat' to see if it matches the color navy blue and size medium."}]
+{'type': 'click', 'name': 'search_results._mens_blazer_lightweight_casual_solid_one_button_slim_fit_sport_coat_.view_product', 'description': "Clicking on 'Men's Blazer Lightweight Casual Solid One Button Slim Fit Sport Coat' to see if it matches the color navy blue and size medium."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-blazer-lightweight-casual-solid-one-button-slim-fit-sport-coat.html
+Taking action [{"type": "click", "name": "product_form.options.navy", "description": "Selecting the color 'Navy'."}, {"type": "click", "name": "product_form.options.medium", "description": "Selecting the size 'Medium'."}]
+{'type': 'click', 'name': 'product_form.options.navy', 'description': "Selecting the color 'Navy'."}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Selecting the size 'Medium'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-blazer-lightweight-casual-solid-one-button-slim-fit-sport-coat.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the product to the cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the product to the cart."}
+init
+--------------------------------------------------

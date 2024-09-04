@@ -1,0 +1,37 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "tailored cropped black jacket", "description": "Typing 'tailored cropped black jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'tailored cropped black jacket', 'description': "Typing 'tailored cropped black jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=tailored+cropped+black+jacket
+Taking action [{"type": "click", "name": "search_results._yunzyun_womens_winter_jackets_women_ladies_lapel_motor_jacket_coat_zip_biker_short_punk_cropped_cot_outerwear_jacket_.view_product", "description": "Clicking on the product 'YunZyun Women's Winter Jackets, Women Ladies Lapel Motor Jacket Coat Zip Biker Short Punk Cropped Cot Outerwear Jacket' to view more details."}]
+{'type': 'click', 'name': 'search_results._yunzyun_womens_winter_jackets_women_ladies_lapel_motor_jacket_coat_zip_biker_short_punk_cropped_cot_outerwear_jacket_.view_product', 'description': "Clicking on the product 'YunZyun Women's Winter Jackets, Women Ladies Lapel Motor Jacket Coat Zip Biker Short Punk Cropped Cot Outerwear Jacket' to view more details."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/yunzyun-women-s-winter-jackets-women-ladies-lapel-motor-jacket-coat-zip-biker-short-punk-cropped-cot-outerwear-jacket.html
+Taking action [{"type": "click", "name": "product_form.options.medium", "description": "Clicking on the size 'Medium' radio button to select the desired size."}, {"type": "click", "name": "product_form.options.black", "description": "Clicking on the color 'Black' radio button to select the desired color."}]
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Clicking on the size 'Medium' radio button to select the desired size."}
+init
+{'type': 'click', 'name': 'product_form.options.black', 'description': "Clicking on the color 'Black' radio button to select the desired color."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/yunzyun-women-s-winter-jackets-women-ladies-lapel-motor-jacket-coat-zip-biker-short-punk-cropped-cot-outerwear-jacket.html
+Taking action [{"type": "click", "name": "product_info._reviews_", "description": "Clicking on the 'Reviews' tab to view product ratings and read customer reviews to assure product quality."}]
+{'type': 'click', 'name': 'product_info._reviews_', 'description': "Clicking on the 'Reviews' tab to view product ratings and read customer reviews to assure product quality."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/yunzyun-women-s-winter-jackets-women-ladies-lapel-motor-jacket-coat-zip-biker-short-punk-cropped-cot-outerwear-jacket.html
+Taking action [{"type": "click", "name": "product_info._reviews_", "description": "Clicking on the 'Reviews' tab to view product ratings and read customer reviews to assure product quality."}]
+{'type': 'click', 'name': 'product_info._reviews_', 'description': "Clicking on the 'Reviews' tab to view product ratings and read customer reviews to assure product quality."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/yunzyun-women-s-winter-jackets-women-ladies-lapel-motor-jacket-coat-zip-biker-short-punk-cropped-cot-outerwear-jacket.html
+Taking action [{"type": "click", "name": "product_info._reviews_", "description": "Clicking on the 'Reviews' tab to view product ratings and read customer reviews to assure product quality."}]
+{'type': 'click', 'name': 'product_info._reviews_', 'description': "Clicking on the 'Reviews' tab to view product ratings and read customer reviews to assure product quality."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/yunzyun-women-s-winter-jackets-women-ladies-lapel-motor-jacket-coat-zip-biker-short-punk-cropped-cot-outerwear-jacket.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the chosen product to the cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the chosen product to the cart."}
+init
+--------------------------------------------------

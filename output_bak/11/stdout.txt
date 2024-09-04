@@ -1,0 +1,23 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "vintage oversized light wash denim jacket", "description": "Typing 'vintage oversized light wash denim jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'vintage oversized light wash denim jacket', 'description': "Typing 'vintage oversized light wash denim jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=vintage+oversized+light+wash+denim+jacket
+Taking action [{"type": "click", "name": "search_results._womens_oversize_jean_jacket_vintage_washed_boyfriend_denim_jacket_long_sleeve_classic_loose_button_down_jean_coats_.view_product", "description": "Clicking on the 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats' to view its details."}, {"type": "click", "name": "search_results._winter_warm_denim_jacket_faux_collar_thick_trucker_jeans_coat_women_women_silk_camisole_tanks_.view_product", "description": "Clicking on the 'Winter Warm Denim Jacket Faux Collar Thick Trucker Jeans Coat Women women silk camisole tanks' to view its details."}, {"type": "click", "name": "search_results._vintage_jackets_for_women_long_sleeve_medievals_coats_triplebreasted_lapel_outerwear_solid_color_trench_coats_.view_product", "description": "Clicking on the 'Vintage Jackets for Women Long Sleeve Medievals Coats Triple-Breasted Lapel Outerwear Solid Color Trench Coats' to view its details."}]
+{'type': 'click', 'name': 'search_results._womens_oversize_jean_jacket_vintage_washed_boyfriend_denim_jacket_long_sleeve_classic_loose_button_down_jean_coats_.view_product', 'description': "Clicking on the 'Women's Oversize Jean Jacket Vintage Washed Boyfriend Denim Jacket Long Sleeve Classic Loose Button Down Jean Coats' to view its details."}
+init
+{'type': 'click', 'name': 'search_results._winter_warm_denim_jacket_faux_collar_thick_trucker_jeans_coat_women_women_silk_camisole_tanks_.view_product', 'description': "Clicking on the 'Winter Warm Denim Jacket Faux Collar Thick Trucker Jeans Coat Women women silk camisole tanks' to view its details."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to examine the product details, description, and sizes available for the selected jacket."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to examine the product details, description, and sizes available for the selected jacket."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_form.options.3xlarge", "description": "Selecting size 3X-Large for the jacket."}, {"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the jacket to the shopping cart."}]
+{'type': 'click', 'name': 'product_form.options.3xlarge', 'description': 'Selecting size 3X-Large for the jacket.'}
+init
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the jacket to the shopping cart."}
+init
+--------------------------------------------------

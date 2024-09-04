@@ -1,0 +1,129 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "men's navy jacket medium", "description": "Typing 'men's navy jacket medium' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "men's navy jacket medium", 'description': "Typing 'men's navy jacket medium' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+navy+jacket+medium
+Taking action [{"type": "click", "name": "search_results._adidas_x_united_arrows__sons_mens_track_jacket_navy_cd7723_.view_product", "description": "Clicking on the product link for 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723'."}]
+{'type': 'click', 'name': 'search_results._adidas_x_united_arrows__sons_mens_track_jacket_navy_cd7723_.view_product', 'description': "Clicking on the product link for 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/adidas-x-united-arrows-sons-men-s-track-jacket-navy-cd7723.html
+Taking action [{"type": "back", "description": "Navigating back to the search results page to find more suitable options within a better budget range."}]
+{'type': 'back', 'description': 'Navigating back to the search results page to find more suitable options within a better budget range.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+navy+jacket+medium
+Taking action [{"type": "click", "name": "search_results._miller_ranch_western_jacket_mens_wool_lined_button_navy_dwj2008003_.view_product", "description": "Clicking on the link to view the product page for 'Miller Ranch Western Jacket Mens Wool Lined Button Navy DWJ2008003'."}]
+{'type': 'click', 'name': 'search_results._miller_ranch_western_jacket_mens_wool_lined_button_navy_dwj2008003_.view_product', 'description': "Clicking on the link to view the product page for 'Miller Ranch Western Jacket Mens Wool Lined Button Navy DWJ2008003'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/miller-ranch-western-jacket-mens-wool-lined-button-navy-dwj2008003.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the selected jacket to the cart."}, {"type": "click", "name": "header.cart_button", "description": "Clicking on the 'Cart' button in the header to go to the cart page and proceed with the checkout process."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the selected jacket to the cart."}
+init
+{'type': 'click', 'name': 'header.cart_button', 'description': "Clicking on the 'Cart' button in the header to go to the cart page and proceed with the checkout process."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/miller-ranch-western-jacket-mens-wool-lined-button-navy-dwj2008003.html
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "men's navy jacket medium discount", "description": "Typing 'men's navy jacket medium discount' into the search input field and submitting the form to check for ongoing sales or special discounts on men's jackets."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "men's navy jacket medium discount", 'description': "Typing 'men's navy jacket medium discount' into the search input field and submitting the form to check for ongoing sales or special discounts on men's jackets."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+navy+jacket+medium+discount
+Taking action [{"type": "click", "name": "sorter.sorter.select.price", "description": "Click to select the sorting option by 'Price'."}, {"type": "click", "name": "sorter._set_ascending_direction_", "description": "Click on the ascending direction button to sort products by price in ascending order."}]
+{'type': 'click', 'name': 'sorter.sorter.select.price', 'description': "Click to select the sorting option by 'Price'."}
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 676, in step
+    self.browser.click(action["name"])
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 488, in click
+    before_hook=self.clickable_recipes[name].get("before_hook", None),
+KeyError: 'sorter.sorter.select.price'
+
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+navy+jacket+medium+discount
+Taking action [{"type": "click", "name": "search_results._mens_suit_jacket_classic_fit_one_button_casual_sports_jackets_coat_comfy_business_daily_blazer_formal_winter_jacket_.view_product", "description": "Clicking on the 'Men's Suit Jacket Classic fit One Button Casual Sports Jackets Coat Comfy Business Daily Blazer Formal Winter Jacket' to gather more details about the product."}]
+{'type': 'click', 'name': 'search_results._mens_suit_jacket_classic_fit_one_button_casual_sports_jackets_coat_comfy_business_daily_blazer_formal_winter_jacket_.view_product', 'description': "Clicking on the 'Men's Suit Jacket Classic fit One Button Casual Sports Jackets Coat Comfy Business Daily Blazer Formal Winter Jacket' to gather more details about the product."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-suit-jacket-classic-fit-one-button-casual-sports-jackets-coat-comfy-business-daily-blazer-formal-winter-jacket.html
+Taking action [{"type": "click", "name": "product_form.options.medium", "description": "Selecting the medium size for 'Men's Suit Jacket Classic fit One Button Casual Sports Jackets Coat Comfy Business Daily Blazer Formal Winter Jacket'."}, {"type": "click", "name": "product_form.add_to_cart", "description": "Adding the 'Men's Suit Jacket Classic fit One Button Casual Sports Jackets Coat Comfy Business Daily Blazer Formal Winter Jacket' to the cart."}]
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Selecting the medium size for 'Men's Suit Jacket Classic fit One Button Casual Sports Jackets Coat Comfy Business Daily Blazer Formal Winter Jacket'."}
+init
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Adding the 'Men's Suit Jacket Classic fit One Button Casual Sports Jackets Coat Comfy Business Daily Blazer Formal Winter Jacket' to the cart."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-suit-jacket-classic-fit-one-button-casual-sports-jackets-coat-comfy-business-daily-blazer-formal-winter-jacket.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Adding the 'Men's Suit Jacket Classic fit One Button Casual Sports Jackets Coat Comfy Business Daily Blazer Formal Winter Jacket' to the cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Adding the 'Men's Suit Jacket Classic fit One Button Casual Sports Jackets Coat Comfy Business Daily Blazer Formal Winter Jacket' to the cart."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-suit-jacket-classic-fit-one-button-casual-sports-jackets-coat-comfy-business-daily-blazer-formal-winter-jacket.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking the 'Add to Cart' button to add the selected jacket to the cart."}, {"type": "click", "name": "header.search_box.search_button", "description": "Clicking the 'Search' button to initiate the process of navigating to the cart page."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking the 'Add to Cart' button to add the selected jacket to the cart."}
+init
+{'type': 'click', 'name': 'header.search_box.search_button', 'description': "Clicking the 'Search' button to initiate the process of navigating to the cart page."}
+init
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 676, in step
+    self.browser.click(action["name"])
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 500, in click
+    self.clickables[name].click()
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <button type="submit" title="Search" class="action search" aria-label="Search" disabled="" data-clickable-id="header.search_box.search_button">...</button> is not clickable at point (1299, 16). Other element would receive the click: <input id="search" type="text" name="q" value="" placeholder="Search entire store here..." class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" autocomplete="off" aria-expanded="false" data-input-id="header.search_box.search_input">
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x0000000104db79a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x0000000104dafe10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x00000001049b4be0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x00000001049fe6fc cxxbridge1$string$len + 391360
+4   chromedriver                        0x00000001049fcd28 cxxbridge1$string$len + 384748
+5   chromedriver                        0x00000001049faf54 cxxbridge1$string$len + 377112
+6   chromedriver                        0x00000001049fa4a0 cxxbridge1$string$len + 374372
+7   chromedriver                        0x00000001049ef930 cxxbridge1$string$len + 330484
+8   chromedriver                        0x00000001049ef3c0 cxxbridge1$string$len + 329092
+9   chromedriver                        0x0000000104a324a4 cxxbridge1$string$len + 603752
+10  chromedriver                        0x00000001049eda08 cxxbridge1$string$len + 322508
+11  chromedriver                        0x00000001049ee66c cxxbridge1$string$len + 325680
+12  chromedriver                        0x0000000104d7e068 cxxbridge1$str$ptr + 1651256
+13  chromedriver                        0x0000000104d8299c cxxbridge1$str$ptr + 1669996
+14  chromedriver                        0x0000000104d631fc cxxbridge1$str$ptr + 1541068
+15  chromedriver                        0x0000000104d8326c cxxbridge1$str$ptr + 1672252
+16  chromedriver                        0x0000000104d54810 cxxbridge1$str$ptr + 1481184
+17  chromedriver                        0x0000000104da1108 cxxbridge1$str$ptr + 1794776
+18  chromedriver                        0x0000000104da1284 cxxbridge1$str$ptr + 1795156
+19  chromedriver                        0x0000000104dafaac cxxbridge1$str$ptr + 1854588
+20  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+21  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8
+
+
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-suit-jacket-classic-fit-one-button-casual-sports-jackets-coat-comfy-business-daily-blazer-formal-winter-jacket.html
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "men's navy jacket medium", "description": "Typing 'men's navy jacket medium' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "men's navy jacket medium", 'description': "Typing 'men's navy jacket medium' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+navy+jacket+medium
+Taking action [{"type": "click", "name": "cart.proceed_to_checkout", "description": "Clicking on the 'Proceed to Checkout' button."}]
+{'type': 'click', 'name': 'cart.proceed_to_checkout', 'description': "Clicking on the 'Proceed to Checkout' button."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+navy+jacket+medium
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/webshop/batch.py", line 66, in main
+    action = await policy.forward(observation, clickables)
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/webshop/model.py", line 155, in forward
+    await self.agent.plan()
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/agent/agent.py", line 306, in plan
+    resp = json.loads(resp)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 2 column 601 (char 601)

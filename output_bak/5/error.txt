@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/webshop/batch.py", line 68, in main
+    observation, reward, terminated, truncated, info = env.step(action)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/gymnasium/wrappers/order_enforcing.py", line 56, in step
+    return self.env.step(action)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/gymnasium/wrappers/env_checker.py", line 51, in step
+    return self.env.step(action)
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 735, in step
+    "error_message": error_message,
+UnboundLocalError: local variable 'error_message' referenced before assignment

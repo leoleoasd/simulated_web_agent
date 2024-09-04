@@ -1,0 +1,31 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "women's jacket", "description": "Typing 'women's jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "women's jacket", 'description': "Typing 'women's jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=women%27s+jacket
+Taking action [{"type": "click", "name": "search_results._womens_padded_jacket_thicken_fashion_faux_fur_down_long_parka_winter_jacket_warm_hooded_outwear_with_pocket_.view_product", "description": "Clicking on the product 'Women's Padded Jacket Thicken Fashion Faux Fur Down Long Parka Winter Jacket Warm Hooded Outwear with Pocket' to view its details."}]
+{'type': 'click', 'name': 'search_results._womens_padded_jacket_thicken_fashion_faux_fur_down_long_parka_winter_jacket_warm_hooded_outwear_with_pocket_.view_product', 'description': "Clicking on the product 'Women's Padded Jacket Thicken Fashion Faux Fur Down Long Parka Winter Jacket Warm Hooded Outwear with Pocket' to view its details."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-padded-jacket-thicken-fashion-faux-fur-down-long-parka-winter-jacket-warm-hooded-outwear-with-pocket.html
+Taking action [{"type": "back", "description": "Navigating back to the search results page to look into the next product 'Womens Long Puffer Vest Women's Down Coats & Jackets Winter Coats Sleeveless Warm Zip Up Jacket Best Outerwear'."}]
+{'type': 'back', 'description': "Navigating back to the search results page to look into the next product 'Womens Long Puffer Vest Women's Down Coats & Jackets Winter Coats Sleeveless Warm Zip Up Jacket Best Outerwear'."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=women%27s+jacket
+Taking action [{"type": "click", "name": "search_results._womens_long_puffer_vest_womens_down_coats__jackets_winter_coats_sleeveless_warm_zip_up_jacket_best_outerwear_.view_product", "description": "Clicking on the product 'Womens Long Puffer Vest Women's Down Coats & Jackets Winter Coats Sleeveless Warm Zip Up Jacket Best Outerwear' to view its details."}]
+{'type': 'click', 'name': 'search_results._womens_long_puffer_vest_womens_down_coats__jackets_winter_coats_sleeveless_warm_zip_up_jacket_best_outerwear_.view_product', 'description': "Clicking on the product 'Womens Long Puffer Vest Women's Down Coats & Jackets Winter Coats Sleeveless Warm Zip Up Jacket Best Outerwear' to view its details."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/womens-long-puffer-vest-women-s-down-coats-jackets-winter-coats-sleeveless-warm-zip-up-jacket-best-outerwear.html
+Taking action [{"type": "click", "name": "product_form.options.mgreen", "description": "Clicking on the 'M-green' color option to select teal."}, {"type": "click", "name": "product_form.options.medium", "description": "Clicking on the 'Medium' size option to select medium size."}]
+{'type': 'click', 'name': 'product_form.options.mgreen', 'description': "Clicking on the 'M-green' color option to select teal."}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Clicking on the 'Medium' size option to select medium size."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/womens-long-puffer-vest-women-s-down-coats-jackets-winter-coats-sleeveless-warm-zip-up-jacket-best-outerwear.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Adding the product 'Womens Long Puffer Vest Women's Down Coats & Jackets Winter Coats Sleeveless Warm Zip Up Jacket Best Outerwear' to the cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Adding the product 'Womens Long Puffer Vest Women's Down Coats & Jackets Winter Coats Sleeveless Warm Zip Up Jacket Best Outerwear' to the cart."}
+init
+--------------------------------------------------

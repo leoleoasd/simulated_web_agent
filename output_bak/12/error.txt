@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/webshop/batch.py", line 66, in main
+    action = await policy.forward(observation, clickables)
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/webshop/model.py", line 155, in forward
+    await self.agent.plan()
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/agent/agent.py", line 306, in plan
+    resp = json.loads(resp)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 2 column 601 (char 601)

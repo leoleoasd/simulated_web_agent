@@ -1,0 +1,24 @@
+Persona: Jake
+Background:
+Jake is a recent college graduate with a degree in Marketing. He has just started working for a mid-sized digital marketing agency in a bustling city. Ambitious and eager to prove himself, Jake is dedicated to growing his skills and advancing in his career.
+
+Demographics:
+- Age: 24
+- Gender: Male
+- Education: Bachelor's degree in Marketing
+- Profession: Marketing Associate
+- Income: $30,000
+
+Financial Situation:
+Jake is still adjusting to his first full-time job and the realities of financial independence. With a modest salary, he is conscious of his budget and trying to balance his student loan repayments with everyday expenses. He is interested in learning how to invest and save for future goals.
+
+Shopping Habits:
+Jake is a pragmatic shopper. He prefers to buy essential items but is not afraid to splurge on experiences rather than material goods. He frequently uses online platforms to compare prices and looks for sales or discounts. He enjoys shopping at stores that offer good value for money and practicality.
+
+Professional Life:
+Jake is enthusiastic about his job and is often found researching the latest trends in digital marketing to enhance his skills. He spends a lot of time collaborating with his team on projects and attending networking events to build professional connections. He is focused on gaining experience and proving his worth within the company.
+
+Personal Style:
+Jake's personal style is casual yet professional. He often wears jeans paired with button-up shirts or smart polos, and he opts for comfortable shoes since he is on his feet often while attending meetings or events. He likes neutral colors with occasional pops of color to keep his wardrobe fresh and engaging. He appreciates brands that offer a blend of affordability and style.
+
+Jake enjoys using public transportation to commute, values sustainability in his choices, and tries to live a balanced life by incorporating fitness and social activities into his routine. He usually starts his day around 7 AM, and he lives in a shared apartment with friends in a vibrant neighborhood in Chicago.

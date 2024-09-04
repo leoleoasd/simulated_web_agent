@@ -1,0 +1,21 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "men's navy blue jacket medium", "description": "Typing 'men's navy blue jacket medium' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "men's navy blue jacket medium", 'description': "Typing 'men's navy blue jacket medium' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+navy+blue+jacket+medium
+Taking action [{"type": "click", "name": "search_results._lstgj_navy_blue_mens_wedding_suit_groom_best_man_party_tuxedo_slim_fit_blazer_velvet_lapel_doublebreasted_jacket_with_pants_work_color__royal_blue_size__5xllarge_.view_product", "description": "Clicking on the product 'LSTGJ Navy Blue Men's Wedding Suit Groom Best Man Party Tuxedo Slim fit Blazer Velvet Lapel Double-Breasted Jacket with Pants Work' to view details on style, size, and price."}]
+{'type': 'click', 'name': 'search_results._lstgj_navy_blue_mens_wedding_suit_groom_best_man_party_tuxedo_slim_fit_blazer_velvet_lapel_doublebreasted_jacket_with_pants_work_color__royal_blue_size__5xllarge_.view_product', 'description': "Clicking on the product 'LSTGJ Navy Blue Men's Wedding Suit Groom Best Man Party Tuxedo Slim fit Blazer Velvet Lapel Double-Breasted Jacket with Pants Work' to view details on style, size, and price."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/lstgj-navy-blue-men-s-wedding-suit-groom-best-man-party-tuxedo-slim-fit-blazer-velvet-lapel-double-breasted-jacket-with-pants-work-color-royal-blue-size-5xl-large.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to check the detailed product description for 'LSTGJ Navy Blue Men's Wedding Suit Groom Best Man Party Tuxedo Slim fit Blazer Velvet Lapel Double-Breasted Jacket with Pants Work'."}, {"type": "click", "name": "product_info._reviews_", "description": "Clicking on the 'Reviews' tab to check reviews for the 'LSTGJ Navy Blue Men's Wedding Suit Groom Best Man Party Tuxedo Slim fit Blazer Velvet Lapel Double-Breasted Jacket with Pants Work'."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to check the detailed product description for 'LSTGJ Navy Blue Men's Wedding Suit Groom Best Man Party Tuxedo Slim fit Blazer Velvet Lapel Double-Breasted Jacket with Pants Work'."}
+init
+{'type': 'click', 'name': 'product_info._reviews_', 'description': "Clicking on the 'Reviews' tab to check reviews for the 'LSTGJ Navy Blue Men's Wedding Suit Groom Best Man Party Tuxedo Slim fit Blazer Velvet Lapel Double-Breasted Jacket with Pants Work'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/lstgj-navy-blue-men-s-wedding-suit-groom-best-man-party-tuxedo-slim-fit-blazer-velvet-lapel-double-breasted-jacket-with-pants-work-color-royal-blue-size-5xl-large.html
+Taking action [{"type": "terminate", "description": "Terminating the task as the current product available does not fit the required specifications of being in a navy blue color and medium size."}]
+{'type': 'terminate', 'description': 'Terminating the task as the current product available does not fit the required specifications of being in a navy blue color and medium size.'}
+--------------------------------------------------

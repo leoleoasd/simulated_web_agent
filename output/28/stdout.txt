@@ -1,0 +1,29 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "women's earth-tone jacket", "description": "Typing 'women's earth-tone jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "women's earth-tone jacket", 'description': "Typing 'women's earth-tone jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=women%27s+earth-tone+jacket
+Taking action [{"type": "click", "name": "search_results._kyleon_womens_coat_half_sleeve_solid_button_knit_open_front_cardigans_hooded_sweater_pea_coats_jacket_parka_outwear_top_.view_product", "description": "Clicking on the link to view the product 'KYLEON Women's Coat Half Sleeve Solid Button Knit Open Front Cardigans Hooded Sweater Pea Coats Jacket Parka Outwear Top'."}]
+{'type': 'click', 'name': 'search_results._kyleon_womens_coat_half_sleeve_solid_button_knit_open_front_cardigans_hooded_sweater_pea_coats_jacket_parka_outwear_top_.view_product', 'description': "Clicking on the link to view the product 'KYLEON Women's Coat Half Sleeve Solid Button Knit Open Front Cardigans Hooded Sweater Pea Coats Jacket Parka Outwear Top'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/kyleon-women-s-coat-half-sleeve-solid-button-knit-open-front-cardigans-hooded-sweater-pea-coats-jacket-parka-outwear-top.html
+Taking action [{"type": "click", "name": "product_form.options.medium", "description": "Selecting the size 'Medium'."}, {"type": "click", "name": "product_form.add_to_cart", "description": "Adding the jacket to the cart."}]
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Selecting the size 'Medium'."}
+init
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': 'Adding the jacket to the cart.'}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/kyleon-women-s-coat-half-sleeve-solid-button-knit-open-front-cardigans-hooded-sweater-pea-coats-jacket-parka-outwear-top.html
+Taking action [{"type": "click", "name": "product_form.options.1beige", "description": "Selecting the color 'Beige' as my preferred earth-tone color for the jacket."}, {"type": "click", "name": "product_form.options.medium", "description": "Selecting the size 'Medium' for the jacket."}]
+{'type': 'click', 'name': 'product_form.options.1beige', 'description': "Selecting the color 'Beige' as my preferred earth-tone color for the jacket."}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Selecting the size 'Medium' for the jacket."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/kyleon-women-s-coat-half-sleeve-solid-button-knit-open-front-cardigans-hooded-sweater-pea-coats-jacket-parka-outwear-top.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the product to the shopping cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the product to the shopping cart."}
+init
+--------------------------------------------------

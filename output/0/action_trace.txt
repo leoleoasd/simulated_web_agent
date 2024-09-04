@@ -1,0 +1,5 @@
+[{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "unisex outdoor jacket", "description": "Typing 'unisex outdoor jacket' into the search input field and submitting the form."}]
+[{"type": "click", "name": "search_results._unisex_winter_dual_control_heating_vest_outdoor_constant_temperature_safe_usb_electric_heating_jacket_211_heating_.view_product", "description": "Clicking on the product 'Unisex Winter Dual Control Heating Vest Outdoor Constant Temperature Safe USB Electric Heating Jacket (2-11 Heating)' to view more details."}]
+[{"type": "click", "name": "product_info._reviews_", "description": "Clicking on the 'Reviews' tab to check customer reviews."}]
+[{"type": "click", "name": "product_form.options.9heatingared", "description": "Clicking on the color 'green' option for the jacket."}, {"type": "click", "name": "product_form.options.medium", "description": "Clicking on the size 'medium' option for the jacket."}]
+[{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the selected jacket to the cart."}]

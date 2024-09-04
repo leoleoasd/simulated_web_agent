@@ -1,0 +1,25 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "men's navy blazer", "description": "Typing 'men's navy blazer' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "men's navy blazer", 'description': "Typing 'men's navy blazer' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+navy+blazer
+Taking action [{"type": "click", "name": "search_results._navy_blue_mens_wedding_suit_groom_best_man_party_tuxedo_slim_fit_blazer_velvet_lapel_doublebreasted_jacket_with_pants_work_color__custom_size__l_eu_50_.view_product", "description": "Clicking on the first blazer product that matches the preferences: navy color and medium size."}]
+{'type': 'click', 'name': 'search_results._navy_blue_mens_wedding_suit_groom_best_man_party_tuxedo_slim_fit_blazer_velvet_lapel_doublebreasted_jacket_with_pants_work_color__custom_size__l_eu_50_.view_product', 'description': 'Clicking on the first blazer product that matches the preferences: navy color and medium size.'}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/navy-blue-men-s-wedding-suit-groom-best-man-party-tuxedo-slim-fit-blazer-velvet-lapel-double-breasted-jacket-with-pants-work-color-custom-size-l-eu-50.html
+Taking action [{"type": "click", "name": "product_info._reviews_", "description": "Clicking on the 'Reviews' tab to look into the product reviews and ratings of the selected blazer."}]
+{'type': 'click', 'name': 'product_info._reviews_', 'description': "Clicking on the 'Reviews' tab to look into the product reviews and ratings of the selected blazer."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/navy-blue-men-s-wedding-suit-groom-best-man-party-tuxedo-slim-fit-blazer-velvet-lapel-double-breasted-jacket-with-pants-work-color-custom-size-l-eu-50.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to check the size availability for the selected blazer."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to check the size availability for the selected blazer."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/navy-blue-men-s-wedding-suit-groom-best-man-party-tuxedo-slim-fit-blazer-velvet-lapel-double-breasted-jacket-with-pants-work-color-custom-size-l-eu-50.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Adding the blazer to the cart by clicking the 'Add to Cart' button."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Adding the blazer to the cart by clicking the 'Add to Cart' button."}
+init
+--------------------------------------------------

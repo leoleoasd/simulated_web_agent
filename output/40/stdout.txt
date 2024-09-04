@@ -1,0 +1,16 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "women's navy blue jacket", "description": "Typing 'women's navy blue jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "women's navy blue jacket", 'description': "Typing 'women's navy blue jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=women%27s+navy+blue+jacket
+Taking action [{"type": "click", "name": "search_results._puremsx_insulated_expedition_parka_coat_hooded_warm_heavy_weight_water_resistant_jacket_mountain_thicken_lined_fur_hooded_long_anorak_parka_padded_coatnavylarge_.view_product", "description": "Clicking on the PUREMSX Insulated Expedition Parka Coat product link to check for sustainability mentions in the product details."}, {"type": "click", "name": "search_results._ara_womens_lissabon_sneaker_blue_navy_silver_75_us_.view_product", "description": "Clicking on the ARA Women's Lissabon Sneaker product link to check for sustainability mentions in the product details."}]
+{'type': 'click', 'name': 'search_results._puremsx_insulated_expedition_parka_coat_hooded_warm_heavy_weight_water_resistant_jacket_mountain_thicken_lined_fur_hooded_long_anorak_parka_padded_coatnavylarge_.view_product', 'description': 'Clicking on the PUREMSX Insulated Expedition Parka Coat product link to check for sustainability mentions in the product details.'}
+init
+{'type': 'click', 'name': 'search_results._ara_womens_lissabon_sneaker_blue_navy_silver_75_us_.view_product', 'description': "Clicking on the ARA Women's Lissabon Sneaker product link to check for sustainability mentions in the product details."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/puremsx-insulated-expedition-parka-coat-hooded-warm-heavy-weight-water-resistant-jacket-mountain-thicken-lined-fur-hooded-long-anorak-parka-padded-coat-navy-large.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking the 'Add to Cart' button to select the jacket."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking the 'Add to Cart' button to select the jacket."}
+init
+--------------------------------------------------

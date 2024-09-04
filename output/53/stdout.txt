@@ -1,0 +1,154 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "navy women's blazer", "description": "Typing 'navy women's blazer' into the search input field and submitting the form to find options that fit Jessica's style and size requirements."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "navy women's blazer", 'description': "Typing 'navy women's blazer' into the search input field and submitting the form to find options that fit Jessica's style and size requirements."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=navy+women%27s+blazer
+Taking action [{"type": "click", "name": "search_results._generic_mens_fashion_singlebreasted_suit_one_button_center_vent_2_pieces_slim_fit_formal_suit_business_jacket_button_blazer_navy_bluexxlarge_.view_product", "description": "Clicking on the product to view detailed information including customer reviews to assess its quality and fit."}]
+{'type': 'click', 'name': 'search_results._generic_mens_fashion_singlebreasted_suit_one_button_center_vent_2_pieces_slim_fit_formal_suit_business_jacket_button_blazer_navy_bluexxlarge_.view_product', 'description': 'Clicking on the product to view detailed information including customer reviews to assess its quality and fit.'}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/generic-mens-fashion-singlebreasted-suit-one-button-center-vent-2-pieces-slim-fit-formal-suit-business-jacket-button-blazer-navy-blue-xxlarge.html
+Taking action [{"type": "back", "description": "Navigating back to the search results page to find a suitable navy women's blazer that matches Jessica's style and size requirements."}]
+{'type': 'back', 'description': "Navigating back to the search results page to find a suitable navy women's blazer that matches Jessica's style and size requirements."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=navy+women%27s+blazer
+Taking action [{"type": "click", "name": "search_results._hemlock_women_long_trench_jacket_lapel_open_front_blazer_cardigans_slim_office_coat_solid_color_work_blazersyellow_s_.view_product", "description": "Clicking on the Hemlock Women's Long Trench Jacket Lapel Open Front Blazer product to view detailed information, including customer reviews, to assess its quality and fit."}]
+{'type': 'click', 'name': 'search_results._hemlock_women_long_trench_jacket_lapel_open_front_blazer_cardigans_slim_office_coat_solid_color_work_blazersyellow_s_.view_product', 'description': "Clicking on the Hemlock Women's Long Trench Jacket Lapel Open Front Blazer product to view detailed information, including customer reviews, to assess its quality and fit."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/hemlock-women-long-trench-jacket-lapel-open-front-blazer-cardigans-slim-office-coat-solid-color-work-blazers-yellow-s.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button."}, {"type": "navigate", "url": "/cart", "description": "Navigating to the cart page to proceed to checkout."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button."}
+init
+{'type': 'navigate', 'url': '/cart', 'description': 'Navigating to the cart page to proceed to checkout.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/hemlock-women-long-trench-jacket-lapel-open-front-blazer-cardigans-slim-office-coat-solid-color-work-blazers-yellow-s.html
+Taking action [{"type": "click", "name": "filter.shop_by", "description": "Clicking on the 'Shop By' filters to narrow down the results to 'Clothing, Shoes & Jewelry' and specifically women's clothing."}, {"type": "click", "name": "filter.clothing_shoes_jewelry", "description": "Selecting the 'Clothing, Shoes & Jewelry' filter."}, {"type": "click", "name": "filter.womens_clothing", "description": "Specifically narrowing down to 'women's clothing' to find a navy tailored blazer."}]
+{'type': 'click', 'name': 'filter.shop_by', 'description': "Clicking on the 'Shop By' filters to narrow down the results to 'Clothing, Shoes & Jewelry' and specifically women's clothing."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/hemlock-women-long-trench-jacket-lapel-open-front-blazer-cardigans-slim-office-coat-solid-color-work-blazers-yellow-s.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to review the product details of the blazer."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to review the product details of the blazer."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/hemlock-women-long-trench-jacket-lapel-open-front-blazer-cardigans-slim-office-coat-solid-color-work-blazers-yellow-s.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the selected product to the cart."}, {"type": "click", "name": "header.search_box.search_button", "description": "Navigating to the cart page to proceed to checkout by clicking on the search button."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the selected product to the cart."}
+init
+{'type': 'click', 'name': 'header.search_box.search_button', 'description': 'Navigating to the cart page to proceed to checkout by clicking on the search button.'}
+init
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 676, in step
+    self.browser.click(action["name"])
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 500, in click
+    self.clickables[name].click()
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <button type="submit" title="Search" class="action search" aria-label="Search" disabled="" data-clickable-id="header.search_box.search_button">...</button> is not clickable at point (1299, 17). Other element would receive the click: <input id="search" type="text" name="q" value="" placeholder="Search entire store here..." class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" autocomplete="off" aria-expanded="false" data-input-id="header.search_box.search_input">
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x0000000100c879a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x0000000100c7fe10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x0000000100884be0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x00000001008ce6fc cxxbridge1$string$len + 391360
+4   chromedriver                        0x00000001008ccd28 cxxbridge1$string$len + 384748
+5   chromedriver                        0x00000001008caf54 cxxbridge1$string$len + 377112
+6   chromedriver                        0x00000001008ca4a0 cxxbridge1$string$len + 374372
+7   chromedriver                        0x00000001008bf930 cxxbridge1$string$len + 330484
+8   chromedriver                        0x00000001008bf3c0 cxxbridge1$string$len + 329092
+9   chromedriver                        0x00000001009024a4 cxxbridge1$string$len + 603752
+10  chromedriver                        0x00000001008bda08 cxxbridge1$string$len + 322508
+11  chromedriver                        0x00000001008be66c cxxbridge1$string$len + 325680
+12  chromedriver                        0x0000000100c4e068 cxxbridge1$str$ptr + 1651256
+13  chromedriver                        0x0000000100c5299c cxxbridge1$str$ptr + 1669996
+14  chromedriver                        0x0000000100c331fc cxxbridge1$str$ptr + 1541068
+15  chromedriver                        0x0000000100c5326c cxxbridge1$str$ptr + 1672252
+16  chromedriver                        0x0000000100c24810 cxxbridge1$str$ptr + 1481184
+17  chromedriver                        0x0000000100c71108 cxxbridge1$str$ptr + 1794776
+18  chromedriver                        0x0000000100c71284 cxxbridge1$str$ptr + 1795156
+19  chromedriver                        0x0000000100c7faac cxxbridge1$str$ptr + 1854588
+20  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+21  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8
+
+
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/hemlock-women-long-trench-jacket-lapel-open-front-blazer-cardigans-slim-office-coat-solid-color-work-blazers-yellow-s.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the product to the cart."}, {"type": "navigate", "description": "Navigating to the cart page to proceed to checkout."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the product to the cart."}
+init
+{'type': 'navigate', 'description': 'Navigating to the cart page to proceed to checkout.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/hemlock-women-long-trench-jacket-lapel-open-front-blazer-cardigans-slim-office-coat-solid-color-work-blazers-yellow-s.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the selected product to the cart."}, {"type": "click", "name": "header.search_box.search_button", "description": "Clicking on the 'Search' button to initiate a new search after adding the item to the cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the selected product to the cart."}
+init
+{'type': 'click', 'name': 'header.search_box.search_button', 'description': "Clicking on the 'Search' button to initiate a new search after adding the item to the cart."}
+init
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 676, in step
+    self.browser.click(action["name"])
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 500, in click
+    self.clickables[name].click()
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <button type="submit" title="Search" class="action search" aria-label="Search" disabled="" data-clickable-id="header.search_box.search_button">...</button> is not clickable at point (1299, 17). Other element would receive the click: <input id="search" type="text" name="q" value="" placeholder="Search entire store here..." class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" autocomplete="off" aria-expanded="false" data-input-id="header.search_box.search_input">
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x0000000100c879a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x0000000100c7fe10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x0000000100884be0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x00000001008ce6fc cxxbridge1$string$len + 391360
+4   chromedriver                        0x00000001008ccd28 cxxbridge1$string$len + 384748
+5   chromedriver                        0x00000001008caf54 cxxbridge1$string$len + 377112
+6   chromedriver                        0x00000001008ca4a0 cxxbridge1$string$len + 374372
+7   chromedriver                        0x00000001008bf930 cxxbridge1$string$len + 330484
+8   chromedriver                        0x00000001008bf3c0 cxxbridge1$string$len + 329092
+9   chromedriver                        0x00000001009024a4 cxxbridge1$string$len + 603752
+10  chromedriver                        0x00000001008bda08 cxxbridge1$string$len + 322508
+11  chromedriver                        0x00000001008be66c cxxbridge1$string$len + 325680
+12  chromedriver                        0x0000000100c4e068 cxxbridge1$str$ptr + 1651256
+13  chromedriver                        0x0000000100c5299c cxxbridge1$str$ptr + 1669996
+14  chromedriver                        0x0000000100c331fc cxxbridge1$str$ptr + 1541068
+15  chromedriver                        0x0000000100c5326c cxxbridge1$str$ptr + 1672252
+16  chromedriver                        0x0000000100c24810 cxxbridge1$str$ptr + 1481184
+17  chromedriver                        0x0000000100c71108 cxxbridge1$str$ptr + 1794776
+18  chromedriver                        0x0000000100c71284 cxxbridge1$str$ptr + 1795156
+19  chromedriver                        0x0000000100c7faac cxxbridge1$str$ptr + 1854588
+20  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+21  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8
+
+
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/hemlock-women-long-trench-jacket-lapel-open-front-blazer-cardigans-slim-office-coat-solid-color-work-blazers-yellow-s.html
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "navy women's blazer", "description": "Typing 'navy women's blazer' into the search input field and submitting the form to find options that fit Jessica's style and size requirements."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "navy women's blazer", 'description': "Typing 'navy women's blazer' into the search input field and submitting the form to find options that fit Jessica's style and size requirements."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=navy+women%27s+blazer
+Taking action [{"type": "click", "name": "filter.clothing_shoes__jewelry_12077item_", "description": "Clicking on the 'Clothing, Shoes & Jewelry' filter to narrow down the search results to women's clothing."}]
+{'type': 'click', 'name': 'filter.clothing_shoes__jewelry_12077item_', 'description': "Clicking on the 'Clothing, Shoes & Jewelry' filter to narrow down the search results to women's clothing."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/index/?cat=5&q=navy+women%27s+blazer
+Taking action [{"type": "click", "name": "search_results._generic_mens_fashion_singlebreasted_suit_one_button_center_vent_2_pieces_slim_fit_formal_suit_business_jacket_button_blazer_navy_bluexxlarge_.view_product", "description": "Clicking on the product 'Generic Mens Fashion SingleBreasted Suit One Button Center Vent 2 Pieces Slim Fit Formal Suit Business Jacket Button Blazer Navy Blue' to view the product details."}]
+{'type': 'click', 'name': 'search_results._generic_mens_fashion_singlebreasted_suit_one_button_center_vent_2_pieces_slim_fit_formal_suit_business_jacket_button_blazer_navy_bluexxlarge_.view_product', 'description': "Clicking on the product 'Generic Mens Fashion SingleBreasted Suit One Button Center Vent 2 Pieces Slim Fit Formal Suit Business Jacket Button Blazer Navy Blue' to view the product details."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/generic-mens-fashion-singlebreasted-suit-one-button-center-vent-2-pieces-slim-fit-formal-suit-business-jacket-button-blazer-navy-blue-xxlarge.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the product to the cart."}, {"type": "back", "description": "Navigating back to the search results to continue looking for a navy tailored women's blazer in size medium that fits Jessica's requirements."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the product to the cart."}
+init
+--------------------------------------------------

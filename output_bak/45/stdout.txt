@@ -1,0 +1,158 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "gender-neutral sustainable jacket", "description": "Typing 'gender-neutral sustainable jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'gender-neutral sustainable jacket', 'description': "Typing 'gender-neutral sustainable jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=gender-neutral+sustainable+jacket
+Taking action [{"type": "click", "name": "search_results._nautica_mens_sustainable_sleep_henley_.view_product", "description": "Clicking on the product 'Nautica Men's Sustainable Sleep Henley' to view its details."}]
+{'type': 'click', 'name': 'search_results._nautica_mens_sustainable_sleep_henley_.view_product', 'description': "Clicking on the product 'Nautica Men's Sustainable Sleep Henley' to view its details."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/nautica-men-s-sustainable-sleep-henley.html
+Taking action [{"type": "click", "name": "product_form.options.deep_anchor_heather", "description": "Clicking on the color option 'Deep Anchor Heather' to check if it meets Alex's preference for earthy tones."}, {"type": "click", "name": "product_form.options.large", "description": "Clicking on the size option 'Large' to check if it meets Alex's preference for an oversized fit."}]
+{'type': 'click', 'name': 'product_form.options.deep_anchor_heather', 'description': "Clicking on the color option 'Deep Anchor Heather' to check if it meets Alex's preference for earthy tones."}
+init
+{'type': 'click', 'name': 'product_form.options.large', 'description': "Clicking on the size option 'Large' to check if it meets Alex's preference for an oversized fit."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/nautica-men-s-sustainable-sleep-henley.html
+Taking action [{"type": "click", "name": "product_form.options.deep_anchor_heather", "description": "Clicking on the 'Deep Anchor Heather' color option to select it."}, {"type": "click", "name": "product_form.options.large", "description": "Clicking on the 'Large' size option to select it."}]
+{'type': 'click', 'name': 'product_form.options.deep_anchor_heather', 'description': "Clicking on the 'Deep Anchor Heather' color option to select it."}
+init
+{'type': 'click', 'name': 'product_form.options.large', 'description': "Clicking on the 'Large' size option to select it."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/nautica-men-s-sustainable-sleep-henley.html
+Taking action [{"type": "back", "description": "Navigating back to the previous page to view the search results."}]
+{'type': 'back', 'description': 'Navigating back to the previous page to view the search results.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=gender-neutral+sustainable+jacket
+Taking action [{"type": "click", "name": "pager._page_next_", "description": "Clicking on 'Next Page' to continue looking for other jackets that meet the criteria."}]
+{'type': 'click', 'name': 'pager._page_next_', 'description': "Clicking on 'Next Page' to continue looking for other jackets that meet the criteria."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/index/?p=2&q=gender-neutral+sustainable+jacket
+Taking action [{"type": "click", "name": "header.search_box.search_button", "description": "Clicking on the 'Search' button to possibly proceed with the checkout."}, {"type": "terminate", "description": "Terminating the session as the next step is to proceed to checkout."}]
+{'type': 'click', 'name': 'header.search_box.search_button', 'description': "Clicking on the 'Search' button to possibly proceed with the checkout."}
+init
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 676, in step
+    self.browser.click(action["name"])
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 500, in click
+    self.clickables[name].click()
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <button type="submit" title="Search" class="action search" aria-label="Search" disabled="" data-clickable-id="header.search_box.search_button">...</button> is not clickable at point (1299, 87). Other element would receive the click: <input id="search" type="text" name="q" value="gender-neutral sustainable jacket" placeholder="Search entire store here..." class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" autocomplete="off" aria-expanded="false" data-input-id="header.search_box.search_input">
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x00000001044cf9a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x00000001044c7e10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x00000001040ccbe0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x00000001041166fc cxxbridge1$string$len + 391360
+4   chromedriver                        0x0000000104114d28 cxxbridge1$string$len + 384748
+5   chromedriver                        0x0000000104112f54 cxxbridge1$string$len + 377112
+6   chromedriver                        0x00000001041124a0 cxxbridge1$string$len + 374372
+7   chromedriver                        0x0000000104107930 cxxbridge1$string$len + 330484
+8   chromedriver                        0x00000001041073c0 cxxbridge1$string$len + 329092
+9   chromedriver                        0x000000010414a4a4 cxxbridge1$string$len + 603752
+10  chromedriver                        0x0000000104105a08 cxxbridge1$string$len + 322508
+11  chromedriver                        0x000000010410666c cxxbridge1$string$len + 325680
+12  chromedriver                        0x0000000104496068 cxxbridge1$str$ptr + 1651256
+13  chromedriver                        0x000000010449a99c cxxbridge1$str$ptr + 1669996
+14  chromedriver                        0x000000010447b1fc cxxbridge1$str$ptr + 1541068
+15  chromedriver                        0x000000010449b26c cxxbridge1$str$ptr + 1672252
+16  chromedriver                        0x000000010446c810 cxxbridge1$str$ptr + 1481184
+17  chromedriver                        0x00000001044b9108 cxxbridge1$str$ptr + 1794776
+18  chromedriver                        0x00000001044b9284 cxxbridge1$str$ptr + 1795156
+19  chromedriver                        0x00000001044c7aac cxxbridge1$str$ptr + 1854588
+20  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+21  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8
+
+
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/index/?p=2&q=gender-neutral+sustainable+jacket
+Taking action [{"type": "click", "name": "related.sustainable_earthtoned_womens_jacket", "description": "Clicking on the related search term 'sustainable earth-toned women's jacket'."}, {"type": "click", "name": "related.sustainable_genderneutral_jacket_made_from_recycled_materials", "description": "Clicking on the related search term 'sustainable gender-neutral jacket made from recycled materials'."}]
+{'type': 'click', 'name': 'related.sustainable_earthtoned_womens_jacket', 'description': "Clicking on the related search term 'sustainable earth-toned women's jacket'."}
+init
+{'type': 'click', 'name': 'related.sustainable_genderneutral_jacket_made_from_recycled_materials', 'description': "Clicking on the related search term 'sustainable gender-neutral jacket made from recycled materials'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=sustainable+gender-neutral+jacket+made+from+recycled+materials
+Taking action [{"type": "click", "name": "related.sustainable_genderneutral_lightweight_jacket", "description": "Clicking on the related search term 'sustainable gender-neutral jacket made from recycled materials'."}]
+{'type': 'click', 'name': 'related.sustainable_genderneutral_lightweight_jacket', 'description': "Clicking on the related search term 'sustainable gender-neutral jacket made from recycled materials'."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=sustainable+gender-neutral+jacket+made+from+recycled+materials
+Taking action [{"type": "click", "name": "search_results._little_donkey_andy_womens_packable_lightweight_puffer_jacket_hooded_windproof_winter_coat_with_recycled_insulation_.view_product", "description": "Clicking on the 'Little Donkey Andy Women's Packable Lightweight Puffer Jacket' product to review its details, focusing on sustainability and style to determine if it meets Alex's preferences for an oversized fit and earthy tones."}]
+{'type': 'click', 'name': 'search_results._little_donkey_andy_womens_packable_lightweight_puffer_jacket_hooded_windproof_winter_coat_with_recycled_insulation_.view_product', 'description': "Clicking on the 'Little Donkey Andy Women's Packable Lightweight Puffer Jacket' product to review its details, focusing on sustainability and style to determine if it meets Alex's preferences for an oversized fit and earthy tones."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/little-donkey-andy-women-s-packable-lightweight-puffer-jacket-hooded-windproof-winter-coat-with-recycled-insulation.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to review the jacket's detailed information, including its sustainability features and suitability for an oversized fit."}, {"type": "click", "name": "product_info._reviews_12_", "description": "Clicking on the 'Reviews 12' tab to check customer reviews regarding the fit, comfort, and overall satisfaction with the jacket."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to review the jacket's detailed information, including its sustainability features and suitability for an oversized fit."}
+init
+{'type': 'click', 'name': 'product_info._reviews_12_', 'description': "Clicking on the 'Reviews 12' tab to check customer reviews regarding the fit, comfort, and overall satisfaction with the jacket."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/little-donkey-andy-women-s-packable-lightweight-puffer-jacket-hooded-windproof-winter-coat-with-recycled-insulation.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to review the jacket's detailed information, including its sustainability features and suitability for an oversized fit."}, {"type": "click", "name": "product_info._reviews_12_", "description": "Clicking on the 'Reviews' tab to gather customer feedback on the jacket's fit and comfort."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to review the jacket's detailed information, including its sustainability features and suitability for an oversized fit."}
+init
+{'type': 'click', 'name': 'product_info._reviews_12_', 'description': "Clicking on the 'Reviews' tab to gather customer feedback on the jacket's fit and comfort."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/little-donkey-andy-women-s-packable-lightweight-puffer-jacket-hooded-windproof-winter-coat-with-recycled-insulation.html
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "sustainable earth-toned women's jacket", "description": "Typing 'sustainable earth-toned women's jacket' into the search input field and submitting the form."}, {"type": "type_and_submit", "name": "header.search_box.search_input", "text": "sustainable unique unisex oversized denim jacket", "description": "Typing 'sustainable unique unisex oversized denim jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "sustainable earth-toned women's jacket", 'description': "Typing 'sustainable earth-toned women's jacket' into the search input field and submitting the form."}
+init
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'sustainable unique unisex oversized denim jacket', 'description': "Typing 'sustainable unique unisex oversized denim jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=sustainable+earsustainable+unique+unisex+oversized+denim+jacketth-toned+women%27s+jacket
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "sustainable gender-neutral jacket made from recycled materials", "description": "Typing 'sustainable gender-neutral jacket made from recycled materials' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': 'sustainable gender-neutral jacket made from recycled materials', 'description': "Typing 'sustainable gender-neutral jacket made from recycled materials' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=sustainable+earsustainable+gender-neutral+jacket+made+frosustainable+unique+unisex+oversized+denim+jacketth-toned+women%27s+jacket
+Taking action [{"type": "click", "name": "cart_button", "description": "Clicking on the cart button to view the cart and proceed to checkout."}, {"type": "type_and_submit", "name": "checkout_input", "text": "initiate_checkout", "description": "Typing 'initiate_checkout' into the checkout input field and submitting the form."}]
+{'type': 'click', 'name': 'cart_button', 'description': 'Clicking on the cart button to view the cart and proceed to checkout.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=sustainable+earsustainable+gender-neutral+jacket+made+frosustainable+unique+unisex+oversized+denim+jacketth-toned+women%27s+jacket
+Taking action [{"type": "click", "name": "search_results._womens_oversize_jean_jacket_vintage_washed_boyfriend_denim_jacket_long_sleeve_classic_loose_button_down_jean_coats_.view_product", "description": "Clicking on the first product to inspect its availability in earthy tones and size options."}]
+{'type': 'click', 'name': 'search_results._womens_oversize_jean_jacket_vintage_washed_boyfriend_denim_jacket_long_sleeve_classic_loose_button_down_jean_coats_.view_product', 'description': 'Clicking on the first product to inspect its availability in earthy tones and size options.'}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to review the product's detailed information, including sustainability features and certifications."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to review the product's detailed information, including sustainability features and certifications."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_form.options.3xlarge", "description": "Clicking on the '3X-Large' size option to check if it meets the oversized criteria."}, {"type": "click", "name": "product_form.options.4xlarge", "description": "Clicking on the '4X-Large' size option to check if it meets the oversized criteria."}, {"type": "click", "name": "product_form.options.5xlarge", "description": "Clicking on the '5X-Large' size option to check if it meets the oversized criteria."}]
+{'type': 'click', 'name': 'product_form.options.3xlarge', 'description': "Clicking on the '3X-Large' size option to check if it meets the oversized criteria."}
+init
+{'type': 'click', 'name': 'product_form.options.4xlarge', 'description': "Clicking on the '4X-Large' size option to check if it meets the oversized criteria."}
+init
+{'type': 'click', 'name': 'product_form.options.5xlarge', 'description': "Clicking on the '5X-Large' size option to check if it meets the oversized criteria."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_info._reviews_", "description": "Clicking on the 'Reviews' tab to gather customer feedback on the jacket's fit and comfort."}]
+{'type': 'click', 'name': 'product_info._reviews_', 'description': "Clicking on the 'Reviews' tab to gather customer feedback on the jacket's fit and comfort."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_info._reviews_", "description": "Clicking on the 'Reviews' tab to gather customer feedback on the jacket's fit and comfort."}]
+{'type': 'click', 'name': 'product_info._reviews_', 'description': "Clicking on the 'Reviews' tab to gather customer feedback on the jacket's fit and comfort."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/women-s-oversize-jean-jacket-vintage-washed-boyfriend-denim-jacket-long-sleeve-classic-loose-button-down-jean-coats.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the jacket to my cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the jacket to my cart."}
+init
+--------------------------------------------------

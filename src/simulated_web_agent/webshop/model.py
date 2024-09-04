@@ -122,7 +122,7 @@ class AgentPolicy(BasePolicy):
         else:
             self.run_name = output
             self.run_path = pathlib.Path(output)
-        self.run_path.mkdir(parents=True)
+        self.run_path.mkdir(parents=True, exist_ok=True)
         context.run_path = self.run_path
         (self.run_path / "persona.txt").write_text(persona)
         (self.run_path / "intent.txt").write_text(intent)

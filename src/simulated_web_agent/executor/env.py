@@ -8,7 +8,7 @@ import time
 import traceback
 import urllib.parse
 from threading import Thread
-from typing import Any, Optional, Union
+from typing import Any, Callable, Optional, Union
 
 import dominate
 import dominate.tags
@@ -38,16 +38,25 @@ from ..agent import context
 run_animate = """
 // js
 // while not to end, scroll down
+// save a settimeout to document for future cancel
 scrollDown = () => {
     window.scrollBy({top: 400, behavior: 'smooth'});
     if ((window.innerHeight + Math.round(window.scrollY)) < document.body.offsetHeight) {
-        setTimeout(scrollDown, 1000);
+        document.scrollDownTimeout = setTimeout(scrollDown, 1000);
     } else {
         // scroll back
         window.scrollBy({top: -800, behavior: 'smooth'});
     }
 }
 scrollDown();
+"""
+
+stop_animate = """
+// js
+// clear the scrollDownTimeout
+if (document.scrollDownTimeout) {
+    clearTimeout(document.scrollDownTimeout);
+}
 """
 
 logger = logging.getLogger(__name__)
@@ -78,22 +87,42 @@ class ElementHighlight:
         if self.headless:
             return self
         self.driver.execute_script(
-            'arguments[0].scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });',
+            """
+console.log(arguments[0]);
+requestAnimationFrame(() => {
+    arguments[0].scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+});
+""",
             self.element,
         )
-        time.sleep(0.5)
         self.driver.execute_script(
             """
-console.log(arguments[0].getBoundingClientRect());
-rect = arguments[0].getBoundingClientRect();
+var cumulativeOffset = function(element) {
+    var top = 0, left = 0;
+    var rect = element.getBoundingClientRect();
+    do {
+        top += element.offsetTop  || 0;
+        left += element.offsetLeft || 0;
+        element = element.offsetParent;
+    } while(element);
+
+    return {
+        top: top,
+        left: left,
+        width: rect.width,
+        height: rect.height,
+    };
+};
+console.log(cumulativeOffset(arguments[0]));
+// rect = arguments[0].getBoundingClientRect();
+rect = cumulativeOffset(arguments[0]);
 div = document.createElement('div');
-div.style.position = 'fixed';
+div.style.position = 'absolute';
 div.style.top = rect.top + 'px';
 div.style.left = rect.left + 'px';
 div.style.width = rect.width + 'px';
 div.style.height = rect.height + 'px';
-div.style.border = '3px solid #79ccd7';
-div.style.outline_offset = '3px';
+div.style.outline = '3px solid #79ccd7';
 div.style.zIndex = '10000';
 div.style.pointerEvents = 'none';
 document.body.appendChild(div);
@@ -102,7 +131,9 @@ document.highlightedElement = div;
 """,
             self.element,
         )
-        time.sleep(1)
+        logger.info("highlight end")
+        time.sleep(1.5)
+        logger.info("sleep end")
         if self.before_hook:
             self.driver.execute_script(self.before_hook, self.element)
         # self.driver.execute_script(
@@ -198,12 +229,18 @@ class Browser:
     inputs = {}
     selects = {}
 
-    def __init__(self, url: str, headless: bool, recipes: list[dict]):
+    def __init__(
+        self,
+        url: str,
+        headless: bool,
+        recipes: list[dict],
+        end_callback: Optional[Callable] = None,
+    ):
         options = Options()
         options.add_argument("start-maximized")
         if headless:
             options.add_argument("--headless")
-        options.add_argument("--remote-debugging-port=9222")
+        # options.add_argument("--remote-debugging-port=9222")
         options.add_argument("--unsafely-disable-devtools-self-xss-warnings")
         driver = webdriver.Chrome(options=options)
         self.driver = driver
@@ -218,6 +255,7 @@ class Browser:
         self.last_recipe_index = -1
         self.last_page = dominate.tags.html()
         self.recipes = recipes
+        self.end_callback = end_callback
 
     def set_attribute(self, element: Element, attribute: str, value: str):
         self.driver.execute_script(
@@ -544,9 +582,12 @@ class Browser:
         if "terminate" in recipe and self.driver.execute_script(recipe["terminate"]):
             if "terminate_callback" in recipe:
                 result = self.driver.execute_script(recipe["terminate_callback"])
-                if self.headless:
+                if self.end_callback:
+                    self.end_callback(result)
+                elif not self.headless:
                     input("Press Enter to continue...")
-                (context.run_path / "result.json").write_text(json.dumps(result))
+                if context.run_path:
+                    (context.run_path / "result.json").write_text(json.dumps(result))
             return {
                 "page": "TERMINATE",
                 "diff_selector": "",
@@ -598,6 +639,8 @@ class SeleniumEnv(gym.Env):
         pretty=False,
         headless=True,
         no_animate=None,
+        start_callback=None,
+        end_callback=None,
     ):
         self.observation_space = spaces.Dict(
             {
@@ -616,12 +659,19 @@ class SeleniumEnv(gym.Env):
         self.ended = False
         self.headless = headless
         self.no_animate = self.headless if no_animate is None else no_animate
+        self.start_callback = start_callback
+        self.end_callback = end_callback
 
     def reset(self, seed=None):
         super().reset(seed=seed)
-        self.browser = Browser(self.start_url, self.headless, self.recipes)
+        self.browser = Browser(
+            self.start_url, self.headless, self.recipes, self.end_callback
+        )
         self.ended = False
-        if not self.headless:
+
+        if self.start_callback:
+            self.start_callback()
+        elif not self.headless:
             input("Press Enter to continue...")
         obs = self.browser.observe()
         if obs["ended"]:
@@ -661,6 +711,7 @@ class SeleniumEnv(gym.Env):
         )
 
     def step(self, actions):
+        self.browser.driver.execute_script(stop_animate)
         obs = None
         for action in json.loads(actions):
             print(action)

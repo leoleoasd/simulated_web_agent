@@ -26,8 +26,9 @@ def make_sync(func):
 @click.command()
 @click.option("--persona", type=str, help="Path to the persona file.", required=True)
 @click.option("--output", type=str, help="Path to the output file.", required=True)
+@click.option("--max-steps", type=int, help="Maximum steps to run.", default=50)
 @make_sync
-async def main(persona: str, output: str):
+async def main(persona: str, output: str, max_steps: int):
     load_dotenv()
     logging.basicConfig()
     loggers = [
@@ -49,6 +50,7 @@ async def main(persona: str, output: str):
         # recipes=google_flights_recipes.recipes,
         recipes=onestopshop_recipes.recipes,
     )
+    num_steps = 0
     observation, info = env.reset()
 
     try:
@@ -66,6 +68,11 @@ async def main(persona: str, output: str):
             observation, reward, terminated, truncated, info = env.step(action)
             print("-" * 50)
             if terminated:
+                break
+            num_steps += 1
+            if num_steps >= max_steps:
+                print(f"Reached max steps of {max_steps}, stopping.")
+                (policy.run_path / "failed.json").write_text("reached max steps")
                 break
     except Exception:
         print(traceback.format_exc())

@@ -1,0 +1,96 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "men's navy blue waterproof jacket", "description": "Typing 'men's navy blue waterproof jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "men's navy blue waterproof jacket", 'description': "Typing 'men's navy blue waterproof jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+navy+blue+waterproof+jacket
+Taking action [{"type": "click", "name": "search_results._lstgj_navy_blue_mens_wedding_suit_groom_best_man_party_tuxedo_slim_fit_blazer_velvet_lapel_doublebreasted_jacket_with_pants_work_color__royal_blue_size__5xllarge_.view_product", "description": "Clicking on the product link for 'LSTGJ Navy Blue Men's Wedding Suit Groom Best Man Party Tuxedo Slim fit Blazer Velvet Lapel Double-Breasted Jacket with Pants Work'."}]
+{'type': 'click', 'name': 'search_results._lstgj_navy_blue_mens_wedding_suit_groom_best_man_party_tuxedo_slim_fit_blazer_velvet_lapel_doublebreasted_jacket_with_pants_work_color__royal_blue_size__5xllarge_.view_product', 'description': "Clicking on the product link for 'LSTGJ Navy Blue Men's Wedding Suit Groom Best Man Party Tuxedo Slim fit Blazer Velvet Lapel Double-Breasted Jacket with Pants Work'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/lstgj-navy-blue-men-s-wedding-suit-groom-best-man-party-tuxedo-slim-fit-blazer-velvet-lapel-double-breasted-jacket-with-pants-work-color-royal-blue-size-5xl-large.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to assess the suitability of the 'LSTGJ Navy Blue Men's Wedding Suit' against my preferred size (medium) and the need for waterproof features."}, {"type": "click", "name": "header.search_box.search_button", "description": "Clicking the 'Search' button to initiate a new search if the current product does not meet the criteria."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to assess the suitability of the 'LSTGJ Navy Blue Men's Wedding Suit' against my preferred size (medium) and the need for waterproof features."}
+init
+{'type': 'click', 'name': 'header.search_box.search_button', 'description': "Clicking the 'Search' button to initiate a new search if the current product does not meet the criteria."}
+init
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 676, in step
+    self.browser.click(action["name"])
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 500, in click
+    self.clickables[name].click()
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <button type="submit" title="Search" class="action search" aria-label="Search" disabled="" data-clickable-id="header.search_box.search_button">...</button> is not clickable at point (1299, 16). Other element would receive the click: <input id="search" type="text" name="q" value="" placeholder="Search entire store here..." class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" autocomplete="off" aria-expanded="false" data-input-id="header.search_box.search_input">
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x0000000104fcf9a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x0000000104fc7e10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x0000000104bccbe0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x0000000104c166fc cxxbridge1$string$len + 391360
+4   chromedriver                        0x0000000104c14d28 cxxbridge1$string$len + 384748
+5   chromedriver                        0x0000000104c12f54 cxxbridge1$string$len + 377112
+6   chromedriver                        0x0000000104c124a0 cxxbridge1$string$len + 374372
+7   chromedriver                        0x0000000104c07930 cxxbridge1$string$len + 330484
+8   chromedriver                        0x0000000104c073c0 cxxbridge1$string$len + 329092
+9   chromedriver                        0x0000000104c4a4a4 cxxbridge1$string$len + 603752
+10  chromedriver                        0x0000000104c05a08 cxxbridge1$string$len + 322508
+11  chromedriver                        0x0000000104c0666c cxxbridge1$string$len + 325680
+12  chromedriver                        0x0000000104f96068 cxxbridge1$str$ptr + 1651256
+13  chromedriver                        0x0000000104f9a99c cxxbridge1$str$ptr + 1669996
+14  chromedriver                        0x0000000104f7b1fc cxxbridge1$str$ptr + 1541068
+15  chromedriver                        0x0000000104f9b26c cxxbridge1$str$ptr + 1672252
+16  chromedriver                        0x0000000104f6c810 cxxbridge1$str$ptr + 1481184
+17  chromedriver                        0x0000000104fb9108 cxxbridge1$str$ptr + 1794776
+18  chromedriver                        0x0000000104fb9284 cxxbridge1$str$ptr + 1795156
+19  chromedriver                        0x0000000104fc7aac cxxbridge1$str$ptr + 1854588
+20  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+21  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8
+
+
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/lstgj-navy-blue-men-s-wedding-suit-groom-best-man-party-tuxedo-slim-fit-blazer-velvet-lapel-double-breasted-jacket-with-pants-work-color-royal-blue-size-5xl-large.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to assess additional features and suitability of 'LSTGJ Navy Blue Men's Wedding Suit' in other sizes and colors."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to assess additional features and suitability of 'LSTGJ Navy Blue Men's Wedding Suit' in other sizes and colors."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/lstgj-navy-blue-men-s-wedding-suit-groom-best-man-party-tuxedo-slim-fit-blazer-velvet-lapel-double-breasted-jacket-with-pants-work-color-royal-blue-size-5xl-large.html
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "adidas x United Arrows & Sons Men's Track Jacket Navy CD7723", "description": "Typing 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "adidas x United Arrows & Sons Men's Track Jacket Navy CD7723", 'description': "Typing 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=adidas+x+United+Arrows+%26+Sons+Men%27s+Track+Jacket+Navy+CD7723
+Taking action [{"type": "click", "name": "search_results._adidas_x_united_arrows__sons_mens_track_jacket_navy_cd7723_.view_product", "description": "Clicking on the product link for 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723' to examine its details."}]
+{'type': 'click', 'name': 'search_results._adidas_x_united_arrows__sons_mens_track_jacket_navy_cd7723_.view_product', 'description': "Clicking on the product link for 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723' to examine its details."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/adidas-x-united-arrows-sons-men-s-track-jacket-navy-cd7723.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to review the full product description and features to determine if it matches the criteria of being medium-sized and waterproof."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to review the full product description and features to determine if it matches the criteria of being medium-sized and waterproof."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/adidas-x-united-arrows-sons-men-s-track-jacket-navy-cd7723.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to review the full product description and confirmation if the 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723' is waterproof."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to review the full product description and confirmation if the 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723' is waterproof."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/adidas-x-united-arrows-sons-men-s-track-jacket-navy-cd7723.html
+Taking action [{"type": "click", "name": "product_form.size_medium", "description": "Clicking on the button to select the medium size for the jacket."}]
+{'type': 'click', 'name': 'product_form.size_medium', 'description': 'Clicking on the button to select the medium size for the jacket.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/adidas-x-united-arrows-sons-men-s-track-jacket-navy-cd7723.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to review the full product description and confirm if the 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723' is waterproof."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to review the full product description and confirm if the 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723' is waterproof."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/adidas-x-united-arrows-sons-men-s-track-jacket-navy-cd7723.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the button to select the medium size for the product 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723'."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the button to select the medium size for the product 'adidas x United Arrows & Sons Men's Track Jacket Navy CD7723'."}
+init
+--------------------------------------------------

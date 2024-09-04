@@ -1,0 +1,23 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "men's blazer", "description": "Typing 'men's blazer' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "men's blazer", 'description': "Typing 'men's blazer' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+blazer
+Taking action [{"type": "click", "name": "search_results._mens_blazer_lightweight_casual_solid_one_button_slim_fit_sport_coat_.view_product", "description": "Viewing the product details for 'Men's Blazer Lightweight Casual Solid One Button Slim Fit Sport Coat' to check color and size."}, {"type": "click", "name": "search_results._mens_blazers_sport_coats_casual_premium_one_button_standardfit_suit_jackets_.view_product", "description": "Viewing the product details for 'Men's Blazers Sport Coats Casual Premium One Button Standard-Fit Suit Jackets' to check color and size."}, {"type": "click", "name": "search_results._mens_blazer_casual_slim_fit_longsleeve_one_button_lapel_suit_2_pieces_comfy_fashion_printed_jacket_pants_set_.view_product", "description": "Viewing the product details for 'Men's Blazer Casual Slim Fit Long-Sleeve One Button Lapel Suit 2 Pieces Comfy Fashion Printed Jacket Pants Set' to check color and size."}, {"type": "click", "name": "search_results._mens_blazers_3_pieces_slim_fit_casual_fashion_printed_suit_jacket_vest_pants_one_button_longsleeve_tuxedo_.view_product", "description": "Viewing the product details for 'Men's Blazers 3 Pieces Slim Fit Casual Fashion Printed Suit Jacket Vest Pants One Button Long-Sleeve Tuxedo' to check color and size."}, {"type": "click", "name": "search_results._autumn_mens_blazer_suit_plaid_outwear_single_breasted_classic_business_casual_slim_suit_jacket_.view_product", "description": "Viewing the product details for 'Autumn Men's Blazer Suit Plaid Outwear Single Breasted Classic Business Casual Slim Suit Jacket' to check color and size."}]
+{'type': 'click', 'name': 'search_results._mens_blazer_lightweight_casual_solid_one_button_slim_fit_sport_coat_.view_product', 'description': "Viewing the product details for 'Men's Blazer Lightweight Casual Solid One Button Slim Fit Sport Coat' to check color and size."}
+init
+{'type': 'click', 'name': 'search_results._mens_blazers_sport_coats_casual_premium_one_button_standardfit_suit_jackets_.view_product', 'description': "Viewing the product details for 'Men's Blazers Sport Coats Casual Premium One Button Standard-Fit Suit Jackets' to check color and size."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-blazer-lightweight-casual-solid-one-button-slim-fit-sport-coat.html
+Taking action [{"type": "click", "name": "product_form.options.navy", "description": "Selecting the color 'Navy' for the Men's Blazer Lightweight Casual Solid One Button Slim Fit Sport Coat."}, {"type": "click", "name": "product_form.options.medium", "description": "Selecting the size 'Medium' for the Men's Blazer Lightweight Casual Solid One Button Slim Fit Sport Coat."}]
+{'type': 'click', 'name': 'product_form.options.navy', 'description': "Selecting the color 'Navy' for the Men's Blazer Lightweight Casual Solid One Button Slim Fit Sport Coat."}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Selecting the size 'Medium' for the Men's Blazer Lightweight Casual Solid One Button Slim Fit Sport Coat."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-blazer-lightweight-casual-solid-one-button-slim-fit-sport-coat.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the selected Men's Blazer Lightweight Casual Solid One Button Slim Fit Sport Coat to the cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the selected Men's Blazer Lightweight Casual Solid One Button Slim Fit Sport Coat to the cart."}
+init
+--------------------------------------------------

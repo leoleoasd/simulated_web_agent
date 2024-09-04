@@ -1,0 +1,34 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "women's navy blazer medium", "description": "Typing 'women's navy blazer medium' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "women's navy blazer medium", 'description': "Typing 'women's navy blazer medium' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=women%27s+navy+blazer+medium
+Taking action [{"type": "click", "name": "search_results._cicy_bell_womens_long_sleeve_casual_blazer_work_office_button_open_front_jacket_suit_.view_product", "description": "Clicking on the product 'Cicy Bell Women's Long Sleeve Casual Blazer Work Office Button Open Front Jacket Suit' to view its details."}]
+{'type': 'click', 'name': 'search_results._cicy_bell_womens_long_sleeve_casual_blazer_work_office_button_open_front_jacket_suit_.view_product', 'description': "Clicking on the product 'Cicy Bell Women's Long Sleeve Casual Blazer Work Office Button Open Front Jacket Suit' to view its details."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/cicy-bell-women-s-long-sleeve-casual-blazer-work-office-button-open-front-jacket-suit.html
+Taking action [{"type": "click", "name": "product_info._reviews_", "description": "Clicking on the 'Reviews' tab to examine customer reviews and ratings for 'Cicy Bell Women's Long Sleeve Casual Blazer Work Office Button Open Front Jacket Suit'."}]
+{'type': 'click', 'name': 'product_info._reviews_', 'description': "Clicking on the 'Reviews' tab to examine customer reviews and ratings for 'Cicy Bell Women's Long Sleeve Casual Blazer Work Office Button Open Front Jacket Suit'."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/cicy-bell-women-s-long-sleeve-casual-blazer-work-office-button-open-front-jacket-suit.html
+Taking action [{"type": "click", "name": "product_form.options.navy", "description": "Clicking on the color 'Navy' option for Cicy Bell Women's Long Sleeve Casual Blazer Work Office Button Open Front Jacket Suit."}, {"type": "click", "name": "product_form.options.medium", "description": "Clicking on the size 'Medium' option for Cicy Bell Women's Long Sleeve Casual Blazer Work Office Button Open Front Jacket Suit."}]
+{'type': 'click', 'name': 'product_form.options.navy', 'description': "Clicking on the color 'Navy' option for Cicy Bell Women's Long Sleeve Casual Blazer Work Office Button Open Front Jacket Suit."}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Clicking on the size 'Medium' option for Cicy Bell Women's Long Sleeve Casual Blazer Work Office Button Open Front Jacket Suit."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/cicy-bell-women-s-long-sleeve-casual-blazer-work-office-button-open-front-jacket-suit.html
+Taking action [{"type": "click", "name": "product_form.options.navy", "description": "Clicking on the color 'Navy' option for Cicy Bell Women's Long Sleeve Casual Blazer Work Office Button Open Front Jacket Suit."}, {"type": "click", "name": "product_form.options.medium", "description": "Clicking on the size 'Medium' option for Cicy Bell Women's Long Sleeve Casual Blazer Work Office Button Open Front Jacket Suit."}]
+{'type': 'click', 'name': 'product_form.options.navy', 'description': "Clicking on the color 'Navy' option for Cicy Bell Women's Long Sleeve Casual Blazer Work Office Button Open Front Jacket Suit."}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Clicking on the size 'Medium' option for Cicy Bell Women's Long Sleeve Casual Blazer Work Office Button Open Front Jacket Suit."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/cicy-bell-women-s-long-sleeve-casual-blazer-work-office-button-open-front-jacket-suit.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button for the 'Cicy Bell Women's Long Sleeve Casual Blazer Work Office Button Open Front Jacket Suit' in navy and medium."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button for the 'Cicy Bell Women's Long Sleeve Casual Blazer Work Office Button Open Front Jacket Suit' in navy and medium."}
+init
+--------------------------------------------------

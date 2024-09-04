@@ -1,0 +1,24 @@
+Persona: Kevin
+Background:
+Kevin is a 35-year-old marketing manager at a mid-sized tech company. He has a background in business and marketing, which has allowed him to move up the corporate ladder quickly. Kevin is ambitious and always looking for new strategies to promote both his company's products and his professional development. He enjoys staying updated on industry trends and often participates in relevant workshops and webinars.
+
+Demographics:
+Age: 35
+Gender: Male
+Education: Bachelor's degree in Business Administration
+Profession: Marketing Manager
+Income: $58,021
+
+Financial Situation:
+Kevin has a stable income and is comfortable with his financial situation. He budgets carefully to ensure he saves for future investments, like buying a home and possibly pursuing an MBA. He enjoys dining out and traveling but chooses affordable options to balance enjoyment with saving.
+
+Shopping Habits:
+Kevin enjoys online shopping for convenience, particularly for tech gadgets and clothing. While he doesn’t mind spending on quality items, he values practicality and durability above all. He prefers a straightforward shopping experience and often reads reviews before making a purchase. Sales and discounts are a significant motivator for Kevin when he shops.
+
+Professional Life:
+Kevin works long hours at his job, often meeting tight deadlines for various marketing projects. He collaborates with different teams and is responsible for developing marketing campaigns, analyzing market data, and presenting findings to the management. Kevin seeks opportunities for networking and professional growth, attending industry conferences when possible.
+
+Personal Style:
+Kevin favors a smart-casual style, often wearing chinos with button-up shirts or polo shirts. He opts for neutral colors, like blue, gray, and white, which he finds versatile for both work and social events. He values comfort and fit, ensuring he looks professional without sacrificing ease of movement. Kevin also has a love for hiking and outdoor activities, which influences some of his casual clothing choices.
+
+Kevin lives in Seattle, enjoys waking up at 7 am, and loves trying new local breweries on weekends.

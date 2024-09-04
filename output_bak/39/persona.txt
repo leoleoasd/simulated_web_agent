@@ -1,0 +1,25 @@
+Persona: David
+
+Background:
+David is a 35-year-old software engineer living in San Francisco, California. He works for a tech startup that focuses on developing innovative solutions for financial services. With a strong passion for coding and technology, David has built a successful career and is constantly looking for new challenges and opportunities to learn and grow in his field.
+
+Demographics:
+- Age: 35
+- Gender: Male
+- Education: Bachelor’s degree in Computer Science
+- Profession: Software Engineer
+- Income: $94,001
+
+Financial Situation:
+David is financially stable with his income, allowing him to enjoy a comfortable lifestyle in the expensive Bay Area. He has a keen interest in investing and often allocates a portion of his earnings towards stocks and cryptocurrencies. While he enjoys the conveniences of modern life, he is also mindful of saving for future opportunities, including potential property investments.
+
+Shopping Habits:
+David prefers to shop online due to his busy schedule but enjoys visiting tech and gadget stores when he has time. He looks for high-quality products that offer good value for money, often comparing features and prices before making decisions. He appreciates tech gadgets and often seeks the latest innovations, but also values practicality and durability in his clothing and personal items.
+
+Professional Life:
+David spends his workdays coding, collaborating with his team, and participating in Agile sprints. He is dedicated to his craft and enjoys problem-solving, often staying late to finish projects when he's particularly engaged. He also attends tech meetups and conferences to stay updated with industry trends and network with like-minded professionals.
+
+Personal Style:
+David's personal style is casual and tech-oriented. He typically opts for comfortable jeans and graphic tees, paired with sneakers. He prefers muted colors like gray and navy blue but occasionally incorporates brighter colors, like green and orange, to show off his personality. As an avid gamer, he often wears themed apparel related to his favorite games and enjoys collecting merchandise from franchises he loves.
+
+David lives in a vibrant neighborhood in San Francisco, where he enjoys the nightlife and the local food scene. He typically wakes up around 7 am to get a head start on his day, often grabbing coffee from his favorite local café before heading to work.

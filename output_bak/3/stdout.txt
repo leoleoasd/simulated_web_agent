@@ -1,0 +1,185 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "men's large blue jacket in thrift stores", "description": "Typing 'men's large blue jacket in thrift stores' into the search input field and submitting to search for the jacket."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "men's large blue jacket in thrift stores", 'description': "Typing 'men's large blue jacket in thrift stores' into the search input field and submitting to search for the jacket."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+large+blue+jacket+in+thrift+stores
+Taking action [{"type": "click", "name": "search_results._mens_suit_jacket_classic_fit_one_button_casual_sports_jackets_coat_comfy_business_daily_blazer_formal_winter_jacket_.view_product", "description": "Clicking on the 'Men's Suit Jacket Classic fit One Button Casual Sports Jackets Coat Comfy Business Daily Blazer Formal Winter Jacket' to view more details about the product."}]
+{'type': 'click', 'name': 'search_results._mens_suit_jacket_classic_fit_one_button_casual_sports_jackets_coat_comfy_business_daily_blazer_formal_winter_jacket_.view_product', 'description': "Clicking on the 'Men's Suit Jacket Classic fit One Button Casual Sports Jackets Coat Comfy Business Daily Blazer Formal Winter Jacket' to view more details about the product."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-suit-jacket-classic-fit-one-button-casual-sports-jackets-coat-comfy-business-daily-blazer-formal-winter-jacket.html
+Taking action [{"type": "click", "name": "header.search_box.search_button", "description": "Proceeding to the next page of search results to continue looking for a blue jacket of size large."}]
+{'type': 'click', 'name': 'header.search_box.search_button', 'description': 'Proceeding to the next page of search results to continue looking for a blue jacket of size large.'}
+init
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 676, in step
+    self.browser.click(action["name"])
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 500, in click
+    self.clickables[name].click()
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <button type="submit" title="Search" class="action search" aria-label="Search" disabled="" data-clickable-id="header.search_box.search_button">...</button> is not clickable at point (1299, 87). Other element would receive the click: <input id="search" type="text" name="q" value="" placeholder="Search entire store here..." class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" autocomplete="off" aria-expanded="false" data-input-id="header.search_box.search_input">
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x000000010279f9a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x0000000102797e10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x000000010239cbe0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x00000001023e66fc cxxbridge1$string$len + 391360
+4   chromedriver                        0x00000001023e4d28 cxxbridge1$string$len + 384748
+5   chromedriver                        0x00000001023e2f54 cxxbridge1$string$len + 377112
+6   chromedriver                        0x00000001023e24a0 cxxbridge1$string$len + 374372
+7   chromedriver                        0x00000001023d7930 cxxbridge1$string$len + 330484
+8   chromedriver                        0x00000001023d73c0 cxxbridge1$string$len + 329092
+9   chromedriver                        0x000000010241a4a4 cxxbridge1$string$len + 603752
+10  chromedriver                        0x00000001023d5a08 cxxbridge1$string$len + 322508
+11  chromedriver                        0x00000001023d666c cxxbridge1$string$len + 325680
+12  chromedriver                        0x0000000102766068 cxxbridge1$str$ptr + 1651256
+13  chromedriver                        0x000000010276a99c cxxbridge1$str$ptr + 1669996
+14  chromedriver                        0x000000010274b1fc cxxbridge1$str$ptr + 1541068
+15  chromedriver                        0x000000010276b26c cxxbridge1$str$ptr + 1672252
+16  chromedriver                        0x000000010273c810 cxxbridge1$str$ptr + 1481184
+17  chromedriver                        0x0000000102789108 cxxbridge1$str$ptr + 1794776
+18  chromedriver                        0x0000000102789284 cxxbridge1$str$ptr + 1795156
+19  chromedriver                        0x0000000102797aac cxxbridge1$str$ptr + 1854588
+20  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+21  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8
+
+
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-suit-jacket-classic-fit-one-button-casual-sports-jackets-coat-comfy-business-daily-blazer-formal-winter-jacket.html
+Taking action [{"type": "click", "name": "header.search_box.search_button", "description": "Clicking on the 'Next page' button to continue browsing search results until we find a suitable blue jacket of size large."}]
+{'type': 'click', 'name': 'header.search_box.search_button', 'description': "Clicking on the 'Next page' button to continue browsing search results until we find a suitable blue jacket of size large."}
+init
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 676, in step
+    self.browser.click(action["name"])
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 500, in click
+    self.clickables[name].click()
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <button type="submit" title="Search" class="action search" aria-label="Search" disabled="" data-clickable-id="header.search_box.search_button">...</button> is not clickable at point (1299, 87). Other element would receive the click: <input id="search" type="text" name="q" value="" placeholder="Search entire store here..." class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" autocomplete="off" aria-expanded="false" data-input-id="header.search_box.search_input">
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x000000010279f9a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x0000000102797e10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x000000010239cbe0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x00000001023e66fc cxxbridge1$string$len + 391360
+4   chromedriver                        0x00000001023e4d28 cxxbridge1$string$len + 384748
+5   chromedriver                        0x00000001023e2f54 cxxbridge1$string$len + 377112
+6   chromedriver                        0x00000001023e24a0 cxxbridge1$string$len + 374372
+7   chromedriver                        0x00000001023d7930 cxxbridge1$string$len + 330484
+8   chromedriver                        0x00000001023d73c0 cxxbridge1$string$len + 329092
+9   chromedriver                        0x000000010241a4a4 cxxbridge1$string$len + 603752
+10  chromedriver                        0x00000001023d5a08 cxxbridge1$string$len + 322508
+11  chromedriver                        0x00000001023d666c cxxbridge1$string$len + 325680
+12  chromedriver                        0x0000000102766068 cxxbridge1$str$ptr + 1651256
+13  chromedriver                        0x000000010276a99c cxxbridge1$str$ptr + 1669996
+14  chromedriver                        0x000000010274b1fc cxxbridge1$str$ptr + 1541068
+15  chromedriver                        0x000000010276b26c cxxbridge1$str$ptr + 1672252
+16  chromedriver                        0x000000010273c810 cxxbridge1$str$ptr + 1481184
+17  chromedriver                        0x0000000102789108 cxxbridge1$str$ptr + 1794776
+18  chromedriver                        0x0000000102789284 cxxbridge1$str$ptr + 1795156
+19  chromedriver                        0x0000000102797aac cxxbridge1$str$ptr + 1854588
+20  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+21  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8
+
+
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-suit-jacket-classic-fit-one-button-casual-sports-jackets-coat-comfy-business-daily-blazer-formal-winter-jacket.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the jacket to the cart."}, {"type": "click", "name": "cart.proceed_to_checkout", "description": "Clicking on the 'Proceed to Checkout' button to finalize the purchase."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the jacket to the cart."}
+init
+{'type': 'click', 'name': 'cart.proceed_to_checkout', 'description': "Clicking on the 'Proceed to Checkout' button to finalize the purchase."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-suit-jacket-classic-fit-one-button-casual-sports-jackets-coat-comfy-business-daily-blazer-formal-winter-jacket.html
+Taking action [{"type": "click", "name": "next_page_button", "description": "Clicking on the 'Next page' button to continue browsing the search results for a blue, size large men's jacket that fits Ethan's criteria."}]
+{'type': 'click', 'name': 'next_page_button', 'description': "Clicking on the 'Next page' button to continue browsing the search results for a blue, size large men's jacket that fits Ethan's criteria."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-suit-jacket-classic-fit-one-button-casual-sports-jackets-coat-comfy-business-daily-blazer-formal-winter-jacket.html
+Taking action [{"type": "click", "name": "header.search_box.search_button", "description": "Clicking on the 'Search' button to look for further search results for a blue jacket of size large."}]
+{'type': 'click', 'name': 'header.search_box.search_button', 'description': "Clicking on the 'Search' button to look for further search results for a blue jacket of size large."}
+init
+Traceback (most recent call last):
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 676, in step
+    self.browser.click(action["name"])
+  File "/Volumes/Code/simulated_web_agent/src/simulated_web_agent/executor/env.py", line 500, in click
+    self.clickables[name].click()
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 354, in execute
+    self.error_handler.check_response(response)
+  File "/Users/leo/micromamba/envs/simulated_web_agent/lib/python3.9/site-packages/selenium/webdriver/remote/errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <button type="submit" title="Search" class="action search" aria-label="Search" disabled="" data-clickable-id="header.search_box.search_button">...</button> is not clickable at point (1299, 87). Other element would receive the click: <input id="search" type="text" name="q" value="" placeholder="Search entire store here..." class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" autocomplete="off" aria-expanded="false" data-input-id="header.search_box.search_input">
+  (Session info: chrome=128.0.6613.113)
+Stacktrace:
+0   chromedriver                        0x000000010279f9a8 cxxbridge1$str$ptr + 1887096
+1   chromedriver                        0x0000000102797e10 cxxbridge1$str$ptr + 1855456
+2   chromedriver                        0x000000010239cbe0 cxxbridge1$string$len + 89508
+3   chromedriver                        0x00000001023e66fc cxxbridge1$string$len + 391360
+4   chromedriver                        0x00000001023e4d28 cxxbridge1$string$len + 384748
+5   chromedriver                        0x00000001023e2f54 cxxbridge1$string$len + 377112
+6   chromedriver                        0x00000001023e24a0 cxxbridge1$string$len + 374372
+7   chromedriver                        0x00000001023d7930 cxxbridge1$string$len + 330484
+8   chromedriver                        0x00000001023d73c0 cxxbridge1$string$len + 329092
+9   chromedriver                        0x000000010241a4a4 cxxbridge1$string$len + 603752
+10  chromedriver                        0x00000001023d5a08 cxxbridge1$string$len + 322508
+11  chromedriver                        0x00000001023d666c cxxbridge1$string$len + 325680
+12  chromedriver                        0x0000000102766068 cxxbridge1$str$ptr + 1651256
+13  chromedriver                        0x000000010276a99c cxxbridge1$str$ptr + 1669996
+14  chromedriver                        0x000000010274b1fc cxxbridge1$str$ptr + 1541068
+15  chromedriver                        0x000000010276b26c cxxbridge1$str$ptr + 1672252
+16  chromedriver                        0x000000010273c810 cxxbridge1$str$ptr + 1481184
+17  chromedriver                        0x0000000102789108 cxxbridge1$str$ptr + 1794776
+18  chromedriver                        0x0000000102789284 cxxbridge1$str$ptr + 1795156
+19  chromedriver                        0x0000000102797aac cxxbridge1$str$ptr + 1854588
+20  libsystem_pthread.dylib             0x000000019072ef94 _pthread_start + 136
+21  libsystem_pthread.dylib             0x0000000190729d34 thread_start + 8
+
+
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-suit-jacket-classic-fit-one-button-casual-sports-jackets-coat-comfy-business-daily-blazer-formal-winter-jacket.html
+Taking action [{"type": "back", "description": "Navigating back to the search results page."}]
+{'type': 'back', 'description': 'Navigating back to the search results page.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+large+blue+jacket+in+thrift+stores
+Taking action [{"type": "click", "name": "search_results._lstgj_navy_blue_mens_wedding_suit_groom_best_man_party_tuxedo_slim_fit_blazer_velvet_lapel_doublebreasted_jacket_with_pants_work_color__royal_blue_size__5xllarge_.view_product", "description": "Clicking on the first product in the search results to review its details."}, {"type": "click", "name": "search_results._lstgj_navy_blue_mens_wedding_suit_groom_best_man_party_tuxedo_slim_fit_blazer_velvet_lapel_doublebreasted_jacket_with_pants_work_color__color_6_size__6xllarge_.view_product", "description": "Clicking on the second product in the search results to review its details."}, {"type": "click", "name": "search_results._mens_suit_jacket_classic_fit_one_button_casual_sports_jackets_coat_comfy_business_daily_blazer_formal_winter_jacket_.view_product", "description": "Clicking on the third product in the search results to review its details."}]
+{'type': 'click', 'name': 'search_results._lstgj_navy_blue_mens_wedding_suit_groom_best_man_party_tuxedo_slim_fit_blazer_velvet_lapel_doublebreasted_jacket_with_pants_work_color__royal_blue_size__5xllarge_.view_product', 'description': 'Clicking on the first product in the search results to review its details.'}
+init
+{'type': 'click', 'name': 'search_results._lstgj_navy_blue_mens_wedding_suit_groom_best_man_party_tuxedo_slim_fit_blazer_velvet_lapel_doublebreasted_jacket_with_pants_work_color__color_6_size__6xllarge_.view_product', 'description': 'Clicking on the second product in the search results to review its details.'}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/lstgj-navy-blue-men-s-wedding-suit-groom-best-man-party-tuxedo-slim-fit-blazer-velvet-lapel-double-breasted-jacket-with-pants-work-color-royal-blue-size-5xl-large.html
+Taking action [{"type": "click", "name": "product_info._details_", "description": "Clicking on the 'Details' tab to review more details of the product."}]
+{'type': 'click', 'name': 'product_info._details_', 'description': "Clicking on the 'Details' tab to review more details of the product."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/lstgj-navy-blue-men-s-wedding-suit-groom-best-man-party-tuxedo-slim-fit-blazer-velvet-lapel-double-breasted-jacket-with-pants-work-color-royal-blue-size-5xl-large.html
+Taking action [{"type": "back", "description": "Navigating back to the search results to refine the product list, as the current product does not meet the criteria of being 'blue' and 'size large'."}]
+{'type': 'back', 'description': "Navigating back to the search results to refine the product list, as the current product does not meet the criteria of being 'blue' and 'size large'."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+large+blue+jacket+in+thrift+stores
+Taking action [{"type": "click", "name": "search_results._lstgj_navy_blue_mens_wedding_suit_groom_best_man_party_tuxedo_slim_fit_blazer_velvet_lapel_doublebreasted_jacket_with_pants_work_color__royal_blue_size__5xllarge_.view_product", "description": "Clicking on the product 'LSTGJ Navy Blue Men's Wedding Suit Groom Best Man Party Tuxedo Slim fit Blazer Velvet Lapel Double-Breasted Jacket with Pants Work' to check details."}, {"type": "click", "name": "search_results._mens_suit_jacket_classic_fit_one_button_casual_sports_jackets_coat_comfy_business_daily_blazer_formal_winter_jacket_.view_product", "description": "Clicking on the product 'Men's Suit Jacket Classic fit One Button Casual Sports Jackets Coat Comfy Business Daily Blazer Formal Winter Jacket' to check details."}, {"type": "click", "name": "search_results._mens_blazersoft_woolen_fabric_1_button_dinner_jacket_stylish_exquisite_embroidery_slim_fit_shawl_lapels_party_business_casual_suit_jacketsblue4xl_.view_product", "description": "Clicking on the product 'Men's Blazer, Soft Woolen Fabric 1 Button Dinner Jacket Stylish Exquisite Embroidery Slim Fit Shawl Lapels Party Business Casual Suit Jackets' to check details."}, {"type": "click", "name": "search_results._coofandy_mens_floral_tuxedo_jacket_rose_embroidered_suit_jacket_wedding_prom_dinner_party_blazer_.view_product", "description": "Clicking on the product 'COOFANDY Men's Floral Tuxedo Jacket Rose Embroidered Suit Jacket Wedding Prom Dinner Party Blazer' to check details."}]
+{'type': 'click', 'name': 'search_results._lstgj_navy_blue_mens_wedding_suit_groom_best_man_party_tuxedo_slim_fit_blazer_velvet_lapel_doublebreasted_jacket_with_pants_work_color__royal_blue_size__5xllarge_.view_product', 'description': "Clicking on the product 'LSTGJ Navy Blue Men's Wedding Suit Groom Best Man Party Tuxedo Slim fit Blazer Velvet Lapel Double-Breasted Jacket with Pants Work' to check details."}
+init
+{'type': 'click', 'name': 'search_results._mens_suit_jacket_classic_fit_one_button_casual_sports_jackets_coat_comfy_business_daily_blazer_formal_winter_jacket_.view_product', 'description': "Clicking on the product 'Men's Suit Jacket Classic fit One Button Casual Sports Jackets Coat Comfy Business Daily Blazer Formal Winter Jacket' to check details."}
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/lstgj-navy-blue-men-s-wedding-suit-groom-best-man-party-tuxedo-slim-fit-blazer-velvet-lapel-double-breasted-jacket-with-pants-work-color-royal-blue-size-5xl-large.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking the 'Add to Cart' button to add the product to the cart as it matches the criteria."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking the 'Add to Cart' button to add the product to the cart as it matches the criteria."}
+init
+--------------------------------------------------

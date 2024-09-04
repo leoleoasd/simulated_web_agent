@@ -1,0 +1,43 @@
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/
+Taking action [{"type": "type_and_submit", "name": "header.search_box.search_input", "text": "men's lightweight durable jacket", "description": "Typing 'men's lightweight durable jacket' into the search input field and submitting the form."}]
+{'type': 'type_and_submit', 'name': 'header.search_box.search_input', 'text': "men's lightweight durable jacket", 'description': "Typing 'men's lightweight durable jacket' into the search input field and submitting the form."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/catalogsearch/result/?q=men%27s+lightweight+durable+jacket
+Taking action [{"type": "click", "name": "search_results._mens_casual_lightweight_flight_jacket_softshell_zipper_windbreaker_bomber_jacket_.view_product", "description": "Clicking on the product 'Men's Casual Lightweight Flight Jacket Softshell Zipper Windbreaker Bomber Jacket' to check its price and reviews."}]
+{'type': 'click', 'name': 'search_results._mens_casual_lightweight_flight_jacket_softshell_zipper_windbreaker_bomber_jacket_.view_product', 'description': "Clicking on the product 'Men's Casual Lightweight Flight Jacket Softshell Zipper Windbreaker Bomber Jacket' to check its price and reviews."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-casual-lightweight-flight-jacket-softshell-zipper-windbreaker-bomber-jacket.html
+Taking action [{"type": "click", "name": "product_form.options.black", "description": "Clicking on the black color option to check for availability of a neutral color."}, {"type": "click", "name": "product_form.options.medium", "description": "Clicking on the medium size option to check for availability in medium size."}]
+{'type': 'click', 'name': 'product_form.options.black', 'description': 'Clicking on the black color option to check for availability of a neutral color.'}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': 'Clicking on the medium size option to check for availability in medium size.'}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-casual-lightweight-flight-jacket-softshell-zipper-windbreaker-bomber-jacket.html
+Taking action [{"type": "click", "name": "product_form.options.black", "description": "Selecting the color 'Black' for the Men's Casual Lightweight Flight Jacket Softshell Zipper Windbreaker Bomber Jacket."}, {"type": "click", "name": "product_form.options.medium", "description": "Ensuring the size 'Medium' is selected for the jacket."}]
+{'type': 'click', 'name': 'product_form.options.black', 'description': "Selecting the color 'Black' for the Men's Casual Lightweight Flight Jacket Softshell Zipper Windbreaker Bomber Jacket."}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Ensuring the size 'Medium' is selected for the jacket."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-casual-lightweight-flight-jacket-softshell-zipper-windbreaker-bomber-jacket.html
+Taking action [{"type": "click", "name": "product_form.options.khaki2", "description": "Selecting the color 'Khaki#2' as a neutral color option."}, {"type": "click", "name": "product_form.options.medium", "description": "Ensuring that the size 'Medium' is selected for the jacket."}]
+{'type': 'click', 'name': 'product_form.options.khaki2', 'description': "Selecting the color 'Khaki#2' as a neutral color option."}
+init
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Ensuring that the size 'Medium' is selected for the jacket."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-casual-lightweight-flight-jacket-softshell-zipper-windbreaker-bomber-jacket.html
+Taking action [{"type": "click", "name": "product_form.options.medium", "description": "Clicking on the 'Medium' size option to ensure it is selected."}, {"type": "click", "name": "product_form.options.khaki2", "description": "Clicking on the 'Khaki#2' color option to ensure it is selected."}]
+{'type': 'click', 'name': 'product_form.options.medium', 'description': "Clicking on the 'Medium' size option to ensure it is selected."}
+init
+{'type': 'click', 'name': 'product_form.options.khaki2', 'description': "Clicking on the 'Khaki#2' color option to ensure it is selected."}
+init
+--------------------------------------------------
+http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/men-s-casual-lightweight-flight-jacket-softshell-zipper-windbreaker-bomber-jacket.html
+Taking action [{"type": "click", "name": "product_form.add_to_cart", "description": "Clicking on the 'Add to Cart' button to add the selected jacket to the cart."}]
+{'type': 'click', 'name': 'product_form.add_to_cart', 'description': "Clicking on the 'Add to Cart' button to add the selected jacket to the cart."}
+init
+--------------------------------------------------
