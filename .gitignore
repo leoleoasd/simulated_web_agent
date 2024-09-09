@@ -132,3 +132,7 @@ wandb
 
 *.parquet
 runs/
+new_upload
+output
+new_output
+upload

@@ -713,9 +713,9 @@ class SeleniumEnv(gym.Env):
     def step(self, actions):
         self.browser.driver.execute_script(stop_animate)
         obs = None
+        error_message = ""
         for action in json.loads(actions):
             print(action)
-            error_message = ""
             try:
                 if action["type"] == "type":
                     self.browser.type(action["name"], action["text"])

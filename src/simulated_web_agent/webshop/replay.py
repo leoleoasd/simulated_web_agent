@@ -82,8 +82,8 @@ async def main(trace_dir: str, output_video: str):
             time.sleep(5)
             observation, reward, terminated, truncated, info = env.step(json.dumps(ac))
     finally:
-        env.close()
         stop_recording()
+        env.close()
 
 
 if __name__ == "__main__":
