@@ -1,15 +1,60 @@
 import asyncio
+import json
 import logging
 import os
+import time
 import traceback
 
 import gymnasium as gym
+import selenium
 from dotenv import load_dotenv
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
-from ..agent.gpt import chat_bulk
-from ..executor import google_flights_recipes, onestopshop_recipes
-from ..executor.env import SeleniumEnv  # noqa
+from ..agent.gpt import chat, chat_bulk
+from ..executor import amazon_recipes, google_flights_recipes, onestopshop_recipes
+from ..executor.env import Browser, SeleniumEnv  # noqa
 from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
+
+
+def solve_captcha(browser: Browser):
+    try:
+        while True:
+            image = browser.driver.find_element(
+                By.CSS_SELECTOR,
+                "body > div > div.a-row.a-spacing-double-large > div.a-section > div > div > form > div.a-row.a-spacing-large > div > div > div.a-row.a-text-center > img",
+            ).get_attribute("src")
+            resp = chat(
+                [
+                    {
+                        "role": "system",
+                        "content": "You are an OCR expert designed to solve CAPTCHAs. You will respond in a single JSON format: {'text': 'The text in the image'}",
+                    },
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": "What’s in this image?"},
+                            {"type": "image_url", "image_url": {"url": image}},
+                        ],
+                    },
+                ],
+                response_format={"type": "json_object"},
+            )
+            text = json.loads(resp.choices[0].message.content)["text"]
+            input_element = browser.driver.find_element(
+                By.CSS_SELECTOR, "#captchacharacters"
+            )
+            # input_element.send_keys(text)
+            # input_element.send_keys(Keys.ENTER)
+            for keys in text:
+                input_element.send_keys(keys)
+                time.sleep(0.2)
+            input_element.send_keys(Keys.ENTER)
+            time.sleep(1)
+    except selenium.common.exceptions.NoSuchElementException:
+        # no more captcha
+        pass
+    return
 
 
 async def main():
@@ -56,7 +101,7 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
     intents = {
         "intent": [
             [
-                "buy a jacket, select red and medium size",
+                "buy a jacket from columbia and arrives tomorrow.",
                 # "book a flight to new york on 10/10/2024, and return on 10/15/2024",
             ]
             # [
@@ -78,11 +123,12 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
     }
     env = gym.make(
         "SeleniumEnv-v0",
-        start_url="http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/",
+        start_url="http://amazon.com/",
         # start_url="https://www.google.com/flights",
         headless=os.environ.get("HEADLESS", "true").lower() == "true",
         # recipes=google_flights_recipes.recipes,
-        recipes=onestopshop_recipes.recipes,
+        recipes=amazon_recipes.recipes,
+        start_callback=solve_captcha,
     )
     for index, persona in enumerate(personas["persona"]):
         print(f"Persona {index}: {persona}")

@@ -383,6 +383,11 @@ class Browser:
             elif input_type == "number":
                 node["value"] = element.get_attribute("value")
                 self.register_input(element, node["name"], recipe)
+            elif input_type == "checkbox":
+                if element.get_attribute("checked"):
+                    node["checked"] = "true"
+                else:
+                    node["checked"] = "false"
         if tag_name == "select":
             select = Select(element)
             for option in select.options:
@@ -560,22 +565,29 @@ class Browser:
         recipe = None
         recipe_index = -1
         for i, r in enumerate(self.recipes):
-            try:
-                element = self.driver.find_element(By.CSS_SELECTOR, r["match"])
-                if (
-                    element
-                    and r["match_text"].lower() in self.get_text(element).lower()
-                ):
+            match_method = r.get("match_method", "text")
+            if match_method == "text":
+                try:
+                    element = self.driver.find_element(By.CSS_SELECTOR, r["match"])
+                    if (
+                        element
+                        and r["match_text"].lower() in self.get_text(element).lower()
+                    ):
+                        recipe = r
+                        recipe_index = i
+                        break
+                    else:
+                        logger.info(
+                            f"NO MATCH FOR recipe i, {r['match']}, got {self.get_text(element)}"
+                        )
+                except NoSuchElementException:
+                    logger.info(f"NO SUCH ELEMENT FOR recipe i, {r['match']}")
+                    pass
+            elif match_method == "url":
+                if r["match"] == path:
                     recipe = r
                     recipe_index = i
                     break
-                else:
-                    logger.info(
-                        f"NO MATCH FOR recipe i, {r['match']}, got {self.get_text(element)}"
-                    )
-            except NoSuchElementException:
-                logger.info(f"NO SUCH ELEMENT FOR recipe i, {r['match']}")
-                pass
         else:
             logging.error(f"NO RECIPE FOUND FOR {path}")
             raise Exception(f"NO RECIPE FOUND FOR {path}")
@@ -670,7 +682,7 @@ class SeleniumEnv(gym.Env):
         self.ended = False
 
         if self.start_callback:
-            self.start_callback()
+            self.start_callback(self.browser)
         elif not self.headless:
             input("Press Enter to continue...")
         obs = self.browser.observe()
