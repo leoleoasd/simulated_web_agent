@@ -2,10 +2,10 @@ name: simulated_web_agent
 channels:
   - conda-forge
 dependencies:
-  - ipython=8.18.1=pyh707e725_3
-  - matplotlib-inline=0.1.7=pyhd8ed1ab_0
-  - pip=24.2=pyhd8ed1ab_0
-  - python=3.9.19=hd7ebdb9_0_cpython
+  - ipython=8.18.1
+  - matplotlib-inline=0.1.7
+  - pip=24.2
+  - python=3.9.19
   - pip:
       - annotated-types==0.7.0
       - anyio==4.4.0
