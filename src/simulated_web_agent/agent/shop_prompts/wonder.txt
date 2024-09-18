@@ -12,7 +12,6 @@ Output a series of random thoughts as they would naturally occur in a human mind
 
 Format your output as follows:
 
-```json
 {
     "thoughts": [
         "<random thought 1>",
@@ -20,6 +19,5 @@ Format your output as follows:
         ...
     ]
 }
-```
 
 Feel free to explore a wide range of topics and ideas that might occur to the persona in the moment.

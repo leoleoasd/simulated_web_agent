@@ -43,13 +43,13 @@ You will also be given a current timestamp. All memories with the same timestamp
 
 Format your output as follows:
 
-```json
 {
     "rationale": "<string representation of the plan>",
     "plan": "<string representation of the plan>",
     "next_step": "<string representation of the next step>"
 }
-```
+
+Remember to only write valid JSON, for example, denote new lines with `\n` in strings.
 
 # Example output
 ## Example 1

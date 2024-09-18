@@ -13,7 +13,6 @@ Examples of insights:
 
 Your output should be a list of insights formatted as follows:
 
-```json
 {
     "insights": [
         "<insight 1>",
@@ -21,4 +20,3 @@ Your output should be a list of insights formatted as follows:
         ...
     ]
 }
-```

@@ -132,8 +132,8 @@ class AgentPolicy(BasePolicy):
 
     async def slow_loop(self):
         while True:
-            await self.agent.reflect()
-            await self.agent.wonder()
+            # await self.agent.reflect()
+            # await self.agent.wonder()
             await self.agent.memory.update()
 
     async def forward(self, observation, available_actions):

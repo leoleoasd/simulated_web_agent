@@ -242,6 +242,7 @@ class Browser:
             options.add_argument("--headless")
         # options.add_argument("--remote-debugging-port=9222")
         options.add_argument("--unsafely-disable-devtools-self-xss-warnings")
+        options.add_argument("--auto-open-devtools-for-tabs")
         driver = webdriver.Chrome(options=options)
         self.driver = driver
         self.driver.get(url)

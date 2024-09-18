@@ -33,7 +33,6 @@ Examples of observations include:
 
 Output your observations as a JSON object in the following format:
 
-```json
 {
     "observations": [
         "<observation 1>",
@@ -41,4 +40,5 @@ Output your observations as a JSON object in the following format:
         ...
     ]
 }
-```
+
+DO NOT OUTPUT ANYTHING ELSE. DO NOT OUTPUT ANYTHING ELSE. DO NOT OUTPUT ANYTHING ELSE. DO NOT OUTPUT ANYTHING ELSE. DO NOT OUTPUT ANYTHING ELSE. 

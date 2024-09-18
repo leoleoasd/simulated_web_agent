@@ -6,7 +6,8 @@ import time
 from typing import Optional, Union
 
 from . import context
-from .gpt import async_chat, load_prompt
+from .gpt import async_chat_bedrock as async_chat
+from .gpt import load_prompt
 from .memory import Action, Memory, MemoryPiece, Observation, Plan, Reflection, Thought
 
 PERCEIVE_PROMPT = load_prompt("perceive")
@@ -84,17 +85,12 @@ class Agent:
                 ]
                 for e in envs
             ]
-            results = await asyncio.gather(
-                *[
-                    async_chat(r, response_format={"type": "json_object"})
-                    for r in requests
-                ]
-            )
-            # logger.info("Perceived: %s", observasions.choices[0].message.content)
-            # observasions = json.loads(observasions.choices[0].message.content)
+            results = await asyncio.gather(*[async_chat(r) for r in requests])
+            # logger.info("Perceived: %s", observasions)
+            # observasions = json.loads(observasions)
             for r in results:
-                logger.info("Perceived: %s", r.choices[0].message.content)
-                observasions += json.loads(r.choices[0].message.content)["observations"]
+                logger.info("Perceived: %s", r)
+                observasions += json.loads(r)["observations"]
             #  = await async_chat(
             #     [
             #         {"role": "system", "content": PERCEIVE_PROMPT},
@@ -124,6 +120,7 @@ class Agent:
     async def feedback(self, obs):
         last_action = None
         last_plan = self.current_plan
+        # todo: allow many actions in a timestamp.
         for m in self.memory.memories[::-1]:
             if isinstance(m, Action):
                 last_action = m
@@ -145,10 +142,9 @@ class Agent:
                             }
                         ),
                     },
-                ],
-                response_format={"type": "json_object"},
+                ]
             )
-        resp = json.loads(resp.choices[0].message.content)
+        resp = json.loads(resp)
         logger.info("feedback: %s", resp)
         for thought in resp["thoughts"]:
             await self.memory.add_memory_piece(Thought(thought, self.memory))
@@ -174,11 +170,9 @@ class Agent:
                 {"role": "system", "content": REFLECT_PROMPT},
                 {"role": "user", "content": json.dumps(model_input)},
             ],
-            response_format={"type": "json_object"},
             log=False,
-            model="gpt-4-turbo",
         )
-        reflections = json.loads(reflections.choices[0].message.content)["insights"]
+        reflections = json.loads(reflections)["insights"]
         logger.info("reflections: %s", reflections)
         for r in reflections:
             await self.memory.add_memory_piece(Reflection(r, self.memory))
@@ -219,7 +213,7 @@ class Agent:
         #     ]
         # )
         # for answer in results:
-        #     answer = json.loads(answer.choices[0].message.content)
+        #     answer = json.loads(answer)
         #     if answer["answer"] != "N/A":
         #         answers.append(answer)
         # try:
@@ -257,9 +251,8 @@ class Agent:
                 },
             ],
             log=False,
-            response_format={"type": "json_object"},
         )
-        resp = json.loads(resp.choices[0].message.content)
+        resp = json.loads(resp)
         logger.info("wondering: %s", resp)
         for thought in resp["thoughts"]:
             await self.memory.add_memory_piece(Thought(thought, self.memory))
@@ -297,12 +290,10 @@ class Agent:
                                 }
                             ),
                         },
-                    ],
-                    response_format={"type": "json_object"},
-                    model="gpt-4-turbo",
+                    ]
                 )
-                # # print(resp.choices[0].message.content)
-                resp = resp.choices[0].message.content
+                # # print(resp)
+                resp = resp
                 resp = json.loads(resp)
                 if "plan" in resp and "rationale" in resp and "next_step" in resp:
                     logger.info(
@@ -347,11 +338,9 @@ class Agent:
                             }
                         ),
                     },
-                ],
-                response_format={"type": "json_object"},
-                model="gpt-4o",
+                ]
             )
-        actions = json.loads(action.choices[0].message.content)
+        actions = json.loads(action)
         logger.info("actions: %s", actions)
         for action in actions["actions"]:
             await self.memory.add_memory_piece(

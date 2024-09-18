@@ -9,6 +9,8 @@ import numpy as np
 import openai
 
 from . import context, gpt
+from .gpt import async_chat_bedrock as async_chat
+from .gpt import embed_text_bedrock as embed_text
 from .gpt import load_prompt
 
 MEMORY_IMPORTANCE_PROMPT = load_prompt("memory_importance")
@@ -60,8 +62,7 @@ class Memory:
                     len(self.embeddings) if self.embeddings is not None else 0 :
                 ]
                 inputs = [m.content for m in memory_to_embed]
-                embeds = await gpt.embed_text(inputs)
-                embeds = [e.embedding for e in embeds.data]
+                embeds = await embed_text(inputs)
                 embeds = np.array(embeds)
                 for i, m in enumerate(memory_to_embed):
                     m.embedding = embeds[i]
@@ -94,15 +95,13 @@ class Memory:
                 ]
                 responses = await asyncio.gather(
                     *[
-                        gpt.async_chat(
+                        async_chat(
                             r, response_format={"type": "json_object"}, log=False
                         )
                         for r in requests
                     ]
                 )
-                new_importance = [
-                    json.loads(r.choices[0].message.content)["score"] for r in responses
-                ]
+                new_importance = [json.loads(r)["score"] for r in responses]
                 new_importance = np.array(new_importance) / 10
                 for i, m in enumerate(memory_to_update):
                     m.importance = new_importance[i]
@@ -171,7 +170,7 @@ class Memory:
                     context.api_call_manager.retrieve_result.append(results)
                 return results
 
-            query_embedding = (await gpt.embed_text(query)).data[0].embedding
+            query_embedding = embed_text(query, type="search_query")[0]
             similarities = np.dot(self.embeddings, query_embedding)
             recencies = np.array([m.timestamp - self.timestamp for m in self.memories])
             recencies = np.exp(recencies)

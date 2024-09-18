@@ -57,7 +57,6 @@ The format for the input and output is as follows:
 
 ### Input
 
-```json
 {
     "last_plan": "<previous plan here>",
     "last_action": {
@@ -67,7 +66,6 @@ The format for the input and output is as follows:
     },
     "new_observation": "<HTML or other observation data here>"
 }
-```
 
 ### Output
 
@@ -78,7 +76,6 @@ One or more thoughts in string format that include:
 ### Example
 
 #### Input
-```json
 {
     "last_plan": "Search for the product, Add to cart, Proceed to checkout",
     "last_action": {
@@ -89,16 +86,13 @@ One or more thoughts in string format that include:
     },
     "new_observation": "<HTML showing search results for 'laptop'>"
 }
-```
 
 #### Output
-```json
 {
     "thoughts": [
         "The search action was successful, as the new observation shows search results for 'laptop'.",
         "Proceed to the next step: 'Add to cart'."
     ]
 }
-```
 
 Use this format to provide your evaluation and feedback.

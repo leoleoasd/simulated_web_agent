@@ -1,4 +1,5 @@
 import asyncio
+import base64
 import json
 import logging
 import os
@@ -6,12 +7,13 @@ import time
 import traceback
 
 import gymnasium as gym
+import requests
 import selenium
 from dotenv import load_dotenv
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from ..agent.gpt import chat, chat_bulk
+from ..agent.gpt import chat_bedrock as chat
 from ..executor import amazon_recipes, google_flights_recipes, onestopshop_recipes
 from ..executor.env import Browser, SeleniumEnv  # noqa
 from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
@@ -24,6 +26,8 @@ def solve_captcha(browser: Browser):
                 By.CSS_SELECTOR,
                 "body > div > div.a-row.a-spacing-double-large > div.a-section > div > div > form > div.a-row.a-spacing-large > div > div > div.a-row.a-text-center > img",
             ).get_attribute("src")
+            image_file = requests.get(image).content
+            image_file = base64.b64encode(image_file).decode("utf-8")
             resp = chat(
                 [
                     {
@@ -33,14 +37,21 @@ def solve_captcha(browser: Browser):
                     {
                         "role": "user",
                         "content": [
+                            {
+                                "type": "image",
+                                "source": {
+                                    "type": "base64",
+                                    "media_type": "image/jpeg",
+                                    "data": image_file,
+                                },
+                            },
                             {"type": "text", "text": "What’s in this image?"},
-                            {"type": "image_url", "image_url": {"url": image}},
                         ],
                     },
                 ],
                 response_format={"type": "json_object"},
             )
-            text = json.loads(resp.choices[0].message.content)["text"]
+            text = json.loads(resp)["text"]
             input_element = browser.driver.find_element(
                 By.CSS_SELECTOR, "#captchacharacters"
             )
@@ -123,7 +134,7 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
     }
     env = gym.make(
         "SeleniumEnv-v0",
-        start_url="http://amazon.com/",
+        start_url="https://pre-prod.amazon.com",
         # start_url="https://www.google.com/flights",
         headless=os.environ.get("HEADLESS", "true").lower() == "true",
         # recipes=google_flights_recipes.recipes,

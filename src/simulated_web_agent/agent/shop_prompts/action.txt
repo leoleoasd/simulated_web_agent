@@ -22,7 +22,7 @@ An action is represented in JSON format, and there are four primary types of act
 #### 1. `type_and_submit`:
 Type text into an input field and immediately submit the form.
 
-```json
+
 {
     "actions": [
         {
@@ -33,12 +33,12 @@ Type text into an input field and immediately submit the form.
         }
     ]
 }
-```
+
 
 #### 2. `click`:
 Click on a button or clickable element identified by `name`.
 
-```json
+
 {
     "actions": [
         {
@@ -48,12 +48,12 @@ Click on a button or clickable element identified by `name`.
         }
     ]
 }
-```
+
 
 #### 3. `back`:
 Navigate back to the previous page in the browser history.
 
-```json
+
 {
     "actions": [
         {
@@ -62,12 +62,12 @@ Navigate back to the previous page in the browser history.
         }
     ]
 }
-```
+
 
 #### 4. `terminate`:
 Only use this action if the `next_step` explicitly indicates a termination action, such as "terminate," "quit," "stop," or "end the session."
 
-```json
+
 {
     "actions": [
         {
@@ -76,7 +76,7 @@ Only use this action if the `next_step` explicitly indicates a termination actio
         }
     ]
 }
-```
+
 
 ### Example Scenario:
 
@@ -100,7 +100,7 @@ Given the following input:
 
 If the `next_step` is "Select the desired size 'Small'," and based on the environment that contains a clickable element with the name "size_small_button", your output should be:
 
-```json
+
 {
     "actions": [
         {
@@ -110,11 +110,11 @@ If the `next_step` is "Select the desired size 'Small'," and based on the enviro
         }
     ]
 }
-```
+
 
 If the `next_step` is more complex (e.g., "Search for 'small red jacket' and press the search button"), your output would look like this:
 
-```json
+
 {
     "actions": [
         {
@@ -125,11 +125,11 @@ If the `next_step` is more complex (e.g., "Search for 'small red jacket' and pre
         }
     ]
 }
-```
+
 
 If the `next_step` explicitly states a termination, such as "terminate," your output would be:
 
-```json
+
 {
     "actions": [
         {
@@ -138,4 +138,7 @@ If the `next_step` explicitly states a termination, such as "terminate," your ou
         }
     ]
 }
-```
+
+
+### Output Format
+Only output SINGLE VALID JSON without anything else.
