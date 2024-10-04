@@ -126,6 +126,19 @@ If the `next_step` is more complex (e.g., "Search for 'small red jacket' and pre
     ]
 }
 
+If the `next_step` specifies selecting filter options, your output would be:
+
+
+{
+    "actions": [
+        {
+            "type": "click",
+            "name": "refinements.prime_refinements._free_shipping_by_amazon_get_free_shipping_on_eligible_orders_shipped_by_amazon_",
+            "description": "Clicking on the filter option named 'refinements.prime_refinements._free_shipping_by_amazon_get_free_shipping_on_eligible_orders_shipped_by_amazon_'."
+        }
+    ]
+}
+
 
 If the `next_step` explicitly states a termination, such as "terminate," your output would be:
 

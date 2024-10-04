@@ -477,6 +477,7 @@ class Browser:
         time.sleep(1)
 
     def type_and_submit(self, name, text):
+        self.clear(name)
         if name not in self.inputs:
             logger.error(f"INVALID ACTION: {name}")
             raise InvalidAction(f"INVALID ACTION: input {name} not found")

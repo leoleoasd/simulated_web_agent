@@ -85,7 +85,9 @@ class Agent:
                 ]
                 for e in envs
             ]
-            results = await asyncio.gather(*[async_chat(r) for r in requests])
+            results = await asyncio.gather(
+                *[async_chat(r, json_mode=True) for r in requests]
+            )
             # logger.info("Perceived: %s", observasions)
             # observasions = json.loads(observasions)
             for r in results:
@@ -142,7 +144,8 @@ class Agent:
                             }
                         ),
                     },
-                ]
+                ],
+                json_mode=True,
             )
         resp = json.loads(resp)
         logger.info("feedback: %s", resp)
@@ -170,6 +173,7 @@ class Agent:
                 {"role": "system", "content": REFLECT_PROMPT},
                 {"role": "user", "content": json.dumps(model_input)},
             ],
+            json_mode=True,
             log=False,
         )
         reflections = json.loads(reflections)["insights"]
@@ -250,6 +254,7 @@ class Agent:
                     ),
                 },
             ],
+            json_mode=True,
             log=False,
         )
         resp = json.loads(resp)
@@ -267,6 +272,7 @@ class Agent:
                 kind_weight={"action": 10, "plan": 10, "thought": 10, "reflection": 10},
             )
             memories = self.format_memories(memories)
+            logger.info("memories: %s", memories)
             new_plan = ""
             rationale = ""
             while True:
@@ -290,7 +296,9 @@ class Agent:
                                 }
                             ),
                         },
-                    ]
+                    ],
+                    json_mode=True,
+                    model="anthropic.claude-3-5-sonnet-20240620-v1:0",
                 )
                 # # print(resp)
                 resp = resp
@@ -338,7 +346,8 @@ class Agent:
                             }
                         ),
                     },
-                ]
+                ],
+                json_mode=True,
             )
         actions = json.loads(action)
         logger.info("actions: %s", actions)

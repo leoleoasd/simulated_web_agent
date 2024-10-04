@@ -32,7 +32,7 @@ def solve_captcha(browser: Browser):
                 [
                     {
                         "role": "system",
-                        "content": "You are an OCR expert designed to solve CAPTCHAs. You will respond in a single JSON format: {'text': 'The text in the image'}",
+                        "content": 'You are an OCR expert designed to solve CAPTCHAs. You will respond in a single JSON format: {"text": "The text in the image"}',
                     },
                     {
                         "role": "user",
@@ -51,6 +51,7 @@ def solve_captcha(browser: Browser):
                 ],
                 response_format={"type": "json_object"},
             )
+            print(resp)
             text = json.loads(resp)["text"]
             input_element = browser.driver.find_element(
                 By.CSS_SELECTOR, "#captchacharacters"
@@ -134,7 +135,7 @@ Clara prefers comfortable, functional clothing, often choosing items that are ea
     }
     env = gym.make(
         "SeleniumEnv-v0",
-        start_url="https://pre-prod.amazon.com",
+        start_url="https://www.amazon.com",
         # start_url="https://www.google.com/flights",
         headless=os.environ.get("HEADLESS", "true").lower() == "true",
         # recipes=google_flights_recipes.recipes,

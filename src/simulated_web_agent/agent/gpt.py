@@ -20,7 +20,7 @@ async_client = None
 # embedding_model = "text-embedding-3-small"
 embedding_model = "cohere.embed-english-v3"
 # chat_model = "gpt-4o-mini"
-chat_model = "anthropic.claude-3-5-sonnet-20240620-v1:0"
+chat_model = "anthropic.claude-3-haiku-20240307-v1:0"
 prompt_dir = Path(__file__).parent.absolute() / "shop_prompts"
 import botocore
 
@@ -94,6 +94,7 @@ async def async_chat_bedrock(
     messages: list[dict[str, str]],
     model=chat_model,
     log=True,
+    json_mode=False,
     **kwargs,
 ) -> ChatCompletion:
     async with session.client("bedrock-runtime", region_name="us-east-1") as client:
@@ -113,9 +114,35 @@ async def async_chat_bedrock(
             ),
         )
         result = json.loads(await response["body"].read())
+        content = result["content"][0]["text"]
         if context.api_call_manager and log:
-            context.api_call_manager.response.append(result["content"][0]["text"])
-        return result["content"][0]["text"]
+            context.api_call_manager.response.append(content)
+
+        if json_mode:
+            # Extract JSON substring from the content
+            try:
+                json_str = _extract_json_string(content)
+                json_obj = json.loads(json_str)
+                return json_str
+            except Exception as e:
+                print(e)
+                print(content)
+                print(json_str)
+                raise Exception("Invalid JSON in response") from e
+        else:
+            return content
+
+
+def _extract_json_string(text: str) -> str:
+    import regex
+
+    # Improved pattern to match JSON objects. Note: This is still not foolproof for deeply nested or complex JSON.
+    json_pattern = r"\{(?:[^{}]*|(?R))*\}"
+    matches = regex.findall(json_pattern, text, regex.DOTALL)
+    if matches:
+        return matches[0]
+    else:
+        raise Exception("No JSON object found in the response")
 
 
 @retry()

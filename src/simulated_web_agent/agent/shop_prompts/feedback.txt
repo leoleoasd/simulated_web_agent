@@ -73,6 +73,8 @@ One or more thoughts in string format that include:
 - An evaluation of whether the action was successful.
 - Any feedback or observations that may inform the next action.
 
+OUTPUT IN JSON FORMAT! STICK TO THE FORMAT! USE `\n` FOR NEW LINES or I'll lose my job.
+
 ### Example
 
 #### Input
