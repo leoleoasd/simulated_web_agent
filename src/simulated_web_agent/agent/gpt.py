@@ -98,8 +98,8 @@ async def async_chat_bedrock(
     **kwargs,
 ) -> ChatCompletion:
     async with session.client("bedrock-runtime", region_name="us-east-1") as client:
-        if context.api_call_manager and log:
-            context.api_call_manager.request.append(messages)
+        if context.api_call_manager.get() and log:
+            context.api_call_manager.get().request.append(messages)
         system_message = messages[0]["content"]
         messages = messages[1:]
         response = await client.invoke_model(
@@ -115,8 +115,8 @@ async def async_chat_bedrock(
         )
         result = json.loads(await response["body"].read())
         content = result["content"][0]["text"]
-        if context.api_call_manager and log:
-            context.api_call_manager.response.append(content)
+        if context.api_call_manager.get() and log:
+            context.api_call_manager.get().response.append(content)
 
         if json_mode:
             # Extract JSON substring from the content
@@ -188,13 +188,13 @@ def chat(messages, model=chat_model, **kwargs) -> ChatCompletion:
 
 async def async_chat(messages, model=chat_model, log=True, **kwargs) -> ChatCompletion:
     try:
-        if context.api_call_manager and log:
-            context.api_call_manager.request.append(messages)
+        if context.api_call_manager.get() and log:
+            context.api_call_manager.get().request.append(messages)
         response = await async_client.chat.completions.create(
             model=model, messages=messages, **kwargs
         )
-        if context.api_call_manager and log:
-            context.api_call_manager.response.append(
+        if context.api_call_manager.get() and log:
+            context.api_call_manager.get().response.append(
                 response.choices[0].message.content
             )
         return response

@@ -166,8 +166,8 @@ class Memory:
             # importance = self.importance.copy()
             # memories = [m for m in self.memories]
             if self.embeddings.size == 0:
-                if context.api_call_manager:
-                    context.api_call_manager.retrieve_result.append(results)
+                if context.api_call_manager.get():
+                    context.api_call_manager.get().retrieve_result.append(results)
                 return results
 
             query_embedding = embed_text(query, type="search_query")[0]
@@ -185,8 +185,8 @@ class Memory:
             # scores = (similarities + recencies + self.importance) * kind_weights
             top_indices = np.argsort(-scores)[:n]
             results += [self.memories[i] for i in top_indices]
-            if context.api_call_manager:
-                context.api_call_manager.retrieve_result.append(results)
+            if context.api_call_manager.get():
+                context.api_call_manager.get().retrieve_result.append(results)
             return results
 
 

@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 from ..agent.gpt import chat_bulk
 from ..executor import google_flights_recipes
 from ..executor.env import SeleniumEnv  # noqa
-from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
+from ..main.model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
 
 
 async def main():

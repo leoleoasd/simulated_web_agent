@@ -139,6 +139,18 @@ If the `next_step` specifies selecting filter options, your output would be:
     ]
 }
 
+If the `next_step` specifies looking into a product, for example, 2 Pcs Kids Clear Bubble Umbrella with Easy Grip Curved Handle Transparent Dome Bubble Umbrella for Toddler Boys Girls(Rainbow), your output would be:
+
+{
+    "actions": [
+        {
+            "type": "click",
+            "name": "search_results.2_pcs_kids_clear_bubble_umbrella_with_easy_grip_curved_handle_transparent_dome_bubble_umbrella_for_toddler_boys_girls_rainbow_.view_product",
+            "description": "Clicking on the product '2 Pcs Kids Clear Bubble Umbrella with Easy Grip Curved Handle Transparent Dome Bubble Umbrella' to check details"
+        }
+    ]
+}
+
 
 If the `next_step` explicitly states a termination, such as "terminate," your output would be:
 

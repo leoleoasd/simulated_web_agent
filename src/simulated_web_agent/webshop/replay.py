@@ -14,8 +14,8 @@ from dotenv import load_dotenv
 from ..agent.gpt import chat_bulk
 from ..executor import google_flights_recipes, onestopshop_recipes
 from ..executor.env import SeleniumEnv  # noqa
+from ..main.model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
 from .batch import make_sync
-from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
 
 recording_process = None
 

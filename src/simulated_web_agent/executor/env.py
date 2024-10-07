@@ -2,6 +2,7 @@ import asyncio
 import json
 import logging
 import os
+import platform
 import random
 import re
 import time
@@ -56,6 +57,176 @@ stop_animate = """
 // clear the scrollDownTimeout
 if (document.scrollDownTimeout) {
     clearTimeout(document.scrollDownTimeout);
+}
+"""
+
+process_js_code = """
+function processElement(element, recipe, parentName = "", nthChild = 0) {
+    // Create a new element using the DOM API
+    let tagName = recipe.tag_name || element.tagName.toLowerCase();
+    // Handle underscored tags
+    if (tagName.endsWith("_")) {
+        tagName = tagName.slice(0, -1);
+    }
+    const newElement = document.createElement(tagName);
+
+    // Extract text content based on the recipe
+    let elementText = "";
+    if (recipe.text_selector) {
+        const textElement = element.querySelector(recipe.text_selector);
+        if (textElement) {
+            elementText = textElement.innerText || textElement.textContent || "";
+        }
+    } else if (recipe.text_js) {
+        elementText = eval(recipe.text_js);
+    } else if (recipe.add_text) {
+        elementText = element.innerText || element.textContent || "";
+    }
+    elementText = elementText.replace(/\s+/g, " ").trim();
+    if (recipe.text_format && elementText) {
+        elementText = recipe.text_format.replace("{}", elementText);
+    }
+
+    if (elementText && recipe.add_text) {
+        newElement.textContent = elementText;
+    }
+
+    // Build the node attributes
+    let elementName = "";
+    if (recipe.name) {
+        if (recipe.name === "from_text") {
+            elementName = parentName ? parentName + "." : "";
+            elementName += elementText.toLowerCase().replace(/[^\w]+/g, "_");
+        } else if (recipe.name === "from_nth_child") {
+            elementName = parentName ? parentName + "." : "";
+            elementName += nthChild.toString();
+        } else {
+            elementName = parentName ? parentName + "." : "";
+            elementName += recipe.name;
+        }
+        newElement.setAttribute("name", elementName);
+        parentName = elementName;
+    }
+
+    // Handle clickables and inputs
+    if (recipe.clickable) {
+        if (!recipe.name) {
+            throw new Error("clickable element must have a name");
+        }
+        // handle click_selector
+        if (recipe.click_selector) {
+            click_element = element.querySelector(recipe.click_selector);
+        } else {
+            click_element = element;
+        }
+        if (click_element) {
+            click_element.setAttribute("data-clickable-id", elementName);
+        } else {
+            console.log('click-element not found', element, recipe);
+        }
+        if (!window.clickable_recipes) {
+            window.clickable_recipes = {};
+        }
+        window.clickable_recipes[elementName] = recipe;
+    }
+    if (tagName === "input") {
+        const inputType = element.getAttribute("type");
+        if (["text", "number"].includes(inputType)) {
+            newElement.setAttribute("value", element.value);
+            element.setAttribute("data-input-id", elementName);
+        } else if (inputType === "checkbox") {
+            newElement.setAttribute("checked", element.checked.toString());
+        } else if (inputType === "radio") {
+            newElement.setAttribute("checked", element.checked.toString());
+            element.setAttribute("data-clickable-id", elementName);
+        }
+        if (!window.input_recipes) {
+            window.input_recipes = {};
+        }
+        window.input_recipes[elementName] = recipe;
+    }
+    // **Handle select elements**
+    if (tagName === "select") {
+        // Tag the select element with data-select-id
+        element.setAttribute("data-select-id", elementName);
+
+        const options = element.querySelectorAll('option');
+        options.forEach((option) => {
+            const optionValue = option.getAttribute('value') || option.textContent.trim();
+            const optionName = elementName + "." + optionValue;
+            const newOption = document.createElement('option');
+            newOption.textContent = option.textContent;
+            newOption.setAttribute('value', optionValue);
+            newOption.setAttribute('name', optionName);
+            newOption.setAttribute('selected', option.selected.toString());
+            option.setAttribute('data-clickable-id', optionName); // Tag actual DOM option element
+            newElement.appendChild(newOption);
+        });
+    }
+    // Copy specified attributes
+    const attrsToCopy = ["alt", "title", "type", "value", "role", "aria-label", "aria-hidden", "aria-selected"];
+    attrsToCopy.forEach((attr) => {
+        const value = element.getAttribute(attr);
+        if (value) {
+            newElement.setAttribute(attr, value);
+        }
+    });
+    if (recipe.keep_attr) {
+        for (const key in recipe.keep_attr) {
+            const value = element.getAttribute(key);
+            if (value) {
+                newElement.setAttribute(key, value);
+            }
+        }
+    }
+    if (recipe['class']) {
+        newElement.setAttribute('class', recipe['class']);
+    }
+    if (recipe['id']) {
+        newElement.setAttribute('id', recipe['id']);
+    }
+
+    // Override attributes if specified
+    if (recipe.override_attr) {
+        for (const key in recipe.override_attr) {
+            newElement.setAttribute(key, eval(recipe.override_attr[key]));
+        }
+    }
+
+    // Process children
+    if (recipe.children && recipe.children.length > 0) {
+        for (const childRecipe of recipe.children) {
+            const selector = childRecipe.direct_child ? `:scope > ${childRecipe.selector}` : childRecipe.selector;
+            const childElements = element.querySelectorAll(selector);
+            childElements.forEach((childElement, index) => {
+                const childNode = processElement(childElement, childRecipe, parentName, index);
+                newElement.appendChild(childNode);
+                if (childRecipe.insert_split_marker) {
+                    const every = childRecipe.insert_split_marker_every || 1;
+                    if (index % every == 0) {
+                        const splitMarker = document.createElement('split-marker');
+                        newElement.appendChild(splitMarker);
+                        // console.log("inserting split marker 1");
+                    }
+                }
+                if (childRecipe.insert_split_marker) {
+                    // console.log("inserting split marker 2");
+                    const splitMarker = document.createElement('split-marker');
+                    newElement.appendChild(splitMarker);
+                } else {
+                    console.log("no split marker");
+                }
+            });
+        }
+    }
+
+    // Handle empty messages
+    if (recipe.empty_message && newElement.children.length === 0) {
+        const emptyTextNode = document.createTextNode(recipe.empty_message);
+        newElement.appendChild(emptyTextNode);
+    }
+
+    return newElement;
 }
 """
 
@@ -135,7 +306,13 @@ document.highlightedElement = div;
         time.sleep(1.5)
         logger.info("sleep end")
         if self.before_hook:
-            self.driver.execute_script(self.before_hook, self.element)
+            print("before_hook")
+            result = self.driver.execute_script(
+                self.before_hook, self.element, context.browser_context.get()
+            )
+            print("before_hook result", result)
+            if result is not None:
+                context.browser_context.set(result)
         # self.driver.execute_script(
         #     "arguments[0].style.outline='3px solid #79ccd7'", self.element
         # )
@@ -158,7 +335,11 @@ document.highlightedElement = div;
                 "document.highlightedElement && document.highlightedElement.remove()"
             )
             if self.after_hook:
-                self.driver.execute_script(self.after_hook, self.element)
+                result = self.driver.execute_script(
+                    self.after_hook, self.element, context.browser_context.get()
+                )
+                if result is not None:
+                    context.browser_context.set(result)
         except StaleElementReferenceException:
             pass
 
@@ -243,6 +424,10 @@ class Browser:
         # options.add_argument("--remote-debugging-port=9222")
         options.add_argument("--unsafely-disable-devtools-self-xss-warnings")
         options.add_argument("--auto-open-devtools-for-tabs")
+        options.add_argument("--window-position=-1000,-1440")
+        options.add_argument("--window-size=2560,1440")
+
+        options.add_argument("--start-maximized")
         driver = webdriver.Chrome(options=options)
         self.driver = driver
         self.driver.get(url)
@@ -511,38 +696,59 @@ class Browser:
         ) as h:
             # self.inputs[name].clear()
             # send end key
-            self.inputs[name].send_keys("\ue010")
-            # send backspace key
-            while self.inputs[name].get_attribute("value"):
-                self.inputs[name].send_keys("\ue003")
-                h.sleep()
+            # self.inputs[name].send_keys("\ue010")
+            # # send backspace key
+            # while self.inputs[name].get_attribute("value"):
+            #     self.inputs[name].send_keys("\ue003")
+            #     h.sleep()
+
+            if platform.system() == "Darwin":  # macOS
+                self.inputs[name].send_keys(webdriver.Keys.COMMAND, "a")
+            else:
+                self.inputs[name].send_keys(webdriver.Keys.CONTROL, "a")
             time.sleep(1)
 
     def click(self, name):
         if name not in self.clickables:
             logger.error(f"INVALID ACTION: {name} is not clickable")
             raise InvalidAction(f"INVALID ACTION: {name} is not clickable")
-        if name in self.selects:
-            select = self.selects[name]
-            select = Select(select)
-            option = self.clickables[name]
-            with ElementHighlight(
-                self.selects[name],
-                self.driver,
-                self.headless,
-                before_hook=self.clickable_recipes[name].get("before_hook", None),
-                after_hook=self.clickable_recipes[name].get("after_hook", None),
-            ):
-                select.select_by_value(option.get_attribute("value"))
+
+        element = self.clickables[name]
+
+        # Check if the element is an option within a select element
+        if element.tag_name.lower() == "option":
+            # Retrieve the parent select element
+            select_name = ".".join(
+                name.split(".")[:-1]
+            )  # Remove the option value from the name
+            if select_name in self.selects:
+                select_element = self.selects[select_name]
+                option_value = name.split(".")[-1]
+                with ElementHighlight(
+                    select_element,
+                    self.driver,
+                    self.headless,
+                    before_hook=self.clickable_recipes[name].get("before_hook", None),
+                    after_hook=self.clickable_recipes[name].get("after_hook", None),
+                ):
+                    # Use Selenium's Select class to select the option
+                    select_obj = Select(select_element)
+                    select_obj.select_by_value(option_value)
+                time.sleep(1)
+            else:
+                logger.error(
+                    f"Select element {select_name} not found for option {name}"
+                )
+                raise InvalidAction(f"Select element {select_name} not found")
         else:
             with ElementHighlight(
-                self.clickables[name],
+                element,
                 self.driver,
                 self.headless,
                 before_hook=self.clickable_recipes[name].get("before_hook", None),
                 after_hook=self.clickable_recipes[name].get("after_hook", None),
             ):
-                self.clickables[name].click()
+                element.click()
             time.sleep(1)
 
     def back(self):
@@ -551,57 +757,51 @@ class Browser:
     def observe(self, skip_wait: bool = False):
         self.clickables = {}
         self.inputs = {}
-        # wait for the page to load
+
         if not skip_wait:
             wait = WebDriverWait(self.driver, 10)
             wait.until(
                 lambda driver: driver.execute_script("return document.readyState")
                 == "complete"
             )
-            # await asyncio.sleep(1)
             logger.info("OBSERVING")
             time.sleep(1)
 
         url = urllib.parse.urlparse(self.driver.current_url)
         path = url.path
         recipe = None
-        recipe_index = -1
         for i, r in enumerate(self.recipes):
             match_method = r.get("match_method", "text")
             if match_method == "text":
                 try:
                     element = self.driver.find_element(By.CSS_SELECTOR, r["match"])
-                    if (
-                        element
-                        and r["match_text"].lower() in self.get_text(element).lower()
-                    ):
+                    if element and r["match_text"].lower() in element.text.lower():
                         recipe = r
-                        recipe_index = i
                         break
-                    else:
-                        logger.info(
-                            f"NO MATCH FOR recipe i, {r['match']}, got {self.get_text(element)}"
-                        )
                 except NoSuchElementException:
-                    logger.info(f"NO SUCH ELEMENT FOR recipe i, {r['match']}")
                     pass
             elif match_method == "url":
                 if r["match"] == path:
                     recipe = r
-                    recipe_index = i
                     break
         else:
             logging.error(f"NO RECIPE FOUND FOR {path}")
             raise Exception(f"NO RECIPE FOUND FOR {path}")
-        if "terminate" in recipe and self.driver.execute_script(recipe["terminate"]):
+        if "terminate" in recipe and self.driver.execute_script(
+            recipe["terminate"], context.browser_context.get()
+        ):
             if "terminate_callback" in recipe:
-                result = self.driver.execute_script(recipe["terminate_callback"])
+                result = self.driver.execute_script(
+                    recipe["terminate_callback"], context.browser_context.get()
+                )
                 if self.end_callback:
                     self.end_callback(result)
                 elif not self.headless:
                     input("Press Enter to continue...")
-                if context.run_path:
-                    (context.run_path / "result.json").write_text(json.dumps(result))
+                if context.run_path.get():
+                    (context.run_path.get() / "result.json").write_text(
+                        json.dumps(result)
+                    )
             return {
                 "page": "TERMINATE",
                 "diff_selector": "",
@@ -610,37 +810,65 @@ class Browser:
                 "inputs": [],
                 "ended": True,
             }
-        new_root = self.process(
-            self.driver.find_element(By.CSS_SELECTOR, recipe["selector"]), recipe
-        )
-        self.driver.execute_script("window.scrollBy({top: -800, behavior: 'smooth'});")
-        if recipe_index == self.last_recipe_index and False:  # TODO
-            # get diff
-            diff = tree_diff(self.last_root, new_root)
-            self.last_root = new_root
-            self.last_recipe_index = recipe_index
-            if diff is not None:
-                # selector_1 = node_to_selector(diff[0])
-                selector_2 = node_to_selector(diff[1])
-                # assert selector_1 == selector_2
-                return {
-                    "page": diff[1],
-                    "diff_selector": selector_2,
-                    "url": self.driver.current_url,
-                    "clickables": list(self.clickables.keys()),
-                    "inputs": list(self.inputs.keys()),
-                    "ended": False,
-                }
-        self.last_root = new_root
-        self.last_recipe_index = recipe_index
+        # Serialize the recipe to JSON
+        recipe_json = json.dumps(recipe)
+
+        # JavaScript code as a string
+        js_code = f"""
+            {process_js_code}
+            const rootElement = document.querySelector('{recipe['selector']}');
+            const recipeObj = {recipe_json};
+            const newRoot = processElement(rootElement, recipeObj);
+            return newRoot.outerHTML;
+        """
+
+        # Execute the script and get the result
+        html_string = self.driver.execute_script(js_code)
+
+        # Parse the HTML string if needed
+        # For example, you can use BeautifulSoup or any other parser
+
+        # Collect elements with data attributes
+        self.collect_clickables_and_inputs()
+
         return {
-            "page": new_root,
+            "page": html_string,
             "diff_selector": "",
             "url": self.driver.current_url,
             "clickables": list(self.clickables.keys()),
             "inputs": list(self.inputs.keys()),
             "ended": False,
         }
+
+    def collect_clickables_and_inputs(self):
+        # Clear existing mappings
+        self.clickables = {}
+        self.inputs = {}
+        self.selects = {}
+
+        # Find elements with data-clickable-id
+        clickable_elements = self.driver.find_elements(
+            By.CSS_SELECTOR, "[data-clickable-id]"
+        )
+        for element in clickable_elements:
+            clickable_id = element.get_attribute("data-clickable-id")
+            self.clickables[clickable_id] = element
+
+        # Find elements with data-input-id
+        input_elements = self.driver.find_elements(By.CSS_SELECTOR, "[data-input-id]")
+        for element in input_elements:
+            input_id = element.get_attribute("data-input-id")
+            self.inputs[input_id] = element
+
+        # Find select elements
+        select_elements = self.driver.find_elements(By.CSS_SELECTOR, "[data-select-id]")
+        for element in select_elements:
+            select_id = element.get_attribute("data-select-id")
+            self.selects[select_id] = element
+        self.inputs_recipes = self.driver.execute_script("return window.input_recipes;")
+        self.clickable_recipes = self.driver.execute_script(
+            "return window.clickable_recipes;"
+        )
 
 
 class SeleniumEnv(gym.Env):
@@ -715,7 +943,7 @@ class SeleniumEnv(gym.Env):
         return (
             {
                 "url": obs["url"],
-                "page": obs["page"].render(pretty=self.pretty),
+                "page": obs["page"],
                 "clickables": obs["clickables"],
                 "inputs": obs["inputs"],
                 "error_message": "",
@@ -789,12 +1017,10 @@ class SeleniumEnv(gym.Env):
                 target=self.browser.driver.execute_script, args=(run_animate,)
             )
             thread.start()
-        if isinstance(obs["page"], str):
-            print(obs["page"])
         return (
             {
                 "url": obs["url"],
-                "page": obs["page"].render(pretty=self.pretty),
+                "page": obs["page"],
                 "clickables": obs["clickables"],
                 "inputs": obs["inputs"],
                 "error_message": error_message,

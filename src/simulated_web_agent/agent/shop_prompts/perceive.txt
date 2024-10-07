@@ -16,11 +16,6 @@ Since you will be only looking at a specific part of the page, which may be empt
 If a diff_selector is provided, it means that the page only changed in the area of the element with the given selector.
 In this case, the HTML shown to you is the changed part of the page.
 
-## Principles
-* **EACH OBSERVATION SHOULD BE INDEPENDENT**. For every logical element (not necessarily a single HTML element. A form, a product card, ...) should be described in ONE paragraph of observation.
-    * For example, for `product-item-info` class, you should describe the product card as a whole. Do not split it into multiple observations.
-    * User should be able to understand each observation independently. For example, "An 'Add to Cart' button is present on the product card, allowing users to easily add the Cheongeun Sweet Potato Starch Powder to their shopping cart." is not acceptable since the product name and other information are not included. Combine them into one observation.
-* **WRITE EVERY DETAIL**. A blind person should able to understand every detail of the web page with your support. This including listing ALL OPTIONS of radio buttons, no matter how long are they.
 
 Examples of observations include:
 1. A search box with the input name "search" and placeholder "Search".
@@ -41,4 +36,39 @@ Output your observations as a JSON object in the following format:
     ]
 }
 
-DO NOT OUTPUT ANYTHING ELSE. DO NOT OUTPUT ANYTHING ELSE. DO NOT OUTPUT ANYTHING ELSE. DO NOT OUTPUT ANYTHING ELSE. DO NOT OUTPUT ANYTHING ELSE. 
+# Example Input 1
+<div name="search_results.men_s_timberturner_ii_jacket"><a
+        name="search_results.men_s_timberturner_ii_jacket.view_product"
+        href="/Columbia-Timberturner-Jacket-Metal-X-Large/dp/B0BKQXJVCT/ref=sr_1_5?crid=1PFMPHIIGNG91&amp;dd=5XUAWlPEOgo-n1V393IIfQ%2C%2C&amp;dib=eyJ2IjoiMSJ9.9IUvyBfIowIgVk-9e3SjmA2ryUrlttKEUr7E9t1xZPM6upAUaVDSaIy4fIOEiJZQl9AWHEQVvKPSStftvKpRcUEUmqysoZMCOUScI1c4SEmEl292rq0XmQ1PV_q3tRui9LkQ9HlOs83ky72xSeqtc4Rgnj9jMP5rbhbwyYpkH8GxgYljNLqDavhvkB8U4rkp5s2kLqE3EYsaYTcAe-nkMNl8G9VKNcKlt7VbHAz-iGcpk6nRb2P7CYxuWrh_KlgZmWESNV50-QnCkXyHUj_siQ2D3VjGy5A7Z0tIVVvSjLs.JwdR_KtmRcIrOYB8Pn_6jx02miqaayRYKIdjEBMESwk&amp;dib_tag=se&amp;keywords=Columbia+jacket&amp;qid=1728341610&amp;refinements=p_90%3A8308921011&amp;rnid=8308919011&amp;sprefix=columbia+jacket%2Caps%2C130&amp;sr=8-5"
+        class="product-name">Men's Timberturner Ii Jacket</a>
+    <div class="product-review"><span class="product-rating">5.0 out of 5 stars</span><span
+            class="product-rating-count">2 reviews</span></div>
+    <div class="product-price"><span>$110.99</span></div>
+    <div class="product-delivery">FREE delivery Sat, Oct 12 Or fastest delivery Thu, Oct 10</div>
+</div>
+# Example Output 1
+{
+    "observations": [
+        "The Men's Timberturner II Jacket is available for $110.99 and has received a perfect rating of 5.0 out of 5 stars based on two reviews. Customers can enjoy free delivery by Saturday, October 12, with the option for faster delivery as early as Thursday, October 10."
+    ]
+}
+# Example Input 2
+<div name="refinements.delivery_day"><span class="refinement-title">Delivery Day</span>
+    <li name="refinements.delivery_day.get_it_by_tomorrow" role="checkbox" aria-label="Get It by Tomorrow">Get
+        It by Tomorrow<input checked="true" type="checkbox"></li>
+</div>
+# Example Output 2
+{
+    "observations": [
+        "There is a refinement option for delivery date. Available options are Get It by Tomorrow. The current selected option is Get It by Tomorrow."
+    ]
+}
+
+
+# Must-follow rules
+* DO NOT OUTPUT ANYTHING ELSE. DO NOT OUTPUT ANYTHING ELSE. DO NOT OUTPUT ANYTHING ELSE. DO NOT OUTPUT ANYTHING ELSE. DO NOT OUTPUT ANYTHING ELSE. 
+* **EACH OBSERVATION SHOULD BE INDEPENDENT**. For every logical element (not necessarily a single HTML element. A form, a product card, ...) should be described in ONE paragraph of observation.
+    * For example, for `search-result` class, you should describe the product card as a whole. Do not split it into multiple observations.
+    * User should be able to understand each observation independently. For example, "An 'Add to Cart' button is present on the product card, allowing users to easily add the Cheongeun Sweet Potato Starch Powder to their shopping cart." is not acceptable since the product name and other information are not included. Combine them into one observation.
+* **WRITE EVERY DETAIL**. A blind person should able to understand every detail of the web page with your support. This including listing ALL OPTIONS of radio buttons, no matter how long are they.
+* DO NOT INCLUDE THE RELEVANT ORDER. You are only seeing a part of the page, so the `first' result isn't actually the first.

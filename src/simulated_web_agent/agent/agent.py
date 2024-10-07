@@ -32,12 +32,12 @@ class LogApiCall:
         self.request = []
         self.response = []
         self.start_time = time.time()
-        context.api_call_manager = self
+        context.api_call_manager.set(self)
 
     def __exit__(self, exc_type, exc_value, traceback):
-        context.api_call_manager = None
+        context.api_call_manager.set(None)
         with open(
-            context.run_path / f"api_trace_{Agent.api_call_count}.json", "w"
+            context.run_path.get() / f"api_trace_{Agent.api_call_count}.json", "w"
         ) as f:
             json.dump(
                 {
@@ -66,7 +66,7 @@ class Agent:
 
     async def perceive(self, environment):
         # environment = json.dumps(environment)
-        pages = environment["page"].split("<split-marker/>")
+        pages = environment["page"].split("<split-marker></split-marker>")
         envs = [
             {
                 **environment,
@@ -91,7 +91,7 @@ class Agent:
             # logger.info("Perceived: %s", observasions)
             # observasions = json.loads(observasions)
             for r in results:
-                logger.info("Perceived: %s", r)
+                # logger.info("Perceived: %s", r)
                 observasions += json.loads(r)["observations"]
             #  = await async_chat(
             #     [
@@ -272,7 +272,6 @@ class Agent:
                 kind_weight={"action": 10, "plan": 10, "thought": 10, "reflection": 10},
             )
             memories = self.format_memories(memories)
-            logger.info("memories: %s", memories)
             new_plan = ""
             rationale = ""
             while True:
@@ -304,9 +303,9 @@ class Agent:
                 resp = resp
                 resp = json.loads(resp)
                 if "plan" in resp and "rationale" in resp and "next_step" in resp:
-                    logger.info(
-                        "retrieved memory for planning: %s", "\n".join(memories)
-                    )
+                    # logger.info(
+                    #     "retrieved memory for planning: %s", "\n".join(memories)
+                    # )
                     new_plan = resp["plan"]
                     rationale = resp["rationale"] if "rationale" in resp else "N/A"
                     next_step = resp["next_step"]

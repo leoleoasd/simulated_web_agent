@@ -106,3 +106,4 @@ You should always follow these tips to write the plan.
 * Correct: Select color red and size medium
 * Wrong: Select color red
 ## select options before adding to cart.
+## Always use the ``departments'' refinements options to refine your search.
