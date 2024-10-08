@@ -1,18 +1,28 @@
 import asyncio
+import base64
 import functools
 import json
 import logging
 import os
+import time
 import traceback
 
 import click
 import gymnasium as gym
+import requests
+import selenium
 from dotenv import load_dotenv
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
+from ..agent.gpt import chat_bedrock as chat
 from ..agent.gpt import chat_bulk
-from ..executor import google_flights_recipes, onestopshop_recipes
-from ..executor.env import SeleniumEnv  # noqa
-from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa
+from ..executor import amazon_recipes, google_flights_recipes, onestopshop_recipes
+from ..executor.env import (
+    Browser,  # noqa
+    SeleniumEnv,  # noqa
+)
+from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa  # noqa
 
 
 def make_sync(func):
@@ -21,6 +31,57 @@ def make_sync(func):
         return asyncio.run(func(*args, **kwargs))
 
     return wrapper
+
+
+def solve_captcha(browser: Browser):
+    try:
+        while True:
+            image = browser.driver.find_element(
+                By.CSS_SELECTOR,
+                "body > div > div.a-row.a-spacing-double-large > div.a-section > div > div > form > div.a-row.a-spacing-large > div > div > div.a-row.a-text-center > img",
+            ).get_attribute("src")
+            image_file = requests.get(image).content
+            image_file = base64.b64encode(image_file).decode("utf-8")
+            resp = chat(
+                [
+                    {
+                        "role": "system",
+                        "content": 'You are an OCR expert designed to solve CAPTCHAs. You will respond in a single JSON format: {"text": "The text in the image"}. DO NOT include any other text. E.g. {"text": "123456"}',
+                    },
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "image",
+                                "source": {
+                                    "type": "base64",
+                                    "media_type": "image/jpeg",
+                                    "data": image_file,
+                                },
+                            },
+                            {"type": "text", "text": "What’s in this image?"},
+                        ],
+                    },
+                ],
+                model="anthropic.claude-3-5-sonnet-20240620-v1:0",
+                json_mode=True,
+            )
+            print(resp)
+            text = json.loads(resp)["text"]
+            input_element = browser.driver.find_element(
+                By.CSS_SELECTOR, "#captchacharacters"
+            )
+            # input_element.send_keys(text)
+            # input_element.send_keys(Keys.ENTER)
+            for keys in text:
+                input_element.send_keys(keys)
+                time.sleep(0.2)
+            input_element.send_keys(Keys.ENTER)
+            time.sleep(1)
+    except selenium.common.exceptions.NoSuchElementException:
+        # no more captcha
+        pass
+    return
 
 
 @click.command()
@@ -44,11 +105,13 @@ async def main(persona: str, output: str, max_steps: int):
 
     env = gym.make(
         "SeleniumEnv-v0",
-        start_url="http://ec2-3-131-244-37.us-east-2.compute.amazonaws.com:7770/",
+        start_url="https://www.amazon.com",
         # start_url="https://www.google.com/flights",
         headless=os.environ.get("HEADLESS", "true").lower() == "true",
         # recipes=google_flights_recipes.recipes,
-        recipes=onestopshop_recipes.recipes,
+        recipes=amazon_recipes.recipes,
+        start_callback=solve_captcha,
+        end_callback=lambda x: print("end with ", x),
     )
     num_steps = 0
     observation, info = env.reset()
@@ -57,7 +120,6 @@ async def main(persona: str, output: str, max_steps: int):
         policy = AgentPolicy(persona, intent, output)
 
         while True:
-            print(observation["url"])
             if not observation["error_message"]:
                 del observation["error_message"]
             # print(observation["page"])

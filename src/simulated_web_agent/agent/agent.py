@@ -347,6 +347,7 @@ class Agent:
                     },
                 ],
                 json_mode=True,
+                model="anthropic.claude-3-5-sonnet-20240620-v1:0",
             )
         actions = json.loads(action)
         logger.info("actions: %s", actions)

@@ -51,40 +51,42 @@ Format your output as follows:
 
 Remember to only write valid JSON, for example, denote new lines with `\n` in strings.
 
+Here’s the updated version of your prompt with the requested changes:
+
 # Example output
 ## Example 1
 Initial plan (at timestep 0) for intent ("buy a jacket from columbia that arrives tomorrow with free shipping"):
 
 {
     "rationale": "I need to find a jacket that is both in my budget and has my preferred color and size.",
-    "plan": "1. (next) search for \"woman jacket\" browse search results to know the general price range of jackets, and determine if that meets my budget.\n2. select arrived by tomorrow, select free shipping, select brand columbia\n3. look into product $product_name\n4. check for color and size, i want orange and x-large.\n5. go back to search results and look into the next product $product_name.\n6. repeat the above steps until i find the product i want.\n7. select my desired color red and size large for product $product_name\n8. add product $product_name to cart by clicking the add to cart button\n9. go to the cart page and checkout",
-    "next_step": "search for \"woman jacket\" browse search results to know the general price range of jackets, and determine if that meets my budget."
+    "plan": "1. (next) search for \"woman jacket\" and check what the available refinement options are.\n2. select $refinement_option_name, select woman's coat department, select arrived by tomorrow, select free shipping, select brand columbia.\n3. browse search results to know the general price range of jackets, and determine if that meets my budget.\n4. look into product $product_name.\n5. check for color and size; I want orange and x-large.\n6. go back to search results and look into the next product $product_name.\n7. repeat the above steps until I find the product I want.\n8. select my desired color red and size large for product $product_name.\n9. add product $product_name to cart by clicking the add to cart button.\n10. go to the cart page and checkout.",
+    "next_step": "search for \"woman jacket\" and check what the available refinement options are."
 }
 
 ## Example 2
-After obtain the search result for "woman jacket", the plan is:
+After obtaining the search result for "woman jacket", the plan is:
 
 {
     "rationale": "I need to check the detail and reviews of the product.",
-    "plan": "1. search for \"woman jacket\", browse search results to know the general price range of jackets, and determine if that meets my budget.\n2. (next) select arrived by tomorrow, select free shipping, select brand columbia\n3. look into product \"Woman Within Women's Plus Size Packable Puffer Jacket\"\n4. check for reviews and rating of the product.\n5. go back to search results and look into the next product \"Woman Fur Casual Vests Female Autumn Spring Fur Collar Waistcoat Ladies Sleeveless Fake Fur Coats Vest Jackets - xingse,S\".\n6. repeat the above steps until i find the product i want.\n7. select my desired color red and size large for product $product_name\n8. add product $product_name to cart by clicking the add to cart button\n9. go to the cart page and checkout",
-    "next_step": "select arrived by tomorrow, select free shipping, select brand columbia"
-}
-
-## Example 2
-After obtain the search result for "woman jacket", the plan is:
-
-{
-    "rationale": "I need to check the detail and reviews of the product.",
-    "plan": "1. search for \"woman jacket\", browse search results to know the general price range of jackets, and determine if that meets my budget.\n2. select arrived by tomorrow, select free shipping, select brand columbia\n3. (next) look into product \"Woman Within Women's Plus Size Packable Puffer Jacket\"\n4. check for reviews and rating of the product.\n5. go back to search results and look into the next product \"Woman Fur Casual Vests Female Autumn Spring Fur Collar Waistcoat Ladies Sleeveless Fake Fur Coats Vest Jackets - xingse,S\".\n6. repeat the above steps until i find the product i want.\n7. select my desired color red and size large for product $product_name\n8. add product $product_name to cart by clicking the add to cart button\n9. go to the cart page and checkout",
-    "next_step": "look into product \"Woman Within Women's Plus Size Packable Puffer Jacket\""
+    "plan": "1. search for \"woman jacket\" and check what the available refinement options are.\n2. select $refinement_option_name, select woman's coat department, select arrived by tomorrow, select free shipping, select brand columbia.\n3. (next) browse search results to know the general price range of jackets, and determine if that meets my budget.\n4. look into product \"Woman Within Women's Plus Size Packable Puffer Jacket\".\n5. check for reviews and rating of the product.\n6. go back to search results and look into the next product \"Woman Fur Casual Vests Female Autumn Spring Fur Collar Waistcoat Ladies Sleeveless Fake Fur Coats Vest Jackets - xingse,S\".\n7. repeat the above steps until I find the product I want.\n8. select my desired color red and size large for product $product_name.\n9. add product $product_name to cart by clicking the add to cart button.\n10. go to the cart page and checkout.",
+    "next_step": "select woman's coat department, select arrived by tomorrow, select free shipping, select brand columbia"
 }
 
 ## Example 3
+After obtaining the search result for "woman jacket", the plan is:
+
+{
+    "rationale": "I need to check the detail and reviews of the product.",
+    "plan": "1. search for \"woman jacket\" and check what the available refinement options are.\n2. select $refinement_option_name, select woman's coat department, select arrived by tomorrow, select free shipping, select brand columbia.\n3. (next) look into product \"Woman Within Women's Plus Size Packable Puffer Jacket\".\n4. check for reviews and rating of the product.\n5. go back to search results and look into the next product \"Woman Fur Casual Vests Female Autumn Spring Fur Collar Waistcoat Ladies Sleeveless Fake Fur Coats Vest Jackets - xingse,S\".\n6. repeat the above steps until I find the product I want.\n7. select my desired color red and size large for product $product_name.\n8. add product $product_name to cart by clicking the add to cart button.\n9. go to the cart page and checkout.",
+    "next_step": "look into product \"Woman Within Women's Plus Size Packable Puffer Jacket\""
+}
+
+## Example 4
 After choosing the product, the plan is:
 
 {
     "rationale": "Select my desired color and size for the product.",
-    "plan": "1. search for \"woman jacket\", browse search results to know the general price range of jackets, and determine if that meets my budget.\n2. select arrived by tomorrow, select free shipping, select brand columbia\n3. look into product \"Woman Within Women's Plus Size Packable Puffer Jacket\"\n4. check for reviews and rating of the product.\n5. (next) select my desired color red and size large for product \"Woman Within Women's Plus Size Packable Puffer Jacket\"\n6. add product \"Woman Within Women's Plus Size Packable Puffer Jacket\" to cart by clicking the add to cart button\n7. go to the cart page and checkout",
+    "plan": "1. search for \"woman jacket\" and check what the available refinement options are.\n2. select $refinement_option_name, select woman's coat department, select arrived by tomorrow, select free shipping, select brand columbia.\n3. look into product \"Woman Within Women's Plus Size Packable Puffer Jacket\".\n4. check for reviews and rating of the product.\n5. (next) select my desired color red and size large for product \"Woman Within Women's Plus Size Packable Puffer Jacket\".\n6. add product \"Woman Within Women's Plus Size Packable Puffer Jacket\" to cart by clicking the add to cart button.\n7. go to the cart page and checkout.",
     "next_step": "select my desired color red and size large for product \"Woman Within Women's Plus Size Packable Puffer Jacket\""
 }
 

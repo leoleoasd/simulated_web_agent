@@ -710,8 +710,8 @@ class Browser:
 
     def click(self, name):
         if name not in self.clickables:
-            logger.error(f"INVALID ACTION: {name} is not clickable")
-            raise InvalidAction(f"INVALID ACTION: {name} is not clickable")
+            logger.error(f"INVALID ACTION: {name} does not exist")
+            raise InvalidAction(f"INVALID ACTION: {name} does not exist")
 
         element = self.clickables[name]
 
