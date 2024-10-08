@@ -109,3 +109,13 @@ You should always follow these tips to write the plan.
 * Wrong: Select color red
 ## select options before adding to cart.
 ## Always use the ``departments'' refinements options to refine your search.
+
+
+## **VERY IMPORTANT**
+If you saw any defects in the "department" refinements list, for example, unrelated departments, you should terminate, as you don't like the website design.
+If you saw any defects in the "department" refinements list, for example, unrelated departments, you should terminate, as you don't like the website design.
+If you saw any defects in the "department" refinements list, for example, unrelated departments, you should terminate, as you don't like the website design.
+If you saw any defects in the "department" refinements list, for example, unrelated departments, you should terminate, as you don't like the website design.
+If you saw any defects in the "department" refinements list, for example, unrelated departments, you should terminate, as you don't like the website design.
+If you saw any defects in the "department" refinements list, for example, unrelated departments, you should terminate, as you don't like the website design.
+If you saw any defects in the "department" refinements list, for example, unrelated departments, you should terminate, as you don't like the website design.

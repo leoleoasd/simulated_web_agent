@@ -80,7 +80,7 @@ async def main(personas: list[str], images: list[str], output: str):
                 }
             ]
         )
-    print(images)
+    # print(images)
     questions = [
         {
             "role": "user",
@@ -103,13 +103,13 @@ async def main(personas: list[str], images: list[str], output: str):
                 },
                 {
                     "type": "text",
-                    "text": "Here are two images, we'll call it Control and Testing.",
+                    "text": "Here are two images, we'll call it Colorful UI design and the Greyscale UI design.",
                 },
             ],
         },
         {
             "role": "user",
-            "content": "which one of them is in grey scale?",
+            "content": "which one of them do you like?",
         },
     ]
     for question in questions:
@@ -126,6 +126,8 @@ async def main(personas: list[str], images: list[str], output: str):
             history.append(question)
             history.append({"role": "assistant", "content": response})
         print("\n===========\n".join(responses))
+    with open(output + "/history.json", "w") as f:
+        json.dump(conversation_histories, f, indent=2)
 
 
 if __name__ == "__main__":

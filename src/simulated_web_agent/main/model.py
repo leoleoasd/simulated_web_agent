@@ -132,7 +132,7 @@ class AgentPolicy(BasePolicy):
 
     async def slow_loop(self):
         while True:
-            # await self.agent.reflect()
+            await self.agent.reflect()
             # await self.agent.wonder()
             await self.agent.memory.update()
 
@@ -144,8 +144,8 @@ class AgentPolicy(BasePolicy):
             )
         else:
             await self.agent.perceive(observation)
-        # if self.slow_loop_task is None:
-        #     self.slow_loop_task = asyncio.create_task(self.slow_loop())
+        if self.slow_loop_task is None:
+            self.slow_loop_task = asyncio.create_task(self.slow_loop())
         # if self.agent.memory.timestamp != 0:
         #     await self.agent.feedback(observation)
         # await self.agent.perceive(observation)

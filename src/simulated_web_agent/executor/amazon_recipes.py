@@ -191,6 +191,8 @@ recipes = [
         "match": "#productTitle",
         "match_text": "",
         "selector": "html",
+        "terminate": "return !!arguments[0]",
+        "terminate_callback": "return arguments[0]",
         "children": [
             {"selector": "head", "children": [{"selector": "title", "add_text": True}]},
             {
@@ -293,7 +295,7 @@ return {title, price, options: options_dict, asin}
     {
         "match": "/ap/signin",
         "match_method": "url",
-        "terminate": "return true",
+        "terminate": "return !!arguments[0]",
         "terminate_callback": "return arguments[0]",
         "selector": "html",
     },

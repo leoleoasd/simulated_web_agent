@@ -4,6 +4,8 @@ import functools
 import json
 import logging
 import os
+import signal
+import subprocess
 import time
 import traceback
 
@@ -84,12 +86,47 @@ def solve_captcha(browser: Browser):
     return
 
 
+recording_process = None
+
+
+def start_recording(output_video: str):
+    # screencapture -D 1 -v output.mp4
+    # start the background process
+    global recording_process
+    recording_process = subprocess.Popen(
+        ["screencapture", "-D", "2", "-v", output_video],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    return recording_process
+
+
+def stop_recording(result=None):
+    # process.terminate()
+    # send Ctrl-C=
+    time.sleep(3)
+    global recording_process
+    recording_process.send_signal(signal.SIGINT)
+
+
 @click.command()
 @click.option("--persona", type=str, help="Path to the persona file.", required=True)
 @click.option("--output", type=str, help="Path to the output file.", required=True)
 @click.option("--max-steps", type=int, help="Maximum steps to run.", default=50)
+@click.option("--cookie", type=(str, str), help="Cookies to set.")
+@click.option(
+    "--record",
+    is_flag=True,
+    show_default=True,
+    default=False,
+    type=bool,
+    help="Record the run.",
+)
 @make_sync
-async def main(persona: str, output: str, max_steps: int):
+async def main(
+    persona: str, output: str, max_steps: int, cookie: (str, str), record: bool
+):
     load_dotenv()
     logging.basicConfig()
     loggers = [
@@ -102,22 +139,42 @@ async def main(persona: str, output: str, max_steps: int):
     persona_info = json.load(open(persona))
     persona = persona_info["persona"]
     intent = persona_info["intent"]
+    policy = AgentPolicy(persona, intent, output)
 
-    env = gym.make(
-        "SeleniumEnv-v0",
-        start_url="https://www.amazon.com",
-        # start_url="https://www.google.com/flights",
-        headless=os.environ.get("HEADLESS", "true").lower() == "true",
-        # recipes=google_flights_recipes.recipes,
-        recipes=amazon_recipes.recipes,
-        start_callback=solve_captcha,
-        end_callback=lambda x: print("end with ", x),
-    )
+    if record:
+        env = gym.make(
+            "SeleniumEnv-v0",
+            start_url="https://www.amazon.com",
+            # start_url="https://www.google.com/flights",
+            headless=os.environ.get("HEADLESS", "true").lower() == "true",
+            # recipes=google_flights_recipes.recipes,
+            recipes=amazon_recipes.recipes,
+            start_callback=lambda x: (
+                solve_captcha(x),
+                start_recording(f"{output}/recording.mp4"),
+            ),
+            end_callback=lambda x: stop_recording,
+        )
+    else:
+        env = gym.make(
+            "SeleniumEnv-v0",
+            start_url="https://www.amazon.com",
+            # start_url="https://www.google.com/flights",
+            headless=os.environ.get("HEADLESS", "true").lower() == "true",
+            # recipes=google_flights_recipes.recipes,
+            recipes=amazon_recipes.recipes,
+            start_callback=solve_captcha,
+            end_callback=lambda x: print("end with ", x),
+        )
     num_steps = 0
     observation, info = env.reset()
 
     try:
-        policy = AgentPolicy(persona, intent, output)
+        if cookie:
+            # save cookie
+            with open(f"{output}/cookies.json", "w") as f:
+                json.dump(cookie, f)
+            env.browser.driver.add_cookie({"name": cookie[0], "value": cookie[1]})
 
         while True:
             if not observation["error_message"]:

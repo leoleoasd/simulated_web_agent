@@ -170,7 +170,7 @@ class Memory:
                     context.api_call_manager.get().retrieve_result.append(results)
                 return results
 
-            query_embedding = embed_text(query, type="search_query")[0]
+            query_embedding = (await embed_text([query], type="search_query"))[0]
             similarities = np.dot(self.embeddings, query_embedding)
             recencies = np.array([m.timestamp - self.timestamp for m in self.memories])
             recencies = np.exp(recencies)
