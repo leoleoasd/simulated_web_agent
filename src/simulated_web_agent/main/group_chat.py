@@ -16,12 +16,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from tqdm.asyncio import tqdm
 
-from ..agent.gpt import async_chat_bedrock, chat_bulk
+from ..agent.gpt import async_chat
 from ..executor import amazon_recipes, google_flights_recipes, onestopshop_recipes
-from ..executor.env import (
-    Browser,  # noqa
-    SeleniumEnv,  # noqa
-)
+from ..executor.env import Browser  # noqa
+from ..executor.env import SeleniumEnv  # noqa
 from .model import AgentPolicy, HumanPolicy, OpenAIPolicy  # noqa  # noqa
 
 
@@ -45,7 +43,7 @@ You are a participant who just participated in a user study. <Your persona> is g
 @click.command()
 @click.option(
     "--output",
-    type=click.Path(exists=True),
+    type=str,
     help="Path to the output file.",
     required=True,
 )
@@ -64,6 +62,8 @@ You are a participant who just participated in a user study. <Your persona> is g
 )
 @make_sync
 async def main(personas: list[str], images: list[str], output: str):
+    # make sure the output directory exists
+    os.makedirs(output, exist_ok=True)
     persona_files = []
     for persona in personas:
         with open(persona) as f:
@@ -85,39 +85,51 @@ async def main(personas: list[str], images: list[str], output: str):
         {
             "role": "user",
             "content": [
+                # {
+                #     "type": "image",
+                #     "source": {
+                #         "type": "base64",
+                #         "media_type": "image/png",
+                #         "data": base64.b64encode(open(images[0], "rb").read()).decode(),
+                #     },
+                # },
+                # {
+                #     "type": "image",
+                #     "source": {
+                #         "type": "base64",
+                #         "media_type": "image/png",
+                #         "data": base64.b64encode(open(images[1], "rb").read()).decode(),
+                #     },
+                # },
                 {
-                    "type": "image",
-                    "source": {
-                        "type": "base64",
-                        "media_type": "image/png",
-                        "data": base64.b64encode(open(images[0], "rb").read()).decode(),
+                    "type": "image_url",
+                    "image_url": {
+                        "url": f"data:image/jpeg;base64,{base64.b64encode(open(images[0], 'rb').read()).decode()}",
                     },
                 },
                 {
-                    "type": "image",
-                    "source": {
-                        "type": "base64",
-                        "media_type": "image/png",
-                        "data": base64.b64encode(open(images[1], "rb").read()).decode(),
+                    "type": "image_url",
+                    "image_url": {
+                        "url": f"data:image/jpeg;base64,{base64.b64encode(open(images[1], 'rb').read()).decode()}",
                     },
                 },
                 {
                     "type": "text",
-                    "text": "Here are two images, we'll call it Colorful UI design and the Greyscale UI design.",
+                    "text": "Here are two images, we'll call it Control and Testing. The control image is in color, and the testing image is in grey scale.",
                 },
             ],
         },
         {
             "role": "user",
-            "content": "which one of them do you like?",
+            "content": "Comparing the two designs, which one do you like more, the colorful one or the grey scale one? Why?",
         },
     ]
     for question in questions:
         responses = await tqdm.gather(
             *[
-                async_chat_bedrock(
+                async_chat(
                     history + [question],
-                    model="anthropic.claude-3-5-sonnet-20240620-v1:0",
+                    model="gpt-4o",
                 )
                 for history in conversation_histories
             ]
@@ -126,8 +138,42 @@ async def main(personas: list[str], images: list[str], output: str):
             history.append(question)
             history.append({"role": "assistant", "content": response})
         print("\n===========\n".join(responses))
-    with open(output + "/history.json", "w") as f:
-        json.dump(conversation_histories, f, indent=2)
+    with open(output + "/conversation_histories.json", "w") as f:
+        json.dump(conversation_histories, f)
+    messages = json.load(open(output + "/conversation_histories.json"))
+    messages = []
+    for index, history in enumerate(conversation_histories):
+        this_message = f"# Conversation #{index + 1}:\n"
+        for message in history:
+            if isinstance(message["content"], str):
+                this_message += f"{message['role']}: {message['content']}\n"
+        messages.append(this_message)
+    # now ask o1-preview to aggregrate the results and analysis
+    o1_prompt = """
+    You are an experimenter conducting a user study. You have a list of conversation histories between a human and a simulated web agent. Each conversation history is a list of messages.
+
+    Your task is to analyze the conversation histories and provide a summary of the results and the analysis.
+
+    Please:
+    - provide a summary of the conversation histories
+    - provide a summary of your insights:
+        - Pros and Cons of the two designs
+
+    <Conversation Histories>: {conversation_histories}
+    """
+    print("o1 analysing")
+    response = await async_chat(
+        [
+            {
+                "role": "user",
+                "content": o1_prompt.format(conversation_histories=messages),
+            },
+        ],
+        model="o1-preview",
+    )
+    print(response)
+    with open(output + "/o1_analysis.txt", "w") as f:
+        f.write(response)
 
 
 if __name__ == "__main__":

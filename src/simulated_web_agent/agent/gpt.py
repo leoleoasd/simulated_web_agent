@@ -13,10 +13,10 @@ from openai.types.chat import ChatCompletion
 from . import context
 
 # client = openai.Client()
-# async_client = openai.AsyncClient()
+async_client = openai.AsyncClient()
 # client = None
 client = None
-async_client = None
+# async_client = None
 # embedding_model = "text-embedding-3-small"
 embedding_model = "cohere.embed-english-v3"
 # chat_model = "gpt-4o-mini"
@@ -197,9 +197,9 @@ async def async_chat(messages, model=chat_model, log=True, **kwargs) -> ChatComp
             context.api_call_manager.get().response.append(
                 response.choices[0].message.content
             )
-        return response
+        return response.choices[0].message.content
     except Exception as e:
-        print(messages)
+        # print(messages)
         print(e)
         raise e
 
