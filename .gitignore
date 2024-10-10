@@ -138,3 +138,5 @@ new_output
 upload
 data
 temp_run
+old_data
+*.zip
