@@ -14,32 +14,39 @@ from tqdm.contrib.concurrent import thread_map
 lock = threading.Lock()
 last_run = time.time()
 
-rang = range(0, 60)
+rang = range(0, 2)
 
 
 def run_cmd(i):
-    if os.path.exists(f"data/simulation/virtual customer {i}"):
-        os.system(f"rm -rf data/simulation/virtual\ customer\ {i}")
+    if os.path.exists(f"new_data/simulation/virtual customer {i}"):
+        os.system(f"rm -rf new_data/simulation/virtual\ customer\ {i}")
     # don't launch all at the same time
     global last_run
     with lock:
-        while time.time() - last_run < 5:
+        while time.time() - last_run < 1:
             # print(last_run, time.time())
             time.sleep(1)
         last_run = time.time()
     print("\nRunning virtual customer", i)
-    os.makedirs(f"data/simulation/virtual customer {i}", exist_ok=True)
-    stdout = open(f"data/simulation/virtual customer {i}/stdout.txt", "w")
-    stderr = open(f"data/simulation/virtual customer {i}/stderr.txt", "w")
+    os.makedirs(f"new_data/simulation/virtual customer {i}", exist_ok=True)
+    stdout = open(f"new_data/simulation/virtual customer {i}/stdout.txt", "w")
+    stderr = open(f"new_data/simulation/virtual customer {i}/stderr.txt", "w")
+    if i % 2 == 0:
+        cookie = "SEARCH_SES_CATEGORY_DEFECT_REDUCTION_STOP:T1"
+    else:
+        cookie = "SEARCH_SES_CATEGORY_DEFECT_REDUCTION_STOP:C"
     subprocess.run(
         [
             "python3",
             "-m",
             "simulated_web_agent.main.batch",
             "--persona",
-            f"data/personas/json/virtual customer {i}.json",
+            f"new_data/personas/json/virtual customer {i}.json",
             "--output",
-            f"data/simulation/virtual customer {i}",
+            f"new_data/simulation/virtual customer {i}",
+            "--cookie",
+            "experiment",
+            cookie,
         ],
         stdout=stdout,
         stderr=stderr,
@@ -49,6 +56,6 @@ def run_cmd(i):
 if __name__ == "__main__":
     needed_ids = []
     for i in rang:
-        if not os.path.exists(f"data/simulation/virtual customer {i}/result.json"):
+        if not os.path.exists(f"new_data/simulation/virtual customer {i}/result.json"):
             needed_ids.append(i)
     thread_map(run_cmd, needed_ids, max_workers=10)
